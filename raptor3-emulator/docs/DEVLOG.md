@@ -469,3 +469,39 @@ z mapą cieni kotwiczy bryły na płycie przy znośnym koszcie.
 
 **Test:** długie miękkie cienie nóg i silnika na płycie, bez artefaktów,
 brak błędów konsoli.
+
+---
+
+## Iteracja 14 — Panel POMOC i statystyki stanowiska
+
+**Pomysły:**
+1. Panel edukacyjny POMOC + trwałe statystyki testów ✔ WYBRANY
+2. Adaptacyjna rozdzielczość
+3. Znaczniki zdarzeń na wykresach
+4. Suwak płaszczyzny przekroju
+5. Etykiety części 3D
+6. Hard mode
+7. Zapis własnego ujęcia kamery
+8. Kapiące skropliny
+9. Wskaźnik temperatur kriogenicznych
+10. Replay z CSV
+11. Porównanie przebiegów
+12. Kolumna zadanej przepustnicy w CSV
+13. Migotanie cieni od pióropusza
+14. NOWY: samouczek krok po kroku (onboarding) przy pierwszej wizycie
+15. NOWY: reset statystyk przyciskiem w panelu POMOC
+
+**Wybrano:** #1 — emulator ma walor edukacyjny, ale nigdzie nie tłumaczył,
+czym jest FFSC ani co robią przyciski; statystyki dodają motywację do
+kolejnych testów.
+
+**Zrobione:**
+- Nowy moduł `stats.js`: licznik testów, łączny czas pracy, zużyty propelent
+  i liczba awaryjnych wyłączeń — zapisywane w `localStorage` (odporne na tryb
+  prywatny przez try/catch), aktualizowane przy każdym powrocie do GOTOWY.
+- Modal POMOC (`index.html` + `style.css` + `main.js`): opis silnika po
+  polsku, instrukcja obsługi wszystkich funkcji, tabela porównawcza
+  R1/R2/R3, sekcja statystyk; zamykanie przez ✕, tło i Escape.
+
+**Test:** po dwóch testach statystyki `{tests:2, 15 s, 8,8 t}` przeżywają
+przeładowanie strony; modal otwiera się i zamyka; brak błędów.

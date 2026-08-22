@@ -276,6 +276,71 @@ canvas.gauge {
 #seqLog .last { color: var(--accent); animation: seqPulse 1.1s ease-in-out infinite; }
 @keyframes seqPulse { 50% { opacity: 0.45; } }
 
+/* modal pomocy */
+#helpModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 6, 10, 0.72);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#helpModal.hidden { display: none; }
+#helpCard {
+  position: relative;
+  width: min(620px, 92vw);
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 22px 26px;
+  font-size: 12px;
+  line-height: 1.65;
+}
+#helpCard h2 {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+#helpCard h3 {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--text);
+  margin: 14px 0 6px;
+}
+#helpCard p, #helpCard li { color: #b8c0cf; }
+#helpCard ul { padding-left: 18px; }
+#helpCard b { color: var(--text); }
+#helpCard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0;
+  font-size: 11px;
+}
+#helpCard th, #helpCard td {
+  border: 1px solid var(--border);
+  padding: 5px 8px;
+  text-align: left;
+}
+#helpCard th { color: var(--dim); font-weight: 400; letter-spacing: 1px; }
+#btnHelpClose {
+  position: absolute;
+  top: 12px; right: 12px;
+  flex: none;
+  width: 30px;
+  padding: 6px 0;
+}
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(120, 160, 220, 0.15);
+  padding: 3px 0;
+}
+.stats-row span { color: var(--dim); font-size: 10px; letter-spacing: 1px; }
+.fineprint { margin-top: 12px; font-size: 10px; color: var(--dim); }
+
 /* stopka */
 #footer {
   bottom: 14px; left: 50%;

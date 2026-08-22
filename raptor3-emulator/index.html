@@ -82,6 +82,7 @@
 
     <div class="btn-row" style="margin-bottom:0">
       <button id="btnCut">PRZEKRÓJ: WYŁ</button>
+      <button id="btnHelp">POMOC</button>
     </div>
 
     <div class="hint">
@@ -140,6 +141,54 @@
   <div class="panel" id="sequence">
     <h2>SEKWENCJA <span id="tMet">T+ 00:00.0</span></h2>
     <ul id="seqLog"><li class="empty">— oczekiwanie na start —</li></ul>
+  </div>
+
+  <div id="helpModal" class="hidden">
+    <div id="helpCard" class="panel">
+      <button id="btnHelpClose" title="Zamknij">✕</button>
+      <h2>POMOC / O SILNIKU</h2>
+
+      <h3>Czym jest Raptor?</h3>
+      <p>Raptor to silnik rakietowy SpaceX napędzający Starshipa — pierwszy
+      latający silnik o <b>pełnoprzepływowym spalaniu stopniowanym</b> (FFSC).
+      Cały metan i cały tlen przechodzą przez własne przedpalniki, napędzając
+      dwie turbopompy, po czym spalają się w komorze przy ciśnieniu do ~350 bar
+      (rekord dla silników rakietowych). Raptor 3 usuwa większość zewnętrznego
+      orurowania — kanały są wtopione w strukturę, co obniża masę i upraszcza
+      produkcję.</p>
+
+      <h3>Obsługa emulatora</h3>
+      <ul>
+        <li><b>URUCHOM</b> — sekwencja: schładzanie → rozruch pomp → zapłon →
+        narastanie → praca. <b>WYŁĄCZ</b> bezpiecznie gasi silnik.</li>
+        <li><b>PRZEPUSTNICA</b> 40–100% — sterownik ogranicza tempo zmian.</li>
+        <li><b>WYSOKOŚĆ</b> zmienia ciśnienie otoczenia: przy ziemi struga jest
+        zwarta z diamentami Macha, w próżni szeroko się rozpręża, a ciąg rośnie.</li>
+        <li><b>GIMBAL</b> ±8° — suwaki lub strzałki na klawiaturze.</li>
+        <li><b>⚠ AWARIA</b> wstrzykuje usterkę (w locie albo uzbraja nieudany
+        zapłon); nadzór FDS sam tnie zawory po przekroczeniu limitów.</li>
+        <li><b>PRZEKRÓJ</b> odsłania komorę, gardziel i płytę wtryskiwacza.</li>
+        <li><b>EKSPORT CSV</b> zapisuje przebieg testu (10 Hz) do pliku.</li>
+      </ul>
+
+      <h3>Warianty silnika (wartości przybliżone)</h3>
+      <table>
+        <tr><th></th><th>Ciąg (SL)</th><th>P. komory</th><th>Isp (próżnia)</th><th>Masa</th></tr>
+        <tr><td>Raptor 1</td><td>185 tf</td><td>250 bar</td><td>345 s</td><td>2080 kg</td></tr>
+        <tr><td>Raptor 2</td><td>230 tf</td><td>300 bar</td><td>347 s</td><td>1630 kg</td></tr>
+        <tr><td>Raptor 3</td><td>280 tf</td><td>350 bar</td><td>350 s</td><td>1525 kg</td></tr>
+      </table>
+
+      <h3>Statystyki stanowiska</h3>
+      <div class="stats-row"><span>TESTY</span><b id="sTests">0</b></div>
+      <div class="stats-row"><span>ŁĄCZNY CZAS PRACY</span><b id="sBurn">0 s</b></div>
+      <div class="stats-row"><span>ZUŻYTY PROPELENT</span><b id="sProp">0 t</b></div>
+      <div class="stats-row"><span>AWARYJNE WYŁĄCZENIA (FDS)</span><b id="sAborts">0</b></div>
+
+      <p class="fineprint">Model poglądowy: wartości złożone z publicznych
+      materiałów SpaceX, reszta oszacowana. To zabawka edukacyjna,
+      nie narzędzie inżynierskie.</p>
+    </div>
   </div>
 
   <div class="panel" id="footer">

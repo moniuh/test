@@ -11,6 +11,7 @@ import { EngineSound } from './sound.js';
 import { TelemetryCharts } from './charts.js';
 import { PuffSystem } from './particles.js';
 import { Recorder } from './recorder.js';
+import { loadStats, recordTest } from './stats.js';
 
 const PIVOT_WORLD_Y = 5.45; // wysokość przegubu gimbala nad płytą
 
@@ -145,6 +146,21 @@ const btnCsv = $('btnCsv');
 const tSamples = $('tSamples');
 btnCsv.addEventListener('click', () => recorder.download());
 let lastSamples = -1;
+
+// panel pomocy + statystyki stanowiska
+const stats = loadStats();
+const helpModal = $('helpModal');
+function refreshStats() {
+  $('sTests').textContent = stats.tests;
+  $('sBurn').textContent = `${Math.round(stats.burnTime)} s`;
+  $('sProp').textContent = `${(stats.prop / 1000).toFixed(1)} t`;
+  $('sAborts').textContent = stats.aborts;
+}
+$('btnHelp').addEventListener('click', () => { refreshStats(); helpModal.classList.remove('hidden'); });
+$('btnHelpClose').addEventListener('click', () => helpModal.classList.add('hidden'));
+helpModal.addEventListener('click', e => { if (e.target === helpModal) helpModal.classList.add('hidden'); });
+window.addEventListener('keydown', e => { if (e.key === 'Escape') helpModal.classList.add('hidden'); });
+let wasActive = false;
 
 $('btnStart').addEventListener('click', () => { sim.start(); sound.ensure(); if (sound.ctx && sound.ctx.state === 'suspended') sound.ctx.resume(); });
 $('btnStop').addEventListener('click', () => sim.shutdown());
@@ -448,6 +464,8 @@ function animate() {
     lastRunning = running;
     for (const b of variantBtns) b.disabled = running;
   }
+  if (wasActive && !running) recordTest(stats, sim); // koniec testu -> statystyki
+  wasActive = running;
   if (recorder.rows.length !== lastSamples) {
     lastSamples = recorder.rows.length;
     tSamples.textContent = `PRÓBKI: ${lastSamples}`;
