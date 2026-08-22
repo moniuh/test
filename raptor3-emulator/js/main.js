@@ -8,6 +8,7 @@ import { EngineSim, P0 } from './simulation.js';
 import { Plume } from './plume.js';
 import { Hud } from './hud.js';
 import { EngineSound } from './sound.js';
+import { TelemetryCharts } from './charts.js';
 
 const PIVOT_WORLD_Y = 5.45; // wysokość przegubu gimbala nad płytą
 
@@ -89,6 +90,7 @@ for (const a of actuators) scene.add(a.mesh);
 const sim = new EngineSim();
 const hud = new Hud();
 const sound = new EngineSound();
+const charts = new TelemetryCharts();
 window.__sim = sim; // hak diagnostyczny (testy/konsola)
 
 let altitudeKm = 0;
@@ -215,6 +217,7 @@ function animate() {
   camera.position.x += ox; camera.position.y += oy; camera.position.z += oz;
 
   hud.update(sim, ambientP, altitudeKm, gimbalX, gimbalY);
+  charts.update(dt, sim);
   sound.update(p, dt);
 
   renderer.render(scene, camera);

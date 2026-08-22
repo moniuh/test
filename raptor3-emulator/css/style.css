@@ -154,6 +154,24 @@ input[type="range"] {
 
 .sep { border-top: 1px solid var(--border); margin: 10px 0; }
 
+.chart {
+  width: 100%;
+  height: 48px;
+  display: block;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(120, 160, 220, 0.12);
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+.chart-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--dim);
+  margin-bottom: 3px;
+}
+
 /* panel sekwencji */
 #sequence { left: 16px; bottom: 14px; width: 250px; }
 #sequence h2 {

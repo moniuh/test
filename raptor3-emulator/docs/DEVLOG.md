@@ -37,3 +37,36 @@ niewybrane zostają w backlogu na kolejne iteracje.
   zdarzenie pulsuje.
 
 **Test:** start → pełna sekwencja stemplowana poprawnie, brak błędów konsoli.
+
+---
+
+## Iteracja 2 — Wykresy telemetrii
+
+**Pomysły:**
+1. Wykresy telemetrii — przewijane przebiegi ciągu i p. komory ✔ WYBRANY
+2. Schładzanie kriogeniczne przed startem (prechill) z wentami pary
+3. Dym i para po wyłączeniu silnika
+4. Tryby awarii + automatyczny FDS
+5. Widok przekroju silnika (płaszczyzny tnące)
+6. Predefiniowane ujęcia kamery + tryb kinowy
+7. Szron na orurowaniu LOX
+8. Zegarowe tarcze wskaźników
+9. Eksport telemetrii do CSV
+10. Warianty silnika Raptor 1 / 2 / 3
+11. Slew rate przepustnicy
+12. Cienie (shadow mapping)
+13. Panel „POMOC" + statystyki testów
+14. Adaptacyjna rozdzielczość renderowania
+15. NOWY: znaczniki zdarzeń sekwencji na wykresach
+16. NOWY: pauza / zwolnione tempo symulacji
+
+**Wybrano:** #1 — chwilowe liczby nie pokazują dynamiki rozruchu i dławienia;
+wykres czyni sekwencję czytelną na pierwszy rzut oka.
+
+**Zrobione:**
+- Nowy moduł `charts.js`: `StripChart` (bufor pierścieniowy 240 próbek,
+  rysowanie z siatką i poświatą) + `TelemetryCharts` (próbkowanie co 0,15 s
+  → okno ~36 s) dla ciągu [kN] i ciśnienia komory [bar].
+- Dwa canvasy w panelu telemetrii, spięte w pętli głównej.
+
+**Test:** przebiegi rysują się podczas rozruchu i wyłączenia, brak błędów.
