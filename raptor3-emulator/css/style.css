@@ -193,6 +193,23 @@ canvas.gauge {
   margin-bottom: 3px;
 }
 
+.csv-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.csv-row button {
+  flex: 0 0 auto;
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 400;
+}
+.csv-row span {
+  font-size: 9.5px;
+  color: var(--dim);
+  letter-spacing: 1px;
+}
+
 /* alarm FDS */
 #alarm {
   position: fixed;

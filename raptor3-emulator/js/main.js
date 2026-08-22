@@ -10,6 +10,7 @@ import { Hud } from './hud.js';
 import { EngineSound } from './sound.js';
 import { TelemetryCharts } from './charts.js';
 import { PuffSystem } from './particles.js';
+import { Recorder } from './recorder.js';
 
 const PIVOT_WORLD_Y = 5.45; // wysokość przegubu gimbala nad płytą
 
@@ -102,7 +103,9 @@ const sim = new EngineSim();
 const hud = new Hud();
 const sound = new EngineSound();
 const charts = new TelemetryCharts();
+const recorder = new Recorder();
 window.__sim = sim; // hak diagnostyczny (testy/konsola)
+window.__rec = recorder;
 
 let altitudeKm = 0;
 let ambientP = P0;
@@ -115,6 +118,11 @@ const elThrottle = $('throttle');
 const elAlt = $('altitude');
 const elGx = $('gimbalX');
 const elGy = $('gimbalY');
+
+const btnCsv = $('btnCsv');
+const tSamples = $('tSamples');
+btnCsv.addEventListener('click', () => recorder.download());
+let lastSamples = -1;
 
 $('btnStart').addEventListener('click', () => { sim.start(); sound.ensure(); if (sound.ctx && sound.ctx.state === 'suspended') sound.ctx.resume(); });
 $('btnStop').addEventListener('click', () => sim.shutdown());
@@ -394,6 +402,12 @@ function animate() {
 
   hud.update(sim, ambientP, altitudeKm, gimbalX, gimbalY);
   charts.update(dt, sim);
+  recorder.update(dt, sim, ambientP, gimbalX, gimbalY);
+  if (recorder.rows.length !== lastSamples) {
+    lastSamples = recorder.rows.length;
+    tSamples.textContent = `PRÓBKI: ${lastSamples}`;
+    btnCsv.disabled = lastSamples === 0;
+  }
   sound.update(p, dt, !!sim.alarm && sim.state !== 'IDLE');
 
   renderer.render(scene, camera);

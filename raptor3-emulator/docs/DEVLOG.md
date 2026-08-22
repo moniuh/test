@@ -328,3 +328,39 @@ telemetrii robi się bardziej „kokpitowy" i krótszy w pionie.
 
 **Test:** tarcze rysują się i aktualizują, redline aktywne przy nadobrotach,
 brak błędów.
+
+---
+
+## Iteracja 10 — Rejestrator telemetrii i eksport CSV
+
+**Pomysły:**
+1. Rejestrator telemetrii z eksportem CSV ✔ WYBRANY
+2. Warianty Raptor 1/2/3
+3. Slew rate przepustnicy
+4. Cienie
+5. Panel „POMOC" + statystyki
+6. Adaptacyjna rozdzielczość
+7. Znaczniki zdarzeń na wykresach
+8. Suwak płaszczyzny przekroju
+9. Etykiety części 3D
+10. Hard mode
+11. Zapis własnego ujęcia kamery
+12. Kapiące skropliny
+13. Wskaźnik temperatur kriogenicznych
+14. Tarcza ciągu (czwarta)
+15. NOWY: odtwarzanie zapisanego testu (replay) z pliku CSV
+16. NOWY: porównanie dwóch przebiegów na jednym wykresie
+
+**Wybrano:** #1 — zamyka pętlę „test → dane": każdy odpał można zabrać
+do arkusza albo notebooka i przeanalizować.
+
+**Zrobione:**
+- Nowy moduł `recorder.js`: próbkowanie 10 Hz przez cały test (start przy
+  wyjściu z GOTOWY, do 20 000 wierszy), kolumny: czas misji, stan, ciąg,
+  p. komory, obroty obu pomp, przepływy, Isp, przepustnica, p. otoczenia,
+  gimbal XY. Eksport przez Blob + link (nazwa `raptor3_test_NNN.csv`).
+- Przycisk EKSPORT CSV z licznikiem próbek w panelu telemetrii,
+  nieaktywny dopóki nie ma danych.
+
+**Test:** nagłówek i wiersze CSV poprawne (2741,9 kN / 349,6 bar przy 100%),
+pobranie `raptor3_test_001.csv` wyzwala się; brak błędów.
