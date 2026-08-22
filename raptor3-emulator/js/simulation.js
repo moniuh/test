@@ -23,6 +23,7 @@ SPEC.thrustVac = SPEC.thrustSL + SPEC.exitArea * P0; // ~2880 kN
 
 export const State = {
   IDLE: 'IDLE',
+  PRECHILL: 'PRECHILL',
   SPINUP: 'SPINUP',
   IGNITION: 'IGNITION',
   RAMP: 'RAMP',
@@ -32,6 +33,7 @@ export const State = {
 
 export const StateLabel = {
   IDLE: 'GOTOWY',
+  PRECHILL: 'SCHŁADZANIE',
   SPINUP: 'ROZRUCH POMP',
   IGNITION: 'ZAPŁON',
   RAMP: 'NARASTANIE CIĄGU',
@@ -83,13 +85,13 @@ export class EngineSim {
 
   start() {
     if (this.state !== State.IDLE) return;
-    this.state = State.SPINUP;
+    this.state = State.PRECHILL;
     this.stateT = 0;
     this.burnTime = 0;
     this.propUsed = 0;
     this.met = 0;
     this.seq = [];
-    this.pushSeq('ROZRUCH POMP');
+    this.pushSeq('SCHŁADZANIE WSTĘPNE');
   }
 
   shutdown() {
@@ -112,6 +114,9 @@ export class EngineSim {
     let fuelTarget = 0, oxTarget = 0;
     switch (this.state) {
       case S.IDLE:
+        break;
+      case S.PRECHILL: // schładzanie kriogeniczne pomp i przewodów
+        if (this.stateT > 3.2) { this.state = S.SPINUP; this.stateT = 0; this.pushSeq('ROZRUCH POMP'); }
         break;
       case S.SPINUP: // rozkręcenie turbopomp (spin prime)
         fuelTarget = 0.22; oxTarget = 0.20;

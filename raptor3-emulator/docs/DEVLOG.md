@@ -70,3 +70,40 @@ wykres czyni sekwencję czytelną na pierwszy rzut oka.
 - Dwa canvasy w panelu telemetrii, spięte w pętli głównej.
 
 **Test:** przebiegi rysują się podczas rozruchu i wyłączenia, brak błędów.
+
+---
+
+## Iteracja 3 — Schładzanie kriogeniczne (prechill) + opary
+
+**Pomysły:**
+1. Prechill z wentami pary przed rozruchem pomp ✔ WYBRANY
+2. Dym i para po wyłączeniu (pełny efekt na bazie nowego systemu cząstek)
+3. Tryby awarii + FDS
+4. Widok przekroju silnika
+5. Kamery predefiniowane + tryb kinowy
+6. Szron na orurowaniu LOX
+7. Tarcze zegarowe wskaźników
+8. Eksport CSV
+9. Warianty Raptor 1/2/3
+10. Slew rate przepustnicy
+11. Cienie
+12. Panel „POMOC" + statystyki
+13. Adaptacyjna rozdzielczość
+14. Znaczniki zdarzeń na wykresach
+15. NOWY: dźwięk syku wentów w fazie schładzania
+
+**Wybrano:** #1 — prawdziwy Raptor przed startem długo „dymi" zimnym gazem;
+sekwencja bez tej fazy wyglądała na zbyt natychmiastową. Przy okazji powstaje
+ogólny system cząstek, który obsłuży też dym i parę (pomysł #2).
+
+**Zrobione:**
+- Nowy moduł `particles.js`: `PuffSystem` — cząstki na GPU (THREE.Points +
+  shader, bufor pierścieniowy 700 sztuk, dryf, rozrost i zanik w vertex
+  shaderze; jedno wywołanie draw).
+- `simulation.js`: nowy stan `PRECHILL` (3,2 s) między GOTOWY a ROZRUCHEM POMP,
+  wpis „SCHŁADZANIE WSTĘPNE" w sekwencji.
+- `main.js`: emisja oparów — zimny gaz osiadający z dyszy + poziome pióropusze
+  z wentów przy turbopompach; lekki boiloff także w trakcie wyłączania.
+
+**Test:** stan SCHŁADZANIE widoczny z oparami, pełna sekwencja przechodzi,
+brak błędów konsoli.

@@ -14,6 +14,7 @@ function fmtClock(t) {
 
 const STATE_COLOR = {
   IDLE: '#8b93a2',
+  PRECHILL: '#8fd8e8',
   SPINUP: '#e8c34a',
   IGNITION: '#ff8a3c',
   RAMP: '#5fd3ff',

@@ -9,6 +9,7 @@ import { Plume } from './plume.js';
 import { Hud } from './hud.js';
 import { EngineSound } from './sound.js';
 import { TelemetryCharts } from './charts.js';
+import { PuffSystem } from './particles.js';
 
 const PIVOT_WORLD_Y = 5.45; // wysokość przegubu gimbala nad płytą
 
@@ -78,6 +79,10 @@ const plume = new Plume();
 plume.group.position.y = engine.exitLocalY;
 engine.group.add(plume.group);
 
+// opary kriogeniczne (prechill, boiloff po wyłączeniu)
+const vapor = new PuffSystem({ count: 700, color: 0xe2ecf6, opacity: 0.42 });
+scene.add(vapor.points);
+
 // siłowniki gimbala: stanowisko -> kołnierz komory
 const actuators = [new Strut(0.045, engineStrutMat(), true), new Strut(0.045, engineStrutMat(), true)];
 function engineStrutMat() {
@@ -144,8 +149,43 @@ window.addEventListener('keyup', e => keys.delete(e.key));
 // ---------- pętla ----------
 
 const _a = new THREE.Vector3();
+const _v = new THREE.Vector3();
 const clock = new THREE.Clock();
 let shake = 0;
+let vaporAcc = 0;
+
+// emisja oparów: z dyszy (chłodzenie/boiloff) i z wentów przy pompach
+function emitVapor(dt, t) {
+  const st = sim.state;
+  let rate = 0;
+  if (st === 'PRECHILL') rate = 46;
+  else if (st === 'SPINUP') rate = 18;
+  else if (st === 'SHUTDOWN' && sim.pcFrac < 0.25) rate = 30;
+  else if (st === 'IDLE' && sim.seq.length && sim.met > 0) rate = 0;
+  if (!rate) return;
+
+  vaporAcc += rate * dt;
+  while (vaporAcc >= 1) {
+    vaporAcc -= 1;
+    const r = Math.random();
+    if (r < 0.62) {
+      // opary z wylotu dyszy — zimny gaz opada i rozpływa się
+      const a = Math.random() * Math.PI * 2;
+      const rr = Math.random() * 0.45;
+      _a.set(Math.cos(a) * rr, engine.exitLocalY - 0.15, Math.sin(a) * rr);
+      engine.group.localToWorld(_a);
+      _v.set((Math.random() - 0.5) * 0.5, -0.55 - Math.random() * 0.45, (Math.random() - 0.5) * 0.5);
+      vapor.emit(_a, _v, 2.2 + Math.random() * 1.6, 2.4 + Math.random() * 2.0, t);
+    } else {
+      // wenty przy turbopompach — krótkie poziome pióropusze
+      const sx = Math.random() < 0.5 ? -1 : 1;
+      _a.set(sx * 0.8, 2.05 - 3.55, (Math.random() - 0.5) * 0.2);
+      engine.group.localToWorld(_a);
+      _v.set(sx * (1.6 + Math.random() * 1.2), -0.15 + Math.random() * 0.3, (Math.random() - 0.5) * 0.6);
+      vapor.emit(_a, _v, 0.7 + Math.random() * 0.5, 1.1 + Math.random() * 0.9, t);
+    }
+  }
+}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -187,6 +227,8 @@ function animate() {
   // pióropusz i oświetlenie dynamiczne
   const ambientFrac = ambientP / P0;
   plume.update(t, sim, ambientFrac);
+  emitVapor(dt, t);
+  vapor.update(t);
 
   const p = sim.power;
   const flick = 0.9 + 0.1 * Math.sin(t * 47) * Math.sin(t * 31 + 1.3);
