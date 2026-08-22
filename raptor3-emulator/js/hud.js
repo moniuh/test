@@ -98,7 +98,11 @@ export class Hud {
       ? `${fmt1.format(ambientP / 1000)} kPa`
       : `${fmt1.format(ambientP)} Pa`;
     e.altVal.textContent = `${fmt0.format(altitudeKm)} km`;
-    e.throttleVal.textContent = `${fmt0.format(sim.throttle * 100)}%`;
+    const cmdPct = Math.round(sim.throttleCmd * 100);
+    const actPct = Math.round(sim.throttle * 100);
+    e.throttleVal.textContent = Math.abs(cmdPct - actPct) > 0
+      ? `${cmdPct}% → ${actPct}%`
+      : `${actPct}%`;
     e.gimbalVal.textContent = `${fmt1.format(gx)}° / ${fmt1.format(gy)}°`;
 
     e.btnStart.disabled = sim.state !== State.IDLE;

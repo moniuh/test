@@ -69,7 +69,8 @@ export class EngineSim {
   constructor() {
     this.state = State.IDLE;
     this.stateT = 0;         // czas w bieżącym stanie
-    this.throttle = 1.0;     // komenda 0.4..1.0
+    this.throttleCmd = 1.0;  // zadana przepustnica 0.4..1.0
+    this.throttle = 1.0;     // rzeczywista (ogranicznik tempa zmian)
     this.ambientP = P0;      // Pa
 
     this.fuelPump = 0;       // 0..1
@@ -155,13 +156,17 @@ export class EngineSim {
   }
 
   setThrottle(t) {
-    this.throttle = Math.min(1, Math.max(SPEC.minThrottle, t));
+    this.throttleCmd = Math.min(1, Math.max(SPEC.minThrottle, t));
   }
 
   update(dt) {
     this.stateT += dt;
     if (this.state !== State.IDLE) this.met += dt;
     const S = State;
+
+    // sterownik ogranicza tempo zmian przepustnicy (w górę wolniej niż w dół)
+    const slew = (this.throttleCmd > this.throttle ? 0.28 : 0.45) * dt;
+    this.throttle += Math.max(-slew, Math.min(slew, this.throttleCmd - this.throttle));
 
     // cele pomp zależnie od stanu
     let fuelTarget = 0, oxTarget = 0;

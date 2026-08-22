@@ -401,3 +401,37 @@ orurowaniem przy 185 tf kontra „czysty" R3 przy 280 tf.
 
 **Test:** R1 daje 1815 kN / 185 tf, przepływy i Isp spadają, orurowanie
 widoczne, powrót do R3 przywraca 280 tf; brak błędów.
+
+---
+
+## Iteracja 12 — Slew rate przepustnicy
+
+**Pomysły:**
+1. Ogranicznik tempa zmian przepustnicy (zadana vs rzeczywista) ✔ WYBRANY
+2. Cienie
+3. Panel „POMOC" + statystyki
+4. Adaptacyjna rozdzielczość
+5. Znaczniki zdarzeń na wykresach
+6. Suwak płaszczyzny przekroju
+7. Etykiety części 3D
+8. Hard mode
+9. Zapis własnego ujęcia kamery
+10. Kapiące skropliny
+11. Wskaźnik temperatur kriogenicznych
+12. Replay z CSV
+13. Porównanie przebiegów
+14. Tabela porównawcza wariantów
+15. NOWY: krzywa odpowiedzi przepustnicy w CSV (kolumna zadanej)
+
+**Wybrano:** #1 — natychmiastowa odpowiedź na suwak była najbardziej
+„growym" uproszczeniem modelu; realny sterownik dławi z ograniczonym tempem.
+
+**Zrobione:**
+- `simulation.js`: rozdzielenie `throttleCmd` (zadana) od `throttle`
+  (rzeczywista); ogranicznik 28 %/s w górę i 45 %/s w dół działa w każdej
+  klatce przed logiką stanów.
+- `hud.js`: etykieta suwaka pokazuje `zadana% → rzeczywista%` w trakcie
+  przejścia, a po zrównaniu pojedynczą wartość.
+
+**Test:** skok 100→40%: po 0,5 s rzeczywista 77,5% (dokładnie 45 %/s),
+po 2,5 s równo 40%; etykieta przejściowa poprawna; brak błędów.
