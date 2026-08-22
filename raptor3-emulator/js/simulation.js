@@ -65,6 +65,13 @@ export class EngineSim {
     this.propUsed = 0;       // kg
     this.power = 0;          // 0..1 — sygnał dla grafiki/dźwięku
     this.turb = 0;           // szum turbulencji
+
+    this.met = 0;            // zegar misji (od komendy URUCHOM)
+    this.seq = [];           // log zdarzeń sekwencji: {t, label}
+  }
+
+  pushSeq(label) {
+    this.seq.push({ t: this.met, label });
   }
 
   get running() { return this.state !== State.IDLE; }
@@ -80,12 +87,16 @@ export class EngineSim {
     this.stateT = 0;
     this.burnTime = 0;
     this.propUsed = 0;
+    this.met = 0;
+    this.seq = [];
+    this.pushSeq('ROZRUCH POMP');
   }
 
   shutdown() {
     if (this.state === State.IDLE || this.state === State.SHUTDOWN) return;
     this.state = State.SHUTDOWN;
     this.stateT = 0;
+    this.pushSeq('KOMENDA WYŁĄCZENIA');
   }
 
   setThrottle(t) {
@@ -94,6 +105,7 @@ export class EngineSim {
 
   update(dt) {
     this.stateT += dt;
+    if (this.state !== State.IDLE) this.met += dt;
     const S = State;
 
     // cele pomp zależnie od stanu
@@ -103,18 +115,19 @@ export class EngineSim {
         break;
       case S.SPINUP: // rozkręcenie turbopomp (spin prime)
         fuelTarget = 0.22; oxTarget = 0.20;
-        if (this.stateT > 1.6) { this.state = S.IGNITION; this.stateT = 0; }
+        if (this.stateT > 1.6) { this.state = S.IGNITION; this.stateT = 0; this.pushSeq('ZAPŁON'); }
         break;
       case S.IGNITION: // zapłon iskrowy przedpalników i komory
         fuelTarget = 0.34; oxTarget = 0.32;
         this.flash = Math.max(this.flash, Math.sin(Math.min(1, this.stateT / 0.45) * Math.PI));
-        if (this.stateT > 0.55) { this.state = S.RAMP; this.stateT = 0; }
+        if (this.stateT > 0.55) { this.state = S.RAMP; this.stateT = 0; this.pushSeq('NARASTANIE CIĄGU'); }
         break;
       case S.RAMP: { // narastanie do zadanej przepustnicy
         const p = throttleToPump(this.throttle);
         fuelTarget = p; oxTarget = p;
         if (Math.abs(this.fuelPump - p) < 0.03 || this.stateT > 3.5) {
           this.state = S.RUNNING; this.stateT = 0;
+          this.pushSeq('PRACA USTALONA');
         }
         break;
       }
@@ -127,6 +140,7 @@ export class EngineSim {
         fuelTarget = 0; oxTarget = 0;
         if (this.fuelPump < 0.02 && this.pcFrac < 0.01) {
           this.state = S.IDLE; this.stateT = 0;
+          this.pushSeq('SILNIK BEZPIECZNY');
         }
         break;
     }

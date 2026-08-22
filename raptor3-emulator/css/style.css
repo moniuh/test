@@ -154,6 +154,31 @@ input[type="range"] {
 
 .sep { border-top: 1px solid var(--border); margin: 10px 0; }
 
+/* panel sekwencji */
+#sequence { left: 16px; bottom: 14px; width: 250px; }
+#sequence h2 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+#sequence h2 span { color: var(--text); font-variant-numeric: tabular-nums; }
+#seqLog {
+  list-style: none;
+  max-height: 132px;
+  overflow-y: auto;
+  font-size: 10.5px;
+  line-height: 1.9;
+}
+#seqLog .t { color: var(--dim); margin-right: 6px; font-variant-numeric: tabular-nums; }
+#seqLog .empty { color: var(--dim); }
+#seqLog .last { color: var(--accent); animation: seqPulse 1.1s ease-in-out infinite; }
+@keyframes seqPulse { 50% { opacity: 0.45; } }
+
 /* stopka */
 #footer {
   bottom: 14px; left: 50%;

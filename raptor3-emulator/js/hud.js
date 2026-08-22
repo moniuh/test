@@ -5,6 +5,13 @@ import { SPEC, State, StateLabel } from './simulation.js';
 const fmt0 = new Intl.NumberFormat('pl-PL', { maximumFractionDigits: 0 });
 const fmt1 = new Intl.NumberFormat('pl-PL', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
+function fmtClock(t) {
+  const mm = String(Math.floor(t / 60)).padStart(2, '0');
+  const ss = String(Math.floor(t % 60)).padStart(2, '0');
+  const d = Math.floor((t % 1) * 10);
+  return `${mm}:${ss}.${d}`;
+}
+
 const STATE_COLOR = {
   IDLE: '#8b93a2',
   SPINUP: '#e8c34a',
@@ -31,7 +38,9 @@ export class Hud {
       altVal: $('vAlt'),
       gimbalVal: $('vGimbal'),
       btnStart: $('btnStart'), btnStop: $('btnStop'),
+      met: $('tMet'), seqLog: $('seqLog'),
     };
+    this.seqLen = -1;
   }
 
   update(sim, ambientP, altitudeKm, gx, gy) {
@@ -59,12 +68,19 @@ export class Hud {
     e.flowLox.textContent = fmt0.format(sim.flowLOX);
     e.isp.textContent = sim.isp > 1 ? fmt0.format(sim.isp) : '—';
 
-    const t = sim.burnTime;
-    const mm = String(Math.floor(t / 60)).padStart(2, '0');
-    const ss = String(Math.floor(t % 60)).padStart(2, '0');
-    const d = Math.floor((t % 1) * 10);
-    e.time.textContent = `${mm}:${ss}.${d}`;
+    e.time.textContent = fmtClock(sim.burnTime);
     e.prop.textContent = fmt1.format(sim.propUsed / 1000);
+
+    // panel sekwencji
+    e.met.textContent = `T+ ${fmtClock(sim.met)}`;
+    if (this.seqLen !== sim.seq.length) {
+      this.seqLen = sim.seq.length;
+      e.seqLog.innerHTML = sim.seq.length
+        ? sim.seq.map((s, i) =>
+            `<li${i === sim.seq.length - 1 ? ' class="last"' : ''}>` +
+            `<span class="t">T+${s.t.toFixed(1)}s</span> ${s.label}</li>`).join('')
+        : '<li class="empty">— oczekiwanie na start —</li>';
+    }
 
     e.ambient.textContent = ambientP >= 1000
       ? `${fmt1.format(ambientP / 1000)} kPa`
