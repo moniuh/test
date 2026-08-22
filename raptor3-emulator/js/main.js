@@ -23,6 +23,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.12;
 renderer.localClippingEnabled = true;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const scene = new THREE.Scene();
 const SKY_SL = new THREE.Color(0x101827);
@@ -51,6 +53,12 @@ scene.add(new THREE.HemisphereLight(0x8fa8cc, 0x1a1c20, 0.5));
 const flood1 = new THREE.SpotLight(0xfff2dd, 620, 0, 0.5, 0.45, 1.8);
 flood1.position.set(9, 8, 7);
 flood1.target.position.set(0, 3, 0);
+flood1.castShadow = true;
+flood1.shadow.mapSize.set(2048, 2048);
+flood1.shadow.camera.near = 2;
+flood1.shadow.camera.far = 40;
+flood1.shadow.bias = -0.0004;
+flood1.shadow.normalBias = 0.02;
 scene.add(flood1, flood1.target);
 const flood2 = new THREE.SpotLight(0xdde8ff, 340, 0, 0.55, 0.5, 1.8);
 flood2.position.set(-8, 9, -6);
@@ -81,6 +89,17 @@ const plume = new Plume();
 plume.group.position.y = engine.exitLocalY;
 engine.group.add(plume.group);
 
+// cienie: bryły rzucają i przyjmują; pomijamy shadery, sprite'y i poświatę
+for (const root of [engine.group, stand.group]) {
+  root.traverse(o => {
+    if (!o.isMesh || o.isSprite) return;
+    if (o.userData.glow || (o.material && o.material.isShaderMaterial)) return;
+    o.castShadow = true;
+    o.receiveShadow = true;
+  });
+}
+ground.group.traverse(o => { if (o.isMesh) o.receiveShadow = true; });
+
 // opary kriogeniczne (prechill, boiloff po wyłączeniu)
 const vapor = new PuffSystem({ count: 700, color: 0xe2ecf6, opacity: 0.42 });
 scene.add(vapor.points);
@@ -95,7 +114,10 @@ const actuators = [new Strut(0.045, engineStrutMat(), true), new Strut(0.045, en
 function engineStrutMat() {
   return new THREE.MeshStandardMaterial({ color: 0xb9bec6, metalness: 0.9, roughness: 0.3 });
 }
-for (const a of actuators) scene.add(a.mesh);
+for (const a of actuators) {
+  a.mesh.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+  scene.add(a.mesh);
+}
 
 // ---------- symulacja i UI ----------
 

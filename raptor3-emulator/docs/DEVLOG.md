@@ -435,3 +435,37 @@ widoczne, powrót do R3 przywraca 280 tf; brak błędów.
 
 **Test:** skok 100→40%: po 0,5 s rzeczywista 77,5% (dokładnie 45 %/s),
 po 2,5 s równo 40%; etykieta przejściowa poprawna; brak błędów.
+
+---
+
+## Iteracja 13 — Cienie
+
+**Pomysły:**
+1. Shadow mapping dla silnika i stanowiska ✔ WYBRANY
+2. Panel „POMOC" + statystyki
+3. Adaptacyjna rozdzielczość
+4. Znaczniki zdarzeń na wykresach
+5. Suwak płaszczyzny przekroju
+6. Etykiety części 3D
+7. Hard mode
+8. Zapis własnego ujęcia kamery
+9. Kapiące skropliny
+10. Wskaźnik temperatur kriogenicznych
+11. Replay z CSV
+12. Porównanie przebiegów
+13. Tabela porównawcza wariantów
+14. Kolumna zadanej przepustnicy w CSV
+15. NOWY: migotanie cieni od światła pióropusza (drugie źródło z cieniem)
+
+**Wybrano:** #1 — scena bez cieni wyglądała na „pływającą"; jeden reflektor
+z mapą cieni kotwiczy bryły na płycie przy znośnym koszcie.
+
+**Zrobione (`main.js`):**
+- `PCFSoftShadowMap`, cień tylko z głównego reflektora (mapa 2048²,
+  bias/normalBias dobrane przeciw acne).
+- Silnik, kratownica i siłowniki rzucają i przyjmują cienie; płyta
+  przyjmuje. Pominięte: shadery pióropusza, cząstki, sprite błysku
+  i poświata wnętrza dyszy.
+
+**Test:** długie miękkie cienie nóg i silnika na płycie, bez artefaktów,
+brak błędów konsoli.
