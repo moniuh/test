@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { buildEngine, buildStand, buildGround, buildStars, Strut } from './engineModel.js';
-import { EngineSim, P0 } from './simulation.js';
+import { EngineSim, P0, SPEC, setVariant } from './simulation.js';
 import { Plume } from './plume.js';
 import { Hud } from './hud.js';
 import { EngineSound } from './sound.js';
@@ -128,6 +128,24 @@ $('btnStart').addEventListener('click', () => { sim.start(); sound.ensure(); if 
 $('btnStop').addEventListener('click', () => sim.shutdown());
 $('btnFail').addEventListener('click', () => sim.injectFailure());
 $('btnCenter').addEventListener('click', () => { gimbalTX = 0; gimbalTY = 0; elGx.value = 0; elGy.value = 0; });
+
+// wybór wariantu silnika (tylko w stanie GOTOWY)
+const variantBtns = [...document.querySelectorAll('button.variant')];
+const hVariant = $('hVariant');
+const hThrust = $('hThrust');
+let lastRunning = null;
+
+function applyVariant(key) {
+  if (sim.state !== 'IDLE') return;
+  setVariant(key);
+  engine.plumbingR1.visible = key === 'R1';
+  engine.plumbingR2.visible = key === 'R1' || key === 'R2';
+  hVariant.textContent = SPEC.name;
+  hThrust.textContent = Math.round(SPEC.thrustSL / 9.80665 / 1000);
+  hud.setVariant(SPEC);
+  for (const b of variantBtns) b.classList.toggle('on', b.dataset.variant === key);
+}
+for (const b of variantBtns) b.addEventListener('click', () => applyVariant(b.dataset.variant));
 
 // predefiniowane ujęcia kamery i tryb kinowy
 const CAM_VIEWS = {
@@ -403,6 +421,11 @@ function animate() {
   hud.update(sim, ambientP, altitudeKm, gimbalX, gimbalY);
   charts.update(dt, sim);
   recorder.update(dt, sim, ambientP, gimbalX, gimbalY);
+  const running = sim.state !== 'IDLE';
+  if (running !== lastRunning) {
+    lastRunning = running;
+    for (const b of variantBtns) b.disabled = running;
+  }
   if (recorder.rows.length !== lastSamples) {
     lastSamples = recorder.rows.length;
     tSamples.textContent = `PRÓBKI: ${lastSamples}`;

@@ -19,12 +19,21 @@
   <canvas id="scene"></canvas>
 
   <div class="panel" id="header">
-    <h1>RAPTOR 3 — EMULATOR SILNIKA</h1>
-    <div class="sub">PEŁNOPRZEPŁYWOWE SPALANIE STOPNIOWANE · CH₄ / LOX · 280 tf</div>
+    <h1><span id="hVariant">RAPTOR 3</span> — EMULATOR SILNIKA</h1>
+    <div class="sub">PEŁNOPRZEPŁYWOWE SPALANIE STOPNIOWANE · CH₄ / LOX · <span id="hThrust">280</span> tf</div>
   </div>
 
   <div class="panel" id="controls">
     <h2>STEROWANIE</h2>
+
+    <div class="ctl">
+      <label>WARIANT SILNIKA</label>
+      <div class="btn-row small" style="margin-bottom:0" id="variantBtns">
+        <button class="variant" data-variant="R1">R1</button>
+        <button class="variant" data-variant="R2">R2</button>
+        <button class="variant on" data-variant="R3">R3</button>
+      </div>
+    </div>
 
     <div class="btn-row">
       <button id="btnStart">URUCHOM</button>

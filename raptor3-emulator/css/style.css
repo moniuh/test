@@ -51,7 +51,14 @@ html, body {
 }
 
 /* panel sterowania */
-#controls { left: 16px; top: 50%; transform: translateY(-50%); width: 250px; }
+#controls {
+  left: 16px; top: 47%;
+  transform: translateY(-50%);
+  width: 250px;
+  max-height: 72vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
 #controls h2, #telemetry h2 {
   font-size: 11px;
   letter-spacing: 2px;
@@ -110,6 +117,11 @@ input[type="range"] {
   letter-spacing: 1px;
 }
 #btnCinema.on { border-color: rgba(95, 211, 255, 0.6); color: var(--accent); }
+button.variant.on {
+  border-color: rgba(95, 211, 255, 0.7);
+  color: var(--accent);
+  background: rgba(95, 211, 255, 0.10);
+}
 
 .gimbal-row { display: flex; align-items: center; gap: 8px; }
 .gimbal-row input { flex: 1; }

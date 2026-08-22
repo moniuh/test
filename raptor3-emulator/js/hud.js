@@ -54,6 +54,13 @@ export class Hud {
     });
   }
 
+  setVariant(spec) {
+    const pcBar = spec.pcMax / 1e5;
+    this.gPc.max = Math.round(pcBar * 1.06);
+    this.gPc.redFrom = Math.round(pcBar * 1.015);
+    this.gPc.value = -1; // wymusza pełne przerysowanie tarczy
+  }
+
   update(sim, ambientP, altitudeKm, gx, gy) {
     const e = this.el;
 

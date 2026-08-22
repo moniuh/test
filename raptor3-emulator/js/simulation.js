@@ -21,6 +21,23 @@ export const SPEC = {
 // Ciąg próżniowy wynika z ciągu SL + odzysku członu ciśnieniowego dyszy
 SPEC.thrustVac = SPEC.thrustSL + SPEC.exitArea * P0; // ~2880 kN
 
+// Warianty rozwojowe silnika (wartości przybliżone, geometria wspólna)
+export const VARIANTS = {
+  R1: { name: 'RAPTOR 1', thrustSL: 1815e3, ispSL: 318, ispVac: 345, pcMax: 250e5, dryMass: 2080 },
+  R2: { name: 'RAPTOR 2', thrustSL: 2256e3, ispSL: 323, ispVac: 347, pcMax: 300e5, dryMass: 1630 },
+  R3: { name: 'RAPTOR 3', thrustSL: 2745e3, ispSL: 327, ispVac: 350, pcMax: 350e5, dryMass: 1525 },
+};
+
+export function setVariant(key) {
+  const v = VARIANTS[key];
+  if (!v) return;
+  Object.assign(SPEC, v);
+  SPEC.thrustVac = SPEC.thrustSL + SPEC.exitArea * P0;
+  SPEC.variant = key;
+}
+SPEC.variant = 'R3';
+SPEC.name = 'RAPTOR 3';
+
 export const State = {
   IDLE: 'IDLE',
   PRECHILL: 'PRECHILL',

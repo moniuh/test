@@ -232,6 +232,27 @@ export function buildEngine() {
   markCryo(mainDuct, 1.0);
   body.add(mainDuct);
 
+  // zewnętrzne orurowanie starszych wariantów (R1 najgęstsze, R2 częściowe)
+  const plumbingR1 = new THREE.Group();
+  plumbingR1.add(
+    tube([[0.50, 2.40, 0.30], [0.05, 2.22, 0.56], [-0.48, 2.05, 0.32], [-0.56, 1.75, -0.18], [-0.05, 1.62, -0.52], [0.48, 1.58, -0.15]], 0.034, MAT.pipe),
+    tube([[0.30, 1.55, 0.38], [0.52, 1.05, 0.40], [0.58, 0.55, 0.34], [0.50, 0.25, 0.20]], 0.030, MAT.pipe),
+    tube([[-0.34, 1.55, -0.34], [-0.52, 1.10, -0.38], [-0.60, 0.60, -0.30]], 0.030, MAT.pipe),
+    tube([[0.15, 2.95, -0.35], [0.35, 2.60, -0.48], [0.42, 2.15, -0.42], [0.35, 1.90, -0.30]], 0.040, MAT.steel),
+  );
+  const boxCtl = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.32, 0.13), MAT.darkSteel);
+  boxCtl.position.set(-0.48, 2.35, -0.28);
+  plumbingR1.add(boxCtl);
+
+  const plumbingR2 = new THREE.Group();
+  plumbingR2.add(
+    tube([[0.42, 2.15, 0.30], [0.10, 1.95, 0.50], [-0.35, 1.80, 0.35], [-0.45, 1.60, 0.10]], 0.036, MAT.pipe),
+    tube([[-0.15, 2.95, 0.32], [-0.35, 2.55, 0.44], [-0.42, 2.15, 0.38]], 0.040, MAT.steel),
+  );
+  plumbingR1.visible = false;
+  plumbingR2.visible = false;
+  body.add(plumbingR1, plumbingR2);
+
   // blok gimbala i przegub kulowy
   const block = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.30, 0.46), MAT.darkSteel);
   block.position.y = 3.42;
@@ -246,7 +267,7 @@ export function buildEngine() {
     new THREE.Vector3(0, 2.55 - PIVOT, 0.47),
   ];
 
-  return { group, glowMat, actAnchorsLocal, cryoParts, exitLocalY: -PIVOT };
+  return { group, glowMat, actAnchorsLocal, cryoParts, plumbingR1, plumbingR2, exitLocalY: -PIVOT };
 }
 
 // ---------- stanowisko testowe ----------

@@ -364,3 +364,40 @@ do arkusza albo notebooka i przeanalizować.
 
 **Test:** nagłówek i wiersze CSV poprawne (2741,9 kN / 349,6 bar przy 100%),
 pobranie `raptor3_test_001.csv` wyzwala się; brak błędów.
+
+---
+
+## Iteracja 11 — Warianty silnika Raptor 1 / 2 / 3
+
+**Pomysły:**
+1. Przełączane warianty R1/R2/R3 ✔ WYBRANY
+2. Slew rate przepustnicy
+3. Cienie
+4. Panel „POMOC" + statystyki
+5. Adaptacyjna rozdzielczość
+6. Znaczniki zdarzeń na wykresach
+7. Suwak płaszczyzny przekroju
+8. Etykiety części 3D
+9. Hard mode
+10. Zapis własnego ujęcia kamery
+11. Kapiące skropliny
+12. Wskaźnik temperatur kriogenicznych
+13. Replay z CSV
+14. Porównanie dwóch przebiegów na wykresie
+15. NOWY: tabela porównawcza wariantów w panelu POMOC
+
+**Wybrano:** #1 — najlepiej pokazuje ewolucję silnika: R1 obrośnięty
+orurowaniem przy 185 tf kontra „czysty" R3 przy 280 tf.
+
+**Zrobione:**
+- `simulation.js`: `VARIANTS` (ciąg SL, Isp, p. komory, masa — wartości
+  przybliżone) i `setVariant()` mutujące wspólny obiekt `SPEC`;
+  ciąg próżniowy przeliczany z pola wylotu dyszy.
+- `engineModel.js`: dwie grupy zewnętrznego orurowania — R1 (gęste rurki
+  wokół komory i dzwonu + skrzynka sterownika) i R2 (częściowe); R3 czysty.
+- `main.js` + `hud.js` + UI: przyciski R1/R2/R3 (zablokowane w trakcie
+  testu), nagłówek strony i tarcza p. komory przeskalowują się do wariantu
+  (R1: redline przy 250 bar).
+
+**Test:** R1 daje 1815 kN / 185 tf, przepływy i Isp spadają, orurowanie
+widoczne, powrót do R3 przywraca 280 tf; brak błędów.
