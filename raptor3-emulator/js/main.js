@@ -38,7 +38,7 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.06;
 controls.minDistance = 3;
 controls.maxDistance = 70;
-controls.maxPolarAngle = Math.PI * 0.55;
+controls.maxPolarAngle = Math.PI * 0.68; // pozwala zajrzeć w dyszę z dołu
 
 // odbicia otoczenia dla metali
 const pmrem = new THREE.PMREMGenerator(renderer);
@@ -120,6 +120,42 @@ $('btnStart').addEventListener('click', () => { sim.start(); sound.ensure(); if 
 $('btnStop').addEventListener('click', () => sim.shutdown());
 $('btnFail').addEventListener('click', () => sim.injectFailure());
 $('btnCenter').addEventListener('click', () => { gimbalTX = 0; gimbalTY = 0; elGx.value = 0; elGy.value = 0; });
+
+// predefiniowane ujęcia kamery i tryb kinowy
+const CAM_VIEWS = {
+  general: { pos: [11.2, 4.4, 2.6], tg: [0, 3.4, 0] },
+  nozzle: { pos: [4.6, 1.7, 3.6], tg: [0, 2.3, 0] },
+  pumps: { pos: [3.1, 5.1, 2.1], tg: [0, 4.35, 0] },
+  below: { pos: [2.8, 0.4, 2.8], tg: [0, 2.6, 0] },
+};
+let camTween = null;
+let cinema = false;
+let cinemaAz = 0;
+const btnCinema = $('btnCinema');
+
+function setCinema(on) {
+  cinema = on;
+  if (on) cinemaAz = Math.atan2(camera.position.z, camera.position.x);
+  btnCinema.textContent = on ? 'TRYB KINOWY: WŁ' : 'TRYB KINOWY: WYŁ';
+  btnCinema.classList.toggle('on', on);
+}
+
+function flyTo(name) {
+  const v = CAM_VIEWS[name];
+  if (!v) return;
+  setCinema(false);
+  camTween = {
+    k: 0, dur: 1.3,
+    fromPos: camera.position.clone(), toPos: new THREE.Vector3(...v.pos),
+    fromTg: controls.target.clone(), toTg: new THREE.Vector3(...v.tg),
+  };
+}
+
+for (const b of document.querySelectorAll('button.cam')) {
+  b.addEventListener('click', () => flyTo(b.dataset.cam));
+}
+btnCinema.addEventListener('click', () => setCinema(!cinema));
+renderer.domElement.addEventListener('pointerdown', () => { camTween = null; setCinema(false); });
 
 // widok przekroju — płaszczyzna tnąca tylko dla siatek silnika
 const cutPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0);
@@ -317,9 +353,30 @@ function animate() {
   // odblask na płycie — tylko gdy struga sięga ziemi (niskie wysokości)
   ground.glowMat.opacity = p * 0.32 * THREE.MathUtils.clamp(ambientFrac * 3, 0.06, 1);
 
+  // sterowanie kamerą: tryb kinowy > przelot > orbitowanie użytkownika
+  if (cinema) {
+    cinemaAz += dt * 0.11;
+    const r = 10.8;
+    camera.position.set(
+      Math.cos(cinemaAz) * r,
+      4.1 + Math.sin(t * 0.13) * 1.8,
+      Math.sin(cinemaAz) * r,
+    );
+    camera.lookAt(0, 3.4, 0);
+    controls.target.set(0, 3.4, 0);
+  } else if (camTween) {
+    camTween.k = Math.min(1, camTween.k + dt / camTween.dur);
+    const k = camTween.k * camTween.k * (3 - 2 * camTween.k); // smoothstep
+    camera.position.lerpVectors(camTween.fromPos, camTween.toPos, k);
+    controls.target.lerpVectors(camTween.fromTg, camTween.toTg, k);
+    camera.lookAt(controls.target);
+    if (camTween.k >= 1) camTween = null;
+  } else {
+    controls.update();
+  }
+
   // drgania kamery przy pracy silnika
   shake += ((p * 0.02 + sim.flash * 0.045 + Math.abs(sim.turb) * 0.002 * p) - shake) * Math.min(1, dt * 8);
-  controls.update();
   const ox = (Math.random() - 0.5) * shake;
   const oy = (Math.random() - 0.5) * shake;
   const oz = (Math.random() - 0.5) * shake;

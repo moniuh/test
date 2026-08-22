@@ -102,6 +102,15 @@ input[type="range"] {
   cursor: pointer;
 }
 
+.btn-row.small { margin-bottom: 6px; }
+.btn-row.small button {
+  padding: 6px 4px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+#btnCinema.on { border-color: rgba(95, 211, 255, 0.6); color: var(--accent); }
+
 .gimbal-row { display: flex; align-items: center; gap: 8px; }
 .gimbal-row input { flex: 1; }
 

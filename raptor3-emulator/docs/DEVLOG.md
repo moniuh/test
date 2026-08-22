@@ -221,3 +221,37 @@ zamienia model w pomoc edukacyjną.
 
 **Test:** przekrój włącza/wyłącza się w locie, wnętrze komory i dzwonu
 widoczne z poświatą, brak błędów.
+
+---
+
+## Iteracja 7 — Ujęcia kamery i tryb kinowy
+
+**Pomysły:**
+1. Predefiniowane ujęcia + tryb kinowy auto-orbit ✔ WYBRANY
+2. Szron na orurowaniu LOX
+3. Tarcze zegarowe wskaźników
+4. Eksport CSV
+5. Warianty Raptor 1/2/3
+6. Slew rate przepustnicy
+7. Cienie
+8. Panel „POMOC" + statystyki
+9. Adaptacyjna rozdzielczość
+10. Znaczniki zdarzeń na wykresach
+11. Suwak płaszczyzny przekroju
+12. Etykiety części silnika w 3D
+13. Hard mode z losowymi awariami
+14. NOWY: zapis ujęcia użytkownika pod klawiszem (custom preset)
+15. NOWY: tryb kinowy reagujący na fazę sekwencji (najazd przy zapłonie)
+
+**Wybrano:** #1 — dobre ujęcia sprzedają całą resztę; ręczne ustawianie
+kamery na „Z DOŁU" wymagało gimnastyki.
+
+**Zrobione (`main.js` + UI):**
+- Cztery presety (OGÓLNY / DYSZA / POMPY / Z DOŁU) z płynnym przelotem
+  (smoothstep 1,3 s); `maxPolarAngle` poszerzony, żeby dało się zajrzeć
+  w dyszę od dołu.
+- TRYB KINOWY: automatyczna orbita z falowaniem wysokości; złapanie sceny
+  myszą lub wybór presetu wyłącza go natychmiast.
+
+**Test:** przelot do „Z DOŁU" podczas pracy (diamenty Macha z bliska),
+tryb kinowy włącza się i wyłącza, brak błędów.
