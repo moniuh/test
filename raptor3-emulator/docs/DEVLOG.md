@@ -505,3 +505,55 @@ kolejnych testów.
 
 **Test:** po dwóch testach statystyki `{tests:2, 15 s, 8,8 t}` przeżywają
 przeładowanie strony; modal otwiera się i zamyka; brak błędów.
+
+---
+
+## Iteracja 15 — Szlif końcowy: wydajność, znaczniki, dokumentacja
+
+**Pomysły:**
+1. Adaptacyjna rozdzielczość renderowania ✔ WYBRANY
+2. Znaczniki zdarzeń sekwencji na wykresach ✔ WYBRANY (drobny, domyka wykresy)
+3. Odświeżenie README i zrzutów po 15 iteracjach ✔ WYBRANY (obowiązek pętli)
+4. Suwak płaszczyzny przekroju
+5. Etykiety części 3D
+6. Hard mode — losowe awarie
+7. Zapis własnego ujęcia kamery
+8. Kapiące skropliny przy szronie
+9. Wskaźnik temperatur kriogenicznych
+10. Replay testu z CSV
+11. Porównanie dwóch przebiegów na wykresie
+12. Kolumna zadanej przepustnicy w CSV
+13. Tabela wariantów generowana z kodu (zamiast statycznej)
+14. Migotanie cieni od światła pióropusza
+15. Samouczek przy pierwszej wizycie / reset statystyk
+
+**Wybrano:** #1 + #2 + #3 — iteracja zamykająca: zabezpieczenie płynności na
+słabszych GPU, ostatni brakujący element wykresów i dokumentacja zgodna ze
+stanem faktycznym. Pozostałe pomysły zostają w backlogu na przyszłość.
+
+**Zrobione:**
+- `main.js`: adaptacyjny pixel ratio — średnia czasu klatki z okien 2 s;
+  powyżej 45 ms zejście o 0,25 (min 1,0), poniżej 22 ms powrót (max 2,0).
+- `charts.js`: pionowe znaczniki zdarzeń sekwencji na obu wykresach
+  (cyjan — fazy nominalne, pomarańcz — zapłon/wyłączenie, czerwień — awarie
+  i FDS); pozycjonowane licznikiem próbek, przewijają się z przebiegiem;
+  log zerowany przy nowym teście.
+- `README.md`: pełna tabela funkcji po 15 iteracjach, nowe zrzuty
+  (SL z parą i cieniami, struga z dołu, próżnia, POMOC, szron), odnośnik
+  do tego dziennika.
+
+**Test:** pełny przebieg regresji (start → praca → wyłączenie → sekwencja
+kompletna) bez błędów konsoli; zrzuty finalne wykonane.
+
+---
+
+## Podsumowanie pętli
+
+15 iteracji, 15 commitów, backlog na start każdej iteracji ≥10 pomysłów.
+Od iteracji 1 (panel sekwencji) do 15 (szlif) emulator urósł o: konsolę
+sekwencji, wykresy ze znacznikami, prechill z oparami i szronem, parę i dym,
+awarie z FDS, przekrój, presety kamer z trybem kinowym, tarcze zegarowe,
+rejestrator CSV, warianty R1/R2/R3, slew rate przepustnicy, cienie, panel
+POMOC ze statystykami i adaptacyjną rozdzielczość. Niewykorzystane pomysły
+(replay z CSV, etykiety 3D, hard mode, suwak przekroju…) czekają w backlogu
+ostatniej iteracji.

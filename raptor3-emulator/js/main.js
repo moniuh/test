@@ -19,7 +19,9 @@ const PIVOT_WORLD_Y = 5.45; // wysokość przegubu gimbala nad płytą
 
 const canvas = document.getElementById('scene');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+const PR_MAX = Math.min(window.devicePixelRatio, 2);
+let pixelRatio = PR_MAX;
+renderer.setPixelRatio(pixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.12;
@@ -352,9 +354,24 @@ function emitSmoke(dt, t) {
   }
 }
 
+// adaptacyjna rozdzielczość: przy niskim fps schodzi do 1.0, wraca gdy jest zapas
+let perfAcc = 0, perfN = 0;
+function adaptResolution(dtRaw) {
+  perfAcc += dtRaw; perfN += 1;
+  if (perfAcc < 2) return;
+  const avg = perfAcc / perfN;
+  perfAcc = 0; perfN = 0;
+  if (avg > 0.045 && pixelRatio > 1.0) pixelRatio = Math.max(1.0, pixelRatio - 0.25);
+  else if (avg < 0.022 && pixelRatio < PR_MAX) pixelRatio = Math.min(PR_MAX, pixelRatio + 0.25);
+  else return;
+  renderer.setPixelRatio(pixelRatio);
+}
+
 function animate() {
   requestAnimationFrame(animate);
-  const dt = Math.min(clock.getDelta(), 0.05);
+  const dtRaw = clock.getDelta();
+  adaptResolution(dtRaw);
+  const dt = Math.min(dtRaw, 0.05);
   const t = clock.elapsedTime;
 
   // klawiatura -> cel gimbala

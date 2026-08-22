@@ -10,11 +10,19 @@ export class StripChart {
     this.n = 240;                       // liczba próbek w oknie
     this.data = new Float32Array(this.n).fill(NaN);
     this.head = 0;
+    this.abs = 0;                       // licznik wszystkich próbek
+    this.markers = [];                  // znaczniki zdarzeń sekwencji
   }
 
   push(v) {
     this.data[this.head] = v;
     this.head = (this.head + 1) % this.n;
+    this.abs += 1;
+  }
+
+  mark(color) {
+    this.markers.push({ abs: this.abs, color });
+    if (this.markers.length > 40) this.markers.shift();
   }
 
   draw() {
@@ -28,6 +36,16 @@ export class StripChart {
     for (let i = 1; i <= 3; i++) {
       const y = (H * i) / 4;
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    }
+
+    // znaczniki zdarzeń (zapłon, awarie, wyłączenie)
+    for (const m of this.markers) {
+      const age = this.abs - m.abs;
+      if (age >= this.n) continue;
+      const x = W - (age / (this.n - 1)) * W;
+      ctx.strokeStyle = m.color;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
     }
 
     // przebieg
@@ -125,9 +143,28 @@ export class TelemetryCharts {
     this.pc = init('chartPc', { max: 370, color: '#b18cff', unit: 'bar' });
     this.timer = 0;
     this.interval = 0.15;   // s między próbkami (~36 s okna)
+    this.seqLen = 0;
+  }
+
+  markerColor(label) {
+    if (label.startsWith('AWARIA') || label.startsWith('FDS')) return 'rgba(255,80,80,0.75)';
+    if (label === 'ZAPŁON') return 'rgba(255,150,60,0.75)';
+    if (label.startsWith('KOMENDA WYŁ')) return 'rgba(255,150,60,0.6)';
+    return 'rgba(95,211,255,0.55)';
   }
 
   update(dt, sim) {
+    // nowe zdarzenia sekwencji -> pionowe znaczniki na obu wykresach
+    if (sim.seq.length < this.seqLen) this.seqLen = 0; // nowy test — log wyzerowany
+    if (sim.seq.length !== this.seqLen) {
+      for (let i = this.seqLen; i < sim.seq.length; i++) {
+        const c = this.markerColor(sim.seq[i].label);
+        this.thrust.mark(c);
+        this.pc.mark(c);
+      }
+      this.seqLen = sim.seq.length;
+    }
+
     this.timer += dt;
     if (this.timer < this.interval) return;
     this.timer = 0;
