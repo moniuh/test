@@ -21,6 +21,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.12;
+renderer.localClippingEnabled = true;
 
 const scene = new THREE.Scene();
 const SKY_SL = new THREE.Color(0x101827);
@@ -119,6 +120,26 @@ $('btnStart').addEventListener('click', () => { sim.start(); sound.ensure(); if 
 $('btnStop').addEventListener('click', () => sim.shutdown());
 $('btnFail').addEventListener('click', () => sim.injectFailure());
 $('btnCenter').addEventListener('click', () => { gimbalTX = 0; gimbalTY = 0; elGx.value = 0; elGy.value = 0; });
+
+// widok przekroju — płaszczyzna tnąca tylko dla siatek silnika
+const cutPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0);
+let cutaway = false;
+const btnCut = $('btnCut');
+btnCut.addEventListener('click', () => {
+  cutaway = !cutaway;
+  btnCut.textContent = cutaway ? 'PRZEKRÓJ: WŁ' : 'PRZEKRÓJ: WYŁ';
+  btnCut.classList.toggle('on', cutaway);
+  engine.group.traverse(obj => {
+    if (!obj.isMesh && !obj.isPoints) return;
+    if (obj === plume.inner || obj === plume.outer || obj === plume.flash) return;
+    if (!obj.userData.ownMat) {
+      obj.material = obj.material.clone();
+      obj.userData.ownMat = true;
+      if (obj.userData.glow) engine.glowMat = obj.material;
+    }
+    obj.material.clippingPlanes = cutaway ? [cutPlane] : null;
+  });
+});
 
 const btnSound = $('btnSound');
 btnSound.addEventListener('click', () => {

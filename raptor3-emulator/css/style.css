@@ -198,6 +198,7 @@ input[type="range"] {
 @keyframes alarmFlash { 50% { border-color: rgba(255, 80, 80, 0.15); color: #c23c3c; } }
 
 #btnFail { border-color: rgba(255, 170, 60, 0.45); color: #ffb45e; }
+#btnCut.on { border-color: rgba(95, 211, 255, 0.6); color: var(--accent); }
 .bar > div.redline { background: linear-gradient(90deg, #ff8a3c, #ff3b3b); }
 
 /* panel sekwencji */

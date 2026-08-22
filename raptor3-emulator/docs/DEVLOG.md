@@ -183,3 +183,41 @@ brak błędów konsoli.
 **Test:** oba scenariusze (awaria w locie, nieudany zapłon) kończą się
 sekwencją „AWARIA → FDS: AWARYJNE WYŁĄCZENIE → SILNIK BEZPIECZNY";
 baner widoczny; brak błędów.
+
+---
+
+## Iteracja 6 — Widok przekroju
+
+**Pomysły:**
+1. Widok przekroju (płaszczyzna tnąca) ✔ WYBRANY
+2. Kamery predefiniowane + tryb kinowy
+3. Szron na orurowaniu LOX
+4. Tarcze zegarowe wskaźników
+5. Eksport CSV
+6. Warianty Raptor 1/2/3
+7. Slew rate przepustnicy
+8. Cienie
+9. Panel „POMOC" + statystyki
+10. Adaptacyjna rozdzielczość
+11. Znaczniki zdarzeń na wykresach
+12. Historia awarii z osobnym kolorem w sekwencji
+13. Tryb „hard mode" — losowe awarie
+14. Podświetlanie pary światłem pióropusza
+15. NOWY: animowane przesuwanie płaszczyzny przekroju suwakiem
+16. NOWY: etykiety części silnika (adnotacje 3D) w trybie przekroju
+
+**Wybrano:** #1 — najciekawsza rzecz w silniku dzieje się w środku; przekrój
+zamienia model w pomoc edukacyjną.
+
+**Zrobione:**
+- `main.js`: `renderer.localClippingEnabled`, płaszczyzna tnąca X=0 i przycisk
+  PRZEKRÓJ. Materiały silnika są klonowane per-siatka przy pierwszym użyciu
+  (materiały bazowe są współdzielone ze stanowiskiem — bez klonowania przekrój
+  ciąłby też kratownicę); referencja materiału poświaty dyszy odtwarzana po
+  klonowaniu przez `userData.glow`.
+- `engineModel.js`: płyta wtryskiwacza (proceduralna tekstura pierścieni
+  otworów) i zapalnik w komorze — widoczne tylko w przekroju.
+- Pióropusz i cząstki pozostają niecięte.
+
+**Test:** przekrój włącza/wyłącza się w locie, wnętrze komory i dzwonu
+widoczne z poświatą, brak błędów.

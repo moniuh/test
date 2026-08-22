@@ -135,6 +135,7 @@ export function buildEngine() {
   const glowMat = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide });
   const glow = latheBetween(1.52, 0.015, 40, glowMat);
   glow.scale.set(0.982, 1, 0.982);
+  glow.userData.glow = true; // referencja odtwarzana po klonowaniu materiału (przekrój)
   body.add(glow);
 
   // pierścienie usztywniające i kołnierze
@@ -174,6 +175,36 @@ export function buildEngine() {
       [sx * 0.46, 2.0, sx * 0.22], [sx * 0.40, 1.62, sx * 0.26], [sx * 0.24, 1.45, sx * 0.14],
     ], 0.030, MAT.pipe));
   }
+
+  // płyta wtryskiwacza — widoczna tylko w widoku przekroju
+  const injCanvas = document.createElement('canvas');
+  injCanvas.width = injCanvas.height = 256;
+  const ictx = injCanvas.getContext('2d');
+  ictx.fillStyle = '#4a4038';
+  ictx.fillRect(0, 0, 256, 256);
+  ictx.fillStyle = '#2b241f';
+  for (let ring = 1; ring <= 5; ring++) {
+    const n = ring * 10;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2;
+      const rr = ring * 22;
+      ictx.beginPath();
+      ictx.arc(128 + Math.cos(a) * rr, 128 + Math.sin(a) * rr, 3.4, 0, Math.PI * 2);
+      ictx.fill();
+    }
+  }
+  const injTex = new THREE.CanvasTexture(injCanvas);
+  injTex.colorSpace = THREE.SRGBColorSpace;
+  const injector = new THREE.Mesh(
+    new THREE.CircleGeometry(0.42, 48),
+    new THREE.MeshStandardMaterial({ map: injTex, roughness: 0.7, metalness: 0.4, side: THREE.DoubleSide })
+  );
+  injector.rotation.x = -Math.PI / 2;
+  injector.position.y = 2.56;
+  body.add(injector);
+  const torch = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.22, 12), MAT.darkSteel);
+  torch.position.y = 2.62;
+  body.add(torch);
 
   // centralny kanał LOX przez oś gimbala
   const mainDuct = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.19, 0.55, 24), MAT.steel);
