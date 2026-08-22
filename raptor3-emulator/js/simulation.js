@@ -73,6 +73,8 @@ export class EngineSim {
     this.met = 0;            // zegar misji (od komendy URUCHOM)
     this.seq = [];           // log zdarzeń sekwencji: {t, label}
 
+    this.frost = 0;          // oszronienie części kriogenicznych 0..1
+
     this.failure = null;     // aktywna awaria: 'ROUGH' | 'OVERSPEED'
     this.armedFailure = null;// awaria uzbrojona na następny start ('IGN_FAIL')
     this.failureT = 0;
@@ -234,5 +236,11 @@ export class EngineSim {
 
     this.flash = Math.max(0, this.flash - dt * 2.2);
     this.power = Math.max(0, Math.min(1, this.pcFrac * (1 + this.turb * 0.01)));
+
+    // szron: szybko narasta przy schładzaniu, utrzymuje się przy pracy,
+    // sublimuje po powrocie do stanu gotowości
+    if (this.state === S.PRECHILL) this.frost = Math.min(1, this.frost + dt / 2.0);
+    else if (this.state !== S.IDLE) this.frost = Math.min(0.9, this.frost + dt * 0.04);
+    else this.frost = Math.max(0, this.frost - dt / 5);
   }
 }

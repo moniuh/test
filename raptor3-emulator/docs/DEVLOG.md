@@ -255,3 +255,40 @@ kamery na „Z DOŁU" wymagało gimnastyki.
 
 **Test:** przelot do „Z DOŁU" podczas pracy (diamenty Macha z bliska),
 tryb kinowy włącza się i wyłącza, brak błędów.
+
+---
+
+## Iteracja 8 — Szron na częściach kriogenicznych
+
+**Pomysły:**
+1. Szron na pompach i przewodach kriogenicznych ✔ WYBRANY
+2. Tarcze zegarowe wskaźników
+3. Eksport CSV
+4. Warianty Raptor 1/2/3
+5. Slew rate przepustnicy
+6. Cienie
+7. Panel „POMOC" + statystyki
+8. Adaptacyjna rozdzielczość
+9. Znaczniki zdarzeń na wykresach
+10. Suwak płaszczyzny przekroju
+11. Etykiety części 3D
+12. Hard mode
+13. Zapis własnego ujęcia kamery
+14. NOWY: kapiące krople skroplin przy szronie (cząstki)
+15. NOWY: wskaźnik temperatury części kriogenicznych w telemetrii
+
+**Wybrano:** #1 — najbardziej charakterystyczny wizualny znak zatankowanego
+silnika; razem z prechillem (iter. 3) domyka opowieść o kriogenice.
+
+**Zrobione:**
+- `simulation.js`: poziom `frost` 0..1 — narasta w SCHŁADZANIU (~2 s),
+  utrzymuje się przy pracy, sublimuje po powrocie do GOTOWY.
+- `engineModel.js`: `markCryo()` — obudowy i woluty obu pomp, kopułki,
+  przewody zasilające i centralny kanał LOX dostają własne materiały
+  (LOX szroni mocniej niż CH4).
+- `main.js`: co klatkę lerp koloru do bieli + wzrost szorstkości / spadek
+  metaliczności proporcjonalnie do szronu; rejestr materiałów odporny na
+  klonowanie w trybie przekroju.
+
+**Test:** po schładzaniu `frost = 0.90`, pompy matowo-białe w ujęciu POMPY,
+komora bez zmian; brak błędów.

@@ -119,6 +119,20 @@ export function buildEngine() {
   body.position.y = -PIVOT;
   group.add(body);
 
+  // części kriogeniczne dostają własne materiały — main.js nakłada na nie szron
+  const cryoParts = [];
+  const markCryo = (mesh, strength) => {
+    mesh.material = mesh.material.clone();
+    mesh.userData.cryoIdx = cryoParts.length;
+    cryoParts.push({
+      mat: mesh.material,
+      base: mesh.material.color.clone(),
+      baseRough: mesh.material.roughness,
+      baseMetal: mesh.material.metalness,
+      strength,
+    });
+  };
+
   // górna część: kopuła + komora + zbieżna
   const upper = latheBetween(3.015, 1.52, 60, MAT.chamber);
   body.add(upper);
@@ -146,14 +160,18 @@ export function buildEngine() {
   body.add(ring(0.470, 0.050, 1.98, MAT.darkSteel));        // kołnierz komory
   body.add(ring(0.300, 0.045, 2.90, MAT.darkSteel));        // kołnierz głowicy
 
-  // turbopompy (CH4 i LOX) po bokach komory
+  // turbopompy (CH4 i LOX) po bokach komory; LOX (+x) szroni mocniej
   for (const sx of [-1, 1]) {
+    const cryoStr = sx > 0 ? 1.0 : 0.62;
     const pump = new THREE.Group();
     const housing = new THREE.Mesh(new THREE.CylinderGeometry(0.185, 0.185, 0.78, 28), MAT.steel);
     housing.position.y = 2.35;
+    markCryo(housing, cryoStr);
     const volute = ring(0.185, 0.075, 2.02, MAT.darkSteel, 40);
+    markCryo(volute, cryoStr * 0.85);
     const cap = new THREE.Mesh(new THREE.SphereGeometry(0.185, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2), MAT.steel);
     cap.position.y = 2.74;
+    markCryo(cap, cryoStr);
     const preburner = new THREE.Mesh(new THREE.CylinderGeometry(0.125, 0.150, 0.34, 24), MAT.darkSteel);
     preburner.position.y = 2.95;
     const pcap = new THREE.Mesh(new THREE.SphereGeometry(0.125, 20, 12), MAT.darkSteel);
@@ -167,9 +185,11 @@ export function buildEngine() {
       [sx * 0.60, 3.16, 0], [sx * 0.50, 3.30, 0], [sx * 0.22, 3.34, 0], [sx * 0.10, 3.20, 0],
     ], 0.068, MAT.pipe));
     // zasilanie pompy z góry (przegub elastyczny przy gimbalu)
-    body.add(tube([
+    const feed = tube([
       [sx * 0.60, 2.74, 0.0], [sx * 0.62, 3.10, 0.14], [sx * 0.45, 3.42, 0.10], [sx * 0.22, 3.52, 0.0],
-    ], 0.075, MAT.steel));
+    ], 0.075, MAT.steel);
+    markCryo(feed, cryoStr * 0.9);
+    body.add(feed);
     // linia recyrkulacji wzdłuż komory
     body.add(tube([
       [sx * 0.46, 2.0, sx * 0.22], [sx * 0.40, 1.62, sx * 0.26], [sx * 0.24, 1.45, sx * 0.14],
@@ -209,6 +229,7 @@ export function buildEngine() {
   // centralny kanał LOX przez oś gimbala
   const mainDuct = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.19, 0.55, 24), MAT.steel);
   mainDuct.position.y = 3.28;
+  markCryo(mainDuct, 1.0);
   body.add(mainDuct);
 
   // blok gimbala i przegub kulowy
@@ -225,7 +246,7 @@ export function buildEngine() {
     new THREE.Vector3(0, 2.55 - PIVOT, 0.47),
   ];
 
-  return { group, glowMat, actAnchorsLocal, exitLocalY: -PIVOT };
+  return { group, glowMat, actAnchorsLocal, cryoParts, exitLocalY: -PIVOT };
 }
 
 // ---------- stanowisko testowe ----------

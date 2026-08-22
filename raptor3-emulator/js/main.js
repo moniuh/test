@@ -172,6 +172,7 @@ btnCut.addEventListener('click', () => {
       obj.material = obj.material.clone();
       obj.userData.ownMat = true;
       if (obj.userData.glow) engine.glowMat = obj.material;
+      if (obj.userData.cryoIdx !== undefined) engine.cryoParts[obj.userData.cryoIdx].mat = obj.material;
     }
     obj.material.clippingPlanes = cutaway ? [cutPlane] : null;
   });
@@ -213,6 +214,7 @@ window.addEventListener('keyup', e => keys.delete(e.key));
 
 const _a = new THREE.Vector3();
 const _v = new THREE.Vector3();
+const FROST_COLOR = new THREE.Color(0xe9f1f8);
 const clock = new THREE.Clock();
 let shake = 0;
 let vaporAcc = 0;
@@ -349,6 +351,14 @@ function animate() {
   // poświata wnętrza dyszy
   const g = Math.min(1.2, p * 1.25 + sim.flash * 0.6);
   engine.glowMat.color.setRGB(2.4 * g, 0.9 * Math.pow(g, 1.4), 0.45 * Math.pow(g, 1.8));
+
+  // szron na częściach kriogenicznych
+  for (const cp of engine.cryoParts) {
+    const f = sim.frost * cp.strength;
+    cp.mat.color.copy(cp.base).lerp(FROST_COLOR, f);
+    cp.mat.roughness = cp.baseRough + (0.96 - cp.baseRough) * f;
+    cp.mat.metalness = cp.baseMetal * (1 - f * 0.85);
+  }
 
   // odblask na płycie — tylko gdy struga sięga ziemi (niskie wysokości)
   ground.glowMat.opacity = p * 0.32 * THREE.MathUtils.clamp(ambientFrac * 3, 0.06, 1);
