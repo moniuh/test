@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raptor 3 — Emulator silnika</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+  <link rel="stylesheet" href="./css/style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three.module.min.js",
+        "three/addons/": "./vendor/addons/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <div class="panel" id="header">
+    <h1>RAPTOR 3 — EMULATOR SILNIKA</h1>
+    <div class="sub">PEŁNOPRZEPŁYWOWE SPALANIE STOPNIOWANE · CH₄ / LOX · 280 tf</div>
+  </div>
+
+  <div class="panel" id="controls">
+    <h2>STEROWANIE</h2>
+
+    <div class="btn-row">
+      <button id="btnStart">URUCHOM</button>
+      <button id="btnStop" disabled>WYŁĄCZ</button>
+    </div>
+
+    <div class="ctl">
+      <label>PRZEPUSTNICA <b id="vThrottle">100%</b></label>
+      <input type="range" id="throttle" min="40" max="100" step="1" value="100">
+    </div>
+
+    <div class="ctl">
+      <label>WYSOKOŚĆ <b id="vAlt">0 km</b></label>
+      <input type="range" id="altitude" min="0" max="100" step="1" value="0">
+      <label style="margin-top:4px">CIŚNIENIE OTOCZENIA <b id="tAmbient">101,3 kPa</b></label>
+    </div>
+
+    <div class="ctl">
+      <label>GIMBAL (±8°) <b id="vGimbal">0,0° / 0,0°</b></label>
+      <div class="gimbal-row">
+        <input type="range" id="gimbalX" min="-8" max="8" step="0.1" value="0">
+        <input type="range" id="gimbalY" min="-8" max="8" step="0.1" value="0">
+        <button id="btnCenter">⌖</button>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-bottom:0">
+      <button id="btnSound">DŹWIĘK: WYŁ</button>
+    </div>
+
+    <div class="hint">
+      Obrót: LPM &nbsp;·&nbsp; zoom: kółko &nbsp;·&nbsp; przesuwanie: PPM<br>
+      Gimbal: strzałki &nbsp;·&nbsp; ⌖ centruje dyszę
+    </div>
+  </div>
+
+  <div class="panel" id="telemetry">
+    <h2>TELEMETRIA</h2>
+
+    <div class="trow"><span class="k">STAN</span><span class="v" id="tState">GOTOWY</span></div>
+    <div class="sep"></div>
+
+    <div class="trow"><span class="k">CIĄG</span>
+      <span class="big"><span id="tThrust">0</span> <small>kN</small></span></div>
+    <div class="trow"><span class="k"></span>
+      <span class="v"><span id="tThrustTf">0,0</span> <small>tf</small></span></div>
+    <div class="bar thrust"><div id="bThrust"></div></div>
+
+    <div class="trow"><span class="k">CIŚNIENIE KOMORY</span>
+      <span class="v"><span id="tPc">0</span> <small>bar</small></span></div>
+    <div class="bar"><div id="bPc"></div></div>
+
+    <div class="trow"><span class="k">POMPA CH₄</span>
+      <span class="v"><span id="tFuelRpm">0</span> <small>obr/min</small></span></div>
+    <div class="bar"><div id="bFuel"></div></div>
+
+    <div class="trow"><span class="k">POMPA LOX</span>
+      <span class="v"><span id="tOxRpm">0</span> <small>obr/min</small></span></div>
+    <div class="bar"><div id="bOx"></div></div>
+
+    <div class="sep"></div>
+    <div class="trow"><span class="k">PRZEPŁYW CH₄</span>
+      <span class="v"><span id="tFlowCh4">0</span> <small>kg/s</small></span></div>
+    <div class="trow"><span class="k">PRZEPŁYW LOX</span>
+      <span class="v"><span id="tFlowLox">0</span> <small>kg/s</small></span></div>
+    <div class="trow"><span class="k">IMPULS WŁAŚCIWY</span>
+      <span class="v"><span id="tIsp">—</span> <small>s</small></span></div>
+
+    <div class="sep"></div>
+    <div class="trow"><span class="k">CZAS PRACY</span>
+      <span class="v" id="tTime">00:00.0</span></div>
+    <div class="trow"><span class="k">ZUŻYTY PROPELENT</span>
+      <span class="v"><span id="tProp">0,0</span> <small>t</small></span></div>
+  </div>
+
+  <div class="panel" id="footer">
+    MODEL POGLĄDOWY — WARTOŚCI PRZYBLIŻONE NA PODSTAWIE DANYCH PUBLICZNYCH
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
