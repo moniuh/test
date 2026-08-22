@@ -50,6 +50,68 @@ export class StripChart {
   }
 }
 
+// Okrągły wskaźnik zegarowy (270° z polem redline)
+export class DialGauge {
+  constructor(canvas, { max, redFrom = Infinity, label, unit, color = '#5fd3ff', fmt = v => Math.round(v) }) {
+    this.canvas = canvas;
+    const dpr = 2;
+    canvas.width = (canvas.clientWidth || 82) * dpr;
+    canvas.height = canvas.width;
+    this.ctx = canvas.getContext('2d');
+    this.max = max;
+    this.redFrom = redFrom;
+    this.label = label;
+    this.unit = unit;
+    this.color = color;
+    this.fmt = fmt;
+    this.value = -1;
+  }
+
+  draw(v) {
+    if (Math.abs(v - this.value) < this.max * 0.0005 && this.value >= 0) return;
+    this.value = v;
+    const { ctx } = this;
+    const S = this.canvas.width, c = S / 2, r = S * 0.40;
+    const A0 = Math.PI * 0.75, SWEEP = Math.PI * 1.5;
+    const frac = Math.min(1, Math.max(0, v / this.max));
+    ctx.clearRect(0, 0, S, S);
+    ctx.lineCap = 'round';
+
+    // tor + pole redline
+    ctx.strokeStyle = 'rgba(255,255,255,0.10)';
+    ctx.lineWidth = S * 0.055;
+    ctx.beginPath(); ctx.arc(c, c, r, A0, A0 + SWEEP); ctx.stroke();
+    if (this.redFrom < this.max) {
+      ctx.strokeStyle = 'rgba(255,70,70,0.55)';
+      ctx.beginPath(); ctx.arc(c, c, r, A0 + SWEEP * (this.redFrom / this.max), A0 + SWEEP); ctx.stroke();
+    }
+
+    // łuk wartości
+    const over = v >= this.redFrom;
+    ctx.strokeStyle = over ? '#ff5d5d' : this.color;
+    ctx.beginPath(); ctx.arc(c, c, r, A0, A0 + SWEEP * frac); ctx.stroke();
+
+    // wskazówka
+    const a = A0 + SWEEP * frac;
+    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+    ctx.lineWidth = S * 0.02;
+    ctx.beginPath();
+    ctx.moveTo(c + Math.cos(a) * r * 0.45, c + Math.sin(a) * r * 0.45);
+    ctx.lineTo(c + Math.cos(a) * r * 0.86, c + Math.sin(a) * r * 0.86);
+    ctx.stroke();
+
+    // wartość i opis
+    ctx.fillStyle = over ? '#ff8484' : '#dfe6f2';
+    ctx.font = `700 ${S * 0.19}px monospace`;
+    ctx.textAlign = 'center';
+    ctx.fillText(this.fmt(v), c, c + S * 0.10);
+    ctx.fillStyle = '#8b93a2';
+    ctx.font = `${S * 0.095}px monospace`;
+    ctx.fillText(this.label, c, c + S * 0.36);
+    ctx.fillText(this.unit, c, c + S * 0.45);
+  }
+}
+
 export class TelemetryCharts {
   constructor() {
     const dpr = 2;

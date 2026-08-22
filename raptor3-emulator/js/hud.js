@@ -1,6 +1,7 @@
 // Panel telemetrii — aktualizacja wskazań DOM na podstawie stanu symulacji.
 
 import { SPEC, State, StateLabel } from './simulation.js';
+import { DialGauge } from './charts.js';
 
 const fmt0 = new Intl.NumberFormat('pl-PL', { maximumFractionDigits: 0 });
 const fmt1 = new Intl.NumberFormat('pl-PL', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -29,9 +30,6 @@ export class Hud {
     this.el = {
       state: $('tState'),
       thrust: $('tThrust'), thrustTf: $('tThrustTf'), thrustBar: $('bThrust'),
-      pc: $('tPc'), pcBar: $('bPc'),
-      fuelRpm: $('tFuelRpm'), fuelBar: $('bFuel'),
-      oxRpm: $('tOxRpm'), oxBar: $('bOx'),
       flowCh4: $('tFlowCh4'), flowLox: $('tFlowLox'),
       isp: $('tIsp'),
       time: $('tTime'), prop: $('tProp'),
@@ -44,6 +42,16 @@ export class Hud {
       alarm: $('alarm'), alarmText: $('alarmText'),
     };
     this.seqLen = -1;
+
+    this.gPc = new DialGauge($('gPc'), {
+      max: 370, redFrom: 355, label: 'CIŚN. KOMORY', unit: 'bar', color: '#b18cff',
+    });
+    this.gFuel = new DialGauge($('gFuel'), {
+      max: 30, redFrom: 27.6, label: 'POMPA CH₄', unit: '×1000 obr/min', fmt: v => v.toFixed(1),
+    });
+    this.gOx = new DialGauge($('gOx'), {
+      max: 16, redFrom: 14.9, label: 'POMPA LOX', unit: '×1000 obr/min', fmt: v => v.toFixed(1),
+    });
   }
 
   update(sim, ambientP, altitudeKm, gx, gy) {
@@ -57,16 +65,9 @@ export class Hud {
     e.thrustTf.textContent = fmt1.format(sim.thrust / 9.80665 / 1000);
     e.thrustBar.style.width = `${Math.min(100, thrustKN / (SPEC.thrustVac / 1000) * 100)}%`;
 
-    e.pc.textContent = fmt0.format(sim.pc / 1e5);
-    e.pcBar.style.width = `${Math.min(100, sim.pc / SPEC.pcMax * 100)}%`;
-
-    const frpm = sim.fuelPump * SPEC.fuelPumpMaxRPM;
-    const orpm = sim.oxPump * SPEC.oxPumpMaxRPM;
-    e.fuelRpm.textContent = fmt0.format(frpm);
-    e.oxRpm.textContent = fmt0.format(orpm);
-    e.fuelBar.style.width = `${Math.min(100, sim.fuelPump * 100)}%`;
-    e.fuelBar.classList.toggle('redline', sim.fuelPump > 1.0);
-    e.oxBar.style.width = `${Math.min(100, sim.oxPump * 100)}%`;
+    this.gPc.draw(sim.pc / 1e5);
+    this.gFuel.draw(sim.fuelPump * SPEC.fuelPumpMaxRPM / 1000);
+    this.gOx.draw(sim.oxPump * SPEC.oxPumpMaxRPM / 1000);
 
     e.flowCh4.textContent = fmt0.format(sim.flowCH4);
     e.flowLox.textContent = fmt0.format(sim.flowLOX);

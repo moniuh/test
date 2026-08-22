@@ -292,3 +292,39 @@ silnika; razem z prechillem (iter. 3) domyka opowieść o kriogenice.
 
 **Test:** po schładzaniu `frost = 0.90`, pompy matowo-białe w ujęciu POMPY,
 komora bez zmian; brak błędów.
+
+---
+
+## Iteracja 9 — Tarcze zegarowe
+
+**Pomysły:**
+1. Zegarowe tarcze dla p. komory i obrotów pomp ✔ WYBRANY
+2. Eksport CSV
+3. Warianty Raptor 1/2/3
+4. Slew rate przepustnicy
+5. Cienie
+6. Panel „POMOC" + statystyki
+7. Adaptacyjna rozdzielczość
+8. Znaczniki zdarzeń na wykresach
+9. Suwak płaszczyzny przekroju
+10. Etykiety części 3D
+11. Hard mode
+12. Zapis własnego ujęcia kamery
+13. Kapiące skropliny przy szronie
+14. Wskaźnik temperatur kriogenicznych
+15. NOWY: tarcza ciągu zamiast dużej liczby (spójny rząd 4 tarcz)
+16. NOWY: tryb ciemny/jasny HUD
+
+**Wybrano:** #1 — paski słabo pokazują położenie względem redline;
+tarcza z czerwonym polem robi to natychmiast, a przy okazji panel
+telemetrii robi się bardziej „kokpitowy" i krótszy w pionie.
+
+**Zrobione:**
+- `charts.js`: klasa `DialGauge` — łuk 270° z torem, polem redline,
+  wskazówką i wartością; przerysowanie tylko przy zmianie wartości.
+- `hud.js` + `index.html`: rząd trzech tarcz (CIŚN. KOMORY / POMPA CH₄ /
+  POMPA LOX ×1000 obr/min) zamiast trzech pasków; przekroczenie redline
+  barwi łuk i wartość na czerwono (NADOBROTY to teraz widać na tarczy).
+
+**Test:** tarcze rysują się i aktualizują, redline aktywne przy nadobrotach,
+brak błędów.
