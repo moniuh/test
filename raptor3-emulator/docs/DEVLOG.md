@@ -107,3 +107,39 @@ ogólny system cząstek, który obsłuży też dym i parę (pomysł #2).
 
 **Test:** stan SCHŁADZANIE widoczny z oparami, pełna sekwencja przechodzi,
 brak błędów konsoli.
+
+---
+
+## Iteracja 4 — Para na płycie i dym po wyłączeniu
+
+**Pomysły:**
+1. Kłęby pary/pyłu odbite od płyty przy pracy + dym resztkowy po wyłączeniu ✔ WYBRANY
+2. Tryby awarii + FDS
+3. Widok przekroju silnika
+4. Kamery predefiniowane + tryb kinowy
+5. Szron na orurowaniu LOX
+6. Tarcze zegarowe wskaźników
+7. Eksport CSV
+8. Warianty Raptor 1/2/3
+9. Slew rate przepustnicy
+10. Cienie
+11. Panel „POMOC" + statystyki
+12. Adaptacyjna rozdzielczość
+13. Znaczniki zdarzeń na wykresach
+14. Syk wentów w fazie schładzania (dźwięk)
+15. NOWY: podświetlanie pary światłem pióropusza (cząstki „lit")
+16. NOWY: deflektor płomienia w płycie zamiast płaskiego odbicia
+
+**Wybrano:** #1 — naturalna kontynuacja systemu cząstek; test statyczny bez
+chmury pary u podstawy wyglądał sterylnie.
+
+**Zrobione (`main.js`):**
+- `emitSteam()` — pierścień emisji wokół punktu uderzenia strugi, prędkość
+  radialna rosnąca z mocą; aktywne tylko przy ciśnieniu otoczenia > ~0,22 atm
+  (w próżni nie ma czego odbijać).
+- `emitSmoke()` — po komendzie wyłączenia ~4,5 s szarych kłębów unoszących się
+  z dyszy, intensywność wygasa liniowo.
+- Dwa nowe `PuffSystem` (para 900, dym 500 cząstek).
+
+**Test:** para roluje po płycie przy pracy, dym unosi się po wyłączeniu,
+brak błędów konsoli.

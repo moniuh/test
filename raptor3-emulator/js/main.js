@@ -83,6 +83,11 @@ engine.group.add(plume.group);
 const vapor = new PuffSystem({ count: 700, color: 0xe2ecf6, opacity: 0.42 });
 scene.add(vapor.points);
 
+// para/pył odbity od płyty podczas pracy + dym po wyłączeniu
+const steam = new PuffSystem({ count: 900, color: 0xf0eee9, opacity: 0.30 });
+const smoke = new PuffSystem({ count: 500, color: 0x77747a, opacity: 0.4 });
+scene.add(steam.points, smoke.points);
+
 // siłowniki gimbala: stanowisko -> kołnierz komory
 const actuators = [new Strut(0.045, engineStrutMat(), true), new Strut(0.045, engineStrutMat(), true)];
 function engineStrutMat() {
@@ -153,6 +158,9 @@ const _v = new THREE.Vector3();
 const clock = new THREE.Clock();
 let shake = 0;
 let vaporAcc = 0;
+let steamAcc = 0;
+let smokeAcc = 0;
+let smokeUntil = -1;
 
 // emisja oparów: z dyszy (chłodzenie/boiloff) i z wentów przy pompach
 function emitVapor(dt, t) {
@@ -184,6 +192,39 @@ function emitVapor(dt, t) {
       _v.set(sx * (1.6 + Math.random() * 1.2), -0.15 + Math.random() * 0.3, (Math.random() - 0.5) * 0.6);
       vapor.emit(_a, _v, 0.7 + Math.random() * 0.5, 1.1 + Math.random() * 0.9, t);
     }
+  }
+}
+
+// para/pył odbijające się od płyty pod pracującym silnikiem
+function emitSteam(dt, t, ambientFrac) {
+  const p = sim.power;
+  if (p < 0.06 || ambientFrac < 0.22) return;
+  steamAcc += 85 * p * dt;
+  while (steamAcc >= 1) {
+    steamAcc -= 1;
+    const a = Math.random() * Math.PI * 2;
+    const r = 0.8 + Math.random() * 0.9;
+    _a.set(Math.cos(a) * r, 0.12 + Math.random() * 0.2, Math.sin(a) * r);
+    const spd = (2.2 + Math.random() * 2.4) * (0.5 + 0.5 * p);
+    _v.set(Math.cos(a) * spd, 0.35 + Math.random() * 0.85, Math.sin(a) * spd);
+    steam.emit(_a, _v, 1.1 + Math.random() * 1.3, 2.2 + Math.random() * 2.4, t);
+  }
+}
+
+// dym resztkowy z dyszy po wyłączeniu
+function emitSmoke(dt, t) {
+  if (sim.state === 'SHUTDOWN') smokeUntil = t + 4.5;
+  if (t > smokeUntil || sim.pcFrac > 0.35) return;
+  const fade = Math.min(1, (smokeUntil - t) / 4.5);
+  smokeAcc += 26 * fade * dt;
+  while (smokeAcc >= 1) {
+    smokeAcc -= 1;
+    const a = Math.random() * Math.PI * 2;
+    const r = Math.random() * 0.4;
+    _a.set(Math.cos(a) * r, engine.exitLocalY - 0.1, Math.sin(a) * r);
+    engine.group.localToWorld(_a);
+    _v.set((Math.random() - 0.5) * 0.4, 0.25 + Math.random() * 0.6, (Math.random() - 0.5) * 0.4);
+    smoke.emit(_a, _v, 2.0 + Math.random() * 1.8, 1.6 + Math.random() * 1.6, t);
   }
 }
 
@@ -228,7 +269,11 @@ function animate() {
   const ambientFrac = ambientP / P0;
   plume.update(t, sim, ambientFrac);
   emitVapor(dt, t);
+  emitSteam(dt, t, ambientFrac);
+  emitSmoke(dt, t);
   vapor.update(t);
+  steam.update(t);
+  smoke.update(t);
 
   const p = sim.power;
   const flick = 0.9 + 0.1 * Math.sin(t * 47) * Math.sin(t * 31 + 1.3);
