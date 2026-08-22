@@ -76,6 +76,16 @@ export class EngineSound {
     lfoGain.gain.value = 45;
     lfo.connect(lfoGain).connect(this.lp.frequency);
     lfo.start();
+
+    // brzęczyk alarmu FDS
+    const beep = ctx.createOscillator();
+    beep.type = 'square';
+    beep.frequency.value = 1180;
+    this.beepGain = ctx.createGain();
+    this.beepGain.gain.value = 0;
+    beep.connect(this.beepGain).connect(ctx.destination);
+    beep.start();
+    this.beepPhase = 0;
   }
 
   setEnabled(on) {
@@ -86,11 +96,15 @@ export class EngineSound {
     }
   }
 
-  update(power, dt) {
+  update(power, dt, alarm = false) {
     this.level += (power - this.level) * Math.min(1, dt * 6);
     if (!this.ctx) return;
     const v = this.enabled ? this.level : 0;
     const t = this.ctx.currentTime;
+
+    this.beepPhase += dt;
+    const beepOn = alarm && this.enabled && (this.beepPhase % 0.7 < 0.3);
+    this.beepGain.gain.setTargetAtTime(beepOn ? 0.055 : 0, t, 0.01);
     this.master.gain.setTargetAtTime(v > 0.001 ? 0.9 : 0, t, 0.08);
     this.noiseGain.gain.setTargetAtTime(v * 0.55, t, 0.06);
     this.subGain.gain.setTargetAtTime(v * 0.5, t, 0.06);

@@ -117,6 +117,7 @@ const elGy = $('gimbalY');
 
 $('btnStart').addEventListener('click', () => { sim.start(); sound.ensure(); if (sound.ctx && sound.ctx.state === 'suspended') sound.ctx.resume(); });
 $('btnStop').addEventListener('click', () => sim.shutdown());
+$('btnFail').addEventListener('click', () => sim.injectFailure());
 $('btnCenter').addEventListener('click', () => { gimbalTX = 0; gimbalTY = 0; elGx.value = 0; elGy.value = 0; });
 
 const btnSound = $('btnSound');
@@ -296,7 +297,7 @@ function animate() {
   ground.glowMat.opacity = p * 0.32 * THREE.MathUtils.clamp(ambientFrac * 3, 0.06, 1);
 
   // drgania kamery przy pracy silnika
-  shake += ((p * 0.02 + sim.flash * 0.045) - shake) * Math.min(1, dt * 8);
+  shake += ((p * 0.02 + sim.flash * 0.045 + Math.abs(sim.turb) * 0.002 * p) - shake) * Math.min(1, dt * 8);
   controls.update();
   const ox = (Math.random() - 0.5) * shake;
   const oy = (Math.random() - 0.5) * shake;
@@ -305,7 +306,7 @@ function animate() {
 
   hud.update(sim, ambientP, altitudeKm, gimbalX, gimbalY);
   charts.update(dt, sim);
-  sound.update(p, dt);
+  sound.update(p, dt, !!sim.alarm && sim.state !== 'IDLE');
 
   renderer.render(scene, camera);
   camera.position.x -= ox; camera.position.y -= oy; camera.position.z -= oz;

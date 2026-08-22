@@ -20,6 +20,7 @@ const STATE_COLOR = {
   RAMP: '#5fd3ff',
   RUNNING: '#51e07f',
   SHUTDOWN: '#ff5d5d',
+  ABORT: '#ff3b3b',
 };
 
 export class Hud {
@@ -40,6 +41,7 @@ export class Hud {
       gimbalVal: $('vGimbal'),
       btnStart: $('btnStart'), btnStop: $('btnStop'),
       met: $('tMet'), seqLog: $('seqLog'),
+      alarm: $('alarm'), alarmText: $('alarmText'),
     };
     this.seqLen = -1;
   }
@@ -62,8 +64,9 @@ export class Hud {
     const orpm = sim.oxPump * SPEC.oxPumpMaxRPM;
     e.fuelRpm.textContent = fmt0.format(frpm);
     e.oxRpm.textContent = fmt0.format(orpm);
-    e.fuelBar.style.width = `${sim.fuelPump * 100}%`;
-    e.oxBar.style.width = `${sim.oxPump * 100}%`;
+    e.fuelBar.style.width = `${Math.min(100, sim.fuelPump * 100)}%`;
+    e.fuelBar.classList.toggle('redline', sim.fuelPump > 1.0);
+    e.oxBar.style.width = `${Math.min(100, sim.oxPump * 100)}%`;
 
     e.flowCh4.textContent = fmt0.format(sim.flowCH4);
     e.flowLox.textContent = fmt0.format(sim.flowLOX);
@@ -91,6 +94,12 @@ export class Hud {
     e.gimbalVal.textContent = `${fmt1.format(gx)}° / ${fmt1.format(gy)}°`;
 
     e.btnStart.disabled = sim.state !== State.IDLE;
-    e.btnStop.disabled = sim.state === State.IDLE || sim.state === State.SHUTDOWN;
+    e.btnStop.disabled = sim.state === State.IDLE || sim.state === State.SHUTDOWN ||
+      sim.state === State.ABORT;
+
+    // baner alarmu FDS
+    const showAlarm = !!sim.alarm;
+    if (e.alarm.classList.contains('show') !== showAlarm) e.alarm.classList.toggle('show', showAlarm);
+    if (showAlarm) e.alarmText.textContent = `FDS · ${sim.alarm}`;
   }
 }

@@ -172,6 +172,34 @@ input[type="range"] {
   margin-bottom: 3px;
 }
 
+/* alarm FDS */
+#alarm {
+  position: fixed;
+  top: 86px; left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(70, 8, 8, 0.9);
+  border: 1px solid rgba(255, 80, 80, 0.75);
+  border-radius: 8px;
+  padding: 10px 26px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ff6d6d;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+#alarm.show {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  animation: alarmFlash 0.8s step-end infinite;
+}
+@keyframes alarmFlash { 50% { border-color: rgba(255, 80, 80, 0.15); color: #c23c3c; } }
+
+#btnFail { border-color: rgba(255, 170, 60, 0.45); color: #ffb45e; }
+.bar > div.redline { background: linear-gradient(90deg, #ff8a3c, #ff3b3b); }
+
 /* panel sekwencji */
 #sequence { left: 16px; bottom: 14px; width: 250px; }
 #sequence h2 {

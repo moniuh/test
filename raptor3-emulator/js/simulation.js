@@ -29,6 +29,7 @@ export const State = {
   RAMP: 'RAMP',
   RUNNING: 'RUNNING',
   SHUTDOWN: 'SHUTDOWN',
+  ABORT: 'ABORT',
 };
 
 export const StateLabel = {
@@ -39,6 +40,7 @@ export const StateLabel = {
   RAMP: 'NARASTANIE CIĄGU',
   RUNNING: 'PRACA',
   SHUTDOWN: 'WYŁĄCZANIE',
+  ABORT: 'AWARYJNE WYŁĄCZENIE',
 };
 
 // mapowanie przepustnicy (ułamek ciągu) -> docelowe obroty pomp
@@ -70,6 +72,36 @@ export class EngineSim {
 
     this.met = 0;            // zegar misji (od komendy URUCHOM)
     this.seq = [];           // log zdarzeń sekwencji: {t, label}
+
+    this.failure = null;     // aktywna awaria: 'ROUGH' | 'OVERSPEED'
+    this.armedFailure = null;// awaria uzbrojona na następny start ('IGN_FAIL')
+    this.failureT = 0;
+    this.alarm = null;       // komunikat FDS (utrzymywany do następnego startu)
+  }
+
+  // wstrzyknięcie awarii testowej — rodzaj zależny od fazy pracy
+  injectFailure() {
+    const S = State;
+    if (this.state === S.IDLE) {
+      this.armedFailure = 'IGN_FAIL';
+      return 'BRAK ZAPŁONU (uzbrojona na następny start)';
+    }
+    if (this.state === S.RUNNING || this.state === S.RAMP) {
+      this.failure = Math.random() < 0.5 ? 'ROUGH' : 'OVERSPEED';
+      this.failureT = 0;
+      this.pushSeq('WSTRZYKNIĘTO AWARIĘ (TEST)');
+      return this.failure === 'ROUGH' ? 'NIESTABILNE SPALANIE' : 'NADOBROTY POMPY CH4';
+    }
+    return null;
+  }
+
+  abort(reason) {
+    this.pushSeq(`AWARIA: ${reason}`);
+    this.pushSeq('FDS: AWARYJNE WYŁĄCZENIE');
+    this.alarm = reason;
+    this.failure = null;
+    this.state = State.ABORT;
+    this.stateT = 0;
   }
 
   pushSeq(label) {
@@ -80,7 +112,7 @@ export class EngineSim {
   get combusting() {
     return this.state === State.RAMP || this.state === State.RUNNING ||
       (this.state === State.IGNITION && this.stateT > 0.25) ||
-      (this.state === State.SHUTDOWN && this.pcFrac > 0.03);
+      ((this.state === State.SHUTDOWN || this.state === State.ABORT) && this.pcFrac > 0.03);
   }
 
   start() {
@@ -91,6 +123,8 @@ export class EngineSim {
     this.propUsed = 0;
     this.met = 0;
     this.seq = [];
+    this.alarm = null;
+    this.failure = null;
     this.pushSeq('SCHŁADZANIE WSTĘPNE');
   }
 
@@ -124,6 +158,10 @@ export class EngineSim {
         break;
       case S.IGNITION: // zapłon iskrowy przedpalników i komory
         fuelTarget = 0.34; oxTarget = 0.32;
+        if (this.armedFailure === 'IGN_FAIL') {
+          if (this.stateT > 0.6) { this.armedFailure = null; this.abort('BRAK ZAPŁONU'); }
+          break; // brak błysku — komora nie odpala
+        }
         this.flash = Math.max(this.flash, Math.sin(Math.min(1, this.stateT / 0.45) * Math.PI));
         if (this.stateT > 0.55) { this.state = S.RAMP; this.stateT = 0; this.pushSeq('NARASTANIE CIĄGU'); }
         break;
@@ -142,6 +180,7 @@ export class EngineSim {
         break;
       }
       case S.SHUTDOWN:
+      case S.ABORT:
         fuelTarget = 0; oxTarget = 0;
         if (this.fuelPump < 0.02 && this.pcFrac < 0.01) {
           this.state = S.IDLE; this.stateT = 0;
@@ -150,13 +189,25 @@ export class EngineSim {
         break;
     }
 
+    // aktywne awarie i nadzór FDS
+    if (this.failure === 'ROUGH') {
+      this.failureT += dt;
+      this.turb += (Math.random() * 2 - 1) * dt * 70; // gwałtowne oscylacje spalania
+      if (this.failureT > 2.2) this.abort('NIESTABILNE SPALANIE');
+    } else if (this.failure === 'OVERSPEED') {
+      this.failureT += dt;
+      fuelTarget = Math.min(1.14, fuelTarget * (1 + this.failureT * 0.12)); // niekontrolowany wzrost
+      if (this.fuelPump > 1.05) this.abort('NADOBROTY POMPY CH4');
+    }
+
     // dynamika pomp — inercja pierwszego rzędu (LOX cięższy => wolniejszy)
     const spool = (v, target, tauUp, tauDown) => {
       const tau = target > v ? tauUp : tauDown;
       return v + (target - v) * (1 - Math.exp(-dt / tau));
     };
-    this.fuelPump = spool(this.fuelPump, fuelTarget, 0.55, 0.85);
-    this.oxPump = spool(this.oxPump, oxTarget, 0.65, 0.95);
+    const fastCut = this.state === S.ABORT; // FDS tnie zawory szybciej
+    this.fuelPump = spool(this.fuelPump, fuelTarget, 0.55, fastCut ? 0.4 : 0.85);
+    this.oxPump = spool(this.oxPump, oxTarget, 0.65, fastCut ? 0.45 : 0.95);
 
     // turbulencja spalania (delikatny szum niskoczęstotliwościowy)
     this.turb += (Math.random() * 2 - 1) * dt * 8;

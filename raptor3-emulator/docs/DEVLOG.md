@@ -143,3 +143,43 @@ chmury pary u podstawy wyglądał sterylnie.
 
 **Test:** para roluje po płycie przy pracy, dym unosi się po wyłączeniu,
 brak błędów konsoli.
+
+---
+
+## Iteracja 5 — Tryby awarii i system FDS
+
+**Pomysły:**
+1. Awarie testowe + automatyczny nadzór FDS ✔ WYBRANY
+2. Widok przekroju silnika
+3. Kamery predefiniowane + tryb kinowy
+4. Szron na orurowaniu LOX
+5. Tarcze zegarowe wskaźników
+6. Eksport CSV
+7. Warianty Raptor 1/2/3
+8. Slew rate przepustnicy
+9. Cienie
+10. Panel „POMOC" + statystyki
+11. Adaptacyjna rozdzielczość
+12. Znaczniki zdarzeń na wykresach
+13. Podświetlanie pary światłem pióropusza
+14. Deflektor płomienia w płycie
+15. NOWY: historia awarii w panelu sekwencji z osobnym kolorem
+16. NOWY: tryb „hard mode" — losowe awarie bez przycisku
+
+**Wybrano:** #1 — emulator bez możliwości zepsucia czegoś to symulator idealnego
+świata; FDS dodaje dramaturgię i drugi tor logiki sterownika.
+
+**Zrobione:**
+- `simulation.js`: `injectFailure()` — w stanie GOTOWY uzbraja BRAK ZAPŁONU,
+  w PRACY losuje NIESTABILNE SPALANIE (rosnące oscylacje, FDS tnie po 2,2 s)
+  lub NADOBROTY POMPY CH4 (niekontrolowany wzrost obrotów, odcięcie >105%).
+  Nowy stan `ABORT` z szybszym zamknięciem zaworów; komunikat alarmu
+  utrzymywany do następnego startu.
+- `hud.js` + `index.html` + `style.css`: migający czerwony baner
+  „FDS · <powód>", przycisk ⚠ AWARIA, czerwony pasek pompy powyżej 100%.
+- `sound.js`: brzęczyk alarmu (przerywany 1180 Hz, tylko przy włączonym dźwięku).
+- Wzmocnione drgania kamery przy niestabilnym spalaniu.
+
+**Test:** oba scenariusze (awaria w locie, nieudany zapłon) kończą się
+sekwencją „AWARIA → FDS: AWARYJNE WYŁĄCZENIE → SILNIK BEZPIECZNY";
+baner widoczny; brak błędów.
