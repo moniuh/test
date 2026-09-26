@@ -1,0 +1,10 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Isometric cube -->
+    <path android:fillColor="#FF1AD9FF" android:pathData="M54,30L75,42L54,54L33,42Z" />
+    <path android:fillColor="#FF0FA3C2" android:pathData="M33,42L54,54L54,78L33,66Z" />
+    <path android:fillColor="#FF0A7088" android:pathData="M75,42L75,66L54,78L54,54Z" />
+    <!-- Scan corners -->
+    <path android:strokeColor="#FFFFFFFF" android:strokeWidth="3" android:strokeLineCap="round"
+        android:pathData="M26,34V26H34M74,26H82V34M82,74V82H74M34,82H26V74" />
+</vector>

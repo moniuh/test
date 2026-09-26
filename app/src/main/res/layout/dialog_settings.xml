@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_detail"
+        android:textAppearance="?attr/textAppearanceTitleSmall" />
+
+    <RadioGroup
+        android:id="@+id/presetGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/presetObject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/preset_object_desc" />
+
+        <RadioButton
+            android:id="@+id/presetStandard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/preset_standard_desc" />
+
+        <RadioButton
+            android:id="@+id/presetRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/preset_room_desc" />
+    </RadioGroup>
+
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/smoothDepthSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/settings_smooth_depth" />
+</LinearLayout>

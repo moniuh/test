@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Skaner 3D</string>
+
+    <string name="action_scan">Skanuj</string>
+    <string name="action_pause">Pauza</string>
+    <string name="action_reset">Wyczyść</string>
+    <string name="action_export">Zapisz</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="action_share">Udostępnij</string>
+    <string name="action_close">Zamknij</string>
+
+    <string name="status_format">%1$s · klatki: %2$d · punkty: %3$d · %4$d MB</string>
+
+    <string name="hint_initializing">Poruszaj powoli telefonem, aby uruchomić śledzenie…</string>
+    <string name="hint_ready">Naciśnij „Skanuj” i obchodź obiekt powoli dookoła.</string>
+    <string name="hint_scanning">Skanowanie… Poruszaj się powoli, patrz na obiekt z różnych stron (odległość 0,3–1,5 m).</string>
+    <string name="hint_too_dark">Za ciemno – włącz światło.</string>
+    <string name="hint_too_fast">Za szybki ruch – zwolnij.</string>
+    <string name="hint_no_features">Za mało szczegółów w obrazie – celuj w powierzchnie z teksturą.</string>
+    <string name="hint_memory_full">Osiągnięto limit pamięci – zapisz skan lub zmniejsz szczegółowość.</string>
+
+    <string name="preset_object">Obiekt (5 mm)</string>
+    <string name="preset_standard">Standard (1 cm)</string>
+    <string name="preset_room">Pomieszczenie (2 cm)</string>
+
+    <string name="settings_title">Ustawienia skanowania</string>
+    <string name="settings_detail">Szczegółowość</string>
+    <string name="preset_object_desc">Obiekt – 5 mm, do 1,2 m od kamery</string>
+    <string name="preset_standard_desc">Standard – 1 cm, do 2,5 m od kamery</string>
+    <string name="preset_room_desc">Pomieszczenie – 2 cm, do 4,5 m od kamery</string>
+    <string name="settings_smooth_depth">Wygładzona głębia (pełniejsze pokrycie, mniejsza dokładność)</string>
+    <string name="settings_reset_notice">Zmieniono szczegółowość – skan wyczyszczony.</string>
+
+    <string name="reset_title">Wyczyścić skan?</string>
+    <string name="reset_message">Wszystkie zeskanowane dane zostaną usunięte.</string>
+
+    <string name="export_title">Zapisz model 3D jako</string>
+    <string name="format_ply_mesh">PLY – siatka z kolorami (MeshLab, Blender)</string>
+    <string name="format_obj">OBJ – siatka z kolorami wierzchołków</string>
+    <string name="format_stl">STL – do druku 3D (bez koloru)</string>
+    <string name="format_ply_points">PLY – chmura punktów</string>
+    <string name="export_progress">Generowanie siatki i zapis…</string>
+    <string name="export_nothing">Najpierw coś zeskanuj.</string>
+    <string name="export_empty_mesh">Za mało danych do utworzenia siatki – skanuj dłużej, z kilku stron.</string>
+    <string name="export_failed">Zapis nie powiódł się</string>
+    <string name="export_done_title">Zapisano</string>
+    <string name="export_done_message">Folder: Pobrane/%1$s\n\n%2$s\n\nWierzchołki: %3$d\nTrójkąty: %4$d</string>
+
+    <string name="error_camera_permission">Aplikacja potrzebuje dostępu do aparatu, aby skanować.</string>
+    <string name="error_arcore_missing">Wymagane są „Usługi Google Play dla AR” (ARCore). Zainstaluj je ze Sklepu Play.</string>
+    <string name="error_arcore_update">Zaktualizuj „Usługi Google Play dla AR” (ARCore) w Sklepie Play.</string>
+    <string name="error_device">To urządzenie nie obsługuje ARCore.</string>
+    <string name="error_no_depth">To urządzenie nie obsługuje ARCore Depth API, które jest potrzebne do skanowania 3D.</string>
+    <string name="error_camera">Aparat jest niedostępny – zamknij inne aplikacje używające aparatu.</string>
+    <string name="error_generic">Błąd ARCore: %1$s</string>
+</resources>
