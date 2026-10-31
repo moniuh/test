@@ -47,6 +47,11 @@ public class JobApplication {
     /** Dokładna treść wysłanego listu motywacyjnego. */
     @Column(columnDefinition = "TEXT")
     private String coverLetter;
+    /** Treść listu motywacyjnego w chwili wysłania (pomysł #46); {@link #coverLetter} można później edytować. */
+    @Column(columnDefinition = "TEXT")
+    private String coverLetterSnapshot;
+    /** Kiedy zapisano snapshot wysłanych dokumentów. */
+    private Instant snapshotAt;
 
     private LocalDate nextFollowUpAt;
     private LocalDate lastContactAt;
@@ -94,6 +99,10 @@ public class JobApplication {
     public void setCvSnapshot(String cvSnapshot) { this.cvSnapshot = cvSnapshot; }
     public String getCoverLetter() { return coverLetter; }
     public void setCoverLetter(String coverLetter) { this.coverLetter = coverLetter; }
+    public String getCoverLetterSnapshot() { return coverLetterSnapshot; }
+    public void setCoverLetterSnapshot(String coverLetterSnapshot) { this.coverLetterSnapshot = coverLetterSnapshot; }
+    public Instant getSnapshotAt() { return snapshotAt; }
+    public void setSnapshotAt(Instant snapshotAt) { this.snapshotAt = snapshotAt; }
     public LocalDate getNextFollowUpAt() { return nextFollowUpAt; }
     public void setNextFollowUpAt(LocalDate nextFollowUpAt) { this.nextFollowUpAt = nextFollowUpAt; }
     public LocalDate getLastContactAt() { return lastContactAt; }
