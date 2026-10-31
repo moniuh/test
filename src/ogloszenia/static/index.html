@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audytor ogłoszeń o pracę</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">§</div>
+      <div>
+        <h1>Audytor ogłoszeń o pracę</h1>
+        <p>Jawność wynagrodzeń · język neutralny płciowo · dyskryminacja · dane nadmiarowe · przejrzystość</p>
+      </div>
+    </div>
+    <span id="mode-badge" class="badge badge-muted">sprawdzam tryb…</span>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Widoki">
+    <button role="tab" class="tab" data-tab="audit" aria-selected="true">Audyt ogłoszenia</button>
+    <button role="tab" class="tab" data-tab="batch" aria-selected="false">Tryb wsadowy</button>
+    <button role="tab" class="tab" data-tab="rules" aria-selected="false">Reguły</button>
+  </nav>
+
+  <main>
+    <!-- ===================== AUDYT ===================== -->
+    <section id="tab-audit" class="tab-panel" role="tabpanel">
+      <div class="grid-top">
+        <div class="card input-card">
+          <div class="card-head">
+            <h2>Ogłoszenie</h2>
+            <span class="muted small" id="char-count">0 znaków</span>
+          </div>
+          <div class="examples" id="examples" aria-label="Przykładowe ogłoszenia">
+            <span class="muted small">Przykłady (fikcyjne):</span>
+          </div>
+          <textarea id="ad-text" spellcheck="false"
+                    placeholder="Wklej treść ogłoszenia o pracę albo wybierz przykład powyżej…"></textarea>
+          <div class="actions">
+            <label class="toggle" id="ai-toggle">
+              <input type="checkbox" id="use-ai" checked>
+              <span>Drugie przejście AI</span>
+            </label>
+            <span class="spacer"></span>
+            <button class="btn ghost" id="clear-btn" type="button">Wyczyść</button>
+            <button class="btn primary" id="audit-btn" type="button">Sprawdź ogłoszenie</button>
+          </div>
+          <p class="error" id="audit-error" hidden></p>
+        </div>
+
+        <div class="card score-card" id="score-card">
+          <div class="empty-state">
+            <div class="empty-ring" aria-hidden="true"></div>
+            <p>Wynik 0–100, podsumowanie kategorii i lista znalezisk pojawią się po sprawdzeniu ogłoszenia.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="injection-banner" class="banner warn" hidden>
+        W ogłoszeniu wykryto tekst przypominający polecenia dla AI. Został potraktowany jako dane, a wynik i tak
+        liczy kod na podstawie reguł.
+      </div>
+
+      <div class="grid-results" id="results" hidden>
+        <div class="card">
+          <div class="card-head">
+            <h2>Podświetlenia</h2>
+            <div class="legend">
+              <span class="lg lg-error">błąd</span>
+              <span class="lg lg-warning">ostrzeżenie</span>
+              <span class="lg lg-suggestion">sugestia</span>
+              <span class="lg lg-ai">AI</span>
+            </div>
+          </div>
+          <div id="highlighted" class="highlighted" aria-live="polite"></div>
+          <div id="doc-level" class="doc-level"></div>
+        </div>
+        <div class="card findings-card">
+          <div class="card-head">
+            <h2>Znaleziska <span class="count" id="findings-count"></span></h2>
+            <div class="filters" role="group" aria-label="Filtr wagi">
+              <button class="chip active" data-filter="all" type="button">Wszystkie</button>
+              <button class="chip" data-filter="error" type="button">Błędy</button>
+              <button class="chip" data-filter="warning" type="button">Ostrzeżenia</button>
+              <button class="chip" data-filter="suggestion" type="button">Sugestie</button>
+            </div>
+          </div>
+          <ol id="findings" class="findings"></ol>
+          <details id="rejected" class="rejected" hidden>
+            <summary>Fragmenty AI odrzucone przy weryfikacji</summary>
+            <ul id="rejected-list"></ul>
+          </details>
+        </div>
+      </div>
+
+      <div class="card" id="rewrite-card" hidden>
+        <div class="card-head">
+          <h2>Wersja poprawiona</h2>
+          <div class="rewrite-actions">
+            <span id="rewrite-source"></span>
+            <button class="btn primary" id="rewrite-btn" type="button">Przepisz ogłoszenie</button>
+          </div>
+        </div>
+        <p class="muted small" id="rewrite-hint">
+          AI przepisuje całe ogłoszenie z zachowaniem faktów; offline stosowane są poprawki z reguł, a brakujące
+          sekcje dopisywane jako pola „[UZUPEŁNIJ: …]”.
+        </p>
+        <div id="rewrite-body" hidden>
+          <div class="rewrite-meta" id="rewrite-meta"></div>
+          <ul class="warnings" id="rewrite-warnings"></ul>
+          <div class="seg" role="group" aria-label="Widok wersji poprawionej">
+            <button class="chip active" data-view="diff" type="button">Różnice</button>
+            <button class="chip" data-view="text" type="button">Tekst</button>
+            <button class="chip" data-view="changes" type="button">Lista zmian</button>
+            <span class="spacer"></span>
+            <button class="btn ghost small" id="copy-btn" type="button">Kopiuj tekst</button>
+            <button class="btn ghost small" id="use-btn" type="button">Wstaw do edytora</button>
+          </div>
+          <div id="view-diff" class="diff"></div>
+          <pre id="view-text" class="plain" hidden></pre>
+          <ol id="view-changes" class="changes" hidden></ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TRYB WSADOWY ===================== -->
+    <section id="tab-batch" class="tab-panel" role="tabpanel" hidden>
+      <div class="card">
+        <div class="card-head">
+          <h2>Wiele ogłoszeń naraz</h2>
+          <span class="muted small">CSV (kolumny: id, tytul, tresc; separator , lub ;) albo JSON (lista obiektów)</span>
+        </div>
+        <div class="batch-controls">
+          <label class="file">
+            <input type="file" id="batch-file" accept=".csv,.json,text/csv,application/json">
+            <span>Wybierz plik…</span>
+          </label>
+          <select id="batch-format" aria-label="Format">
+            <option value="auto">format: automatycznie</option>
+            <option value="csv">CSV</option>
+            <option value="json">JSON</option>
+          </select>
+          <button class="btn ghost" id="sample-csv" type="button">Przykład CSV</button>
+          <button class="btn ghost" id="sample-json" type="button">Przykład JSON</button>
+          <span class="spacer"></span>
+          <button class="btn primary" id="batch-btn" type="button">Analizuj wsad</button>
+        </div>
+        <textarea id="batch-content" class="batch-content" spellcheck="false"
+                  placeholder="Wklej zawartość pliku CSV lub JSON albo wczytaj plik / przykład…"></textarea>
+        <p class="error" id="batch-error" hidden></p>
+      </div>
+      <div id="batch-results" hidden>
+        <div class="tiles" id="batch-tiles"></div>
+        <div class="grid-2">
+          <div class="card">
+            <h2>Najczęstsze problemy</h2>
+            <ol class="bars" id="batch-top"></ol>
+          </div>
+          <div class="card">
+            <h2>Kategorie</h2>
+            <table class="table" id="batch-cats"></table>
+            <h2 class="mt">Rozkład ocen</h2>
+            <div id="batch-verdicts" class="verdict-dist"></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Ogłoszenia (od najsłabszych)</h2>
+          <div class="table-wrap"><table class="table" id="batch-items"></table></div>
+          <ul class="warnings" id="batch-skipped"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REGUŁY ===================== -->
+    <section id="tab-rules" class="tab-panel" role="tabpanel" hidden>
+      <div class="card">
+        <div class="card-head">
+          <h2>Katalog reguł</h2>
+          <span class="muted small" id="rules-count"></span>
+        </div>
+        <p class="muted small">Reguły są danymi (wzorce, wyjątki, wyjaśnienie, podstawa prawna, poprawka) w module
+          <code>rules.py</code>. Formuła wyniku: <span id="formula-text">—</span></p>
+        <div id="rules-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    To narzędzie wspiera redakcję ogłoszeń, ale nie jest poradą prawną — zweryfikuj aktualny stan prawny.
+    Wszystkie przykłady są fikcyjne.
+  </footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>
