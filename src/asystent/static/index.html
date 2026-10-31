@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asystent kadrowy</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">Z</span>
+      <div>
+        <strong>Asystent kadrowy</strong>
+        <span class="muted small">Zefirion sp. z o.o. · firma fikcyjna</span>
+      </div>
+    </div>
+    <nav class="main-tabs" role="tablist" aria-label="Widok">
+      <button role="tab" class="tab active" data-view="chat" aria-selected="true">Czat pracownika</button>
+      <button role="tab" class="tab" data-view="hr" aria-selected="false">Panel HR</button>
+    </nav>
+    <span id="mode-badge" class="badge" title="Tryb odpowiadania">…</span>
+  </header>
+
+  <main>
+    <!-- CZAT PRACOWNIKA -->
+    <section id="view-chat" class="view active" aria-label="Czat pracownika">
+      <div class="chat-layout">
+        <div class="chat-panel card">
+          <div id="messages" class="messages" aria-live="polite">
+            <div class="msg bot intro">
+              <p><strong>Dzień dobry!</strong> Odpowiadam na pytania o urlopy, wynagrodzenia, pracę zdalną,
+                benefity i procedury — wyłącznie na podstawie regulaminów firmy, zawsze z cytatem i paragrafem.</p>
+              <p class="muted small">Nie znam Twoich danych kadrowych. Gdy dokumenty nie dają odpowiedzi albo sprawa
+                jest wrażliwa, nie zgaduję — pomogę przekazać pytanie do HR.</p>
+            </div>
+          </div>
+          <div class="suggestions" id="suggestions" aria-label="Przykładowe pytania"></div>
+          <form id="ask-form" class="ask-form">
+            <label for="question" class="sr-only">Twoje pytanie</label>
+            <textarea id="question" rows="2" maxlength="1000" placeholder="Zadaj pytanie, np. „Ile mam dni urlopu?”" required></textarea>
+            <button type="submit" class="btn primary" id="ask-btn">Zapytaj</button>
+          </form>
+        </div>
+        <aside class="side">
+          <div class="card">
+            <h3>Prywatność</h3>
+            <p class="small">Rozmowa jest pseudonimowa — nie podajesz imienia ani nazwiska. Pytania przechowujemy
+              <span id="retention-days">90</span> dni, z zamaskowanymi danymi osobowymi i informacjami o zdrowiu.</p>
+            <p class="small">Sesja: <code id="session-id">—</code>
+              <button class="link" id="new-session" type="button">Nowa sesja</button></p>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <h3>Moje zgłoszenia do HR</h3>
+              <button class="link" id="refresh-mine" type="button">Odśwież</button>
+            </div>
+            <div id="my-escalations" class="small muted">Brak zgłoszeń.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PANEL HR -->
+    <section id="view-hr" class="view" aria-label="Panel HR">
+      <div class="hr-head">
+        <nav class="sub-tabs" role="tablist" aria-label="Sekcje panelu HR">
+          <button role="tab" class="subtab active" data-hr="docs">Dokumenty</button>
+          <button role="tab" class="subtab" data-hr="tickets">Zgłoszenia <span id="open-count" class="count"></span></button>
+          <button role="tab" class="subtab" data-hr="gaps">Luki w wiedzy</button>
+          <button role="tab" class="subtab" data-hr="stats">Statystyki</button>
+        </nav>
+        <form id="token-form" class="token-form hidden">
+          <label class="small" for="hr-token">Token panelu HR</label>
+          <input id="hr-token" type="password" autocomplete="off">
+          <button class="btn small" type="submit">Zaloguj</button>
+        </form>
+      </div>
+
+      <div id="hr-docs" class="hr-section active">
+        <div class="grid-2">
+          <form id="upload-form" class="card">
+            <h3>Dodaj dokument lub nową wersję</h3>
+            <p class="small muted">Markdown, TXT, DOCX (PDF opcjonalnie). Podział na fragmenty według nagłówków
+              i paragrafów (§). Odpowiada tylko wersja aktualna — najnowsza z datą „obowiązuje od” nie późniejszą niż dziś.</p>
+            <label>Plik <input type="file" id="up-file" accept=".md,.markdown,.txt,.docx,.pdf" required></label>
+            <div class="row">
+              <label>Tytuł <input id="up-title" placeholder="z pliku"></label>
+              <label>Kod dokumentu <input id="up-key" placeholder="np. polityka-urlopowa"></label>
+            </div>
+            <div class="row">
+              <label>Wersja <input id="up-version" placeholder="np. 5.0"></label>
+              <label>Obowiązuje od <input id="up-date" type="date"></label>
+            </div>
+            <button class="btn primary" type="submit">Wgraj dokument</button>
+            <p id="upload-result" class="small" role="status"></p>
+          </form>
+          <form id="search-form" class="card">
+            <h3>Test wyszukiwania (BM25)</h3>
+            <p class="small muted">Sprawdź, które fragmenty asystent znajdzie dla pytania — z wynikiem i pokryciem pojęć.</p>
+            <div class="row"><input id="search-q" placeholder="np. zwolnienie lekarskie" required>
+              <button class="btn" type="submit">Szukaj</button></div>
+            <div id="search-results" class="small"></div>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Baza wiedzy</h3>
+          <div class="table-wrap">
+            <table class="docs-table">
+              <thead><tr><th>Dokument</th><th>Wersja</th><th>Obowiązuje od</th><th>Status</th><th>Fragmenty</th><th></th></tr></thead>
+              <tbody id="docs-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="hr-tickets" class="hr-section">
+        <div class="card-head">
+          <h3>Zgłoszenia od pracowników</h3>
+          <select id="ticket-filter" aria-label="Filtr statusu">
+            <option value="">Wszystkie</option>
+            <option value="nowe" selected>Nowe</option>
+            <option value="odpowiedziane">Odpowiedziane</option>
+            <option value="zamknięte">Zamknięte</option>
+          </select>
+        </div>
+        <div id="tickets"></div>
+      </div>
+
+      <div id="hr-gaps" class="hr-section">
+        <div class="card-head">
+          <div>
+            <h3>Luki w wiedzy</h3>
+            <p class="small muted">Pytania bez podstawy w dokumentach, z niską pewnością, ocenione negatywnie lub przekazane
+              do HR — pogrupowane po słowach kluczowych, z podpowiedzią, który dokument uzupełnić.</p>
+          </div>
+          <select id="gaps-days" aria-label="Okres">
+            <option value="7">7 dni</option>
+            <option value="30">30 dni</option>
+            <option value="90" selected>90 dni</option>
+          </select>
+        </div>
+        <div id="gaps"></div>
+      </div>
+
+      <div id="hr-stats" class="hr-section">
+        <div id="kpis" class="kpis"></div>
+        <div class="grid-2">
+          <div class="card viz-root">
+            <h3>Pytania dziennie (14 dni)</h3>
+            <div id="per-day" class="columns" role="img" aria-label="Liczba pytań dziennie"></div>
+          </div>
+          <div class="card viz-root">
+            <h3>Wynik odpowiedzi</h3>
+            <div id="by-status"></div>
+            <h3 class="mt">Najczęściej cytowane dokumenty</h3>
+            <div id="top-docs"></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Retencja logów</h3>
+          <p class="small">Pytania i oceny są usuwane po <strong id="ret-days">90</strong> dniach (zmienna
+            <code>HR_RETENTION_DAYS</code>), zamknięte zgłoszenia — po tym samym czasie od zamknięcia.
+            Ostatnie czyszczenie: <span id="ret-last">—</span>.</p>
+          <form id="purge-form" class="row">
+            <label class="small">Usuń starsze niż (dni) <input id="purge-days" type="number" min="1" max="3650"></label>
+            <button class="btn" type="submit">Wyczyść teraz</button>
+            <span id="purge-result" class="small" role="status"></span>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
