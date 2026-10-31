@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import pl.radarpracy.common.BadRequestException;
+import pl.radarpracy.common.Text;
 
 import java.util.List;
 
@@ -54,6 +56,15 @@ public class ApplicationController {
         return ApplicationView.of(service.changeStatus(id, request.status(), request.note()));
     }
 
+    /** Przeniesienie karty na tablicy Kanban (pomysł #39). */
+    record MoveRequest(ApplicationStatus status, Integer position, String note) {
+    }
+
+    @PostMapping("/{id}/move")
+    ApplicationView move(@PathVariable Long id, @RequestBody MoveRequest request) {
+        return ApplicationView.of(service.move(id, request.status(), request.position(), request.note()));
+    }
+
     @GetMapping("/{id}/events")
     List<ApplicationEvent> events(@PathVariable Long id) {
         return service.events(id);
@@ -65,7 +76,19 @@ public class ApplicationController {
     @PostMapping("/{id}/notes")
     @ResponseStatus(HttpStatus.CREATED)
     ApplicationEvent addNote(@PathVariable Long id, @RequestBody NoteRequest request) {
-        return service.addEvent(id, EventType.NOTE, request.note());
+        if (Text.isBlank(request.note())) {
+            throw new BadRequestException("Notatka nie może być pusta");
+        }
+        return service.addEvent(id, EventType.NOTE, request.note().strip());
+    }
+
+    record CoverLetterSave(String coverLetter) {
+    }
+
+    /** Zapis (lub usunięcie pustym tekstem) listu motywacyjnego aplikacji (pomysł #42). */
+    @PutMapping("/{id}/cover-letter")
+    ApplicationView saveCoverLetter(@PathVariable Long id, @RequestBody CoverLetterSave request) {
+        return ApplicationView.of(service.saveCoverLetter(id, request.coverLetter()));
     }
 
     @DeleteMapping("/{id}")

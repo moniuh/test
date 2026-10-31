@@ -9,4 +9,6 @@ public interface JobApplicationRepository extends JpaRepository<JobApplication, 
     List<JobApplication> findAllByOrderByStatusAscBoardPositionAscIdAsc();
 
     List<JobApplication> findByOfferId(Long offerId);
+
+    List<JobApplication> findByStatus(ApplicationStatus status);
 }
