@@ -1,0 +1,43 @@
+/* Moduł „dopasowanie i rekomendacje”: ranking ofert, zapisane wyszukiwania, preferencje, podobne oferty. */
+
+.matching-filters .grid-3 { align-items: start; }
+.matching-filters fieldset { margin-bottom: 0.85rem; }
+.matching-filters .field-inline { display: flex; align-items: center; gap: 0.45rem; font-weight: 600; font-size: 0.9rem; margin: 0.35rem 0 0.85rem; }
+.matching-save-form { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: flex-end; margin-top: 0.5rem; }
+.matching-save-form .field { margin-bottom: 0; flex: 1 1 260px; }
+
+.matching-summary { font-weight: 600; margin: 0 0 0.75rem; }
+
+.matching-results { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.matching-offer { border: 1px solid var(--border); border-radius: var(--radius); padding: 0.85rem 1rem; background: var(--surface); }
+.matching-offer.is-excluded { border-style: dashed; background: var(--surface-2); }
+.matching-offer.is-new { border-left: 4px solid var(--info); }
+.matching-offer-head { display: flex; gap: 0.9rem; align-items: flex-start; }
+.matching-offer-main { flex: 1; min-width: 0; }
+.matching-offer-main h3 { font-size: 1.05rem; margin: 0 0 0.15rem; }
+.matching-offer-main .meta { margin: 0 0 0.4rem; }
+.matching-metric { display: inline-flex; align-items: center; gap: 0.3rem; }
+
+.matching-exclusions { margin: 0.6rem 0 0; padding: 0.5rem 0.75rem; border-left: 3px solid var(--danger); background: var(--danger-soft); border-radius: 0 6px 6px 0; font-size: 0.9rem; }
+.matching-exclusions ul { margin: 0.25rem 0 0; }
+.matching-exclusions blockquote { margin: 0.2rem 0 0; font-style: italic; color: var(--muted); }
+
+.matching-offer details { margin-top: 0.6rem; }
+.matching-offer summary, .matching-details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--primary); }
+.matching-components { font-size: 0.86rem; margin-top: 0.4rem; }
+.matching-components th, .matching-components td { padding: 0.4rem 0.45rem; }
+.matching-components .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.matching-components tbody th, .matching-components tfoot th { text-transform: none; letter-spacing: 0; font-size: inherit; color: var(--text); }
+.matching-components tfoot td, .matching-components tfoot th { font-weight: 700; border-bottom: none; }
+.matching-bar { display: inline-block; width: 52px; height: 8px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; vertical-align: middle; margin-right: 0.35rem; }
+.matching-bar > span { display: block; height: 100%; background: var(--primary); }
+.matching-bar.negative > span { background: var(--danger); }
+
+.matching-saved li { display: flex; flex-direction: column; gap: 0.35rem; }
+.matching-saved .actions { gap: 0.35rem; }
+
+.matching-prefs h3 { font-size: 0.95rem; margin: 0.75rem 0 0.35rem; }
+.matching-prefs ul { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; }
+
+.matching-similar li { display: flex; flex-direction: column; gap: 0.25rem; }
+.matching-similar .chips { display: flex; flex-wrap: wrap; gap: 0.3rem; }
