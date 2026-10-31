@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Symulator rozmów rekrutacyjnych</title>
+  <meta name="description" content="Trening prowadzenia rozmów rekrutacyjnych z kandydatem symulowanym przez AI, coachem na żywo i raportem po sesji.">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="#/" aria-label="Strona główna">
+        <span class="brand__mark" aria-hidden="true">SR</span>
+        <span>
+          <span class="brand__title">Symulator rozmów rekrutacyjnych</span>
+          <span class="brand__subtitle">Trening dla menedżerów</span>
+        </span>
+      </a>
+      <nav class="topnav" aria-label="Nawigacja">
+        <a href="#/" data-nav="home">Scenariusze</a>
+        <a href="#/sesje" data-nav="sessions">Poprzednie sesje</a>
+        <span id="mode-badge" class="badge badge--muted" title="Tryb działania">…</span>
+      </nav>
+    </div>
+  </header>
+
+  <div class="ai-notice" role="note">
+    <div class="ai-notice__inner">
+      <span class="ai-notice__icon" aria-hidden="true">🤖</span>
+      <p><strong>Kandydat jest symulowany komputerowo</strong> — <span id="ai-notice-mode">przez AI lub skrypt</span>. To nie jest prawdziwa osoba.
+        To <strong>trening, nie ocena</strong>: wyniki widzisz domyślnie tylko Ty.</p>
+    </div>
+  </div>
+
+  <main id="app" class="container" aria-live="polite">
+    <p class="muted">Ładowanie…</p>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      Dane w scenariuszach są fikcyjne. Wskazówki prawne mają charakter szkoleniowy — to nie jest porada prawna.
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
