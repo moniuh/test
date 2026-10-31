@@ -81,6 +81,20 @@ Otwórz <http://127.0.0.1:8000/> i kliknij **„Wczytaj dane przykładowe”**: 
 próbą prompt injection (`cv-05.txt`) i CV z zaprzeczeniem wymagania obowiązkowego (`cv-06.txt`).
 Bazy powstają w bieżącym katalogu (`preselekcja.db`, `preselekcja-demografia.db`).
 
+### W Dockerze
+
+```bash
+docker build -t ai-hr/preselekcja-cv .
+docker run -d --name preselekcja -p 127.0.0.1:8000:8000 -v preselekcja-dane:/data -v preselekcja-demografia:/data-demografia ai-hr/preselekcja-cv
+# z funkcjami AI: dodaj -e ANTHROPIC_API_KEY=...
+```
+
+Bazy SQLite leżą w wolumenach (`/data`, `/data-demografia`), więc przetrwają restart i aktualizację kontenera. Dane demograficzne mają osobny wolumen — tak jak w aplikacji są oddzielone od ocen. Obraz działa jako użytkownik bez uprawnień roota i ma wbudowany healthcheck.
+Port jest celowo wystawiony tylko na `127.0.0.1`: aplikacja nie ma logowania.
+
+Wszystkie pięć aplikacji portfolio naraz (z portalem startowym) uruchomisz przez
+[`deploy/docker-compose.yml`](https://github.com/moniuh/test/tree/ccr-69ef4109-9sgm79/deploy).
+
 ## Tryb AI a tryb offline
 
 | Element | Tryb AI (`ANTHROPIC_API_KEY`) | Tryb offline (domyślny bez klucza) |
