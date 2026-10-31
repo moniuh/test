@@ -29,6 +29,40 @@ flowchart LR
 Szczegóły każdego rozwiązania (funkcje, architektura, API, zgodność, ograniczenia) są w README
 i katalogu `docs/` na danym branchu.
 
+## Stan implementacji
+
+Wszystkie branche są kompletne. Każdy ma testy, UI, API, CI i dokumentację (`docs/architektura.md`,
+`docs/zgodnosc.md`). Testy przechodzą w trybie offline. Ścieżka AI jest przetestowana na atrapie
+modelu i na prawdziwym SDK z atrapą HTTP; przed wdrożeniem trzeba ją jeszcze sprawdzić na prawdziwym kluczu API.
+
+| Branch | Testy | Najważniejsze elementy |
+|---|---:|---|
+| `ai-hr/ogloszenia-zgodnosc` | 446 | 29 reguł jako dane (z przykładami pozytywnymi i negatywnymi każdej), słownik 57 par nazw stanowisk, wynik 0–100 z jawną formułą, podświetlenia w tekście, przepisanie z kontrolą faktów (AI nie może dopisać kwot), tryb wsadowy CSV/JSON i CLI |
+| `ai-hr/preselekcja-cv` | 196 | anonimizacja z polską fleksją nazwisk, ocena per wymaganie z cytatem-dowodem, wykrywanie prompt injection (też bez diakrytyków), decyzja tylko po stronie człowieka, override rate, dziennik audytowy append-only z łańcuchem SHA-256, reguła 4/5 na danych trzymanych w osobnej bazie |
+| `ai-hr/symulator-rozmow` | 204 | 3 scenariusze z ukrytymi faktami STAR i pułapkami, coach wykrywający 10 kategorii pytań niedozwolonych z podstawą prawną i lepszym sformułowaniem, raport z pokryciem STAR i proporcją mówienia, grywalny kandydat offline |
+| `ai-hr/szkolenia-lms` | 156 | reguły przypisań i auto-przypisanie nowych pracowników, statusy ważności i odnowienia, idempotentne przypomnienia z eskalacją do przełożonego, generator testów (AI i offline) z zatwierdzaniem przez HR, zaświadczenia z kodem weryfikacyjnym, raport CSV pod kontrolę |
+| `ai-hr/asystent-kadrowy` | 175 | BM25 z polskim stemmingiem i synonimami, wersjonowanie dokumentów z datą obowiązywania, odpowiedzi tylko z potwierdzonym cytatem, bezpieczniki (mobbing, zdrowie, sprawy indywidualne, porady prawne), eskalacje do HR, raport luk w wiedzy, retencja 90 dni |
+
+<details>
+<summary>Zrzuty ekranu (tryb offline)</summary>
+
+**Audytor ogłoszeń**
+![Audytor ogłoszeń](https://raw.githubusercontent.com/moniuh/test/refs/heads/ai-hr/ogloszenia-zgodnosc/docs/screenshot.png)
+
+**Preselekcja CV**: kandydat z wykrytą próbą prompt injection
+![Preselekcja CV](https://raw.githubusercontent.com/moniuh/test/refs/heads/ai-hr/preselekcja-cv/docs/screenshot.png)
+
+**Symulator rozmów**: coach flaguje dopytanie o dzieci
+![Symulator rozmów](https://raw.githubusercontent.com/moniuh/test/refs/heads/ai-hr/symulator-rozmow/docs/screenshot.png)
+
+**LMS szkoleń obowiązkowych**: pulpit zgodności
+![LMS szkoleń](https://raw.githubusercontent.com/moniuh/test/refs/heads/ai-hr/szkolenia-lms/docs/screenshot.png)
+
+**Asystent kadrowy**: odpowiedź z cytatami z regulaminu
+![Asystent kadrowy](https://raw.githubusercontent.com/moniuh/test/refs/heads/ai-hr/asystent-kadrowy/docs/screenshot.png)
+
+</details>
+
 ## Wspólne zasady projektowe
 
 1. **AI doradza, człowiek decyduje.** Żadne rozwiązanie nie podejmuje samodzielnie decyzji
