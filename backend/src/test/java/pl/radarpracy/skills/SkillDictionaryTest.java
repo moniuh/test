@@ -43,4 +43,11 @@ class SkillDictionaryTest {
         SkillHit hit = dict.find(text).get(0);
         assertThat(text.substring(hit.start(), hit.end())).isEqualTo("Spring Boot");
     }
+
+    @Test
+    void ambiguousPolishWordsAreNotSkills() {
+        assertThat(dict.skillsIn("Praca jest zdalna, a zespół go wspiera. Jest to stanowisko w 2020 r.")).isEmpty();
+        assertThat(dict.skillsIn("Testy: Jest i React Testing Library, backend w Go")).contains("Jest", "Go");
+        assertThat(dict.resolve("Go")).map(Skill::name).contains("Go");
+    }
 }

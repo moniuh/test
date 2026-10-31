@@ -10,13 +10,16 @@ import java.util.regex.Pattern;
 /** Rozpoznaje liczbę lat doświadczenia w wymaganiach („min. 3 lata”, „5+ years”) i w CV („2019 – obecnie”). */
 public final class YearsParser {
 
-    private static final String UNIT = "(?:lat|lata|rok|roku|years?|yrs?)";
+    /** Jednostka: lat/lata/latami/latach, rok/roku/rokiem, years. */
+    private static final String UNIT = "(?:lat\\w*|rok\\w*|years?|yrs?)\\b";
+    /** Liczba lat, także z częścią dziesiętną („2,5”) — liczymy pełne lata; nie zaczyna się w środku liczby. */
+    private static final String N = "(?<![\\d.,])(\\d{1,2})(?:[.,]\\d)?";
     private static final Pattern MIN_PREFIX = Pattern.compile(
-            "(?:min\\.?|minimum|co najmniej|przynajmniej|at least|od|powyzej|over)\\s*(\\d{1,2})\\s*\\+?\\s*" + UNIT);
-    private static final Pattern PLUS = Pattern.compile("(\\d{1,2})\\s*\\+\\s*" + UNIT);
-    private static final Pattern RANGE = Pattern.compile("(\\d{1,2})\\s*(?:-|–|—|do|to)\\s*\\d{1,2}\\s*" + UNIT);
+            "(?:min\\.?|minimum|co najmniej|przynajmniej|at least|od|powyzej|over)\\s*" + N + "\\s*\\+?\\s*" + UNIT);
+    private static final Pattern PLUS = Pattern.compile(N + "\\s*\\+\\s*" + UNIT);
+    private static final Pattern RANGE = Pattern.compile(N + "\\s*(?:-|–|—|do|to)\\s*\\d{1,2}\\s*" + UNIT);
     private static final Pattern PLAIN = Pattern.compile(
-            "(\\d{1,2})\\s*(?:lat|lata|rok|roku|letni\\w*|roczn\\w*|years?|yrs?)\\b");
+            N + "\\s*(?:lat\\w*|rok\\w*|letni\\w*|roczn\\w*|years?|yrs?)\\b");
     private static final Pattern DATE_RANGE = Pattern.compile(
             "((?:19|20)\\d{2})\\s*(?:-|–|—|do|to)\\s*((?:19|20)\\d{2}|obecnie|teraz|nadal|now|present|current|dzis)");
     private static final Map<String, Integer> WORDS = Map.ofEntries(

@@ -97,8 +97,9 @@ class CvSkillExtractorTest {
     void ambiguousAliasesNeedCapitalLetter() {
         Map<String, CvSkillExtractor.SkillSuggestion> s = suggest("""
                 Ukończyłam studia w 2020 r. Mój kod jest testowany, lubię go refaktoryzować.
-                Testy: Jest, Go, R
+                Testy: Jest, Go, RStudio
                 """, new CandidateProfile());
+        // pojedyncza litera „R” jest zbyt niejednoznaczna — język R rozpoznają aliasy („RStudio”, „język R”)
         assertThat(s).containsKeys("Jest", "Go", "R");
         assertThat(s.get("Jest").mentions()).isEqualTo(1);
         assertThat(s.get("Go").mentions()).isEqualTo(1);

@@ -61,4 +61,11 @@ class RequirementExtractorTest {
         assertThat(YearsParser.requiredYears("Znajomość Javy")).isNull();
         assertThat(YearsParser.yearsInText("Java Developer (2021 – 2024)")).isEqualTo(3);
     }
+
+    @Test
+    void yearsParserHandlesInflectionAndDecimals() {
+        assertThat(YearsParser.yearsInText("pracuję z Javą od 4 latami")).isEqualTo(4);
+        assertThat(YearsParser.yearsInText("2,5 roku doświadczenia")).isEqualTo(2);
+        assertThat(YearsParser.requiredYears("min. 2,5 roku w Kotlinie")).isEqualTo(2);
+    }
 }

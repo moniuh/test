@@ -33,10 +33,15 @@ public class SkillDictionary {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     record Entry(String name, String category, String family, List<String> aliases, List<String> implies,
-                 Boolean prefix) {
+                 Boolean prefix, List<String> caseSensitive, List<String> notFollowedBy) {
     }
 
-    private record Alias(String folded, Skill skill) {
+    /**
+     * Alias do wyszukania. {@code caseSensitive} — dopasowanie w oryginalnym tekście z zachowaniem wielkości
+     * liter (np. „Jest” jako framework, a nie polskie „jest”); {@code notFollowedBy} — złożone słowa, po których
+     * trafienie jest odrzucane (np. „Jest to…”).
+     */
+    private record Alias(String text, Skill skill, boolean caseSensitive, Set<String> notFollowedBy) {
     }
 
     private final Map<String, Skill> byName = new LinkedHashMap<>();
@@ -54,20 +59,32 @@ public class SkillDictionary {
                 folded.add(Text.fold(a).strip());
             }
             String foldedName = Text.fold(e.name());
-            if (!folded.contains(foldedName) && !Boolean.TRUE.equals(e.prefix())) {
+            List<String> exact = e.caseSensitive() == null ? List.of() : e.caseSensitive();
+            // nazwy niejednoznaczne (krótkie lub ze wskazanymi aliasami z wielkością liter) nie są aliasem złożonym
+            boolean ambiguousName = !exact.isEmpty() || foldedName.length() <= 2;
+            if (!folded.contains(foldedName) && !Boolean.TRUE.equals(e.prefix()) && !ambiguousName) {
                 folded.add(foldedName);
+            }
+            Set<String> notFollowedBy = new java.util.HashSet<>();
+            if (e.notFollowedBy() != null) {
+                e.notFollowedBy().forEach(w -> notFollowedBy.add(Text.fold(w).strip()));
             }
             Skill skill = new Skill(e.name(), e.category(), e.family(), List.copyOf(folded),
                     e.implies() == null ? List.of() : List.copyOf(e.implies()), Boolean.TRUE.equals(e.prefix()));
             byName.put(skill.name(), skill);
             byFoldedName.put(foldedName, skill);
             for (String a : folded) {
-                aliases.add(new Alias(a, skill));
+                aliases.add(new Alias(a, skill, false, notFollowedBy));
                 byFoldedName.putIfAbsent(a, skill);
             }
+            for (String a : exact) {
+                aliases.add(new Alias(a, skill, true, notFollowedBy));
+            }
+            // rozpoznanie samej nazwy (np. resolve("Go")) działa niezależnie od niejednoznaczności w tekście
+            byFoldedName.putIfAbsent(foldedName, skill);
         }
         // dłuższe aliasy najpierw — ułatwia wybór najdłuższego dopasowania
-        aliases.sort(Comparator.comparingInt((Alias a) -> a.folded().length()).reversed());
+        aliases.sort(Comparator.comparingInt((Alias a) -> a.text().length()).reversed());
     }
 
     private static List<Entry> load(String path) {
@@ -118,19 +135,22 @@ public class SkillDictionary {
         String folded = Text.fold(text);
         boolean[] taken = new boolean[folded.length()];
         for (Alias alias : aliases) {
-            String a = alias.folded();
+            String a = alias.text();
             if (a.isEmpty()) {
                 continue;
             }
+            String haystack = alias.caseSensitive() ? text : folded;
+            String needle = alias.caseSensitive() ? a : a;
             int from = 0;
             while (true) {
-                int idx = folded.indexOf(a, from);
+                int idx = haystack.indexOf(needle, from);
                 if (idx < 0) {
                     break;
                 }
                 int end = idx + a.length();
-                if (isWordStart(folded, idx, a) && (alias.skill().prefix() || isWordEnd(folded, end, a))
-                        && !overlaps(taken, idx, end)) {
+                String foldedAlias = Text.fold(a);
+                if (isWordStart(folded, idx, foldedAlias) && (alias.skill().prefix() || isWordEnd(folded, end, foldedAlias))
+                        && !overlaps(taken, idx, end) && !followedByExcluded(folded, end, alias.notFollowedBy())) {
                     int realEnd = alias.skill().prefix() ? extendWord(folded, end) : end;
                     for (int i = idx; i < realEnd; i++) {
                         taken[i] = true;
@@ -206,6 +226,21 @@ public class SkillDictionary {
         }
         // „node” nie może pasować do „node.js” (dłuższy alias już zajął miejsce), ale „java.” na końcu zdania tak
         return !(next == '.' && end + 1 < s.length() && Character.isLetterOrDigit(s.charAt(end + 1)));
+    }
+
+    private static boolean followedByExcluded(String folded, int end, Set<String> words) {
+        if (words.isEmpty()) {
+            return false;
+        }
+        int i = end;
+        while (i < folded.length() && folded.charAt(i) == ' ') {
+            i++;
+        }
+        int j = i;
+        while (j < folded.length() && Character.isLetter(folded.charAt(j))) {
+            j++;
+        }
+        return j > i && words.contains(folded.substring(i, j));
     }
 
     private static int extendWord(String s, int end) {

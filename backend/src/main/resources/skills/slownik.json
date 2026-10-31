@@ -11,7 +11,7 @@
   {"name": "ASP.NET", "category": "framework", "family": "dotnet", "aliases": ["asp.net", "asp.net core", "asp .net"], "implies": [".NET", "C#"]},
   {"name": "C++", "category": "jezyk-programowania", "family": "c-family", "aliases": ["c++", "cpp", "c++17", "c++20"]},
   {"name": "C", "category": "jezyk-programowania", "family": "c-family", "aliases": ["jezyk c", "ansi c", "c language", "embedded c"]},
-  {"name": "Go", "category": "jezyk-programowania", "family": "go", "aliases": ["golang", "go lang", "jezyk go", "go (golang)"]},
+  {"name": "Go", "category": "jezyk-programowania", "family": "go", "aliases": ["golang", "go lang", "jezyk go", "go (golang)"], "caseSensitive": ["Go"], "notFollowedBy": ["to", "live", "ahead", "back", "for", "with", "beyond", "further"]},
   {"name": "Rust", "category": "jezyk-programowania", "family": "rust", "aliases": ["rust"]},
   {"name": "PHP", "category": "jezyk-programowania", "family": "php", "aliases": ["php", "php 8", "php8"]},
   {"name": "Ruby", "category": "jezyk-programowania", "family": "ruby", "aliases": ["ruby", "ruby on rails", "rails"]},
@@ -21,7 +21,6 @@
   {"name": "SQL", "category": "baza-danych", "family": "sql-db", "aliases": ["sql", "t-sql", "pl/sql", "plsql", "tsql", "zapytania sql"]},
   {"name": "Bash", "category": "narzedzie", "family": "skrypty", "aliases": ["bash", "shell", "skrypty powloki", "shell scripting", "zsh"]},
   {"name": "PowerShell", "category": "narzedzie", "family": "skrypty", "aliases": ["powershell"]},
-
   {"name": "Spring", "category": "framework", "family": "spring", "aliases": ["spring", "spring framework", "spring mvc", "spring data", "spring security"], "implies": ["Java"]},
   {"name": "Spring Boot", "category": "framework", "family": "spring", "aliases": ["spring boot", "springboot", "spring-boot"], "implies": ["Spring", "Java"]},
   {"name": "Hibernate", "category": "framework", "family": "orm", "aliases": ["hibernate"], "implies": ["JPA"]},
@@ -52,7 +51,6 @@
   {"name": "GraphQL", "category": "architektura", "family": "api", "aliases": ["graphql"]},
   {"name": "gRPC", "category": "architektura", "family": "api", "aliases": ["grpc", "protobuf"]},
   {"name": "Mikroserwisy", "category": "architektura", "family": "architektura", "aliases": ["mikroserwis", "microservice", "micro-service", "mikrouslug", "architektura rozproszona"], "prefix": true},
-
   {"name": "PostgreSQL", "category": "baza-danych", "family": "sql-db", "aliases": ["postgresql", "postgres", "postgre", "psql"], "implies": ["SQL"]},
   {"name": "MySQL", "category": "baza-danych", "family": "sql-db", "aliases": ["mysql", "mariadb"], "implies": ["SQL"]},
   {"name": "Oracle DB", "category": "baza-danych", "family": "sql-db", "aliases": ["oracle", "oracle db", "oracle database"], "implies": ["SQL"]},
@@ -62,7 +60,6 @@
   {"name": "Cassandra", "category": "baza-danych", "family": "nosql", "aliases": ["cassandra"]},
   {"name": "DynamoDB", "category": "baza-danych", "family": "nosql", "aliases": ["dynamodb", "dynamo db"]},
   {"name": "Elasticsearch", "category": "baza-danych", "family": "nosql", "aliases": ["elasticsearch", "elastic search", "opensearch"]},
-
   {"name": "AWS", "category": "chmura", "family": "cloud", "aliases": ["aws", "amazon web services", "ec2", "s3", "aws lambda"]},
   {"name": "Azure", "category": "chmura", "family": "cloud", "aliases": ["azure", "microsoft azure"]},
   {"name": "GCP", "category": "chmura", "family": "cloud", "aliases": ["gcp", "google cloud", "google cloud platform"]},
@@ -84,10 +81,9 @@
   {"name": "Grafana", "category": "devops", "family": "monitoring", "aliases": ["grafana"]},
   {"name": "ELK", "category": "devops", "family": "monitoring", "aliases": ["elk", "kibana", "logstash"]},
   {"name": "Nginx", "category": "devops", "family": "systemy", "aliases": ["nginx", "apache httpd"]},
-
   {"name": "JUnit", "category": "testy", "family": "testy-jednostkowe", "aliases": ["junit", "junit5", "junit 5", "testng"]},
   {"name": "Mockito", "category": "testy", "family": "testy-jednostkowe", "aliases": ["mockito"]},
-  {"name": "Jest", "category": "testy", "family": "testy-jednostkowe", "aliases": ["jest", "vitest", "mocha", "react testing library", "testing library"]},
+  {"name": "Jest", "category": "testy", "family": "testy-jednostkowe", "aliases": ["vitest", "mocha", "react testing library", "testing library", "jestjs", "jest.js"], "caseSensitive": ["Jest"], "notFollowedBy": ["to", "w", "na", "dla", "do", "z", "ze", "od", "po", "mozliwa", "mozliwe", "mozliwy", "wymagana", "wymagane", "wymagany", "mile", "bardzo", "nam", "dostepna", "dostepne", "oferowana", "atutem", "plusem", "praca", "potrzebna", "potrzebne", "konieczna", "konieczne", "istotna", "istotne", "wazna", "wazne", "dla", "one", "ona", "on", "tez", "takze", "juz", "jeszcze", "jedna", "jeden", "jednym", "mozliwosc", "opcja", "zespol", "firma", "nasza", "nasz", "naszym", "prowadzona", "realizowana", "skierowana", "oparta", "oparty"]},
   {"name": "Selenium", "category": "testy", "family": "testy-e2e", "aliases": ["selenium", "webdriver"]},
   {"name": "Cypress", "category": "testy", "family": "testy-e2e", "aliases": ["cypress"]},
   {"name": "Playwright", "category": "testy", "family": "testy-e2e", "aliases": ["playwright"]},
@@ -97,7 +93,6 @@
   {"name": "TDD", "category": "metodyka", "family": "praktyki", "aliases": ["tdd", "test-driven", "test driven"]},
   {"name": "Clean Code", "category": "metodyka", "family": "praktyki", "aliases": ["clean code", "zasady solid", "solid principles", "czysty kod", "design patterns", "wzorce projektowe", "wzorcow projektowych"]},
   {"name": "Code review", "category": "metodyka", "family": "praktyki", "aliases": ["code review", "code-review", "przeglady kodu", "review kodu"]},
-
   {"name": "Pandas", "category": "dane", "family": "python-dane", "aliases": ["pandas"], "implies": ["Python"]},
   {"name": "NumPy", "category": "dane", "family": "python-dane", "aliases": ["numpy"], "implies": ["Python"]},
   {"name": "scikit-learn", "category": "dane", "family": "ml", "aliases": ["scikit-learn", "sklearn", "scikit learn"], "implies": ["Python", "Machine Learning"]},
@@ -118,9 +113,8 @@
   {"name": "Excel", "category": "biuro", "family": "office", "aliases": ["excel", "ms excel", "microsoft excel", "arkusze kalkulacyjne", "arkuszy kalkulacyjnych", "tabele przestawne", "vba"]},
   {"name": "MS Office", "category": "biuro", "family": "office", "aliases": ["ms office", "pakiet office", "pakietu office", "microsoft office", "ms word", "microsoft word", "powerpoint", "office 365", "microsoft 365"]},
   {"name": "Google Analytics", "category": "marketing", "family": "marketing", "aliases": ["google analytics", "ga4"]},
-  {"name": "SEO", "category": "marketing", "family": "marketing", "aliases": ["seo", "sem", "pozycjonowanie"]},
+  {"name": "SEO", "category": "marketing", "family": "marketing", "aliases": ["seo", "pozycjonowanie", "sem (google ads)"]},
   {"name": "Google Ads", "category": "marketing", "family": "marketing", "aliases": ["google ads", "adwords", "meta ads", "facebook ads", "kampanie ppc", "ppc"]},
-
   {"name": "Jira", "category": "narzedzie", "family": "pm", "aliases": ["jira", "confluence", "atlassian"]},
   {"name": "Scrum", "category": "metodyka", "family": "agile", "aliases": ["scrum", "sprint", "sprintach"], "implies": ["Agile"]},
   {"name": "Agile", "category": "metodyka", "family": "agile", "aliases": ["agile", "zwinne", "zwinnych metodyk", "metodyki zwinne", "kanban"]},
@@ -151,7 +145,6 @@
   {"name": "Cyberbezpieczeństwo", "category": "bezpieczenstwo", "family": "security", "aliases": ["cyberbezpieczenstw", "security", "owasp", "pentest", "siem", "soc", "iso 27001", "bezpieczenstwo it", "bezpieczenstwa it"], "prefix": true},
   {"name": "OAuth / OIDC", "category": "bezpieczenstwo", "family": "security", "aliases": ["oauth", "oauth2", "openid connect", "oidc", "jwt", "keycloak", "sso"]},
   {"name": "ITIL", "category": "metodyka", "family": "itsm", "aliases": ["itil", "servicenow"]},
-
   {"name": "Angielski", "category": "jezyk-obcy", "aliases": ["angielsk", "english", "j. ang", "jezyk ang"], "prefix": true},
   {"name": "Niemiecki", "category": "jezyk-obcy", "aliases": ["niemieck", "german", "deutsch", "j. niem"], "prefix": true},
   {"name": "Francuski", "category": "jezyk-obcy", "aliases": ["francusk", "french", "francais"], "prefix": true},
@@ -159,7 +152,6 @@
   {"name": "Włoski", "category": "jezyk-obcy", "aliases": ["wlosk", "italian"], "prefix": true},
   {"name": "Ukraiński", "category": "jezyk-obcy", "aliases": ["ukrainsk", "ukrainian"], "prefix": true},
   {"name": "Rosyjski", "category": "jezyk-obcy", "aliases": ["rosyjsk", "russian"], "prefix": true},
-
   {"name": "Wykształcenie wyższe", "category": "wyksztalcenie", "aliases": ["wyksztalcenie wyzsze", "wyksztalcenia wyzszego", "wyksztalceniem wyzszym", "studia", "studiow", "politechnik", "uniwersytet", "university", "akademia", "akademii", "magister", "licencjat", "absolwent", "bachelor", "master's degree", "degree in", "bsc", "msc", "wydzial"], "prefix": true},
   {"name": "Komunikatywność", "category": "miekkie", "aliases": ["komunikatywn", "communication skills", "umiejetnosci komunikacyjne", "umiejetnosc komunikacji", "excellent communication", "strong communication"], "prefix": true},
   {"name": "Praca zespołowa", "category": "miekkie", "aliases": ["praca zespolowa", "pracy zespolowej", "pracy w zespole", "praca w zespole", "teamwork", "team player", "wspolpracy w zespole"]},
