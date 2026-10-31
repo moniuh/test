@@ -15,9 +15,13 @@ Każdy pomysł oceniony w skali 1–5 w pięciu wymiarach względem celu produkt
 | R | Wyróżnik | 15% | nie oferują tego portale ani arkusz kalkulacyjny | standard w każdym narzędziu |
 | Z | Bezpieczeństwo | 10% | brak ryzyka prawnego i zależności od platform | zależność od regulaminów cudzych platform, dane wrażliwe |
 
+**Cel produktu:** Agregator ogłoszeń o pracę z tailoringiem CV: oferty z wielu źródeł trafiają do jednej skrzynki, są analizowane i rankowane, a pod wybraną ofertę powstaje dopasowana (prawdziwa) wersja CV.
+
 Punktem wyjścia jest MVP: profil z CV, oferty wklejane jako tekst, dopasowanie
 wymaganie po wymaganiu z cytatem z CV jako dowodem oraz prosty tracker aplikacji. Każdy z 100
-pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowanych.**
+pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowanych.** Część pomysłów
+spoza top 50 też jest gotowa (oznaczone ✅ w backlogu) — powstały przed doprecyzowaniem celu
+produktu albo jako naturalne uzupełnienie innych funkcji.
 
 ## Podsumowanie wg kategorii
 
@@ -39,111 +43,111 @@ pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowany
 
 | # | Pomysł | Kat. | Oceny | Wynik | Gdzie w kodzie |
 |---|---|---|---|---|---|
-| 1 | **#18** Detektor czerwonych flag w ofercie | B | W5 C4 K5 R5 Z5 | **96,0** | _do zrobienia_ |
-| 2 | **#5** Dopasowanie CV do oferty (tailoring) | A | W5 C5 K4 R5 Z5 | **95,0** | _do zrobienia_ |
-| 3 | **#28** Słownik synonimów i rodzin technologii | C | W5 C5 K5 R3 Z5 | **94,0** | _do zrobienia_ |
-| 4 | **#31** Ranking ofert: dopasowanie × preferencje | C | W5 C5 K5 R3 Z5 | **94,0** | _do zrobienia_ |
-| 5 | **#78** Wynik przed i po tailoringu | T | W5 C4 K5 R4 Z5 | **93,0** | _do zrobienia_ |
-| 6 | **#16** Deduplikacja ofert | B | W5 C5 K4 R4 Z5 | **92,0** | _do zrobienia_ |
-| 7 | **#49** Automatyczna analiza pobranych ofert | S | W5 C5 K4 R4 Z5 | **92,0** | _do zrobienia_ |
-| 8 | **#72** Skuteczność wg źródła i wersji CV | G | W5 C3 K5 R5 Z5 | **92,0** | _do zrobienia_ |
-| 9 | **#17** Normalizacja wynagrodzeń | B | W5 C4 K4 R5 Z5 | **91,0** | _do zrobienia_ |
-| 10 | **#68** Strażnik prawdomówności tailoringu | T | W5 C4 K4 R5 Z5 | **91,0** | _do zrobienia_ |
-| 11 | **#9** Konektor RSS/Atom | S | W5 C5 K4 R4 Z4 | **90,0** | _do zrobienia_ |
-| 12 | **#3** Warianty CV pod różne role | A | W5 C4 K5 R3 Z5 | **90,0** | _do zrobienia_ |
-| 13 | **#13** Parser struktury oferty | B | W5 C5 K4 R3 Z5 | **89,0** | _do zrobienia_ |
-| 14 | **#33** Zapisane wyszukiwania z alertami | C | W5 C5 K4 R3 Z5 | **89,0** | _do zrobienia_ |
-| 15 | **#48** Skrzynka nowych ofert | S | W5 C5 K4 R3 Z5 | **89,0** | _do zrobienia_ |
-| 16 | **#30** Luki kompetencyjne na tle rynku | C | W5 C3 K5 R4 Z5 | **89,0** | _do zrobienia_ |
-| 17 | **#24** Odrzucanie ofert z powodem | B | W4 C5 K5 R3 Z5 | **88,0** | _do zrobienia_ |
-| 18 | **#19** Wykrywanie ofert-oszustw | B | W5 C3 K4 R5 Z5 | **87,0** | _do zrobienia_ |
-| 19 | **#34** Wyjaśnienie wyniku dopasowania | C | W4 C4 K5 R4 Z5 | **87,0** | _do zrobienia_ |
-| 20 | **#53** Generator pytań rekrutacyjnych z oferty | E | W4 C4 K5 R4 Z5 | **87,0** | _do zrobienia_ |
-| 21 | **#42** List motywacyjny oparty na dowodach | D | W5 C4 K4 R4 Z4 | **86,0** | _do zrobienia_ |
-| 22 | **#67** Generator dopasowanego CV pod ofertę | T | W5 C4 K3 R5 Z5 | **86,0** | _do zrobienia_ |
-| 23 | **#4** Audyt CV pod ATS | A | W5 C3 K5 R3 Z5 | **86,0** | _do zrobienia_ |
-| 24 | **#27** Dopasowanie stopniowane | C | W4 C5 K4 R4 Z5 | **86,0** | _do zrobienia_ |
-| 25 | **#65** Statystyki widełek z zebranych ofert | F | W4 C3 K5 R5 Z5 | **86,0** | _do zrobienia_ |
-| 26 | **#83** Detektor prompt injection w ofertach | H | W4 C3 K5 R5 Z5 | **86,0** | _do zrobienia_ |
-| 27 | **#2** Automatyczna ekstrakcja umiejętności z CV | A | W5 C4 K4 R3 Z5 | **85,0** | _do zrobienia_ |
-| 28 | **#15** Harmonogram pobierania i stan źródeł | S | W5 C4 K4 R3 Z5 | **85,0** | _do zrobienia_ |
-| 29 | **#21** Wykrywanie trybu pracy i typu umowy | B | W4 C5 K5 R2 Z5 | **85,0** | _do zrobienia_ |
-| 30 | **#32** Twarde filtry deal-breakerów | C | W4 C5 K5 R2 Z5 | **85,0** | _do zrobienia_ |
-| 31 | **#73** Pulpit tygodniowy | G | W4 C5 K5 R2 Z5 | **85,0** | _do zrobienia_ |
-| 32 | **#44** Obserwowane strony kariery firm | S | W5 C4 K3 R5 Z4 | **84,0** | _do zrobienia_ |
-| 33 | **#41** Przypomnienia o follow-upie | D | W4 C4 K5 R3 Z5 | **84,0** | _do zrobienia_ |
-| 34 | **#60** Filtry na poziomie źródła | S | W4 C4 K5 R3 Z5 | **84,0** | _do zrobienia_ |
-| 35 | **#71** Lejek rekrutacyjny | G | W4 C4 K5 R3 Z5 | **84,0** | _do zrobienia_ |
-| 36 | **#69** Ostrzeżenie o stawce poniżej rynku | F | W4 C3 K5 R4 Z5 | **83,0** | _do zrobienia_ |
-| 37 | **#75** Trendy umiejętności w ofertach | G | W4 C3 K5 R4 Z5 | **83,0** | _do zrobienia_ |
-| 38 | **#82** Maskowanie danych osobowych przed AI | H | W4 C3 K5 R4 Z5 | **83,0** | _do zrobienia_ |
-| 39 | **#70** Kolejność punktów doświadczenia wg trafności | T | W4 C4 K4 R4 Z5 | **82,0** | _do zrobienia_ |
-| 40 | **#97** „Co dalej?” — następne kroki | I | W4 C4 K4 R4 Z5 | **82,0** | _do zrobienia_ |
-| 41 | **#22** Wygasanie ofert i archiwizacja | B | W4 C4 K5 R2 Z5 | **81,0** | _do zrobienia_ |
-| 42 | **#40** Oś czasu aplikacji | D | W4 C4 K5 R2 Z5 | **81,0** | _do zrobienia_ |
-| 43 | **#39** Tablica Kanban z przeciąganiem | D | W4 C5 K4 R2 Z5 | **80,0** | _do zrobienia_ |
-| 44 | **#61** Wyszukiwarka pełnotekstowa | C | W4 C5 K4 R2 Z5 | **80,0** | _do zrobienia_ |
-| 45 | **#87** Dostępność WCAG 2.2 AA | H | W4 C5 K4 R2 Z5 | **80,0** | _do zrobienia_ |
-| 46 | **#63** Kalkulator netto UoP, B2B, zlecenie | F | W4 C4 K4 R4 Z4 | **80,0** | _do zrobienia_ |
-| 47 | **#47** Ostrzeżenie o ponownej aplikacji | D | W4 C3 K5 R3 Z5 | **80,0** | _do zrobienia_ |
-| 48 | **#94** Biblioteka dopasowanych CV | T | W4 C3 K5 R3 Z5 | **80,0** | _do zrobienia_ |
-| 49 | **#36** Podobne oferty | C | W4 C4 K4 R3 Z5 | **79,0** | _do zrobienia_ |
-| 50 | **#8** Wykrywanie zbędnych danych wrażliwych w CV | A | W4 C2 K5 R4 Z5 | **79,0** | _do zrobienia_ |
+| 1 | **#18** Detektor czerwonych flag w ofercie | B | W5 C4 K5 R5 Z5 | **96,0** | `offer/analysis/RedFlagDetector` · `GET /api/offers/{id}/analysis` · Oferta → Analiza ogłoszenia |
+| 2 | **#5** Dopasowanie CV do oferty (tailoring) | A | W5 C5 K4 R5 Z5 | **95,0** | `profile/cv/CvTailoringService` · `GET /api/offers/{id}/tailoring` · Oferta → „Dopasuj CV do tej oferty” |
+| 3 | **#28** Słownik synonimów i rodzin technologii | C | W5 C5 K5 R3 Z5 | **94,0** | `skills/SkillDictionary` + `resources/skills/slownik.json` (~160 umiejętności) |
+| 4 | **#31** Ranking ofert: dopasowanie × preferencje | C | W5 C5 K5 R3 Z5 | **94,0** | `matching/ranking/RankingScorer`, `RankingWeights` · `GET /api/ranking` · Oferty, skrzynka agregatora |
+| 5 | **#78** Wynik przed i po tailoringu | T | W5 C4 K5 R4 Z5 | **93,0** | `tailoring/ScoreComparison` · podgląd tailoringu · Tailoring CV → Kontrola |
+| 6 | **#16** Deduplikacja ofert | B | W5 C5 K4 R4 Z5 | **92,0** | `offer/analysis/DuplicateDetector` + `aggregator/DedupKeys` · `GET /api/offers/{id}/duplicates`, `POST /api/offers/duplicates/check`, `POST …/mark-duplicate` · Oferta → Analiza ogłoszenia |
+| 7 | **#49** Automatyczna analiza pobranych ofert | S | W5 C5 K4 R4 Z5 | **92,0** | `aggregator/OfferAnalyzer`, `OfferTextAnalyzer` · przy każdym pobraniu źródła |
+| 8 | **#72** Skuteczność wg źródła i wersji CV | G | W5 C3 K5 R5 Z5 | **92,0** | `analytics` (źródła i wersje CV, test istotności) · `GET /api/analytics/effectiveness` · Analityka |
+| 9 | **#17** Normalizacja wynagrodzeń | B | W5 C4 K4 R5 Z5 | **91,0** | `salary/SalaryParser`, `SalaryNormalizer` · `GET /api/offers/{id}/salary`, `POST /api/salary/parse` · Oferta → Wynagrodzenie |
+| 10 | **#68** Strażnik prawdomówności tailoringu | T | W5 C4 K4 R5 Z5 | **91,0** | `tailoring/TruthGuard`, `GuardReport` · `POST /api/tailoring/check` · Tailoring CV → Kontrola |
+| 11 | **#9** Konektor RSS/Atom | S | W5 C5 K4 R4 Z4 | **90,0** | `aggregator/FeedParser` (RSS 2.0/1.0, Atom, ochrona XXE) · `/api/aggregator/sources` · Agregator → Źródła |
+| 12 | **#3** Warianty CV pod różne role | A | W5 C4 K5 R3 Z5 | **90,0** | `profile/CvVariant`, `ProfileService` · `/api/cv`, `/api/cv/{id}/activate` · Profil → Wersje CV |
+| 13 | **#13** Parser struktury oferty | B | W5 C5 K4 R3 Z5 | **89,0** | `offer/analysis/OfferTextParser` · `POST /api/offers/parse` · Nowa oferta → Wklej treść |
+| 14 | **#33** Zapisane wyszukiwania z alertami | C | W5 C5 K4 R3 Z5 | **89,0** | `matching/ranking/SavedSearch` · `/api/saved-searches`, `…/results`, `…/mark-seen` · Oferty → Zapisane wyszukiwania |
+| 15 | **#48** Skrzynka nowych ofert | S | W5 C5 K4 R3 Z5 | **89,0** | `aggregator/InboxService` (ranking z modułu dopasowania) · `GET /api/aggregator/inbox`, `POST …/inbox/seen` · Agregator → Skrzynka |
+| 16 | **#30** Luki kompetencyjne na tle rynku | C | W5 C3 K5 R4 Z5 | **89,0** | `analytics` (symulacja „ile ofert odblokuje nauka”) · `GET /api/analytics/skill-gaps` · Analityka |
+| 17 | **#24** Odrzucanie ofert z powodem | B | W4 C5 K5 R3 Z5 | **88,0** | `offer/analysis/OfferAnalysisController` · `POST /api/offers/{id}/reject` · Oferta → Odrzuć |
+| 18 | **#19** Wykrywanie ofert-oszustw | B | W5 C3 K4 R5 Z5 | **87,0** | `offer/analysis/ScamDetector` · `GET /api/offers/{id}/analysis` · Oferta → Analiza ogłoszenia |
+| 19 | **#34** Wyjaśnienie wyniku dopasowania | C | W4 C4 K5 R4 Z5 | **87,0** | `matching/MatchService#explanation` · `GET /api/offers/{id}/match` · Oferta → „Dlaczego N%?” |
+| 20 | **#53** Generator pytań rekrutacyjnych z oferty | E | W4 C4 K5 R4 Z5 | **87,0** | `interview/InterviewQuestionService` + `resources/interview/pytania.json` · `GET /api/offers/{id}/interview-questions` · Oferta → Pytania, które mogą paść |
+| 21 | **#42** List motywacyjny oparty na dowodach | D | W5 C4 K4 R4 Z4 | **86,0** | `application/letter` (cytaty z CV, AI opcjonalnie) · `POST /api/cover-letters` · Oferta → Aplikacja, Aplikacja → List |
+| 22 | **#67** Generator dopasowanego CV pod ofertę | T | W5 C4 K3 R5 Z5 | **86,0** | `tailoring/CvTailor`, `CvStructureParser`, `AiTailor` · `POST /api/tailoring/preview`, `POST /api/tailoring` · Tailoring CV → oferta |
+| 23 | **#4** Audyt CV pod ATS | A | W5 C3 K5 R3 Z5 | **86,0** | `profile/cv/CvAuditService` · `GET /api/cv/{id}/audit` · Profil → Audyt ATS |
+| 24 | **#27** Dopasowanie stopniowane | C | W4 C5 K4 R4 Z5 | **86,0** | `matching/MatchService` (lata, poziom CEFR, rodziny technologii) · `GET /api/offers/{id}/match` |
+| 25 | **#65** Statystyki widełek z zebranych ofert | F | W4 C3 K5 R5 Z5 | **86,0** | `salary/tools/SalaryStatsService` (bez duplikatów i oszustw) · `GET /api/salary/stats` · Wynagrodzenia → Rynek |
+| 26 | **#83** Detektor prompt injection w ofertach | H | W4 C3 K5 R5 Z5 | **86,0** | `aggregator/InjectionDetector` · `GET /api/aggregator/offers/{id}/signals` · Agregator → Skrzynka (ostrzeżenie) |
+| 27 | **#2** Automatyczna ekstrakcja umiejętności z CV | A | W5 C4 K4 R3 Z5 | **85,0** | `profile/cv/CvSkillExtractor` · `GET /api/cv/{id}/skills`, `POST …/skills/apply` · Profil → Umiejętności z CV |
+| 28 | **#15** Harmonogram pobierania i stan źródeł | S | W5 C4 K4 R3 Z5 | **85,0** | `aggregator/AggregatorScheduler`, `AggregatorRun` · `POST /api/aggregator/sources/{id}/run`, `/run-all`, `GET /runs` · Agregator → Historia pobrań |
+| 29 | **#21** Wykrywanie trybu pracy i typu umowy | B | W4 C5 K5 R2 Z5 | **85,0** | `offer/analysis/EmploymentTermsDetector` (też w agregatorze) · `POST /api/offers/parse` |
+| 30 | **#32** Twarde filtry deal-breakerów | C | W4 C5 K5 R2 Z5 | **85,0** | `matching/ranking/DealBreakerFilter` · `GET /api/ranking?includeExcluded=` · Oferty → „Pokaż wykluczone” |
+| 31 | **#73** Pulpit tygodniowy | G | W4 C5 K5 R2 Z5 | **85,0** | `analytics` · `GET /api/analytics/dashboard` · Pulpit |
+| 32 | **#44** Obserwowane strony kariery firm | S | W5 C4 K3 R5 Z4 | **84,0** | `aggregator/JsonLdExtractor`, `SafeHttpFetcher`, `RobotsTxt`, `HostThrottle` · źródło typu JSONLD_PAGE · Agregator → Źródła |
+| 33 | **#41** Przypomnienia o follow-upie | D | W4 C4 K5 R3 Z5 | **84,0** | `application/FollowUpPolicy` · `GET /api/applications/follow-ups`, `POST …/follow-up`, `…/snooze` · Aplikacje → Follow-upy |
+| 34 | **#60** Filtry na poziomie źródła | S | W4 C4 K5 R3 Z5 | **84,0** | `aggregator/SourceFilter` · filtry w formularzu źródła · Agregator → Źródła |
+| 35 | **#71** Lejek rekrutacyjny | G | W4 C4 K5 R3 Z5 | **84,0** | `analytics` (lejek) · `GET /api/analytics/funnel` · Analityka |
+| 36 | **#69** Ostrzeżenie o stawce poniżej rynku | F | W4 C3 K5 R4 Z5 | **83,0** | `salary/tools/SalaryBenchmarkService` · `GET /api/offers/{id}/salary-benchmark` · Oferta → panel wynagrodzenia |
+| 37 | **#75** Trendy umiejętności w ofertach | G | W4 C3 K5 R4 Z5 | **83,0** | `analytics` · `GET /api/analytics/skill-trends` · Analityka |
+| 38 | **#82** Maskowanie danych osobowych przed AI | H | W4 C3 K5 R4 Z5 | **83,0** | `ai/PiiMasker` · `POST /api/ai/mask-preview` · używane przed każdym wywołaniem AI |
+| 39 | **#70** Kolejność punktów doświadczenia wg trafności | T | W4 C4 K4 R4 Z5 | **82,0** | `tailoring/RelevanceScorer` · opcje „zwiń nieistotne”, limit punktów · Tailoring CV |
+| 40 | **#97** „Co dalej?” — następne kroki | I | W4 C4 K4 R4 Z5 | **82,0** | `analytics/NextActionRules` · `GET /api/analytics/next-actions` · Pulpit → Co dalej? |
+| 41 | **#22** Wygasanie ofert i archiwizacja | B | W4 C4 K5 R2 Z5 | **81,0** | `aggregator/ArchiveService` · `POST /api/aggregator/archive-expired` + harmonogram |
+| 42 | **#40** Oś czasu aplikacji | D | W4 C4 K5 R2 Z5 | **81,0** | `application/timeline` · `GET /api/applications/{id}/timeline` · Aplikacja → Oś czasu |
+| 43 | **#39** Tablica Kanban z przeciąganiem | D | W4 C5 K4 R2 Z5 | **80,0** | `application/BoardOrder` · `POST /api/applications/{id}/move` · Aplikacje → Tablica (przeciąganie + menu klawiaturowe) |
+| 44 | **#61** Wyszukiwarka pełnotekstowa | C | W4 C5 K4 R2 Z5 | **80,0** | `aggregator/Bm25Search` (BM25F, frazy, wykluczenia, aliasy) · `GET /api/aggregator/search` · Agregator → Szukaj |
+| 45 | **#87** Dostępność WCAG 2.2 AA | H | W4 C5 K4 R2 Z5 | **80,0** | cały frontend: etykiety, fokus, `aria-live`, zakładki ARIA, alternatywa klawiaturowa dla Kanban, wydruk; audyt axe-core bez naruszeń |
+| 46 | **#63** Kalkulator netto UoP, B2B, zlecenie | F | W4 C4 K4 R4 Z4 | **80,0** | `salary/tools/NetSalaryCalculator`, `TaxParameters2026` · `POST /api/salary/net` · Wynagrodzenia → Kalkulator |
+| 47 | **#47** Ostrzeżenie o ponownej aplikacji | D | W4 C3 K5 R3 Z5 | **80,0** | `application/history/CompanyNames` · `GET /api/applications/check` · Oferta → Aplikacja (ostrzeżenie) |
+| 48 | **#94** Biblioteka dopasowanych CV | T | W4 C3 K5 R3 Z5 | **80,0** | `tailoring/TailoredCv` · `GET /api/tailoring`, `DELETE /api/tailoring/{id}` · Tailoring CV → Biblioteka |
+| 49 | **#36** Podobne oferty | C | W4 C4 K4 R3 Z5 | **79,0** | `matching/ranking/TfIdfIndex`, `SimilarOffersService` · `GET /api/offers/{id}/similar` · Oferta → Podobne oferty |
+| 50 | **#8** Wykrywanie zbędnych danych wrażliwych w CV | A | W4 C2 K5 R4 Z5 | **79,0** | `profile/cv/SensitiveDataDetector` · `GET /api/cv/{id}/sensitive` · Profil → Dane wrażliwe |
 
 ## Ranking — miejsca 51–100 (backlog)
 
-| # | Pomysł | Kat. | Oceny | Wynik |
-|---|---|---|---|---|
-| 51 | #14 Import oferty z adresu URL | B | W5 C5 K3 R3 Z2 | 78,0 |
-| 52 | #1 Import CV z PDF i DOCX | A | W5 C3 K4 R2 Z5 | 78,0 |
-| 53 | #54 Ocena odpowiedzi metodą STAR | E | W4 C3 K4 R4 Z5 | 78,0 |
-| 54 | #64 Porównywarka ofert | F | W4 C3 K4 R4 Z5 | 78,0 |
-| 55 | #88 Tailoring wsadowy | T | W4 C3 K4 R4 Z5 | 78,0 |
-| 56 | #59 Bookmarklet „zapisz ofertę” | S | W4 C4 K4 R3 Z4 | 77,0 |
-| 57 | #74 Podsumowanie zawodowe pod ofertę | T | W4 C4 K4 R3 Z4 | 77,0 |
-| 58 | #35 Uczenie preferencji z ocen | C | W4 C4 K3 R4 Z5 | 77,0 |
-| 59 | #56 Bank historii STAR | E | W3 C3 K5 R4 Z5 | 77,0 |
-| 60 | #46 Snapshot wysłanych dokumentów | D | W4 C2 K5 R3 Z5 | 76,0 |
-| 61 | #79 Raport aktywności poszukiwania pracy | G | W3 C2 K5 R5 Z5 | 76,0 |
-| 62 | #51 Rozszerzenie przeglądarki „zapisz ofertę” | D | W5 C5 K2 R3 Z3 | 75,0 |
-| 63 | #91 Powiadomienia w przeglądarce i e-mail | I | W5 C4 K3 R2 Z4 | 75,0 |
-| 64 | #26 Gotowe konektory publicznych API ofert | S | W4 C4 K4 R3 Z3 | 75,0 |
-| 65 | #10 Konektor JSON API z mapowaniem pól | S | W4 C4 K3 R4 Z4 | 75,0 |
-| 66 | #77 Porównanie wersji dopasowanej z bazową | T | W4 C3 K4 R3 Z5 | 75,0 |
-| 67 | #95 Słowa kluczowe ATS w dopasowanym CV | T | W4 C3 K4 R3 Z5 | 75,0 |
-| 68 | #20 Klasyfikacja poziomu stanowiska | B | W3 C4 K5 R2 Z5 | 75,0 |
-| 69 | #96 Interfejs PL/EN | I | W3 C5 K4 R2 Z5 | 74,0 |
-| 70 | #29 Edytowalne wagi wymagań | C | W3 C3 K5 R3 Z5 | 74,0 |
-| 71 | #62 Debrief po rozmowie | E | W3 C3 K5 R3 Z5 | 74,0 |
-| 72 | #100 Pakiet aplikacyjny jednym kliknięciem | T | W4 C3 K4 R3 Z4 | 73,0 |
-| 73 | #80 Bank osiągnięć | T | W4 C3 K3 R4 Z5 | 73,0 |
-| 74 | #81 Dziennik wywołań AI | H | W3 C2 K5 R4 Z5 | 73,0 |
-| 75 | #50 Automatyczne statusy z poczty | D | W5 C4 K2 R4 Z2 | 72,0 |
-| 76 | #85 Eksport dopasowanego CV do DOCX | T | W4 C3 K4 R2 Z5 | 72,0 |
-| 77 | #84 Eksport, import i usunięcie danych | H | W4 C1 K5 R3 Z5 | 72,0 |
-| 78 | #23 Tagi i notatki przy ofertach | B | W3 C4 K5 R1 Z5 | 72,0 |
-| 79 | #90 PWA na telefon | I | W4 C4 K3 R2 Z5 | 71,0 |
-| 80 | #58 Import alertów e-mail z portali | S | W4 C3 K3 R4 Z4 | 71,0 |
-| 81 | #93 Przepisywanie punktów na „działanie + efekt + liczba” | T | W4 C3 K3 R4 Z4 | 71,0 |
-| 82 | #43 Szablony wiadomości | D | W3 C3 K5 R2 Z5 | 71,0 |
-| 83 | #45 Kalendarz rozmów z eksportem .ics | D | W3 C3 K5 R2 Z5 | 71,0 |
-| 84 | #52 Notatki z rozmów | D | W3 C3 K5 R2 Z5 | 71,0 |
-| 85 | #76 Dziennik samopoczucia | G | W2 C3 K5 R4 Z5 | 71,0 |
-| 86 | #38 Dopasowanie semantyczne przez AI | C | W4 C4 K3 R3 Z3 | 70,0 |
-| 87 | #7 Klauzula RODO w CV | A | W3 C2 K5 R3 Z5 | 70,0 |
-| 88 | #66 Asystent negocjacji | F | W3 C2 K5 R3 Z5 | 70,0 |
-| 89 | #55 Symulator rozmowy z AI | E | W4 C3 K3 R4 Z3 | 69,0 |
-| 90 | #25 Profile firm | B | W3 C3 K4 R3 Z5 | 69,0 |
-| 91 | #57 Etykieta pobierania | S | W3 C3 K4 R3 Z5 | 69,0 |
-| 92 | #12 Historia wersji CV z porównaniem | A | W3 C2 K4 R3 Z5 | 65,0 |
-| 93 | #98 Profile tailoringu per rola | T | W3 C2 K4 R3 Z5 | 65,0 |
-| 94 | #6 Eksport CV do PDF z szablonu | A | W4 C2 K3 R2 Z5 | 63,0 |
-| 95 | #37 Role sąsiednie i ścieżki zmiany kariery | C | W3 C2 K3 R4 Z5 | 63,0 |
-| 96 | #92 Docker Compose z PostgreSQL | I | W3 C1 K5 R1 Z5 | 60,0 |
-| 97 | #99 Dane demonstracyjne i reset | I | W3 C1 K5 R1 Z5 | 60,0 |
-| 98 | #86 Konta użytkowników i logowanie | H | W3 C5 K2 R1 Z4 | 59,0 |
-| 99 | #89 Dokumentacja API (OpenAPI) | I | W2 C1 K5 R1 Z5 | 54,0 |
-| 100 | #11 Tłumaczenie CV PL↔EN przez AI | A | W3 C2 K3 R2 Z3 | 53,0 |
+| # | Pomysł | Kat. | Oceny | Wynik | Stan |
+|---|---|---|---|---|---|
+| 51 | #14 Import oferty z adresu URL | B | W5 C5 K3 R3 Z2 | 78,0 | ✅ `offer/analysis/OfferImporter`, `UrlGuard` (SSRF), `JobPostingExtractor` · `POST /api/offers/import-url` · Nowa oferta → Z adresu URL |
+| 52 | #1 Import CV z PDF i DOCX | A | W5 C3 K4 R2 Z5 | 78,0 | ✅ `profile/cv` · `POST /api/cv/import` · Profil → Narzędzia CV → Import |
+| 53 | #54 Ocena odpowiedzi metodą STAR | E | W4 C3 K4 R4 Z5 | 78,0 | ✅ `interview/StarAnalyzer` · `POST /api/interview-practice/assess` · Rozmowy → Trening odpowiedzi |
+| 54 | #64 Porównywarka ofert | F | W4 C3 K4 R4 Z5 | 78,0 | ✅ `salary/tools/OfferComparisonService` · `POST /api/salary/compare` · Wynagrodzenia → Porównanie |
+| 55 | #88 Tailoring wsadowy | T | W4 C3 K4 R4 Z5 | 78,0 | — |
+| 56 | #59 Bookmarklet „zapisz ofertę” | S | W4 C4 K4 R3 Z4 | 77,0 | — |
+| 57 | #74 Podsumowanie zawodowe pod ofertę | T | W4 C4 K4 R3 Z4 | 77,0 | — |
+| 58 | #35 Uczenie preferencji z ocen | C | W4 C4 K3 R4 Z5 | 77,0 | ✅ `matching/ranking/PreferenceLearner` · `GET /api/ranking/preferences` · Oferty → Twoje preferencje |
+| 59 | #56 Bank historii STAR | E | W3 C3 K5 R4 Z5 | 77,0 | ✅ `interview/StarStory` · `/api/star-stories`, `…/suggest` · Rozmowy → Bank historii STAR |
+| 60 | #46 Snapshot wysłanych dokumentów | D | W4 C2 K5 R3 Z5 | 76,0 | ✅ `application/snapshot` · `GET/POST /api/applications/{id}/snapshot` · Aplikacja → Co wysłano |
+| 61 | #79 Raport aktywności poszukiwania pracy | G | W3 C2 K5 R5 Z5 | 76,0 | ✅ `analytics` · `GET /api/analytics/report`, `/report.csv` · Raport (druk / PDF / CSV) |
+| 62 | #51 Rozszerzenie przeglądarki „zapisz ofertę” | D | W5 C5 K2 R3 Z3 | 75,0 | — |
+| 63 | #91 Powiadomienia w przeglądarce i e-mail | I | W5 C4 K3 R2 Z4 | 75,0 | — |
+| 64 | #26 Gotowe konektory publicznych API ofert | S | W4 C4 K4 R3 Z3 | 75,0 | — |
+| 65 | #10 Konektor JSON API z mapowaniem pól | S | W4 C4 K3 R4 Z4 | 75,0 | — |
+| 66 | #77 Porównanie wersji dopasowanej z bazową | T | W4 C3 K4 R3 Z5 | 75,0 | ✅ `tailoring/LineDiff` · Tailoring CV → Zmiany |
+| 67 | #95 Słowa kluczowe ATS w dopasowanym CV | T | W4 C3 K4 R3 Z5 | 75,0 | — |
+| 68 | #20 Klasyfikacja poziomu stanowiska | B | W3 C4 K5 R2 Z5 | 75,0 | — |
+| 69 | #96 Interfejs PL/EN | I | W3 C5 K4 R2 Z5 | 74,0 | — |
+| 70 | #29 Edytowalne wagi wymagań | C | W3 C3 K5 R3 Z5 | 74,0 | — |
+| 71 | #62 Debrief po rozmowie | E | W3 C3 K5 R3 Z5 | 74,0 | ✅ `interview` (debrief) · `PUT /api/interviews/{id}/debrief`, `GET /api/interview-insights` · Rozmowy → Podsumowania |
+| 72 | #100 Pakiet aplikacyjny jednym kliknięciem | T | W4 C3 K4 R3 Z4 | 73,0 | — |
+| 73 | #80 Bank osiągnięć | T | W4 C3 K3 R4 Z5 | 73,0 | — |
+| 74 | #81 Dziennik wywołań AI | H | W3 C2 K5 R4 Z5 | 73,0 | — |
+| 75 | #50 Automatyczne statusy z poczty | D | W5 C4 K2 R4 Z2 | 72,0 | — |
+| 76 | #85 Eksport dopasowanego CV do DOCX | T | W4 C3 K4 R2 Z5 | 72,0 | ✅ `tailoring/DocxExporter` · `GET /api/tailoring/{id}/docx` · Tailoring CV → Pobierz DOCX |
+| 77 | #84 Eksport, import i usunięcie danych | H | W4 C1 K5 R3 Z5 | 72,0 | — |
+| 78 | #23 Tagi i notatki przy ofertach | B | W3 C4 K5 R1 Z5 | 72,0 | — |
+| 79 | #90 PWA na telefon | I | W4 C4 K3 R2 Z5 | 71,0 | — |
+| 80 | #58 Import alertów e-mail z portali | S | W4 C3 K3 R4 Z4 | 71,0 | — |
+| 81 | #93 Przepisywanie punktów na „działanie + efekt + liczba” | T | W4 C3 K3 R4 Z4 | 71,0 | — |
+| 82 | #43 Szablony wiadomości | D | W3 C3 K5 R2 Z5 | 71,0 | ✅ `application/messages` · `GET /api/message-templates`, `POST /api/applications/{id}/messages` · Aplikacja → Wiadomości |
+| 83 | #45 Kalendarz rozmów z eksportem .ics | D | W3 C3 K5 R2 Z5 | 71,0 | ✅ `application/calendar/IcsWriter` · `GET /api/interviews/{id}/ics`, `/api/interviews/calendar.ics` · Aplikacja → Rozmowy |
+| 84 | #52 Notatki z rozmów | D | W3 C3 K5 R2 Z5 | 71,0 | ✅ `application/Interview` (notatki, pytania) · Aplikacja → Rozmowy → formularz |
+| 85 | #76 Dziennik samopoczucia | G | W2 C3 K5 R4 Z5 | 71,0 | ✅ `analytics/MoodEntry` · `/api/mood` · Pulpit, Analityka |
+| 86 | #38 Dopasowanie semantyczne przez AI | C | W4 C4 K3 R3 Z3 | 70,0 | — |
+| 87 | #7 Klauzula RODO w CV | A | W3 C2 K5 R3 Z5 | 70,0 | — |
+| 88 | #66 Asystent negocjacji | F | W3 C2 K5 R3 Z5 | 70,0 | ✅ `salary/tools/NegotiationService` · `GET /api/offers/{id}/negotiation` · Wynagrodzenia → Negocjacje |
+| 89 | #55 Symulator rozmowy z AI | E | W4 C3 K3 R4 Z3 | 69,0 | — |
+| 90 | #25 Profile firm | B | W3 C3 K4 R3 Z5 | 69,0 | — |
+| 91 | #57 Etykieta pobierania | S | W3 C3 K4 R3 Z5 | 69,0 | — |
+| 92 | #12 Historia wersji CV z porównaniem | A | W3 C2 K4 R3 Z5 | 65,0 | — |
+| 93 | #98 Profile tailoringu per rola | T | W3 C2 K4 R3 Z5 | 65,0 | — |
+| 94 | #6 Eksport CV do PDF z szablonu | A | W4 C2 K3 R2 Z5 | 63,0 | — |
+| 95 | #37 Role sąsiednie i ścieżki zmiany kariery | C | W3 C2 K3 R4 Z5 | 63,0 | — |
+| 96 | #92 Docker Compose z PostgreSQL | I | W3 C1 K5 R1 Z5 | 60,0 | — |
+| 97 | #99 Dane demonstracyjne i reset | I | W3 C1 K5 R1 Z5 | 60,0 | — |
+| 98 | #86 Konta użytkowników i logowanie | H | W3 C5 K2 R1 Z4 | 59,0 | — |
+| 99 | #89 Dokumentacja API (OpenAPI) | I | W2 C1 K5 R1 Z5 | 54,0 | — |
+| 100 | #11 Tłumaczenie CV PL↔EN przez AI | A | W3 C2 K3 R2 Z3 | 53,0 | — |
 
 ## Karty pomysłów
 
@@ -167,10 +171,10 @@ pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowany
 - ✅ **#68. Strażnik prawdomówności tailoringu** — Każda umiejętność i fakt w dopasowanym CV musi wynikać z CV bazowego lub profilu; nowe twierdzenia są blokowane albo jawnie oznaczane. _(W5 C4 K4 R5 Z5 → 91,0, miejsce 10)_
 - ✅ **#70. Kolejność punktów doświadczenia wg trafności** — Punkty w każdym stanowisku sortowane wg pokrycia wymagań oferty; nieistotne można zwinąć. _(W4 C4 K4 R4 Z5 → 82,0, miejsce 39)_
 - ⬜ **#74. Podsumowanie zawodowe pod ofertę** — Krótkie podsumowanie na górze CV zbudowane z rzeczywistych umiejętności pasujących do oferty (szablon offline, AI opcjonalnie). _(W4 C4 K4 R3 Z4 → 77,0, miejsce 57)_
-- ⬜ **#77. Porównanie wersji dopasowanej z bazową** — Widok różnic: co dodano, co przesunięto, co ukryto — przed zapisem i wysłaniem. _(W4 C3 K4 R3 Z5 → 75,0, miejsce 66)_
+- ✅ **#77. Porównanie wersji dopasowanej z bazową** — Widok różnic: co dodano, co przesunięto, co ukryto — przed zapisem i wysłaniem. _(W4 C3 K4 R3 Z5 → 75,0, miejsce 66)_
 - ✅ **#78. Wynik przed i po tailoringu** — Dopasowanie oferty liczone dla CV bazowego i dopasowanego, z listą wymagań, które zyskały dowód. _(W5 C4 K5 R4 Z5 → 93,0, miejsce 5)_
 - ⬜ **#80. Bank osiągnięć** — Zbiór punktów i osiągnięć (z tagami umiejętności), z których tailoring dobiera najlepsze pod ofertę. _(W4 C3 K3 R4 Z5 → 73,0, miejsce 73)_
-- ⬜ **#85. Eksport dopasowanego CV do DOCX** — Plik Word z dopasowaną wersją CV, gotowy do wysłania lub dalszej edycji. _(W4 C3 K4 R2 Z5 → 72,0, miejsce 76)_
+- ✅ **#85. Eksport dopasowanego CV do DOCX** — Plik Word z dopasowaną wersją CV, gotowy do wysłania lub dalszej edycji. _(W4 C3 K4 R2 Z5 → 72,0, miejsce 76)_
 - ⬜ **#88. Tailoring wsadowy** — Dopasowane wersje CV dla kilku najlepszych ofert ze skrzynki jednym poleceniem. _(W4 C3 K4 R4 Z5 → 78,0, miejsce 55)_
 - ⬜ **#93. Przepisywanie punktów na „działanie + efekt + liczba”** — Podpowiedzi offline (brak czasownika, brak liczby) i opcjonalna redakcja AI bez dodawania faktów. _(W4 C3 K3 R4 Z4 → 71,0, miejsce 81)_
 - ✅ **#94. Biblioteka dopasowanych CV** — Lista wersji dopasowanych do ofert z powiązaniem: oferta → wersja CV → aplikacja. _(W4 C3 K5 R3 Z5 → 80,0, miejsce 48)_
@@ -181,7 +185,7 @@ pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowany
 ### B. Analiza i jakość ofert
 
 - ✅ **#13. Parser struktury oferty** — Z wklejonego tekstu: stanowisko, firma, lokalizacja, widełki, wymagania obowiązkowe i mile widziane. _(W5 C5 K4 R3 Z5 → 89,0, miejsce 13)_
-- ⬜ **#14. Import oferty z adresu URL** — Pobranie strony ogłoszenia na żądanie użytkownika i ekstrakcja treści do parsera. _(W5 C5 K3 R3 Z2 → 78,0, miejsce 51)_
+- ✅ **#14. Import oferty z adresu URL** — Pobranie strony ogłoszenia na żądanie użytkownika i ekstrakcja treści do parsera. _(W5 C5 K3 R3 Z2 → 78,0, miejsce 51)_
 - ✅ **#16. Deduplikacja ofert** — Wykrywanie tej samej oferty opublikowanej w kilku źródłach (podobieństwo tytułu, firmy i treści). _(W5 C5 K4 R4 Z5 → 92,0, miejsce 6)_
 - ✅ **#17. Normalizacja wynagrodzeń** — Sprowadzenie widełek godzinowych, dziennych, miesięcznych i rocznych, brutto, netto i B2B do wspólnej miary miesięcznej. _(W5 C4 K4 R5 Z5 → 91,0, miejsce 9)_
 - ✅ **#18. Detektor czerwonych flag w ofercie** — Brak widełek, nieodpłatny okres próbny, umowa o dzieło na stałą pracę, „rodzinna atmosfera” i inne sygnały ostrzegawcze z uzasadnieniem. _(W5 C4 K5 R5 Z5 → 96,0, miejsce 1)_
@@ -203,7 +207,7 @@ pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowany
 - ✅ **#32. Twarde filtry deal-breakerów** — Wykluczenie ofert z wykluczającymi warunkami (np. tylko praca w biurze, wynagrodzenie poniżej minimum, słowa zakazane). _(W4 C5 K5 R2 Z5 → 85,0, miejsce 30)_
 - ✅ **#33. Zapisane wyszukiwania z alertami** — Zapis filtrów i licznik nowych ofert spełniających kryteria od ostatniego sprawdzenia. _(W5 C5 K4 R3 Z5 → 89,0, miejsce 14)_
 - ✅ **#34. Wyjaśnienie wyniku dopasowania** — „Dlaczego 72%”: wkład każdego wymagania w punktach, z cytatem z CV jako dowodem. _(W4 C4 K5 R4 Z5 → 87,0, miejsce 19)_
-- ⬜ **#35. Uczenie preferencji z ocen** — Polubione i odrzucone oferty korygują wagi cech w rankingu (np. technologie, tryb pracy). _(W4 C4 K3 R4 Z5 → 77,0, miejsce 58)_
+- ✅ **#35. Uczenie preferencji z ocen** — Polubione i odrzucone oferty korygują wagi cech w rankingu (np. technologie, tryb pracy). _(W4 C4 K3 R4 Z5 → 77,0, miejsce 58)_
 - ✅ **#36. Podobne oferty** — TF-IDF i podobieństwo cosinusowe — „więcej takich ofert”. _(W4 C4 K4 R3 Z5 → 79,0, miejsce 49)_
 - ⬜ **#37. Role sąsiednie i ścieżki zmiany kariery** — Podpowiedzi stanowisk o dużym pokryciu umiejętności (np. QA → SDET). _(W3 C2 K3 R4 Z5 → 63,0, miejsce 95)_
 - ⬜ **#38. Dopasowanie semantyczne przez AI** — Druga opinia modelu językowego dla wymagań, których nie rozpoznał słownik. _(W4 C4 K3 R3 Z3 → 70,0, miejsce 86)_
@@ -211,7 +215,7 @@ pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowany
 
 ### A. Profil i baza CV
 
-- ⬜ **#1. Import CV z PDF i DOCX** — Wgranie pliku CV, ekstrakcja tekstu (PDFBox, Apache POI) i zapis jako nowa wersja CV. _(W5 C3 K4 R2 Z5 → 78,0, miejsce 52)_
+- ✅ **#1. Import CV z PDF i DOCX** — Wgranie pliku CV, ekstrakcja tekstu (PDFBox, Apache POI) i zapis jako nowa wersja CV. _(W5 C3 K4 R2 Z5 → 78,0, miejsce 52)_
 - ✅ **#2. Automatyczna ekstrakcja umiejętności z CV** — Słownik technologii i kompetencji z synonimami rozpoznaje umiejętności w CV i proponuje je do profilu, z latami doświadczenia, jeśli są w tekście. _(W5 C4 K4 R3 Z5 → 85,0, miejsce 27)_
 - ✅ **#3. Warianty CV pod różne role** — Kilka wersji CV (np. Backend, Fullstack) z wyborem aktywnej; dopasowanie liczy się względem wybranej wersji. _(W5 C4 K5 R3 Z5 → 90,0, miejsce 12)_
 - ✅ **#4. Audyt CV pod ATS** — Kontrola sekcji, długości, danych kontaktowych, czasowników akcji i mierzalnych efektów; wynik 0–100 z listą poprawek. _(W5 C3 K5 R3 Z5 → 86,0, miejsce 23)_
@@ -228,28 +232,28 @@ pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowany
 - ✅ **#40. Oś czasu aplikacji** — Historia zmian statusów, rozmów, wiadomości i notatek w jednym widoku. _(W4 C4 K5 R2 Z5 → 81,0, miejsce 42)_
 - ✅ **#41. Przypomnienia o follow-upie** — Automatyczny termin kontaktu (np. 7 dni bez odpowiedzi) i lista zaległych follow-upów. _(W4 C4 K5 R3 Z5 → 84,0, miejsce 33)_
 - ✅ **#42. List motywacyjny oparty na dowodach** — List budowany z cytatów CV dopasowanych do wymagań oferty; tryb offline z szablonu i opcjonalnie AI. _(W5 C4 K4 R4 Z4 → 86,0, miejsce 21)_
-- ⬜ **#43. Szablony wiadomości** — Follow-up, podziękowanie po rozmowie, prośba o informację zwrotną, odmowa i przyjęcie oferty — z podstawieniem danych. _(W3 C3 K5 R2 Z5 → 71,0, miejsce 82)_
-- ⬜ **#45. Kalendarz rozmów z eksportem .ics** — Terminy rozmów przy aplikacjach i eksport do dowolnego kalendarza. _(W3 C3 K5 R2 Z5 → 71,0, miejsce 83)_
-- ⬜ **#46. Snapshot wysłanych dokumentów** — Zapis dokładnej treści CV i listu wysłanych do firmy w chwili aplikowania. _(W4 C2 K5 R3 Z5 → 76,0, miejsce 60)_
+- ✅ **#43. Szablony wiadomości** — Follow-up, podziękowanie po rozmowie, prośba o informację zwrotną, odmowa i przyjęcie oferty — z podstawieniem danych. _(W3 C3 K5 R2 Z5 → 71,0, miejsce 82)_
+- ✅ **#45. Kalendarz rozmów z eksportem .ics** — Terminy rozmów przy aplikacjach i eksport do dowolnego kalendarza. _(W3 C3 K5 R2 Z5 → 71,0, miejsce 83)_
+- ✅ **#46. Snapshot wysłanych dokumentów** — Zapis dokładnej treści CV i listu wysłanych do firmy w chwili aplikowania. _(W4 C2 K5 R3 Z5 → 76,0, miejsce 60)_
 - ✅ **#47. Ostrzeżenie o ponownej aplikacji** — Informacja, że kandydat już aplikował do tej firmy lub na tę samą rolę, z datą i wynikiem. _(W4 C3 K5 R3 Z5 → 80,0, miejsce 47)_
 - ⬜ **#50. Automatyczne statusy z poczty** — Rozpoznawanie odpowiedzi firm w skrzynce Gmail i aktualizacja statusu. _(W5 C4 K2 R4 Z2 → 72,0, miejsce 75)_
 - ⬜ **#51. Rozszerzenie przeglądarki „zapisz ofertę”** — Jedno kliknięcie na stronie portalu zapisuje ofertę w aplikacji. _(W5 C5 K2 R3 Z3 → 75,0, miejsce 62)_
-- ⬜ **#52. Notatki z rozmów** — Osoby prowadzące, zadane pytania, wrażenia i ustalenia przy każdej rozmowie. _(W3 C3 K5 R2 Z5 → 71,0, miejsce 84)_
+- ✅ **#52. Notatki z rozmów** — Osoby prowadzące, zadane pytania, wrażenia i ustalenia przy każdej rozmowie. _(W3 C3 K5 R2 Z5 → 71,0, miejsce 84)_
 
 ### E. Przygotowanie do rozmów
 
 - ✅ **#53. Generator pytań rekrutacyjnych z oferty** — Pytania techniczne i behawioralne wyprowadzone z wymagań konkretnej oferty, z luką kompetencyjną na pierwszym miejscu. _(W4 C4 K5 R4 Z5 → 87,0, miejsce 20)_
-- ⬜ **#54. Ocena odpowiedzi metodą STAR** — Heurystyki sprawdzają sytuację, zadanie, działanie, rezultat, liczby i długość odpowiedzi. _(W4 C3 K4 R4 Z5 → 78,0, miejsce 53)_
+- ✅ **#54. Ocena odpowiedzi metodą STAR** — Heurystyki sprawdzają sytuację, zadanie, działanie, rezultat, liczby i długość odpowiedzi. _(W4 C3 K4 R4 Z5 → 78,0, miejsce 53)_
 - ⬜ **#55. Symulator rozmowy z AI** — Model w roli rekrutera prowadzi rozmowę na podstawie oferty. _(W4 C3 K3 R4 Z3 → 69,0, miejsce 89)_
-- ⬜ **#56. Bank historii STAR** — Własne osiągnięcia zapisane raz i podpowiadane do pytań oraz wymagań. _(W3 C3 K5 R4 Z5 → 77,0, miejsce 59)_
-- ⬜ **#62. Debrief po rozmowie** — Co poszło dobrze, co poprawić, jakie padły pytania; wnioski zbierane między rozmowami. _(W3 C3 K5 R3 Z5 → 74,0, miejsce 71)_
+- ✅ **#56. Bank historii STAR** — Własne osiągnięcia zapisane raz i podpowiadane do pytań oraz wymagań. _(W3 C3 K5 R4 Z5 → 77,0, miejsce 59)_
+- ✅ **#62. Debrief po rozmowie** — Co poszło dobrze, co poprawić, jakie padły pytania; wnioski zbierane między rozmowami. _(W3 C3 K5 R3 Z5 → 74,0, miejsce 71)_
 
 ### F. Wynagrodzenia i negocjacje
 
 - ✅ **#63. Kalkulator netto UoP, B2B, zlecenie** — Szacunek kwoty „na rękę” z parametrami podatkowymi na dany rok zapisanymi w jednym miejscu. _(W4 C4 K4 R4 Z4 → 80,0, miejsce 46)_
-- ⬜ **#64. Porównywarka ofert** — Zestawienie kilku ofert: netto, benefity, dni wolne, dojazd — z wartością całkowitą. _(W4 C3 K4 R4 Z5 → 78,0, miejsce 54)_
+- ✅ **#64. Porównywarka ofert** — Zestawienie kilku ofert: netto, benefity, dni wolne, dojazd — z wartością całkowitą. _(W4 C3 K4 R4 Z5 → 78,0, miejsce 54)_
 - ✅ **#65. Statystyki widełek z zebranych ofert** — Mediana i rozrzut wynagrodzeń wg poziomu i typu umowy. _(W4 C3 K5 R5 Z5 → 86,0, miejsce 25)_
-- ⬜ **#66. Asystent negocjacji** — Kotwica, kontroferta i gotowe sformułowania na podstawie oferty i danych rynkowych. _(W3 C2 K5 R3 Z5 → 70,0, miejsce 88)_
+- ✅ **#66. Asystent negocjacji** — Kotwica, kontroferta i gotowe sformułowania na podstawie oferty i danych rynkowych. _(W3 C2 K5 R3 Z5 → 70,0, miejsce 88)_
 - ✅ **#69. Ostrzeżenie o stawce poniżej rynku** — Porównanie widełek oferty z medianą podobnych ofert. _(W4 C3 K5 R4 Z5 → 83,0, miejsce 36)_
 
 ### G. Analityka rynku i postępów
@@ -258,8 +262,8 @@ pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowany
 - ✅ **#72. Skuteczność wg źródła i wersji CV** — Odsetek odpowiedzi i rozmów dla każdego źródła oferty i wariantu CV (test A/B CV). _(W5 C3 K5 R5 Z5 → 92,0, miejsce 8)_
 - ✅ **#73. Pulpit tygodniowy** — Aktywność w bieżącym tygodniu względem celu, najbliższe rozmowy i najlepsze nowe oferty. _(W4 C5 K5 R2 Z5 → 85,0, miejsce 31)_
 - ✅ **#75. Trendy umiejętności w ofertach** — Najczęściej wymagane technologie w zebranych ofertach i ich pokrycie przez profil. _(W4 C3 K5 R4 Z5 → 83,0, miejsce 37)_
-- ⬜ **#76. Dziennik samopoczucia** — Krótki wpis nastroju i energii; ostrzeżenie przy spadku i sugestia przerwy. _(W2 C3 K5 R4 Z5 → 71,0, miejsce 85)_
-- ⬜ **#79. Raport aktywności poszukiwania pracy** — Zestawienie aplikacji i rozmów do wydruku lub CSV, np. dla doradcy kariery lub urzędu pracy. _(W3 C2 K5 R5 Z5 → 76,0, miejsce 61)_
+- ✅ **#76. Dziennik samopoczucia** — Krótki wpis nastroju i energii; ostrzeżenie przy spadku i sugestia przerwy. _(W2 C3 K5 R4 Z5 → 71,0, miejsce 85)_
+- ✅ **#79. Raport aktywności poszukiwania pracy** — Zestawienie aplikacji i rozmów do wydruku lub CSV, np. dla doradcy kariery lub urzędu pracy. _(W3 C2 K5 R5 Z5 → 76,0, miejsce 61)_
 
 ### H. Prywatność, bezpieczeństwo, dostępność
 

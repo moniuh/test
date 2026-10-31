@@ -16,7 +16,46 @@ tego strażnik prawdomówności).
   ocenionych jednym modelem punktowym; 50 najwyżej ocenionych jest zaimplementowanych.
 - **Architektura:** [docs/ARCHITEKTURA.md](docs/ARCHITEKTURA.md)
 
-<!-- FUNKCJE -->
+## Co potrafi
+
+**Agregacja ogłoszeń** (`/agregator`)
+- Źródła: kanały RSS/Atom, strony kariery firm z danymi schema.org `JobPosting`, ogłoszenia wklejone
+  lub zaimportowane z adresu URL. Pobieranie cykliczne i na żądanie, z historią przebiegów.
+- Etykieta pobierania: robots.txt, limit zapytań na domenę, identyfikujący User-Agent, ochrona SSRF,
+  link „Źródło” do oryginału przy każdej ofercie.
+- Każda pobrana oferta jest analizowana: wymagania, widełki sprowadzone do wspólnej miary, tryb pracy,
+  forma umowy, poziom stanowiska, data ważności. Duplikaty z różnych źródeł są wykrywane.
+- Skrzynka nowych ofert posortowana rankingiem, wyszukiwarka pełnotekstowa (BM25), filtry na poziomie
+  źródła, automatyczna archiwizacja wygasłych ofert, ostrzeżenia o ukrytych poleceniach dla AI w treści ogłoszeń.
+
+**Ocena ofert** (`/oferty`, `/oferty/:id`)
+- Dopasowanie do CV wymaganie po wymaganiu z cytatem z CV jako dowodem; słownik ~160 umiejętności
+  z synonimami (k8s = Kubernetes) i rodzinami (MySQL ≈ PostgreSQL); lata doświadczenia i poziom języka
+  liczone częściowo; wyjaśnienie „dlaczego 74%”.
+- Ranking: dopasowanie × wynagrodzenie × tryb pracy × lokalizacja × świeżość, wykluczenia z Twoich
+  deal-breakerów, uczenie preferencji z zapisanych i odrzuconych ofert, zapisane wyszukiwania z licznikiem nowych.
+- Analiza ogłoszenia: czerwone flagi (z podstawą prawną), ryzyko oszustwa, duplikaty, podobne oferty.
+
+**Tailoring CV** (`/dopasuj-cv`)
+- Generator dopasowanej wersji CV pod ofertę: kluczowe kompetencje z wymagań na górze, punkty
+  doświadczenia w kolejności trafności, podsumowanie z prawdziwych danych; opcjonalnie redakcja AI.
+- Strażnik prawdomówności: blokuje dopisane umiejętności, liczby, daty i pracodawców, których nie ma
+  w CV bazowym ani w profilu.
+- Wynik dopasowania przed i po, widok zmian, eksport DOCX, biblioteka wersji powiązanych z ofertami i aplikacjami.
+- Podpowiedzi słów kluczowych pod ofertę, audyt CV pod ATS, wykrywanie zbędnych danych wrażliwych,
+  import CV z PDF/DOCX, wyciąganie umiejętności z CV.
+
+**Aplikowanie i przygotowanie**
+- Tablica Kanban aplikacji (także z klawiatury), oś czasu, przypomnienia o follow-upie, list motywacyjny
+  z cytatów CV, szablony wiadomości, rozmowy z eksportem do kalendarza (.ics), zapis wysłanych dokumentów.
+- Pytania rekrutacyjne wyprowadzone z oferty, ocena odpowiedzi metodą STAR, bank historii, podsumowania rozmów.
+- Wynagrodzenia: kalkulator netto (UoP, zlecenie, B2B liniowy/ryczałt/skala, parametry 2026), porównywarka
+  ofert, statystyki widełek z zebranych ofert, ostrzeżenie o stawce poniżej rynku, asystent negocjacji.
+- Pulpit z listą „Co dalej?”, lejek rekrutacyjny, skuteczność źródeł i wersji CV, luki kompetencyjne
+  na tle rynku, trendy umiejętności, dziennik samopoczucia, raport aktywności (druk/PDF/CSV).
+
+Pełna lista z numerami pomysłów i miejscem w kodzie: [docs/POMYSLY-100.md](docs/POMYSLY-100.md).
+
 
 ## Uruchomienie
 
@@ -49,7 +88,10 @@ java -jar backend/target/radar-pracy-0.2.0.jar   # http://localhost:8080
 | `RADAR_AI_MODEL` | `claude-opus-5-5` | model Claude |
 | `RADAR_DB_URL` | plik H2 `./data/radarpracy` | np. `jdbc:postgresql://localhost:5432/radar` (sterownik PostgreSQL jest w zależnościach) |
 | `RADAR_DB_USER` / `RADAR_DB_PASSWORD` | `sa` / pusty | dane logowania do bazy |
-| `RADAR_DEMO_DATA` | `true` | dane demonstracyjne przy pustej bazie (fikcyjna kandydatka i firmy) |
+| `RADAR_DEMO_DATA` | `true` | dane demonstracyjne przy pustej bazie (fikcyjna kandydatka, firmy i źródła ofert) |
+| `RADAR_AGGREGATOR_SCHEDULER` | `true` | cykliczne pobieranie ofert ze źródeł |
+| `RADAR_AGGREGATOR_INTERVAL` | `60` | co ile minut pobierać oferty |
+| `RADAR_CALENDAR_ZONE` | `Europe/Warsaw` | strefa terminów rozmów w eksporcie .ics |
 | `PORT` | `8080` | port backendu |
 
 Kursy walut, liczba godzin w miesiącu i przeliczniki B2B ↔ UoP są w `backend/src/main/resources/application.yml`
@@ -78,7 +120,10 @@ CI (GitHub Actions) uruchamia wszystkie trzy kroki.
 ## Ograniczenia
 
 - Kalkulator netto i przeliczniki wynagrodzeń to szacunki na parametrach z jednego roku, a nie porada podatkowa.
-- Import z adresu URL pobiera pojedynczą stronę na żądanie użytkownika; część portali blokuje pobieranie —
-  wtedy wystarczy wkleić treść ogłoszenia.
+- Agregator korzysta wyłącznie z oficjalnych kanałów (RSS/Atom, dane strukturalne stron kariery) i nie
+  pobiera danych z portali, których regulamin tego zabrania. Import z URL pobiera pojedynczą stronę na żądanie
+  użytkownika; strony renderowane wyłącznie skryptem lub blokujące pobieranie wymagają wklejenia treści.
+- Ochrona SSRF sprawdza adres IP po rozwiązaniu DNS, więc pobieranie wymaga działającego DNS na serwerze
+  (w środowiskach, gdzie adresy rozwiązuje wyłącznie proxy HTTP, źródła sieciowe zostaną odrzucone).
 - Schemat bazy tworzy Hibernate (`ddl-auto: update`). Przed wdrożeniem produkcyjnym warto przejść na migracje.
 - Aplikacja jest jednoosobowa (bez kont użytkowników) — pomysł #86 czeka w backlogu.

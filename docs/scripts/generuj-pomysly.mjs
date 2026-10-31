@@ -45,9 +45,15 @@ for (const w of data.model.wymiary) {
   linie.push(`| ${w.kod} | ${w.nazwa} | ${Math.round(w.waga * 100)}% | ${w.piec} | ${w.jeden} |`);
 }
 linie.push('');
+if (data.cel) {
+  linie.push(`**Cel produktu:** ${data.cel}`);
+  linie.push('');
+}
 linie.push('Punktem wyjścia jest MVP: profil z CV, oferty wklejane jako tekst, dopasowanie');
 linie.push('wymaganie po wymaganiu z cytatem z CV jako dowodem oraz prosty tracker aplikacji. Każdy z 100');
-linie.push('pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowanych.**');
+linie.push('pomysłów rozszerza to MVP. **50 najwyżej ocenionych zostało zaimplementowanych.** Część pomysłów');
+linie.push('spoza top 50 też jest gotowa (oznaczone ✅ w backlogu) — powstały przed doprecyzowaniem celu');
+linie.push('produktu albo jako naturalne uzupełnienie innych funkcji.');
 linie.push('');
 linie.push('## Podsumowanie wg kategorii');
 linie.push('');
@@ -71,10 +77,11 @@ for (const p of ranking.filter((x) => x.top)) {
 linie.push('');
 linie.push('## Ranking — miejsca 51–100 (backlog)');
 linie.push('');
-linie.push('| # | Pomysł | Kat. | Oceny | Wynik |');
-linie.push('|---|---|---|---|---|');
+linie.push('| # | Pomysł | Kat. | Oceny | Wynik | Stan |');
+linie.push('|---|---|---|---|---|---|');
 for (const p of ranking.filter((x) => !x.top)) {
-  linie.push(`| ${p.miejsce} | #${p.id} ${p.tytul} | ${p.kat} | ${oceny(p.s)} | ${fmt(p.wynik)} |`);
+  const stan = realizacja[p.id] ? `✅ ${realizacja[p.id]}` : '—';
+  linie.push(`| ${p.miejsce} | #${p.id} ${p.tytul} | ${p.kat} | ${oceny(p.s)} | ${fmt(p.wynik)} | ${stan} |`);
 }
 linie.push('');
 linie.push('## Karty pomysłów');
@@ -83,7 +90,7 @@ for (const [kod, nazwa] of Object.entries(data.kategorie)) {
   linie.push(`### ${kod}. ${nazwa}`);
   linie.push('');
   for (const p of pomysly.filter((x) => x.kat === kod)) {
-    const znak = p.top ? '✅' : '⬜';
+    const znak = realizacja[p.id] ? '✅' : '⬜';
     linie.push(`- ${znak} **#${p.id}. ${p.tytul}** — ${p.opis} _(${oceny(p.s)} → ${fmt(p.wynik)}, miejsce ${p.miejsce})_`);
   }
 }
@@ -105,6 +112,8 @@ if (process.argv.includes('--check')) {
   writeFileSync(cel, tresc);
   console.log(`Zapisano ${cel}`);
   console.log('Top 50:', ranking.filter((p) => p.top).map((p) => `#${p.id}(${p.wynik})`).join(' '));
+  console.log('Zrealizowane łącznie:', Object.keys(realizacja).length, '— poza top 50:',
+    ranking.filter((p) => !p.top && realizacja[p.id]).map((p) => '#' + p.id).join(' '));
   console.log('Miejsca 51-56:', ranking.slice(50, 56).map((p) => `#${p.id}(${p.wynik})`).join(' '));
   if (brak.length) console.log(`Bez realizacji: ${brak.map((p) => '#' + p.id).join(', ')}`);
 }

@@ -5,18 +5,19 @@
 ```mermaid
 flowchart LR
     subgraph FE["Frontend: React 19 + Vite + TypeScript"]
-        PAGES["Strony: Pulpit, Oferty, Oferta, Aplikacje,<br/>Rozmowy, Wynagrodzenia, Analityka, Profil"]
+        PAGES["Strony: Pulpit, Agregator, Oferty, Oferta,<br/>Tailoring CV, Aplikacje, Rozmowy,<br/>Wynagrodzenia, Analityka, Profil"]
         SLOTS["Panele modułów (features/*)<br/>wpięte w strony rdzenia"]
     end
     subgraph BE["Backend: Java 21 + Spring Boot 4"]
         API["REST /api/*"]
         CORE["Rdzeń: profil i CV, oferty,<br/>dopasowanie, wynagrodzenia, aplikacje"]
-        MODS["Moduły: profile.cv, offer.analysis,<br/>matching.ranking, application.*,<br/>interview, salary.tools, analytics"]
+        MODS["Moduły: aggregator, tailoring, profile.cv,<br/>offer.analysis, matching.ranking, application.*,<br/>interview, salary.tools, analytics"]
         DICT["Słownik umiejętności<br/>(synonimy, rodziny, „obejmuje”)"]
         AI["ClaudeClient + PiiMasker<br/>(opcjonalnie, z fallbackiem offline)"]
     end
     DB[("H2 (dev) / PostgreSQL")]
     CLAUDE["Claude API"]
+    SRC["Źródła ofert: RSS/Atom,<br/>strony kariery (JSON-LD)"]
 
     PAGES --> API
     SLOTS --> API
@@ -28,6 +29,7 @@ flowchart LR
     CORE --> DB
     MODS --> DB
     MODS -. "tylko zamaskowane dane" .-> AI
+    SRC -- "harmonogram, robots.txt, limit" --> MODS
     AI -. "ANTHROPIC_API_KEY" .-> CLAUDE
 ```
 
@@ -58,6 +60,22 @@ sequenceDiagram
     M-->>FE: wynik 0–100 (wagi 3/1), wyjaśnienie „dlaczego”
 ```
 
+## Przepływ agregatora
+
+```mermaid
+flowchart LR
+    S["Źródło (RSS/Atom/JSON-LD)"] --> F["Pobranie<br/>robots.txt · limit · SSRF"]
+    F --> P["Parsowanie wpisów"]
+    P --> FL{"Filtry źródła"}
+    FL -- odrzucone --> X["licznik filteredOut"]
+    FL --> D{"Duplikat?<br/>externalId · URL · tytuł+firma"}
+    D -- tak --> XD["licznik duplicates"]
+    D -- nie --> A["Analiza: wymagania, widełki,<br/>tryb pracy, umowa, poziom,<br/>sygnały prompt injection"]
+    A --> O["JobOffer (NEW)"]
+    O --> I["Skrzynka: ranking + dopasowanie"]
+    I --> T["Tailoring CV pod ofertę"]
+```
+
 ## Zasady
 
 1. **AI doradza, człowiek decyduje.** Model nie podejmuje decyzji i nie liczy wyników.
@@ -73,7 +91,7 @@ sequenceDiagram
 | Warstwa | Ścieżka | Zawartość |
 |---|---|---|
 | Rdzeń backendu | `backend/src/main/java/pl/radarpracy/{common,skills,profile,offer,salary,matching,application,ai,demo}` | encje, serwisy, REST, słownik, dopasowanie, AI |
-| Moduły backendu | `profile/cv`, `offer/analysis`, `matching/ranking`, `application/*`, `interview`, `salary/tools`, `analytics` | funkcje z rankingu 100 pomysłów |
+| Moduły backendu | `aggregator`, `tailoring`, `profile/cv`, `offer/analysis`, `matching/ranking`, `application/*`, `interview`, `salary/tools`, `analytics` | funkcje z rankingu 100 pomysłów |
 | Rdzeń frontendu | `frontend/src/{api,components,hooks,pages}` | klient API, typy, komponenty UI, strony rdzenia |
 | Moduły frontendu | `frontend/src/features/<moduł>` | strony i panele modułów |
 | Dokumentacja | `docs/` | ranking pomysłów, architektura, generator rankingu |
@@ -82,5 +100,5 @@ sequenceDiagram
 
 Encje rdzenia: `CandidateProfile` (singleton), `CvVariant`, `JobOffer` (wymagania jako JSON),
 `JobApplication`, `ApplicationEvent`, `Interview`. Moduły dodają własne tabele z prefiksem
-(`ranking_*`, `interview_*`, `analytics_*`). Schemat tworzy Hibernate (`ddl-auto: update`); przed
+(`aggregator_*`, `tailoring_*`, `ranking_*`, `interview_*`, `analytics_*`) powiązane z encjami rdzenia po id. Schemat tworzy Hibernate (`ddl-auto: update`); przed
 wdrożeniem produkcyjnym warto przejść na migracje (Flyway).
