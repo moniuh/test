@@ -3,6 +3,8 @@ package pl.radarpracy.salary.tools;
 import org.springframework.stereotype.Service;
 import pl.radarpracy.offer.ContractType;
 import pl.radarpracy.offer.JobOffer;
+import pl.radarpracy.offer.analysis.ScamAssessment;
+import pl.radarpracy.offer.analysis.ScamDetector;
 import pl.radarpracy.offer.OfferService;
 import pl.radarpracy.offer.Seniority;
 import pl.radarpracy.salary.NormalizedSalary;
@@ -137,6 +139,10 @@ public class SalaryStatsService {
         List<Sample> out = new ArrayList<>();
         for (JobOffer o : source) {
             if (o.getDuplicateOfId() != null) {
+                continue;
+            }
+            // oferty z wysokim ryzykiem oszustwa (#19) zaniżałyby lub zawyżały obraz rynku
+            if (ScamDetector.assess(o).level() == ScamAssessment.RiskLevel.HIGH) {
                 continue;
             }
             NormalizedSalary n = normalizer.normalize(o);

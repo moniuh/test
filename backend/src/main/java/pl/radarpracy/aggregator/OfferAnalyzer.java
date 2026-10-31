@@ -3,6 +3,7 @@ package pl.radarpracy.aggregator;
 import org.springframework.stereotype.Component;
 import pl.radarpracy.common.Text;
 import pl.radarpracy.offer.ContractType;
+import pl.radarpracy.offer.analysis.EmploymentTermsDetector;
 import pl.radarpracy.offer.JobOffer;
 import pl.radarpracy.offer.Requirement;
 import pl.radarpracy.offer.RequirementExtractor;
@@ -96,6 +97,10 @@ public class OfferAnalyzer {
 
         Set<ContractType> contracts = new LinkedHashSet<>(OfferTextAnalyzer.fromEmploymentTypes(item.employmentTypes()));
         contracts.addAll(OfferTextAnalyzer.contractTypes(fullText));
+        // detektor z modułu analizy ofert (#21) uzupełnia formy inne niż B2B; B2B rozstrzyga reguła agregatora,
+        // która odróżnia „projekty B2B” (sprzedaż) od kontraktu B2B
+        EmploymentTermsDetector.contractTypes(fullText).stream().map(EmploymentTermsDetector.Detection::value)
+                .filter(c -> c != ContractType.B2B).forEach(contracts::add);
         if (salary != null && salary.contractHint() != null) {
             contracts.add(salary.contractHint());
         }
@@ -104,17 +109,24 @@ public class OfferAnalyzer {
             notes.add("Forma umowy: " + contracts.stream().map(Enum::name).toList());
         }
 
+        String modeText = fullText + "\n" + Text.nullToEmpty(location);
+        // pierwszeństwo ma detektor z modułu analizy ofert (#21, obsługuje zaprzeczenia), potem reguły agregatora
         WorkMode mode = Boolean.TRUE.equals(item.remote()) ? WorkMode.REMOTE
-                : OfferTextAnalyzer.workMode(fullText + "\n" + Text.nullToEmpty(location));
+                : EmploymentTermsDetector.workMode(modeText).map(EmploymentTermsDetector.Detection::value)
+                        .orElseGet(() -> OfferTextAnalyzer.workMode(modeText));
         o.setWorkMode(mode);
         if (mode != null) {
             notes.add("Tryb pracy: " + MODE_PL.get(mode));
         }
 
         Seniority seniority = OfferTextAnalyzer.seniority(item.title());
+        if (seniority == null) {
+            seniority = EmploymentTermsDetector.seniority(item.title(), fullText, o.getRequirements())
+                    .map(EmploymentTermsDetector.Detection::value).orElse(null);
+        }
         o.setSeniority(seniority);
         if (seniority != null) {
-            notes.add("Poziom z tytułu: " + seniority.name());
+            notes.add("Poziom: " + seniority.name());
         }
 
         o.setPublishedAt(item.publishedAt());

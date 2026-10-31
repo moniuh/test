@@ -132,6 +132,11 @@ export interface InboxItem {
   signals: InjectionSignal[];
   seen: boolean;
   snippet: string;
+  /** Pozycja w rankingu (dopasowanie × preferencje, moduł „dopasowanie”). */
+  rankScore: number | null;
+  /** Oferta wykluczona przez deal-breakery z profilu. */
+  excluded: boolean;
+  exclusionReasons: string[];
 }
 
 export interface Inbox {

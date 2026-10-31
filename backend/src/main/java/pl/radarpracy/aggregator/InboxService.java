@@ -10,6 +10,10 @@ import pl.radarpracy.aggregator.AggregatorDtos.Summary;
 import pl.radarpracy.common.Text;
 import pl.radarpracy.matching.MatchResult;
 import pl.radarpracy.matching.MatchService;
+import pl.radarpracy.matching.ranking.Exclusion;
+import pl.radarpracy.matching.ranking.RankedOffer;
+import pl.radarpracy.matching.ranking.RankingService;
+import pl.radarpracy.matching.ranking.RankingSnapshot;
 import pl.radarpracy.offer.JobOffer;
 import pl.radarpracy.offer.OfferService;
 import pl.radarpracy.offer.OfferStatus;
@@ -28,7 +32,8 @@ import java.util.stream.Collectors;
 
 /**
  * Skrzynka nowych ofert (pomysł #48): jeden strumień ofert NEW — pobranych ze źródeł i dodanych ręcznie —
- * z wynikiem dopasowania ({@link MatchService#matchAll}, liczony raz na żądanie), źródłem, widełkami,
+ * z wynikiem dopasowania ({@link MatchService#matchAll}, liczony raz na żądanie), pozycją w rankingu
+ * i wykluczeniami z modułu rankingu ({@link RankingService}), źródłem, widełkami,
  * sygnałami prompt injection i stanem „przejrzana”. Oferty dodane ręcznie uznajemy za przejrzane
  * (kandydat sam je dodał).
  */
@@ -44,9 +49,12 @@ public class InboxService {
     private final MatchService matching;
     private final SalaryNormalizer normalizer;
     private final AggregatorProperties props;
+    private final RankingService ranking;
 
     public InboxService(OfferService offers, AggregatedOfferRepository meta, AggregatorSourceRepository sources,
-                        MatchService matching, SalaryNormalizer normalizer, AggregatorProperties props) {
+                        MatchService matching, SalaryNormalizer normalizer, AggregatorProperties props,
+                        RankingService ranking) {
+        this.ranking = ranking;
         this.offers = offers;
         this.meta = meta;
         this.sources = sources;
@@ -60,11 +68,12 @@ public class InboxService {
      * @param sourceId   tylko z tego źródła
      * @param origin     SOURCE / MANUAL (opcjonalnie)
      * @param minScore   minimalny wynik dopasowania
-     * @param sort       „match” (domyślnie: dopasowanie, potem świeżość) albo „fresh”
+     * @param sort       „rank” (domyślnie: ranking dopasowania i preferencji), „match” albo „fresh”
      */
     public Inbox inbox(Boolean onlyUnseen, Long sourceId, String origin, Integer minScore, String sort) {
         Map<Long, AggregatedOffer> metaByOffer = metaByOffer();
         List<JobOffer> candidates = offers.byStatus(OfferStatus.NEW);
+        RankingSnapshot ranks = ranking.snapshot(null);
         Map<Long, MatchResult> scores = matching.matchAll(null);
         long unseen = 0;
         List<InboxItem> items = new ArrayList<>();
@@ -90,17 +99,26 @@ public class InboxService {
             if (minScore != null && minScore > 0 && (score == null || score < minScore)) {
                 continue;
             }
-            items.add(item(o, m, fromSource, seen, match));
+            items.add(item(o, m, fromSource, seen, match, ranks.get(o.getId()).orElse(null)));
         }
         Comparator<InboxItem> fresh = Comparator.comparing(InboxService::freshness,
                 Comparator.nullsLast(Comparator.reverseOrder()));
         Comparator<InboxItem> byScore = Comparator.comparing((InboxItem i) -> i.score() == null ? -1 : i.score())
                 .reversed();
-        items.sort("fresh".equalsIgnoreCase(sort) ? fresh.thenComparing(byScore) : byScore.thenComparing(fresh));
+        Comparator<InboxItem> byRank = Comparator.comparing((InboxItem i) -> i.excluded())
+                .thenComparing(Comparator.comparing((InboxItem i) -> i.rankScore() == null ? -1 : i.rankScore()).reversed());
+        if ("fresh".equalsIgnoreCase(sort)) {
+            items.sort(fresh.thenComparing(byScore));
+        } else if ("match".equalsIgnoreCase(sort)) {
+            items.sort(byScore.thenComparing(fresh));
+        } else {
+            items.sort(byRank.thenComparing(byScore).thenComparing(fresh));
+        }
         return new Inbox(items, items.size(), unseen);
     }
 
-    private InboxItem item(JobOffer o, AggregatedOffer m, boolean fromSource, boolean seen, MatchResult match) {
+    private InboxItem item(JobOffer o, AggregatedOffer m, boolean fromSource, boolean seen, MatchResult match,
+                           RankedOffer ranked) {
         NormalizedSalary ns = normalizer.normalize(o);
         List<InjectionSignal> signals = m != null && m.getSignals() != null ? m.getSignals() : List.of();
         return new InboxItem(o.getId(), o.getTitle(), o.getCompany(), o.getLocation(), o.getUrl(), o.getWorkMode(),
@@ -112,7 +130,9 @@ public class InboxService {
                 match == null ? null : match.score(), match == null ? null : match.mustHaveMet(),
                 match == null ? null : match.mustHaveTotal(),
                 match == null ? List.of() : match.missingSkills().stream().limit(4).toList(), signals, seen,
-                Text.truncate(Text.nullToEmpty(o.getDescription()).replaceAll("\\s+", " ").strip(), 240));
+                Text.truncate(Text.nullToEmpty(o.getDescription()).replaceAll("\\s+", " ").strip(), 240),
+                ranked == null ? null : ranked.rankScore(), ranked != null && ranked.excluded(),
+                ranked == null ? List.of() : ranked.exclusions().stream().map(Exclusion::reason).toList());
     }
 
     private static Instant freshness(InboxItem i) {

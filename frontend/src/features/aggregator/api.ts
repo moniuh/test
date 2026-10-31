@@ -11,7 +11,7 @@ export interface InboxQuery {
   sourceId?: number | null;
   origin?: 'SOURCE' | 'MANUAL' | null;
   minScore?: number | null;
-  sort?: 'match' | 'fresh';
+  sort?: 'rank' | 'match' | 'fresh';
 }
 
 /** Parametry zapytania bez pustych wartości. */

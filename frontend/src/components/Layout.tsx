@@ -1,5 +1,6 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { api } from '../api/client';
 
 const NAV = [
   { to: '/', label: 'Pulpit', end: true },
@@ -16,6 +17,15 @@ const NAV = [
 export function Layout() {
   const location = useLocation();
   const mainRef = useRef<HTMLElement>(null);
+  const [unseen, setUnseen] = useState(0);
+
+  // licznik nowych (nieprzejrzanych) ofert z agregatora — odświeżany przy zmianie widoku
+  useEffect(() => {
+    api
+      .get<{ unseen: number }>('/api/aggregator/summary')
+      .then((s) => setUnseen(s.unseen ?? 0))
+      .catch(() => setUnseen(0));
+  }, [location.pathname]);
 
   // po zmianie widoku przenieś fokus na treść (czytniki ekranu i klawiatura)
   useEffect(() => {
@@ -44,6 +54,13 @@ export function Layout() {
                 <li key={n.to}>
                   <NavLink to={n.to} end={n.end}>
                     {n.label}
+                    {n.to === '/agregator' && unseen > 0 && (
+                      <>
+                        {' '}
+                        <span className="nav-count" aria-hidden="true">{unseen}</span>
+                        <span className="sr-only">({unseen} nowych ofert)</span>
+                      </>
+                    )}
                   </NavLink>
                 </li>
               ))}

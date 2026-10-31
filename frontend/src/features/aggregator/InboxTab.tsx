@@ -23,7 +23,7 @@ export function InboxTab({
   const [onlyUnseen, setOnlyUnseen] = useState(false);
   const [sourceFilter, setSourceFilter] = useState<SourceFilter>('');
   const [minScore, setMinScore] = useState('');
-  const [sort, setSort] = useState<'match' | 'fresh'>('match');
+  const [sort, setSort] = useState<'rank' | 'match' | 'fresh'>('rank');
   const [busy, setBusy] = useState<number | null>(null);
   const [actionError, setActionError] = useState<string>();
 
@@ -149,8 +149,9 @@ export function InboxTab({
         </Field>
         <Field label="Sortuj">
           {(id) => (
-            <select id={id} value={sort} onChange={(e) => setSort(e.target.value as 'match' | 'fresh')}>
-              <option value="match">Najlepiej dopasowane</option>
+            <select id={id} value={sort} onChange={(e) => setSort(e.target.value as 'rank' | 'match' | 'fresh')}>
+              <option value="rank">Ranking (dopasowanie i preferencje)</option>
+              <option value="match">Najlepiej dopasowane do CV</option>
               <option value="fresh">Najnowsze</option>
             </select>
           )}
@@ -226,6 +227,8 @@ function InboxCard({
         <div className="row">
           {!item.seen && <Badge tone="info">Nowa</Badge>}
           {item.origin === 'MANUAL' && <Badge>dodana ręcznie</Badge>}
+          {item.excluded && <Badge tone="danger">wykluczona</Badge>}
+          {item.rankScore != null && <Badge title="Ranking: dopasowanie, wynagrodzenie, tryb pracy, lokalizacja, świeżość">ranking {item.rankScore}</Badge>}
           <span className="aggregator-score">
             Dopasowanie <ScoreBadge score={item.score ?? undefined} />
           </span>
@@ -246,6 +249,11 @@ function InboxCard({
         {item.mustHaveTotal ? ` · wymagania obowiązkowe: ${item.mustHaveMet}/${item.mustHaveTotal}` : ''}
         {item.missingSkills.length > 0 && ` · brakuje: ${item.missingSkills.join(', ')}`}
       </p>
+      {item.excluded && item.exclusionReasons.length > 0 && (
+        <p className="aggregator-meta">
+          <strong>Wykluczona przez Twoje preferencje:</strong> {item.exclusionReasons.join('; ')}
+        </p>
+      )}
       {item.snippet && <p className="aggregator-snippet">{item.snippet}</p>}
       <SignalsWarning signals={item.signals} />
       <div className="aggregator-actions">
