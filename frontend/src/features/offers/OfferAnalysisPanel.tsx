@@ -14,7 +14,13 @@ import './offers.css';
  * Analiza ogłoszenia: ryzyko oszustwa (#19), czerwone flagi (#18) i duplikaty (#16). Wszystko liczą
  * jawne reguły offline; każdy sygnał ma dosłowny cytat z ogłoszenia.
  */
-export function OfferAnalysisPanel({ offer }: { offer: JobOffer }) {
+export function OfferAnalysisPanel({
+  offer, onChanged: onOfferChanged,
+}: {
+  offer: JobOffer;
+  /** Wywoływane po zmianie oferty w panelu (np. oznaczenie duplikatu) — strona odświeża dane bez przeładowania. */
+  onChanged?: (offer: JobOffer) => void;
+}) {
   const analysis = useAsync(() => offersApi.analysis(offer.id), [offer.id, offer.updatedAt]);
   // po przejściu do innej oferty (ta sama strona) nie pokazuj analizy poprzedniej
   const data = analysis.data?.offerId === offer.id ? analysis.data : undefined;
@@ -27,7 +33,13 @@ export function OfferAnalysisPanel({ offer }: { offer: JobOffer }) {
         <>
           <ScamSection analysis={data} />
           <RedFlagsSection analysis={data} />
-          <DuplicatesSection key={offer.id} offer={offer} analysis={data} onChanged={analysis.reload} />
+          <DuplicatesSection
+            key={offer.id}
+            offer={offer}
+            analysis={data}
+            onChanged={analysis.reload}
+            onOfferChanged={onOfferChanged}
+          />
         </>
       )}
     </Card>
@@ -126,11 +138,12 @@ function RedFlagsSection({ analysis }: { analysis: OfferAnalysis }) {
 }
 
 function DuplicatesSection({
-  offer, analysis, onChanged,
+  offer, analysis, onChanged, onOfferChanged,
 }: {
   offer: JobOffer;
   analysis: OfferAnalysis;
   onChanged: () => void;
+  onOfferChanged?: (offer: JobOffer) => void;
 }) {
   const report = analysis.duplicates;
   const [busy, setBusy] = useState<number | null>(null);
@@ -148,6 +161,7 @@ function DuplicatesSection({
       setOverride({ duplicateOfId: updated.duplicateOfId ?? c.offerId });
       setMessage(`Oznaczono jako duplikat oferty „${c.title}” i przeniesiono do archiwum.`);
       onChanged();
+      onOfferChanged?.(updated);
     } catch (e) {
       setError(errorMessage(e));
     } finally {
@@ -159,10 +173,11 @@ function DuplicatesSection({
     setBusy(-1);
     setError(undefined);
     try {
-      await offersApi.unmarkDuplicate(offer.id);
+      const updated = await offersApi.unmarkDuplicate(offer.id);
       setOverride({ duplicateOfId: null });
       setMessage('Cofnięto oznaczenie duplikatu — oferta wróciła jako nowa.');
       onChanged();
+      onOfferChanged?.(updated);
     } catch (e) {
       setError(errorMessage(e));
     } finally {
@@ -171,7 +186,8 @@ function DuplicatesSection({
   }
 
   const duplicateOf = override ? override.duplicateOfId : offer.duplicateOfId;
-  const statusChanged = override != null;
+  // bez onOfferChanged strona nie dostanie nowego stanu — wtedy proponujemy odświeżenie
+  const statusChanged = override != null && !onOfferChanged;
   const num = (n: number) => n.toLocaleString('pl-PL');
 
   return (

@@ -185,7 +185,7 @@ export function OfferDetailPage() {
         </div>
         <div className="stack">
           <ApplyPanel offer={o} cvId={activeCvId} />
-          <OfferAnalysisPanel offer={o} />
+          <OfferAnalysisPanel offer={o} onChanged={(updated) => offer.setData(updated)} />
           <Card title="Wynagrodzenie">
             <p style={{ margin: 0 }}>{formatSalary(o)}</p>
             {salary.data?.present && (
