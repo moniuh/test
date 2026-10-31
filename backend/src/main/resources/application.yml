@@ -20,6 +20,9 @@ server:
     include-message: always
 
 radar:
+  # Strefa, w której interpretowane są terminy rozmów (eksport .ics).
+  calendar:
+    zone: ${RADAR_CALENDAR_ZONE:Europe/Warsaw}
   demo-data: ${RADAR_DEMO_DATA:true}
   ai:
     # Bez ANTHROPIC_API_KEY (lub z RADAR_AI_OFFLINE=true) każda funkcja AI używa ścieżki offline.

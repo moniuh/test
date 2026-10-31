@@ -9,6 +9,9 @@ spring:
       ddl-auto: create-drop
 
 radar:
+  # Strefa, w której interpretowane są terminy rozmów (eksport .ics).
+  calendar:
+    zone: ${RADAR_CALENDAR_ZONE:Europe/Warsaw}
   demo-data: true
   ai:
     offline: true
