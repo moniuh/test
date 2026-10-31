@@ -107,7 +107,8 @@ def _finding(rule: Rule, ctx: TextContext, start: int | None, end: int | None, *
     fragment = None
     if start is not None and end is not None:
         raw = ctx.text[start:end]
-        end = start + len(raw.rstrip())
+        # Fragment do podświetlenia bez końcowych spacji i przecinków (poprawka może obejmować więcej).
+        end = start + len(raw.rstrip(" \t\r\n,;"))
         fragment = ctx.text[start:end]
     return Finding(
         rule_id=rule.id,
@@ -271,7 +272,7 @@ def _check_title_gender(rule: Rule, ctx: TextContext) -> list[Finding]:
     if not hits:
         return []
     start, end, masc, fem, is_masc = min(hits)
-    form = "męskiej" if is_masc else "żeńskiej"
+    form = "męską" if is_masc else "żeńską"
     explanation = f"{rule.explanation} Wykryto formę {form}: „{title[start:end]}”."
     suggestion = f"Dodaj „(K/M)” lub użyj obu form: „{masc} / {fem}”."
     fix = Fix(start=span[1], end=span[1], text=" (K/M)", mode="title_marker")

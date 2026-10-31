@@ -580,9 +580,16 @@ def test_salary_details_lists_missing_aspects():
     assert "brutto/netto" not in finding.explanation
 
 
+def test_fragment_excludes_trailing_punctuation_but_fix_keeps_it():
+    [finding] = run_rule(RULES_BY_ID["disc.age_indirect"], "Dołącz do młodego, dynamicznego zespołu.")
+    assert finding.fragment == "młodego" and finding.fix.text == ""
+    assert finding.fix.end - finding.fix.start == len("młodego, ")
+
+
 def test_title_finding_names_both_forms():
     [finding] = run_rule(RULES_BY_ID["gender.title"], "Księgowa\nopis")
     assert finding.fragment == "Księgowa"
+    assert "Wykryto formę żeńską" in finding.explanation
     assert "Księgowy / Księgowa" in finding.suggestion
     assert finding.fix and finding.fix.text == " (K/M)"
 
