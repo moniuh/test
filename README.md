@@ -106,6 +106,20 @@ Tryb wsadowy z linii poleceń:
 .venv/bin/ogloszenia-wsad examples/wsad-przyklad.json --json   # raport JSON
 ```
 
+### W Dockerze
+
+```bash
+docker build -t ai-hr/ogloszenia-zgodnosc .
+docker run -d --name ogloszenia -p 127.0.0.1:8000:8000 ai-hr/ogloszenia-zgodnosc
+# z funkcjami AI: dodaj -e ANTHROPIC_API_KEY=...
+```
+
+Aplikacja nie przechowuje danych, więc nie potrzebuje wolumenu. Obraz działa jako użytkownik bez uprawnień roota i ma wbudowany healthcheck.
+Port jest celowo wystawiony tylko na `127.0.0.1`: aplikacja nie ma logowania.
+
+Wszystkie pięć aplikacji portfolio naraz (z portalem startowym) uruchomisz przez
+[`deploy/docker-compose.yml`](https://github.com/moniuh/test/tree/ccr-69ef4109-9sgm79/deploy).
+
 ## Tryb AI a tryb offline
 
 | Funkcja | AI | Offline (zawsze dostępny) |
