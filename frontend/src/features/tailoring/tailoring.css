@@ -1,0 +1,53 @@
+/* Moduł „tailoring” — style z prefiksem tailoring-. Kolor zawsze uzupełnia etykieta tekstowa. */
+
+.tailoring-options { display: grid; gap: 0.75rem 1.25rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); align-items: start; }
+.tailoring-options .field { margin-bottom: 0; }
+.tailoring-check { display: flex; gap: 0.5rem; align-items: flex-start; font-weight: 400; }
+.tailoring-check input { margin-top: 0.2rem; flex: none; }
+
+.card textarea.tailoring-cv-text { min-height: 520px; }
+.tailoring-cv-view {
+  white-space: pre-wrap; font-family: var(--mono); font-size: 0.85rem; background: var(--surface-2);
+  padding: 0.85rem 1rem; border-radius: 8px; max-height: 520px; overflow: auto; margin: 0;
+}
+
+/* --- różnice --- */
+.tailoring-diff { list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-size: 0.84rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.tailoring-diff li { display: grid; grid-template-columns: 1.6rem 7.5rem 1fr; gap: 0.5rem; padding: 0.3rem 0.6rem; border-bottom: 1px solid var(--border); align-items: baseline; }
+.tailoring-diff li:last-child { border-bottom: none; }
+.tailoring-diff-mark { font-weight: 700; text-align: center; }
+.tailoring-diff-kind { font-family: var(--font); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
+.tailoring-diff-text { white-space: pre-wrap; word-break: break-word; }
+.tailoring-diff-prev { display: block; color: var(--muted); font-size: 0.8rem; margin-top: 0.15rem; }
+.tailoring-diff .kind-SAME { color: var(--muted); }
+.tailoring-diff .kind-ADDED { background: var(--success-soft); }
+.tailoring-diff .kind-ADDED .tailoring-diff-kind { color: var(--success); }
+.tailoring-diff .kind-MOVED { background: var(--info-soft); }
+.tailoring-diff .kind-MOVED .tailoring-diff-kind { color: var(--info); }
+.tailoring-diff .kind-CHANGED { background: var(--warning-soft); }
+.tailoring-diff .kind-CHANGED .tailoring-diff-kind { color: var(--warning); }
+.tailoring-diff .kind-REMOVED { background: var(--danger-soft); }
+.tailoring-diff .kind-REMOVED .tailoring-diff-text { text-decoration: line-through; }
+.tailoring-diff .kind-REMOVED .tailoring-diff-kind { color: var(--danger); }
+@media (max-width: 640px) {
+  .tailoring-diff li { grid-template-columns: 1.4rem 1fr; }
+  .tailoring-diff-kind { grid-column: 2; }
+  .tailoring-diff-text { grid-column: 1 / -1; }
+}
+
+/* --- wynik przed/po --- */
+.tailoring-scores { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+.tailoring-score { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.tailoring-arrow { font-size: 1.5rem; color: var(--muted); }
+.tailoring-req-levels { font-size: 0.85rem; color: var(--muted); }
+
+.tailoring-roles { list-style: none; padding: 0; margin: 0; }
+.tailoring-roles > li { padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+.tailoring-roles > li:last-child { border-bottom: none; }
+.tailoring-roles ol { margin: 0.35rem 0 0; }
+.tailoring-roles .is-hidden { color: var(--muted); }
+
+.tailoring-callout p { margin-bottom: 0.5rem; }
+.tailoring-saved { border-left: 4px solid var(--success); }
+.tailoring-detail { background: var(--surface-2); border-radius: 8px; padding: 0.75rem 1rem; }
+.tailoring-table td .badges { margin-top: 0.25rem; }
