@@ -1,0 +1,21 @@
+Ochrona danych osobowych (RODO) — szkolenie roczne
+
+W naszej firmie szkolenie z ochrony danych osobowych powtarzamy co 12 miesięcy. Taką częstotliwość przyjęła firma: RODO nie określa terminów szkoleń, ale wymaga, żebyśmy potrafili wykazać dbałość o bezpieczeństwo danych.
+
+Najważniejsze pojęcia
+Dane osobowe to wszelkie informacje o zidentyfikowanej lub możliwej do zidentyfikowania osobie fizycznej, na przykład imię i nazwisko, numer PESEL albo adres e-mail.
+Przetwarzanie to każda operacja na danych osobowych, taka jak zbieranie, przechowywanie, przeglądanie, udostępnianie lub usuwanie.
+Administrator danych to podmiot, który decyduje o celach i sposobach przetwarzania danych osobowych.
+Inspektor ochrony danych to osoba, która doradza w sprawach ochrony danych i monitoruje przestrzeganie przepisów w firmie.
+Naruszenie ochrony danych osobowych to incydent bezpieczeństwa prowadzący do zniszczenia, utraty, zmiany lub nieuprawnionego ujawnienia danych.
+
+Zasady na co dzień
+Dane osobowe przetwarzamy tylko w takim zakresie, jaki jest niezbędny do wykonania zadania.
+Ekran komputera blokujemy przy każdym odejściu od biurka, a dokumenty z danymi chowamy do zamykanej szafy.
+Hasło do systemów firmowych ma co najmniej 12 znaków i nie przekazujemy go nikomu, także współpracownikom.
+Naruszenie ochrony danych osobowych zgłaszamy natychmiast inspektorowi ochrony danych, bo administrator ma tylko 72 godziny na zawiadomienie Prezesa UODO.
+Na żądanie osoby, której dane dotyczą, odpowiadamy bez zbędnej zwłoki, nie później niż w ciągu miesiąca.
+Dokumenty z danymi osobowymi niszczymy w niszczarce, a nie wyrzucamy do kosza.
+Pliki z danymi wysyłane poza firmę szyfrujemy, a hasło przekazujemy innym kanałem, na przykład SMS-em.
+Inspektor ochrony danych w naszej firmie jest dostępny pod adresem iod@firma-demo.example.
+Za naruszenie przepisów organ nadzorczy może nałożyć na firmę wysoką karę pieniężną.
