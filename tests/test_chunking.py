@@ -76,6 +76,7 @@ def test_plain_text_uses_paragraph_and_chapter_lines():
     assert title == "Regulamin nagród"
     chunks = chunk_document(title, text)
     paths = [c.path_label for c in chunks]
+    assert paths[0] == "Regulamin nagród › Rozdział I Zasady › § 1. Cel"  # tytuł nie jest osobnym fragmentem
     assert "Regulamin nagród › Rozdział I Zasady › § 1. Cel" in paths
     assert "Regulamin nagród › Rozdział I Zasady › § 2. Kwota" in paths
 

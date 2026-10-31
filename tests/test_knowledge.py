@@ -91,6 +91,7 @@ def test_upload_without_metadata_uses_defaults(make_assistant):
     assistant = make_assistant(seed=False)
     doc = assistant.kb.add_document("Parking.txt", "Zasady parkingu\n§ 1. Miejsca\nMiejsc jest 20.".encode())
     assert doc.title == "Zasady parkingu"
+    assert doc.chunk_count == 1  # pierwszy wiersz jest tytułem, a nie fragmentem
     assert doc.doc_key == "zasady-parkingu"
     assert doc.version == "1"
     assert doc.effective_from == "2026-10-31"

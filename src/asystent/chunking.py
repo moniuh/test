@@ -220,6 +220,8 @@ def chunk_document(title: str, body: str, max_chars: int = MAX_CHUNK_CHARS) -> l
 
     def flush() -> None:
         text = "\n".join(current).strip()
+        if not stack and text.split("\n", 1)[0].strip() == title.strip():
+            text = text[len(text.split("\n", 1)[0]):].strip()  # tytuł z pierwszego wiersza TXT to nie treść
         if text:
             path = (title, *[h for level, h in stack if level > 1])
             sections.append((path, [text]))
