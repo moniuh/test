@@ -1,0 +1,57 @@
+/* Moduł „Aplikowanie i śledzenie” — uzupełnia klasy .board*, .timeline, .tabs ze styles.css. */
+
+.applications-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.applications-toolbar .tabs { margin-bottom: 0; border-bottom: none; }
+
+/* --- tablica --- */
+/* blok zawierający dla .sr-only (position: absolute) — inaczej wychodzą poza przewijaną tablicę */
+.applications-board { position: relative; }
+.applications-cards { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; min-height: 3rem; }
+.applications-card-title { font-weight: 600; text-decoration: none; color: var(--text); display: block; line-height: 1.3; }
+.applications-card-title:hover { color: var(--primary); text-decoration: underline; }
+.applications-card-meta { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.35rem; }
+.applications-card-actions { margin-top: 0.45rem; }
+.applications-drop-before { box-shadow: 0 -3px 0 0 var(--primary); }
+.applications-drop-end { height: 0; border-top: 3px solid var(--primary); border-radius: 2px; }
+.applications-count { font-weight: 600; color: var(--muted); font-size: 0.85rem; }
+.applications-col-closed h2 { color: var(--muted); }
+.applications-col-summary { min-height: 0; }
+.applications-col-summary ul { margin: 0; padding: 0; list-style: none; font-size: 0.9rem; }
+
+.applications-row-head { text-transform: none; letter-spacing: 0; font-size: inherit; color: inherit; }
+
+/* menu „Przenieś do…” (alternatywa klawiaturowa dla przeciągania) */
+.applications-move { position: relative; }
+.applications-move-panel {
+  margin-top: 0.4rem; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2);
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.applications-move-panel ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.applications-move-panel .btn { width: 100%; justify-content: flex-start; }
+.applications-move-label { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin: 0.2rem 0 0; }
+
+/* --- follow-upy --- */
+.applications-followups { list-style: none; padding: 0; margin: 0 0 0.75rem; }
+.applications-followups > li { display: flex; justify-content: space-between; gap: 0.75rem; align-items: center; flex-wrap: wrap; padding: 0.55rem 0; border-bottom: 1px solid var(--border); }
+.applications-followups > li:last-child { border-bottom: none; }
+.applications-followups h3 { font-size: 0.95rem; margin: 0; }
+
+/* --- szczegóły --- */
+.applications-timeline-kind { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; color: var(--muted); margin-right: 0.4rem; }
+.timeline li.applications-upcoming::before { background: var(--primary); }
+.timeline li.applications-note::before { border-color: #c98a00; }
+.applications-detail-text { white-space: pre-wrap; margin: 0.2rem 0 0; font-size: 0.9rem; }
+.applications-doc { white-space: pre-wrap; font-family: var(--mono); font-size: 0.82rem; background: var(--surface-2); padding: 0.75rem 0.9rem; border-radius: 8px; max-height: 420px; overflow: auto; margin: 0.5rem 0 0; }
+.applications-interview { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+.applications-interview:last-child { border-bottom: none; }
+.applications-interview h3 { font-size: 1rem; margin: 0; }
+.applications-debrief { margin-top: 0.5rem; padding: 0.5rem 0.75rem; border-left: 3px solid var(--info); background: var(--info-soft); border-radius: 0 6px 6px 0; font-size: 0.88rem; }
+.applications-form-grid { display: grid; gap: 0 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.applications-form-grid .applications-span { grid-column: 1 / -1; }
+@media (max-width: 700px) { .applications-form-grid { grid-template-columns: 1fr; } }
+.applications-letter textarea { min-height: 260px; }
+.applications-evidence { list-style: none; padding: 0; margin: 0.4rem 0 0; }
+.applications-evidence li { margin-bottom: 0.5rem; font-size: 0.9rem; }
+.applications-message-to { font-size: 0.9rem; margin: 0 0 0.5rem; }
+.applications-history { list-style: none; padding: 0; margin: 0.4rem 0 0; }
+.applications-history li { padding: 0.25rem 0; }
