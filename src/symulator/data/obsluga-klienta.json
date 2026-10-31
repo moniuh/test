@@ -1,0 +1,313 @@
+{
+  "id": "obsluga-klienta",
+  "title": "Specjalistka ds. obsługi klienta",
+  "position": "Specjalista / specjalistka ds. obsługi klienta (infolinia i czat)",
+  "company": "Sklep internetowy Lumina (firma fikcyjna)",
+  "description": "Rekrutacja do zespołu obsługi klienta sklepu internetowego z artykułami domowymi. Praca zmianowa 8–20, infolinia, czat i reklamacje.",
+  "difficulty": "łatwy",
+  "competencies": [
+    {
+      "id": "komunikacja",
+      "name": "Komunikacja z klientem",
+      "description": "Słuchanie, uspokajanie emocji, jasne wyjaśnianie i dotrzymywanie ustaleń.",
+      "keywords": [
+        "komunikacja",
+        "rozmowa",
+        "klient",
+        "klientka",
+        "słuchanie",
+        "wyjaśnić",
+        "emocje",
+        "skarga",
+        "zdenerwowany"
+      ],
+      "sample_question": "Proszę opowiedzieć o sytuacji, w której rozmawiała Pani z bardzo zdenerwowanym klientem."
+    },
+    {
+      "id": "rozwiazywanie_problemow",
+      "name": "Rozwiązywanie problemów",
+      "description": "Szukanie przyczyny, a nie tylko gaszenie objawów; inicjatywa i usprawnienia.",
+      "keywords": [
+        "problem",
+        "rozwiązanie",
+        "przyczyna",
+        "usprawnienie",
+        "pomysł",
+        "analiza",
+        "awaria",
+        "zgłoszenia",
+        "błąd"
+      ],
+      "sample_question": "Proszę opowiedzieć o sytuacji, kiedy zauważyła Pani powtarzający się problem w zgłoszeniach klientów."
+    },
+    {
+      "id": "praca_zespolowa",
+      "name": "Praca zespołowa",
+      "description": "Współpraca, dzielenie się pracą i wspieranie zespołu w trudnym okresie.",
+      "keywords": [
+        "zespół",
+        "współpraca",
+        "koleżanki",
+        "koledzy",
+        "wspólnie",
+        "grupa",
+        "zespołowo",
+        "pomoc"
+      ],
+      "sample_question": "Proszę opowiedzieć o sytuacji, w której zespół musiał wspólnie poradzić sobie z dużym obciążeniem."
+    }
+  ],
+  "persona": {
+    "name": "Joanna Wrzos",
+    "gender": "K",
+    "background": "Trzy lata na infolinii u dostawcy energii, wcześniej sprzedawczyni w drogerii. Lubi ludzi i dużo mówi.",
+    "style": "gadatliwy",
+    "style_description": "Gadatliwa i serdeczna. Chętnie opowiada, robi dygresje, łatwo odbiega od tematu. Konkretów udziela, gdy pytanie jest otwarte i dotyczy jej doświadczeń.",
+    "intro": "Dzień dobry! Nazywam się Joanna Wrzos. Od trzech lat pracuję na infolinii u dostawcy energii, a wcześniej byłam sprzedawczynią w drogerii. Bardzo lubię kontakt z ludźmi — koleżanki mówią, że chyba nawet za bardzo!",
+    "topic_answers": {
+      "motywacja": "Lubię rozmawiać z ludźmi i załatwiać ich sprawy, a w handlu internetowym jest dużo ciekawsze tempo niż w energetyce. No i sama znam Państwa sklep jako klientka!",
+      "mocne_strony": "Cierpliwość i to, że umiem słuchać. Pamiętam też stałych klientów — oni to bardzo doceniają.",
+      "slabe_strony": "Czasem za bardzo się rozgaduję z klientem i rozmowa trwa za długo. Pracuję nad tym: mam przy sobie listę pytań, które prowadzą rozmowę do celu.",
+      "oczekiwania_finansowe": "Myślę o kwocie około 6200 zł brutto, ale jestem otwarta na rozmowę, zwłaszcza jeśli są premie za jakość obsługi.",
+      "dyspozycyjnosc": "Mogę pracować w systemie zmianowym od 8 do 20, weekendy też wchodzą w grę, jeśli grafik jest znany z wyprzedzeniem.",
+      "termin_rozpoczecia": "Mam miesięczny okres wypowiedzenia, więc mogłabym zacząć od początku przyszłego miesiąca.",
+      "pytania_do_rekrutera": "Tak! Jak wygląda wdrożenie w pierwszych tygodniach i czy będzie ktoś, kogo mogę pytać, gdy czegoś nie wiem?"
+    },
+    "fallback_answers": [
+      "Hm, trudno mi powiedzieć tak ogólnie — u nas każdy dzień był inny, naprawdę.",
+      "To zależy od sytuacji, ale generalnie zawsze staram się być pomocna i miła.",
+      "Myślę, że dobrze sobie radzę. Koleżanki i kierowniczka to doceniały, zresztą mamy świetną atmosferę.",
+      "Nie jestem pewna, o co dokładnie chodzi w pytaniu — można je doprecyzować?"
+    ],
+    "closed_answers": [
+      "Tak, jasne!",
+      "No tak, zdecydowanie tak.",
+      "Raczej tak, zdarzało się.",
+      "Tak… to znaczy, to zależy od sytuacji."
+    ],
+    "fillers": [
+      "O, to dobre pytanie!",
+      "Ojej, od czego by tu zacząć…",
+      "Muszę powiedzieć, że to temat, o którym mogłabym długo mówić.",
+      "Na infolinii to w ogóle była szkoła życia, mówię szczerze."
+    ],
+    "digressions": [
+      "Swoją drogą, nasza kierowniczka zawsze powtarzała, że uśmiech słychać w słuchawce — i coś w tym jest.",
+      "A propos, w drogerii też miałam podobne sytuacje, ale to już inna historia.",
+      "Zresztą u nas w zespole zawsze sobie pomagałyśmy, to było naprawdę fajne."
+    ],
+    "awkward_answers": [
+      "Oj… nie bardzo wiem, czy to ma związek z pracą. Wolałabym porozmawiać o moim doświadczeniu.",
+      "Hm, to dość prywatne pytanie… Może wrócimy do obowiązków na stanowisku?",
+      "Przepraszam, ale wolałabym nie odpowiadać na to pytanie."
+    ]
+  },
+  "facts": [
+    {
+      "id": "kom_s",
+      "competency": "komunikacja",
+      "star": "S",
+      "keywords": [
+        "trudny klient",
+        "zdenerwowany",
+        "awantura",
+        "krzyczał",
+        "agresywny",
+        "emocje",
+        "skarga",
+        "reklamacja"
+      ],
+      "content": "W poprzedniej pracy zadzwonił klient, któremu od trzech miesięcy naliczano podwójne opłaty. Był bardzo zdenerwowany, krzyczał i groził, że pójdzie z tym do mediów.",
+      "hint": "Miałam kiedyś takiego klienta, że do dziś go pamiętam…"
+    },
+    {
+      "id": "kom_t",
+      "competency": "komunikacja",
+      "star": "T",
+      "keywords": [],
+      "content": "Moim zadaniem było go uspokoić i w jednej rozmowie ustalić, skąd biorą się te opłaty — bez przełączania do kolejnego działu, bo był już przełączany trzy razy.",
+      "hint": "Wiedziałam, że nie mogę go znowu nigdzie przełączyć.",
+      "requires": [
+        "kom_s"
+      ]
+    },
+    {
+      "id": "kom_a",
+      "competency": "komunikacja",
+      "star": "A",
+      "keywords": [
+        "uspokoiła",
+        "słuchała",
+        "przeprosiła",
+        "sprawdziła"
+      ],
+      "content": "Najpierw pozwoliłam mu się wygadać i nie przerywałam. Potem powtórzyłam własnymi słowami, co się stało, żeby wiedział, że go słucham. Przeprosiłam, sprawdziłam historię konta, gdy był na linii, i powiedziałam dokładnie, co zrobię i kiedy oddzwonię.",
+      "hint": "Zrobiłam kilka rzeczy, które zawsze działają przy zdenerwowanych klientach.",
+      "requires": [
+        "kom_s"
+      ]
+    },
+    {
+      "id": "kom_r",
+      "competency": "komunikacja",
+      "star": "R",
+      "keywords": [
+        "ankieta",
+        "ocena"
+      ],
+      "content": "Oddzwoniłam następnego dnia, tak jak obiecałam — korekta była już zrobiona. Klient wystawił w ankiecie 5 na 5 i napisał, że pierwszy raz ktoś go wysłuchał. Kierowniczka puszcza tę rozmowę na szkoleniu nowych osób.",
+      "hint": "Skończyło się to naprawdę dobrze, ale to dłuższa historia.",
+      "requires": [
+        "kom_a"
+      ]
+    },
+    {
+      "id": "prob_s",
+      "competency": "rozwiazywanie_problemow",
+      "star": "S",
+      "keywords": [
+        "powtarzający",
+        "zgłoszenia",
+        "faktura",
+        "usterka",
+        "błąd w systemie",
+        "problem",
+        "maile"
+      ],
+      "content": "W jednym tygodniu dostaliśmy kilkadziesiąt zgłoszeń o tym samym — klientom nie dochodziły maile z fakturą.",
+      "hint": "Kiedyś wyłapałam problem, który dotyczył dziesiątek klientów naraz."
+    },
+    {
+      "id": "prob_t",
+      "competency": "rozwiazywanie_problemow",
+      "star": "T",
+      "keywords": [
+        "zlecił"
+      ],
+      "content": "Nikt mi tego nie zlecił, ale chciałam znaleźć przyczynę, bo każda taka rozmowa zajmowała około 10 minut, a kolejka na infolinii rosła.",
+      "hint": "Formalnie to nie był mój obowiązek.",
+      "requires": [
+        "prob_s"
+      ]
+    },
+    {
+      "id": "prob_a",
+      "competency": "rozwiazywanie_problemow",
+      "star": "A",
+      "keywords": [
+        "arkusz",
+        "przeanalizowała",
+        "dział IT",
+        "zaproponowała"
+      ],
+      "content": "Zebrałam w arkuszu wszystkie takie zgłoszenia z tygodnia i zauważyłam, że dotyczą tylko klientów z adresami w jednej domenie pocztowej. Wysłałam to z przykładami do działu IT i zaproponowałam, żebyśmy do czasu poprawki wysyłali faktury ręcznie z gotowym komunikatem dla klientów.",
+      "hint": "Trochę posiedziałam nad danymi, zanim coś zauważyłam.",
+      "requires": [
+        "prob_s"
+      ]
+    },
+    {
+      "id": "prob_r",
+      "competency": "rozwiazywanie_problemow",
+      "star": "R",
+      "keywords": [
+        "wyróżnienie",
+        "spadła"
+      ],
+      "content": "IT znalazło błąd w filtrze antyspamowym w dwa dni. Zgłoszeń w tej sprawie było potem prawie zero, a mój arkusz stał się wzorem do zgłaszania powtarzających się problemów. Dostałam za to wyróżnienie kwartalne.",
+      "hint": "Kierownictwo to zauważyło.",
+      "requires": [
+        "prob_a"
+      ]
+    },
+    {
+      "id": "zesp_s",
+      "competency": "praca_zespolowa",
+      "star": "S",
+      "keywords": [
+        "obciążenie",
+        "kolejka",
+        "święta",
+        "brak ludzi",
+        "urlopy",
+        "szczyt",
+        "zespół"
+      ],
+      "content": "W okresie świątecznym połowa zespołu była na urlopach i zostałyśmy we trzy na zmianie, a w kolejce czatu czekało ponad sto osób.",
+      "hint": "Pamiętam jedne święta, kiedy było nas na zmianie naprawdę mało."
+    },
+    {
+      "id": "zesp_t",
+      "competency": "praca_zespolowa",
+      "star": "T",
+      "keywords": [
+        "poprosiła",
+        "zorganizować"
+      ],
+      "content": "Byłam najbardziej doświadczona na tej zmianie, więc kierowniczka poprosiła mnie, żebym zorganizowała pracę tak, żebyśmy nie przekroczyły czasu odpowiedzi.",
+      "hint": "Kierowniczka liczyła wtedy na mnie.",
+      "requires": [
+        "zesp_s"
+      ]
+    },
+    {
+      "id": "zesp_a",
+      "competency": "praca_zespolowa",
+      "star": "A",
+      "keywords": [
+        "podział",
+        "szablony",
+        "odprawa",
+        "podzieliłyśmy"
+      ],
+      "content": "Podzieliłyśmy się: jedna osoba brała tylko proste sprawy, czyli status zamówienia, z gotowymi szablonami, druga zwroty, a ja trudne reklamacje. Co godzinę robiłyśmy dwuminutową odprawę, kto jest zawalony, i przerzucałyśmy sprawy.",
+      "hint": "Wymyśliłyśmy prosty sposób podziału pracy.",
+      "requires": [
+        "zesp_s"
+      ]
+    },
+    {
+      "id": "zesp_r",
+      "competency": "praca_zespolowa",
+      "star": "R",
+      "keywords": [
+        "czas odpowiedzi",
+        "norma"
+      ],
+      "content": "Średni czas odpowiedzi na czacie utrzymałyśmy poniżej 4 minut przy normie 5. Po świętach podział na proste i trudne sprawy wprowadzono na stałe w całym dziale.",
+      "hint": "Udało się lepiej, niż ktokolwiek się spodziewał.",
+      "requires": [
+        "zesp_a"
+      ]
+    }
+  ],
+  "traps": [
+    {
+      "id": "pulapka_dzieci",
+      "category": "rodzina",
+      "mention": "Muszę tylko powiedzieć, że mam dwójkę dzieci… ale to naprawdę nie przeszkadza w pracy.",
+      "trigger_keywords": [
+        "weekend",
+        "dyspozycyjność",
+        "grafik",
+        "godziny pracy",
+        "zmiany",
+        "nadgodziny"
+      ],
+      "trigger_turn": 7,
+      "note": "Kandydatka sama wspomniała o dzieciach. Dopytywanie o nie (wiek dzieci, opiekę, plany) to pytanie o sytuację rodzinną. Wystarczy neutralnie przyjąć informację i wrócić do wymagań stanowiska.",
+      "followup_keywords": [
+        "dzieci",
+        "dziecko",
+        "syn",
+        "córka",
+        "opieka",
+        "przedszkole",
+        "żłobek",
+        "mąż",
+        "rodzina",
+        "macierzyński"
+      ]
+    }
+  ]
+}

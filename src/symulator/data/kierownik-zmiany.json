@@ -1,0 +1,330 @@
+{
+  "id": "kierownik-zmiany",
+  "title": "Kierownik zmiany w magazynie",
+  "position": "Kierownik / kierowniczka zmiany w centrum dystrybucyjnym",
+  "company": "Centrum dystrybucyjne Magazyn Północ (firma fikcyjna)",
+  "description": "Rekrutacja na kierownika zmiany (ok. 25 osób) w magazynie e-commerce. Praca zmianowa, w tym nocna; odpowiedzialność za wydajność, jakość i bezpieczeństwo.",
+  "difficulty": "trudny",
+  "competencies": [
+    {
+      "id": "zarzadzanie_zespolem",
+      "name": "Przywództwo i motywowanie zespołu",
+      "description": "Trudne rozmowy, jasne zasady, dbanie o ludzi i wyniki jednocześnie.",
+      "keywords": [
+        "zespół",
+        "pracownik",
+        "ludzie",
+        "motywacja",
+        "lider",
+        "podwładny",
+        "trudna rozmowa",
+        "dyscyplina"
+      ],
+      "sample_question": "Proszę opowiedzieć o sytuacji, w której musiał Pan przeprowadzić trudną rozmowę z pracownikiem."
+    },
+    {
+      "id": "bezpieczenstwo_pracy",
+      "name": "Bezpieczeństwo i organizacja pracy",
+      "description": "Reagowanie na zagrożenia, zgłaszanie zdarzeń, zapobieganie powtórkom.",
+      "keywords": [
+        "bezpieczeństwo",
+        "BHP",
+        "wypadek",
+        "zagrożenie",
+        "incydent",
+        "wózek",
+        "ryzyko"
+      ],
+      "sample_question": "Proszę opowiedzieć o sytuacji, kiedy zauważył Pan zagrożenie dla bezpieczeństwa na zmianie."
+    },
+    {
+      "id": "rozwiazywanie_problemow",
+      "name": "Rozwiązywanie problemów operacyjnych",
+      "description": "Decyzje pod presją czasu, ustalanie priorytetów, komunikacja w kryzysie.",
+      "keywords": [
+        "problem",
+        "awaria",
+        "kryzys",
+        "przestój",
+        "opóźnienie",
+        "priorytety",
+        "decyzja",
+        "system"
+      ],
+      "sample_question": "Proszę opowiedzieć o sytuacji, w której na zmianie wystąpiła poważna awaria albo przestój."
+    }
+  ],
+  "persona": {
+    "name": "Robert Sadowski",
+    "gender": "M",
+    "background": "Osiem lat w logistyce: magazynier, operator wózka, od trzech lat lider dwunastoosobowego zespołu na nocnej zmianie w magazynie e-commerce.",
+    "style": "unikajacy_konkretow",
+    "style_description": "Pewny siebie, ale mówi ogólnikami („generalnie”, „różnie bywało”). Konkretne fakty podaje dopiero wtedy, gdy rekruter prosi o konkretną sytuację i dopytuje.",
+    "intro": "Dzień dobry. Robert Sadowski. W logistyce jestem od ośmiu lat — zaczynałem jako magazynier, potem wózek, a od trzech lat jestem liderem zespołu na nocnej zmianie. Generalnie znam magazyn od podszewki.",
+    "topic_answers": {
+      "motywacja": "Chcę zrobić krok dalej — z lidera na kierownika zmiany. U Państwa jest większa skala i nowoczesny sprzęt, to mnie przyciąga.",
+      "mocne_strony": "Generalnie dogaduję się z ludźmi i znam każdy proces na magazynie. Ludzie wiedzą, że mogą na mnie liczyć.",
+      "slabe_strony": "Czasem za dużo biorę na siebie, zamiast delegować. Uczę się tego, daję więcej odpowiedzialności zastępcy.",
+      "oczekiwania_finansowe": "Myślę o 8500–9000 zł brutto plus dodatek za pracę w nocy.",
+      "dyspozycyjnosc": "Praca zmianowa i nocki to dla mnie normalka, od lat tak pracuję.",
+      "termin_rozpoczecia": "Mam trzymiesięczny okres wypowiedzenia, ale można spróbować skrócić go porozumieniem stron.",
+      "pytania_do_rekrutera": "Ilu ludzi miałbym na zmianie i czy jest stały zastępca, czy to się zmienia?"
+    },
+    "fallback_answers": [
+      "Generalnie staram się, żeby zespół dobrze pracował. Różne sytuacje się zdarzały.",
+      "Ogólnie u nas wszystko było pod kontrolą, wiadomo, jak to na zmianie.",
+      "To zależy, każda zmiana jest inna. Robi się to, co trzeba.",
+      "No, raczej dobrze sobie radzę, nikt nie narzekał."
+    ],
+    "closed_answers": [
+      "Tak, oczywiście.",
+      "No, było różnie, ale tak.",
+      "Raczej tak, jak to w magazynie.",
+      "Jasne, to podstawa."
+    ],
+    "fillers": [
+      "Generalnie to różnie bywało, ale skoro pytanie jest konkretne…",
+      "No dobrze, konkretnie…",
+      "Ogólnie rzecz biorąc… ale dobrze, podam przykład.",
+      "Hm, było tego trochę, ale powiem o jednej sytuacji."
+    ],
+    "digressions": [],
+    "awkward_answers": [
+      "Hm… a to jest ważne dla tego stanowiska? Wolałbym zostać przy sprawach zawodowych.",
+      "To raczej moja prywatna sprawa.",
+      "Nie bardzo rozumiem, co to ma wspólnego z pracą na magazynie…"
+    ]
+  },
+  "facts": [
+    {
+      "id": "lid_s",
+      "competency": "zarzadzanie_zespolem",
+      "star": "S",
+      "keywords": [
+        "trudna rozmowa",
+        "spóźnienia",
+        "spóźniał",
+        "słabe wyniki",
+        "dyscyplina",
+        "pracownik",
+        "podwładny",
+        "problem z pracownikiem"
+      ],
+      "content": "Na mojej zmianie był magazynier z długim stażem, który zaczął się regularnie spóźniać, i odbijało się to na wydajności całej linii.",
+      "hint": "Miałem kiedyś sytuację z jednym doświadczonym pracownikiem…"
+    },
+    {
+      "id": "lid_t",
+      "competency": "zarzadzanie_zespolem",
+      "star": "T",
+      "keywords": [
+        "stracić"
+      ],
+      "content": "Jako lider musiałem to rozwiązać, zanim zrobi się z tego sprawa dyscyplinarna, a jednocześnie nie chciałem go stracić, bo był jednym z najlepszych operatorów wózka.",
+      "hint": "Nie chciałem go stracić.",
+      "requires": [
+        "lid_s"
+      ]
+    },
+    {
+      "id": "lid_a",
+      "competency": "zarzadzanie_zespolem",
+      "star": "A",
+      "keywords": [
+        "rozmowa",
+        "dane",
+        "ustaliliśmy",
+        "zasada"
+      ],
+      "content": "Zaprosiłem go na rozmowę po zmianie, bez świadków. Pokazałem dane — godziny wejść z ostatniego miesiąca — i zapytałem, co się dzieje. Okazało się, że zmienił mu się dojazd. Ustaliliśmy przesunięcie jego startu o 20 minut na miesiąc i jasną zasadę: kolejne spóźnienie to rozmowa z kierownikiem magazynu.",
+      "hint": "Załatwiłem to po swojemu, bez robienia afery.",
+      "requires": [
+        "lid_s"
+      ]
+    },
+    {
+      "id": "lid_r",
+      "competency": "zarzadzanie_zespolem",
+      "star": "R",
+      "keywords": [
+        "wydajność",
+        "szkolenie"
+      ],
+      "content": "Przez kolejne trzy miesiące nie spóźnił się ani razu, a wydajność linii wróciła do normy, około 140 paczek na godzinę. Pół roku później sam zgłosił się na szkolenie na zastępcę lidera.",
+      "hint": "Ogólnie się poprawiło.",
+      "requires": [
+        "lid_a"
+      ]
+    },
+    {
+      "id": "bhp_s",
+      "competency": "bezpieczenstwo_pracy",
+      "star": "S",
+      "keywords": [
+        "zagrożenie",
+        "wypadek",
+        "niebezpieczna",
+        "wózek widłowy",
+        "potrącenie",
+        "incydent",
+        "bezpieczeństwo"
+      ],
+      "content": "Wózek widłowy o mało nie potrącił nowej osoby na skrzyżowaniu alejek, bo była tam zła widoczność i brakowało lustra.",
+      "hint": "Raz było naprawdę blisko poważnego wypadku."
+    },
+    {
+      "id": "bhp_t",
+      "competency": "bezpieczenstwo_pracy",
+      "star": "T",
+      "keywords": [
+        "odpowiadał",
+        "zabezpieczyć"
+      ],
+      "content": "Odpowiadałem za bezpieczeństwo na swojej zmianie, więc musiałem od razu zabezpieczyć to miejsce i dopilnować, żeby to się nie powtórzyło.",
+      "hint": "To była moja odpowiedzialność.",
+      "requires": [
+        "bhp_s"
+      ]
+    },
+    {
+      "id": "bhp_a",
+      "competency": "bezpieczenstwo_pracy",
+      "star": "A",
+      "keywords": [
+        "taśma",
+        "odprawa",
+        "zgłosił",
+        "lustro",
+        "oznakowanie"
+      ],
+      "content": "Od razu wyłączyłem to skrzyżowanie z ruchu wózków taśmą i zrobiłem krótką odprawę z całą zmianą. Zgłosiłem zdarzenie potencjalnie wypadkowe do służby BHP, zrobiłem zdjęcia i zaproponowałem lustro, oznakowanie podłogi i ograniczenie prędkości do 6 km/h w tej strefie.",
+      "hint": "Zrobiłem, co trzeba, zgodnie z procedurami.",
+      "requires": [
+        "bhp_s"
+      ]
+    },
+    {
+      "id": "bhp_r",
+      "competency": "bezpieczenstwo_pracy",
+      "star": "R",
+      "keywords": [
+        "zgłoszenia",
+        "incydent"
+      ],
+      "content": "Lustro i oznakowanie były w tydzień. Od tego czasu w tym miejscu nie było żadnego incydentu, a zgłoszeń zdarzeń potencjalnie wypadkowych na mojej zmianie przybyło — z 2 do 9 na kwartał, bo ludzie przestali się bać zgłaszać.",
+      "hint": "Teraz jest tam bezpiecznie.",
+      "requires": [
+        "bhp_a"
+      ]
+    },
+    {
+      "id": "kryz_s",
+      "competency": "rozwiazywanie_problemow",
+      "star": "S",
+      "keywords": [
+        "awaria",
+        "system",
+        "WMS",
+        "przestój",
+        "padł",
+        "szczyt",
+        "kryzys"
+      ],
+      "content": "W szczycie przed świętami system WMS padł na trzy godziny w środku nocnej zmiany, a do rana mieliśmy wysłać 4 tysiące paczek.",
+      "hint": "Pamiętam jedną noc przed świętami, kiedy wszystko stanęło."
+    },
+    {
+      "id": "kryz_t",
+      "competency": "rozwiazywanie_problemow",
+      "star": "T",
+      "keywords": [
+        "decyzja",
+        "zdecydować"
+      ],
+      "content": "Musiałem zdecydować, jak pracować bez systemu, żeby nie stracić porannego odbioru kuriera i nie narobić błędów w wysyłkach.",
+      "hint": "Decyzja była po mojej stronie.",
+      "requires": [
+        "kryz_s"
+      ]
+    },
+    {
+      "id": "kryz_a",
+      "competency": "rozwiazywanie_problemow",
+      "star": "A",
+      "keywords": [
+        "podzielił",
+        "wydruki",
+        "priorytet",
+        "informował"
+      ],
+      "content": "Podzieliłem ludzi: część przygotowywała strefę pakowania i palety, a dwie najbardziej doświadczone osoby kompletowały zamówienia priorytetowe z wydruków z poprzedniego wieczoru. Co pół godziny dzwoniłem do IT po status i informowałem kierownika i kuriera o opóźnieniu.",
+      "hint": "Trzeba było szybko przeorganizować ludzi.",
+      "requires": [
+        "kryz_s"
+      ]
+    },
+    {
+      "id": "kryz_r",
+      "competency": "rozwiazywanie_problemow",
+      "star": "R",
+      "keywords": [
+        "paczki",
+        "procedura"
+      ],
+      "content": "Wysłaliśmy 3600 z 4000 paczek, kurier poczekał 40 minut, a błędów w kompletacji było mniej niż zwykle. Na bazie tej nocy napisaliśmy procedurę awaryjną — wydruki priorytetów robimy teraz zawsze na początku zmiany.",
+      "hint": "Generalnie wyszliśmy z tego obronną ręką.",
+      "requires": [
+        "kryz_a"
+      ]
+    }
+  ],
+  "traps": [
+    {
+      "id": "pulapka_religia",
+      "category": "religia",
+      "mention": "Tylko w niedziele wolałbym nie pracować, bo chodzę do kościoła… ale jak trzeba, to się dostosuję.",
+      "trigger_keywords": [
+        "niedziela",
+        "weekend",
+        "grafik",
+        "dyspozycyjność",
+        "święta",
+        "nocki"
+      ],
+      "trigger_turn": 4,
+      "note": "Kandydat sam wspomniał o praktykach religijnych. Nie dopytuj o wyznanie — jeśli to ważne, zapytaj neutralnie o dostępność w grafiku.",
+      "followup_keywords": [
+        "kościół",
+        "msza",
+        "wierzący",
+        "religia",
+        "wyznanie",
+        "parafia",
+        "katolik",
+        "modlitwa"
+      ]
+    },
+    {
+      "id": "pulapka_zwiazek",
+      "category": "zwiazki_zawodowe",
+      "mention": "Jakby co, w poprzedniej firmie należałem do związku zawodowego, ale z przełożonymi zawsze się dogadywałem.",
+      "trigger_keywords": [
+        "przełożony",
+        "kierownik",
+        "konflikt z przełożonym",
+        "odejść",
+        "zmiana pracy"
+      ],
+      "trigger_turn": 7,
+      "note": "Kandydat sam wspomniał o przynależności związkowej. To nie może być tematem oceny — nie dopytuj i wróć do kompetencji.",
+      "followup_keywords": [
+        "związek zawodowy",
+        "związkowiec",
+        "związkowy",
+        "przynależność",
+        "strajk",
+        "należał"
+      ]
+    }
+  ]
+}

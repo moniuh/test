@@ -1,0 +1,333 @@
+{
+  "id": "junior-developer",
+  "title": "Junior Python Developer",
+  "position": "Młodszy programista / młodsza programistka Python",
+  "company": "Software house Kodowisko (firma fikcyjna)",
+  "description": "Rekrutacja do zespołu tworzącego aplikacje webowe w Pythonie. Praca hybrydowa, code review, mentoring dla juniorów.",
+  "difficulty": "średni",
+  "competencies": [
+    {
+      "id": "rozwiazywanie_problemow",
+      "name": "Rozwiązywanie problemów technicznych",
+      "description": "Systematyczne szukanie przyczyny błędu, mierzenie zamiast zgadywania, zabezpieczenie przed powtórką.",
+      "keywords": [
+        "problem",
+        "błąd",
+        "błędy",
+        "bug",
+        "debugowanie",
+        "przyczyna",
+        "rozwiązanie",
+        "awaria",
+        "wydajność",
+        "kod"
+      ],
+      "sample_question": "Proszę opowiedzieć o sytuacji, w której musiał Pan znaleźć przyczynę trudnego błędu w kodzie."
+    },
+    {
+      "id": "uczenie_sie",
+      "name": "Szybkie uczenie się",
+      "description": "Samodzielne opanowanie nowej technologii, planowanie nauki, dzielenie się wiedzą.",
+      "keywords": [
+        "nauka",
+        "uczyć",
+        "nauczył",
+        "nowa technologia",
+        "nowe narzędzie",
+        "kurs",
+        "dokumentacja",
+        "rozwój"
+      ],
+      "sample_question": "Proszę opowiedzieć o sytuacji, kiedy musiał Pan szybko nauczyć się nowej technologii."
+    },
+    {
+      "id": "praca_zespolowa",
+      "name": "Praca zespołowa",
+      "description": "Współpraca w projekcie, rozwiązywanie napięć, odpowiedzialność za wspólny wynik.",
+      "keywords": [
+        "zespół",
+        "współpraca",
+        "kolega",
+        "koleżanka",
+        "grupa",
+        "projekt grupowy",
+        "code review",
+        "konflikt"
+      ],
+      "sample_question": "Proszę opowiedzieć o sytuacji, w której w projekcie zespołowym ktoś nie wywiązywał się ze swojej części."
+    }
+  ],
+  "persona": {
+    "name": "Kacper Lis",
+    "gender": "M",
+    "background": "Absolwent informatyki, półroczny staż przy wewnętrznych narzędziach w Pythonie w firmie logistycznej, projekt dyplomowy — aplikacja do rezerwacji sal.",
+    "style": "zestresowany",
+    "style_description": "Zestresowany i niepewny. Odpowiada krótko, z wahaniem, czasem przeprasza. Otwiera się przy pytaniach o konkretne sytuacje i przy spokojnym dopytywaniu.",
+    "intro": "Dzień dobry… Nazywam się Kacper Lis. Skończyłem informatykę, a potem przez pół roku byłem na stażu w firmie logistycznej, gdzie pisałem w Pythonie narzędzia do raportów. Przepraszam, trochę się stresuję.",
+    "topic_answers": {
+      "motywacja": "Chcę się rozwijać w Pythonie i pracować przy prawdziwych projektach z code review. Czytałem Państwa wpisy o testach automatycznych i… bardzo mi się spodobały.",
+      "mocne_strony": "Chyba… dokładność. Lubię dojść do tego, dlaczego coś nie działa. I piszę testy.",
+      "slabe_strony": "Czasem za długo siedzę sam nad problemem, zanim poproszę o pomoc. Teraz daję sobie limit: godzina i pytam.",
+      "oczekiwania_finansowe": "Myślałem o… około 6000 zł brutto na umowie o pracę. Ale najważniejszy jest dla mnie rozwój.",
+      "dyspozycyjnosc": "Mogę pracować w standardowych godzinach, a dwa dni w tygodniu w biurze to dla mnie nie problem.",
+      "termin_rozpoczecia": "Mogę zacząć od zaraz, staż już się skończył.",
+      "pytania_do_rekrutera": "Tak… jak wygląda u Państwa code review i czy junior ma przypisanego mentora?"
+    },
+    "fallback_answers": [
+      "Hm… nie jestem pewien, co odpowiedzieć. Mogę opowiedzieć o konkretnej sytuacji, jeśli to pomoże.",
+      "Staram się… robić rzeczy porządnie. Tak myślę.",
+      "Trudno mi powiedzieć tak ogólnie…",
+      "Przepraszam, czy mógłbym prosić o doprecyzowanie pytania?"
+    ],
+    "closed_answers": [
+      "Tak.",
+      "Yyy… tak, raczej tak.",
+      "Chyba tak.",
+      "No… tak, zdarzyło się."
+    ],
+    "fillers": [
+      "Yyy…",
+      "Przepraszam, trochę się stresuję.",
+      "Hm, niech pomyślę…",
+      "Okej…"
+    ],
+    "digressions": [],
+    "awkward_answers": [
+      "Yyy… nie wiem, czy muszę na to odpowiadać…",
+      "Przepraszam, ale to chyba nie jest związane z pracą?",
+      "Wolałbym… o tym nie mówić, jeśli można."
+    ]
+  },
+  "facts": [
+    {
+      "id": "dbg_s",
+      "competency": "rozwiazywanie_problemow",
+      "star": "S",
+      "keywords": [
+        "trudny błąd",
+        "bug",
+        "debugowanie",
+        "wolno",
+        "wydajność",
+        "skrypt",
+        "raport",
+        "przyczyna błędu"
+      ],
+      "content": "Na stażu skrypt, który generował raporty dla magazynu, nagle zaczął działać godzinę zamiast pięciu minut.",
+      "hint": "Na stażu miałem jeden taki… dość dziwny problem z wydajnością."
+    },
+    {
+      "id": "dbg_t",
+      "competency": "rozwiazywanie_problemow",
+      "star": "T",
+      "keywords": [
+        "termin",
+        "sam"
+      ],
+      "content": "Senior był na urlopie, a raport był potrzebny codziennie o 7 rano, więc musiałem sam znaleźć przyczynę w ciągu dwóch dni.",
+      "hint": "Nie było wtedy kogo zapytać.",
+      "requires": [
+        "dbg_s"
+      ]
+    },
+    {
+      "id": "dbg_a",
+      "competency": "rozwiazywanie_problemow",
+      "star": "A",
+      "keywords": [
+        "profiler",
+        "pomiar",
+        "zapytanie",
+        "przepisał",
+        "test"
+      ],
+      "content": "Dodałem pomiar czasu poszczególnych kroków i uruchomiłem profiler. Okazało się, że w pętli dla każdego wiersza szło osobne zapytanie do bazy. Przepisałem to na jedno zapytanie z joinem i dopisałem test, który sprawdza czas na próbce danych.",
+      "hint": "Najpierw musiałem zmierzyć, gdzie ucieka czas.",
+      "requires": [
+        "dbg_s"
+      ]
+    },
+    {
+      "id": "dbg_r",
+      "competency": "rozwiazywanie_problemow",
+      "star": "R",
+      "keywords": [
+        "minuty",
+        "pokazał"
+      ],
+      "content": "Raport znowu generował się w około 3 minuty, a mój test miesiąc później wyłapał podobny problem u kolegi. Senior po powrocie poprosił, żebym pokazał zespołowi, jak używać profilera.",
+      "hint": "Ostatecznie… chyba wyszło dobrze.",
+      "requires": [
+        "dbg_a"
+      ]
+    },
+    {
+      "id": "nauka_s",
+      "competency": "uczenie_sie",
+      "star": "S",
+      "keywords": [
+        "docker",
+        "nowa technologia",
+        "nie znał",
+        "nigdy wcześniej",
+        "nauczyć",
+        "nowe narzędzie"
+      ],
+      "content": "W projekcie na stażu trzeba było użyć Dockera, a ja nigdy wcześniej z nim nie pracowałem.",
+      "hint": "Na stażu musiałem nauczyć się czegoś zupełnie od zera."
+    },
+    {
+      "id": "nauka_t",
+      "competency": "uczenie_sie",
+      "star": "T",
+      "keywords": [
+        "tydzień",
+        "środowisko"
+      ],
+      "content": "Miałem tydzień, żeby przygotować środowisko do uruchamiania testów, tak żeby każdy w zespole mógł je odpalić jednym poleceniem.",
+      "hint": "Czasu było… niewiele.",
+      "requires": [
+        "nauka_s"
+      ]
+    },
+    {
+      "id": "nauka_a",
+      "competency": "uczenie_sie",
+      "star": "A",
+      "keywords": [
+        "plan",
+        "dokumentacja",
+        "instrukcja",
+        "przegląd"
+      ],
+      "content": "Zrobiłem sobie plan: dwa wieczory na dokumentację i mały projekt na boku, potem pierwsza wersja i poprosiłem seniora o 15 minut przeglądu. Notowałem błędy, na które trafiałem, i zrobiłem z tego krótką instrukcję w repozytorium.",
+      "hint": "Miałem na to swój sposób.",
+      "requires": [
+        "nauka_s"
+      ]
+    },
+    {
+      "id": "nauka_r",
+      "competency": "uczenie_sie",
+      "star": "R",
+      "keywords": [
+        "wiki",
+        "godzina"
+      ],
+      "content": "Po tygodniu środowisko działało u wszystkich czterech osób w zespole, a moja instrukcja nadal jest w wiki — nowi stażyści zaczynają od niej. Przygotowanie komputera nowej osoby skróciło się z dnia do godziny.",
+      "hint": "To się przydało nie tylko mnie.",
+      "requires": [
+        "nauka_a"
+      ]
+    },
+    {
+      "id": "team_s",
+      "competency": "praca_zespolowa",
+      "star": "S",
+      "keywords": [
+        "projekt grupowy",
+        "projekt dyplomowy",
+        "nie wywiązywał",
+        "nie oddawał",
+        "konflikt",
+        "kolega",
+        "czwórka"
+      ],
+      "content": "Przy projekcie dyplomowym pracowaliśmy we czwórkę i jeden kolega przestał oddawać swoją część — backend logowania.",
+      "hint": "Przy projekcie dyplomowym było… trochę napięć w zespole."
+    },
+    {
+      "id": "team_t",
+      "competency": "praca_zespolowa",
+      "star": "T",
+      "keywords": [
+        "integracja",
+        "odpowiedzialny"
+      ],
+      "content": "Odpowiadałem za integrację wszystkich części, więc musiałem jakoś rozwiązać tę sytuację, bo obrona była za miesiąc.",
+      "hint": "To na mnie spadało poskładanie wszystkiego.",
+      "requires": [
+        "team_s"
+      ]
+    },
+    {
+      "id": "team_a",
+      "competency": "praca_zespolowa",
+      "star": "A",
+      "keywords": [
+        "rozmowa",
+        "w cztery oczy",
+        "programowanie w parach",
+        "tablica zadań"
+      ],
+      "content": "Zamiast skarżyć się promotorowi, porozmawiałem z nim w cztery oczy. Okazało się, że utknął i wstydził się przyznać. Zaproponowałem programowanie w parach dwa razy w tygodniu i rozbiliśmy jego zadanie na mniejsze kawałki na tablicy zadań.",
+      "hint": "Nie chciałem od razu iść z tym do promotora.",
+      "requires": [
+        "team_s"
+      ]
+    },
+    {
+      "id": "team_r",
+      "competency": "praca_zespolowa",
+      "star": "R",
+      "keywords": [
+        "obrona",
+        "ocena"
+      ],
+      "content": "Logowanie było gotowe tydzień przed terminem, obroniliśmy projekt na piątkę, a od tamtej pory pilnuję, żeby zadania w zespole były małe i widoczne — łatwiej wtedy zauważyć, że ktoś utknął.",
+      "hint": "Skończyło się dobrze, chociaż było nerwowo.",
+      "requires": [
+        "team_a"
+      ]
+    }
+  ],
+  "traps": [
+    {
+      "id": "pulapka_zdrowie",
+      "category": "zdrowie",
+      "mention": "W CV jest przerwa po studiach, bo przez pół roku miałem rehabilitację po operacji kolana… ale już wszystko jest w porządku.",
+      "trigger_keywords": [
+        "przerwa",
+        "luka",
+        "CV",
+        "po studiach",
+        "robił"
+      ],
+      "trigger_turn": 4,
+      "note": "Kandydat sam wspomniał o leczeniu. Dopytywanie o zdrowie (diagnozę, rokowania, zwolnienia) jest niedozwolone — wystarczy przyjąć informację i wrócić do kompetencji.",
+      "followup_keywords": [
+        "kolano",
+        "rehabilitacja",
+        "operacja",
+        "zdrowie",
+        "leczenie",
+        "uraz",
+        "kontuzja",
+        "noga",
+        "lekarz"
+      ]
+    },
+    {
+      "id": "pulapka_pochodzenie",
+      "category": "narodowosc",
+      "mention": "A, i znam też ukraiński, bo moja mama pochodzi z Charkowa.",
+      "trigger_keywords": [
+        "język",
+        "angielski",
+        "języki obce"
+      ],
+      "trigger_turn": 8,
+      "note": "Kandydat sam wspomniał o pochodzeniu rodziny. Pytania o narodowość czy pochodzenie są niedozwolone; o język możesz pytać tylko wtedy, gdy jest potrzebny na stanowisku.",
+      "followup_keywords": [
+        "mama",
+        "Charków",
+        "Ukraina",
+        "Ukrainiec",
+        "pochodzenie",
+        "pochodzi",
+        "rodzina",
+        "narodowość"
+      ]
+    }
+  ]
+}
