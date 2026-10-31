@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "asystent-kadrowy"
+version = "0.1.0"
+description = "Asystent kadrowy odpowiadający na pytania pracowników z cytatami z regulaminów firmy"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE.md" }
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "pydantic>=2.7",
+    "anthropic>=2.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27"]
+# Tekst z PDF jest opcjonalny — bez pypdf upload PDF zwraca czytelny błąd.
+pdf = ["pypdf>=4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+asystent = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

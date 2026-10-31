@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# Środowisko
+.venv/
+.env
+
+# Dane lokalne
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
