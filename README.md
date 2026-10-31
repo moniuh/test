@@ -87,6 +87,20 @@ SZKOLENIA_DZIS=2027-01-15 .venv/bin/uvicorn szkolenia.api:app   # „podróż w 
 W produkcji przegląd dzienny wywołuj z crona: `curl -X POST http://host/api/jobs/daily`
 (uruchamia się też przy każdym starcie aplikacji).
 
+### W Dockerze
+
+```bash
+docker build -t ai-hr/szkolenia-lms .
+docker run -d --name szkolenia -p 127.0.0.1:8000:8000 -v szkolenia-dane:/data ai-hr/szkolenia-lms
+# z funkcjami AI: dodaj -e ANTHROPIC_API_KEY=...
+```
+
+Bazy SQLite leżą w wolumenach (`/data`), więc przetrwają restart i aktualizację kontenera. Obraz działa jako użytkownik bez uprawnień roota i ma wbudowany healthcheck.
+Port jest celowo wystawiony tylko na `127.0.0.1`: aplikacja nie ma logowania.
+
+Wszystkie pięć aplikacji portfolio naraz (z portalem startowym) uruchomisz przez
+[`deploy/docker-compose.yml`](https://github.com/moniuh/test/tree/ccr-69ef4109-9sgm79/deploy).
+
 ## Tryb AI a tryb offline
 
 | | AI (Claude) | Offline |

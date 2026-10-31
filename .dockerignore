@@ -1,0 +1,20 @@
+# Do obrazu trafia tylko to, co potrzebne do instalacji i działania aplikacji.
+.git
+.github
+.venv
+venv
+build
+dist
+**/*.egg-info
+**/__pycache__
+**/*.py[cod]
+.pytest_cache
+.ruff_cache
+*.db
+*.db-*
+*.sqlite3
+.env
+tests
+docs
+Dockerfile
+.dockerignore
