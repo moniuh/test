@@ -152,6 +152,9 @@ NAME_LABEL_RE = re.compile(
 FULL_NAME_RE = re.compile(rf"\b(?:{_FIRST_NAME_ALT})[ \t]+{_CAP_WORD}\b")
 
 
+_NAME_ENDINGS = (
+    r"(?:iego|iemu|owej|owie|owi|ową|owa|iej|iem|ego|emu|ich|imi|ie|em|om|ej|im|a|e|i|y|u|ą|ę)?"
+)
 _PLACEHOLDER_RE = re.compile(r"\[[A-ZĄĆĘŁŃÓŚŹŻ /\-]+\]")
 
 
@@ -252,13 +255,13 @@ def anonymize(text: str, neutralize: bool = True) -> AnonymizationResult:
         if len(token) < 3 or token.startswith("["):
             continue
         token_cap = token[:1].upper() + token[1:].lower()
-        # Nazwiska odmieniają się (Kowalska → Kowalskiej): obcinamy końcową samogłoskę i dopuszczamy końcówkę.
-        if len(token_cap) >= 5 and token_cap[-1] in "aeiouy":
+        # Nazwiska i imiona się odmieniają (Kowalska → Kowalskiej, Nowak → Nowakiem): obcinamy końcową
+        # samogłoskę i dopuszczamy tylko typowe końcówki fleksyjne (żeby „Lis” nie maskował „Lista”).
+        if len(token_cap) >= 4 and token_cap[-1] in "aeiouy":
             stem = re.escape(token_cap[:-1])
         else:
             stem = re.escape(token_cap)
-        suffix = r"[a-ząćęłńóśźż]{0,4}"
-        pattern = re.compile(rf"\b(?:{stem}{suffix}|{re.escape(token.upper())})\b")
+        pattern = re.compile(rf"\b(?:{stem}{_NAME_ENDINGS}|{re.escape(token.upper())})\b")
         m.mask("name", pattern)
     # Sklejenie sąsiednich znaczników („[IMIĘ I NAZWISKO] [IMIĘ I NAZWISKO]” → jeden).
     m.text = re.sub(r"(\[IMIĘ I NAZWISKO\])(?:[ \t]+\[IMIĘ I NAZWISKO\])+", r"\1", m.text)

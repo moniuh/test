@@ -127,7 +127,7 @@ def test_rejection_requires_reason_and_actor(client, job_payload):
     r = client.post(f"/api/candidates/{cid}/decisions", json={"status": "invited"})
     assert r.status_code == 422 and "X-Actor" in r.json()["detail"]
     r = client.post(f"/api/candidates/{cid}/decisions", json={"status": "zaakceptowany"}, headers=H)
-    assert r.status_code == 422 and "Niedozwolona wartość" in r.json()["detail"]
+    assert r.status_code == 422 and "Niedozwolona wartość" in r.json()["detail"] and " lub " in r.json()["detail"]
     # status nie zmienił się bez decyzji człowieka
     assert client.get(f"/api/candidates/{cid}", headers=H).json()["status"] == "new"
 

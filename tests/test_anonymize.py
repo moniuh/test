@@ -146,3 +146,15 @@ def test_gender_forms_are_neutralized_after_masking():
     assert "Pracowałem/am" in result.text and "odpowiedzialny/a" in result.text
     assert result.gender_neutralized == 3
     assert anonymize("Pracowałam", neutralize=False).text == "Pracowałam"
+
+
+def test_short_surname_does_not_mask_similar_words():
+    result = anonymize("Maria Lis\nPrzygotowanie: Lista płac, Listopad 2024. Pani Lisowi dziękujemy.")
+    assert "Lista płac" in result.text and "Listopad" in result.text
+    assert "Lisowi" not in result.text
+
+
+def test_inflected_forms_of_header_name():
+    result = anonymize("Jan Nowak\nRekomendacja: z Janem Nowakiem współpracowało się świetnie, Nowaka polecam.")
+    for form in ("Janem", "Nowakiem", "Nowaka"):
+        assert form not in result.text

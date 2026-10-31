@@ -128,3 +128,27 @@ def test_get_llm_respects_offline_flag(monkeypatch):
     assert get_llm() is None and not ai_enabled()
     monkeypatch.setenv("HR_AI_OFFLINE", "0")
     assert ai_enabled()
+
+
+def test_counterfactual_gender_swap_gives_identical_anonymized_text_and_score():
+    """Test kontrfaktyczny: to samo CV w wersji „męskiej” i „żeńskiej” musi dać identyczne wejście i wynik."""
+    import json
+    import re
+
+    from conftest import EXAMPLES
+    from preselekcja.models import Job
+
+    female = (EXAMPLES / "cv-01.txt").read_text(encoding="utf-8")
+    male = re.sub(r"(\w+)łam\b", r"\1łem", female)
+    for a, b in [("ANNA", "JAN"), ("Specjalistka", "Specjalista"), ("sumienna", "sumienny"),
+                 ("komunikatywna", "komunikatywny"), ("mężatka", "żonaty"), ("anna.", "jan.")]:
+        male = male.replace(a, b)
+    assert male != female
+    anon_f, anon_m = anonymize(female).text, anonymize(male).text
+    assert anon_f == anon_m
+
+    job = Job(id=1, created_at="", created_by="t",
+              **json.loads((EXAMPLES / "oferta.json").read_text(encoding="utf-8")))
+    ev_f = evaluate_candidate(job, anon_f, llm=None, today=TODAY)
+    ev_m = evaluate_candidate(job, anon_m, llm=None, today=TODAY)
+    assert ev_f.score == ev_m.score and ev_f.recommendation == ev_m.recommendation

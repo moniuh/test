@@ -63,8 +63,11 @@ def _polish_errors(errors: list[dict[str, Any]]) -> list[dict[str, str]]:
         if etype == "value_error":
             msg = str(e.get("msg", "")).removeprefix("Value error, ")
         elif etype in _MESSAGES:
+            ctx = dict(e.get("ctx") or {})
+            if "expected" in ctx:
+                ctx["expected"] = str(ctx["expected"]).replace(" or ", " lub ")
             try:
-                msg = _MESSAGES[etype].format(**(e.get("ctx") or {}))
+                msg = _MESSAGES[etype].format(**ctx)
             except (KeyError, IndexError):
                 msg = _MESSAGES[etype]
         else:
@@ -152,8 +155,9 @@ def create_app(
     def get_job(job_id: int):
         return service.get_job(job_id)
 
+    # Endpoint synchroniczny: FastAPI uruchamia go w puli wątków, więc wywołanie modelu nie blokuje pętli zdarzeń.
     @app.post("/api/jobs/{job_id}/candidates", status_code=201)
-    async def add_candidate(
+    def add_candidate(
         job_id: int,
         file: UploadFile | None = File(default=None),
         text: str | None = Form(default=None),
@@ -163,7 +167,7 @@ def create_app(
         data = None
         filename = None
         if file is not None and file.filename:
-            data = await file.read(MAX_UPLOAD_BYTES + 1)
+            data = file.file.read(MAX_UPLOAD_BYTES + 1)
             filename = file.filename
         return service.add_candidate(actor_of(x_actor), job_id, text=text, file_bytes=data, filename=filename, mode=mode)
 
