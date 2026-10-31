@@ -1,0 +1,47 @@
+{
+  "company": "Firma Demo sp. z o.o.",
+  "reviewer": "Joanna Pawlak (HR)",
+  "trainer": "Ryszard Bąk (specjalista BHP)",
+  "trainings": [
+    {"key": "bhp-robotnicze", "title": "BHP okresowe — stanowiska robotnicze", "category": "BHP",
+     "validity_months": 36, "pass_threshold": 80, "mode": "elearning", "questions_per_test": 8, "material": "bhp-robotnicze.txt"},
+    {"key": "bhp-administracyjne", "title": "BHP okresowe — stanowiska administracyjno-biurowe", "category": "BHP",
+     "validity_months": 72, "pass_threshold": 80, "mode": "elearning", "questions_per_test": 8, "material": "bhp-administracyjne.txt"},
+    {"key": "bhp-kierujacy", "title": "BHP okresowe — osoby kierujące pracownikami", "category": "BHP",
+     "validity_months": 60, "pass_threshold": 80, "mode": "elearning", "questions_per_test": 8, "material": "bhp-kierujacy.txt"},
+    {"key": "instruktaz", "title": "Instruktaż stanowiskowy BHP — magazyn", "category": "BHP",
+     "validity_months": null, "pass_threshold": 100, "mode": "classroom", "questions_per_test": 1, "material": "instruktaz-stanowiskowy.txt"},
+    {"key": "rodo", "title": "Ochrona danych osobowych (RODO)", "category": "RODO",
+     "validity_months": 12, "pass_threshold": 80, "mode": "elearning", "questions_per_test": 6, "material": "rodo.txt"},
+    {"key": "sygnalisci", "title": "Ochrona sygnalistów — procedura zgłoszeń wewnętrznych", "category": "Sygnaliści",
+     "validity_months": null, "pass_threshold": 80, "mode": "elearning", "questions_per_test": 6, "material": "sygnalisci.txt"},
+    {"key": "antymobbing", "title": "Przeciwdziałanie mobbingowi i dyskryminacji", "category": "Antymobbing",
+     "validity_months": 24, "pass_threshold": 80, "mode": "elearning", "questions_per_test": 5, "material": "antymobbing.txt"}
+  ],
+  "rules": [
+    {"training": "rodo", "department": null, "position": null, "due_days": 14},
+    {"training": "sygnalisci", "department": null, "position": null, "due_days": 30},
+    {"training": "antymobbing", "department": null, "position": null, "due_days": 30},
+    {"training": "instruktaz", "department": "Magazyn", "position": null, "due_days": 0},
+    {"training": "bhp-robotnicze", "department": "Magazyn", "position": "Magazynier", "due_days": 365},
+    {"training": "bhp-robotnicze", "department": "Magazyn", "position": "Operator wózka widłowego", "due_days": 365},
+    {"training": "bhp-administracyjne", "department": null, "position": "Specjalista ds. kadr i płac", "due_days": 365},
+    {"training": "bhp-administracyjne", "department": null, "position": "Księgowy", "due_days": 365},
+    {"training": "bhp-administracyjne", "department": "Sprzedaż", "position": "Przedstawiciel handlowy", "due_days": 365},
+    {"training": "bhp-kierujacy", "department": null, "position": "Dyrektor administracyjny", "due_days": 180},
+    {"training": "bhp-kierujacy", "department": null, "position": "Kierownik magazynu", "due_days": 180},
+    {"training": "bhp-kierujacy", "department": null, "position": "Kierownik sprzedaży", "due_days": 180}
+  ],
+  "employees": [
+    {"key": "agnieszka", "full_name": "Agnieszka Malinowska", "department": "Administracja", "position": "Dyrektor administracyjny", "hired_days_ago": 2950, "manager": null},
+    {"key": "tomasz", "full_name": "Tomasz Wieczorek", "department": "Magazyn", "position": "Kierownik magazynu", "hired_days_ago": 2200, "manager": "agnieszka"},
+    {"key": "marta", "full_name": "Marta Krajewska", "department": "Sprzedaż", "position": "Kierownik sprzedaży", "hired_days_ago": 1920, "manager": "agnieszka"},
+    {"key": "joanna", "full_name": "Joanna Pawlak", "department": "Administracja", "position": "Specjalista ds. kadr i płac", "hired_days_ago": 1100, "manager": "agnieszka"},
+    {"key": "pawel", "full_name": "Paweł Zając", "department": "Magazyn", "position": "Magazynier", "hired_days_ago": 1470, "manager": "tomasz"},
+    {"key": "katarzyna", "full_name": "Katarzyna Lis", "department": "Magazyn", "position": "Operator wózka widłowego", "hired_days_ago": 730, "manager": "tomasz"},
+    {"key": "bartosz", "full_name": "Bartosz Górski", "department": "Sprzedaż", "position": "Przedstawiciel handlowy", "hired_days_ago": 425, "manager": "marta"},
+    {"key": "michal", "full_name": "Michał Sikora", "department": "Administracja", "position": "Księgowy", "hired_days_ago": 80, "manager": "agnieszka", "new_hire": true},
+    {"key": "natalia", "full_name": "Natalia Wróbel", "department": "Sprzedaż", "position": "Przedstawiciel handlowy", "hired_days_ago": 20, "manager": "marta", "new_hire": true},
+    {"key": "kamil", "full_name": "Kamil Nowicki", "department": "Magazyn", "position": "Magazynier", "hired_days_ago": 5, "manager": "tomasz", "new_hire": true}
+  ]
+}

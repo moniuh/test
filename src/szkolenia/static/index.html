@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Szkolenia obowiązkowe — LMS lite</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">✓</span>
+      <div>
+        <div class="brand-title">Szkolenia obowiązkowe</div>
+        <div class="brand-sub" id="company">—</div>
+      </div>
+    </div>
+    <div class="topbar-meta">
+      <span class="meta-item" id="today-label">—</span>
+      <span class="badge" id="ai-badge" title="Źródło generatora pytań">AI: —</span>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sekcje">
+    <a href="#pulpit" data-view="pulpit">Pulpit</a>
+    <a href="#pracownicy" data-view="pracownicy">Pracownicy</a>
+    <a href="#szkolenia" data-view="szkolenia">Szkolenia</a>
+    <a href="#moje" data-view="moje">Moje szkolenia</a>
+    <a href="#raport" data-view="raport">Raport</a>
+    <a href="#przypomnienia" data-view="przypomnienia">Przypomnienia</a>
+    <a href="#weryfikacja" data-view="weryfikacja">Weryfikacja</a>
+  </nav>
+
+  <main id="app" class="container" aria-live="polite">
+    <p class="muted">Ładowanie…</p>
+  </main>
+
+  <div id="toasts" class="toasts" role="status"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
