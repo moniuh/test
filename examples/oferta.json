@@ -1,0 +1,70 @@
+{
+  "title": "Specjalista / Specjalistka ds. kadr i płac",
+  "description": "Zielony Młyn sp. z o.o. (firma fikcyjna), Kraków, praca hybrydowa. Kompleksowa obsługa kadrowo-płacowa ok. 250 pracowników. Wynagrodzenie: 7 500–9 000 zł brutto.",
+  "requirements": [
+    {
+      "id": "kadry-place",
+      "name": "Doświadczenie w kadrach i płacach (min. 2 lata)",
+      "kind": "must",
+      "weight": 5,
+      "keywords": ["kadry i płace", "naliczanie wynagrodzeń", "lista płac"],
+      "synonyms": ["obsługa kadrowo-płacowa", "rozliczanie wynagrodzeń", "payroll"],
+      "partial_keywords": [],
+      "min_years": 2
+    },
+    {
+      "id": "prawo-pracy",
+      "name": "Znajomość prawa pracy",
+      "kind": "must",
+      "weight": 4,
+      "keywords": ["prawo pracy", "Kodeks pracy"],
+      "synonyms": ["przepisy kadrowe", "przepisy prawa pracy"],
+      "partial_keywords": []
+    },
+    {
+      "id": "zus-us",
+      "name": "Rozliczenia z ZUS i urzędem skarbowym",
+      "kind": "must",
+      "weight": 4,
+      "keywords": ["ZUS", "deklaracje ZUS"],
+      "synonyms": ["urząd skarbowy", "PIT-11", "PIT-4R", "składki"],
+      "partial_keywords": []
+    },
+    {
+      "id": "program-kp",
+      "name": "Obsługa programu kadrowo-płacowego",
+      "kind": "must",
+      "weight": 3,
+      "keywords": ["program kadrowo-płacowy", "system kadrowo-płacowy"],
+      "synonyms": ["program kadrowy", "system kadrowy", "system HR"],
+      "partial_keywords": []
+    },
+    {
+      "id": "excel",
+      "name": "Zaawansowany Excel",
+      "kind": "nice",
+      "weight": 2,
+      "keywords": ["Excel"],
+      "synonyms": ["arkusz kalkulacyjny", "tabele przestawne"],
+      "partial_keywords": []
+    },
+    {
+      "id": "angielski",
+      "name": "Język angielski min. B2",
+      "kind": "nice",
+      "weight": 2,
+      "keywords": ["angielski B2", "angielski C1", "angielski C2"],
+      "synonyms": ["English B2", "English C1", "biegły angielski"],
+      "partial_keywords": ["angielski B1", "angielski A2", "angielski podstawowy"]
+    },
+    {
+      "id": "wyksztalcenie",
+      "name": "Wykształcenie kierunkowe lub studia podyplomowe (kadry, HR, ekonomia, administracja)",
+      "kind": "nice",
+      "weight": 1,
+      "keywords": ["studia podyplomowe", "zarządzanie zasobami ludzkimi"],
+      "synonyms": ["ekonomia", "administracja", "kadry i płace w praktyce"],
+      "partial_keywords": []
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+[
+  {"file": "cv-01.txt", "demographics": {"gender": "female", "age_group": "30_49", "disability": "no"}},
+  {"file": "cv-02.docx", "demographics": {"gender": "male", "age_group": "under_30", "disability": "no"}},
+  {"file": "cv-03.pdf", "demographics": {"gender": "female", "age_group": "30_49", "disability": "undisclosed"}},
+  {"file": "cv-04.txt", "demographics": {"gender": "male", "age_group": "50_plus", "disability": "no"}},
+  {"file": "cv-05.txt", "demographics": null},
+  {"file": "cv-06.txt", "demographics": {"gender": "female", "age_group": "30_49", "disability": "yes"}}
+]
