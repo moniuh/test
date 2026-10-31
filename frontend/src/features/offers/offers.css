@@ -1,0 +1,66 @@
+/* Moduł „Pozyskiwanie i analiza ofert” — tylko klasy z prefiksem offers-. Kolory z tokenów styles.css. */
+
+/* --- cytaty-dowody (kolor + obramowanie; znaczenie niesie też etykieta tekstowa obok) --- */
+.offers-quote {
+  margin: 0.35rem 0 0;
+  padding: 0.35rem 0.75rem;
+  border-left: 3px solid #c98a00;
+  background: var(--warning-soft);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+.offers-quote.high { border-left-color: var(--danger); background: var(--danger-soft); }
+.offers-quote.info { border-left-color: var(--info); background: var(--info-soft); }
+.offers-quote.neutral { border-left-color: var(--border); background: var(--surface-2); }
+
+/* --- poziom ryzyka oszustwa --- */
+.offers-risk {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid;
+  margin-bottom: 0.6rem;
+}
+.offers-risk-icon { font-size: 1.4rem; line-height: 1; }
+.offers-risk-text { margin: 0; }
+.offers-risk-low { background: var(--success-soft); border-color: #b5e0c4; color: #155f36; }
+.offers-risk-medium { background: var(--warning-soft); border-color: #f0d59a; color: #6b4600; }
+.offers-risk-high { background: var(--danger-soft); border-color: #f1b9bc; color: #8e1b22; }
+
+.offers-section + .offers-section { margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid var(--border); }
+.offers-section h3 { margin-bottom: 0.4rem; }
+.offers-flag-head { display: flex; gap: 0.5rem; align-items: baseline; flex-wrap: wrap; }
+.offers-flag-why { margin: 0.25rem 0 0; }
+.offers-points { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* --- okno odrzucenia oferty --- */
+.offers-dialog {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  width: min(520px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: 0 10px 40px rgba(20, 24, 50, 0.25);
+}
+.offers-dialog::backdrop { background: rgba(20, 24, 50, 0.45); }
+.offers-dialog h2 { margin-bottom: 0.25rem; }
+.offers-radio-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem 1rem; }
+.offers-radio-list label { display: inline-flex; align-items: center; gap: 0.45rem; font-weight: 400; }
+@media (max-width: 520px) {
+  .offers-radio-list { grid-template-columns: 1fr; }
+}
+
+/* --- strona „Nowa oferta” --- */
+.offers-tabpanel { margin-bottom: 1rem; }
+.offers-fields th[scope='row'] { text-transform: none; letter-spacing: 0; font-size: 0.9rem; color: var(--text); white-space: nowrap; }
+.offers-fields td { overflow-wrap: anywhere; }
+.offers-fields tr.offers-row-review { background: #fffaf0; }
+.offers-dup:focus, .offers-result-title:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+.offers-dup { border-color: #f0d59a; background: #fffdf6; }
+.offers-hint-list { margin: 0.25rem 0 0; }
