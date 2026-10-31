@@ -1,0 +1,25 @@
+/* Moduł „rozmowy” — uzupełnienia wspólnych klas (prefiks iv-). */
+.iv-group + .iv-group { margin-top: 1rem; }
+.iv-group h3 { margin-top: 0.25rem; }
+.iv-question-head { align-items: flex-start; flex-wrap: nowrap; }
+.iv-question-meta { gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; flex: none; max-width: 45%; }
+.iv-why { margin: 0.3rem 0 0; }
+.iv-question-actions { justify-content: space-between; margin-top: 0.4rem; align-items: flex-start; }
+.iv-question-actions details { flex: 1; min-width: 12rem; }
+.iv-question-actions details p { margin: 0.3rem 0 0; }
+.iv-star { display: grid; gap: 0.75rem; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.iv-star-part { border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.75rem; background: var(--surface-2); }
+.iv-star-letter { font-weight: 700; font-size: 1.1rem; margin-right: 0.35rem; }
+.iv-star-part blockquote { margin-top: 0.35rem; }
+@media (max-width: 900px) { .iv-star { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .iv-star { grid-template-columns: 1fr; } }
+.iv-score { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 0.75rem; }
+.iv-metrics { margin-top: 0.75rem; }
+.iv-story { border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 0.9rem; }
+.iv-story + .iv-story { margin-top: 0.75rem; }
+.iv-story dl { margin: 0.4rem 0; }
+.iv-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.iv-rating { border: none; padding: 0; margin: 0 0 0.85rem; }
+.iv-rating label { display: inline-flex; align-items: center; gap: 0.3rem; margin-right: 0.9rem; font-weight: 400; }
+.iv-upcoming li { display: flex; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; }
+.iv-ai { white-space: pre-wrap; }
