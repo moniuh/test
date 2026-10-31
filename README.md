@@ -77,6 +77,20 @@ python -m venv .venv && .venv/bin/pip install -e '.[dev]' && .venv/bin/uvicorn a
 Otwórz <http://localhost:8000>. Przy pierwszym starcie pusta baza `asystent.db` zostaje wypełniona dokumentami
 z `data/dokumenty/`. Panel HR jest pod zakładką „Panel HR” (albo `/#hr`).
 
+### W Dockerze
+
+```bash
+docker build -t ai-hr/asystent-kadrowy .
+docker run -d --name asystent -p 127.0.0.1:8000:8000 -v asystent-dane:/data ai-hr/asystent-kadrowy
+# z funkcjami AI: dodaj -e ANTHROPIC_API_KEY=...
+```
+
+Bazy SQLite leżą w wolumenach (`/data`), więc przetrwają restart i aktualizację kontenera. Obraz działa jako użytkownik bez uprawnień roota i ma wbudowany healthcheck.
+Port jest celowo wystawiony tylko na `127.0.0.1`: aplikacja nie ma logowania.
+
+Wszystkie pięć aplikacji portfolio naraz (z portalem startowym) uruchomisz przez
+[`deploy/docker-compose.yml`](https://github.com/moniuh/test/tree/ccr-69ef4109-9sgm79/deploy).
+
 ## Tryb AI a tryb offline
 
 | | Tryb AI | Tryb offline |
