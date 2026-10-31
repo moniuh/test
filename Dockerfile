@@ -11,12 +11,16 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 RUN useradd --create-home --uid 10001 app
 
-COPY . .
+# Jawna lista plików: obraz jest taki sam przy budowie z lokalnego katalogu i z repozytorium git.
+COPY pyproject.toml README.md LICENSE.md ./
+COPY src ./src
+COPY data ./data
 RUN pip install . \
+ && rm -rf build src \
  && mkdir -p /data \
  && chown app:app /data
 
-# Pakiet jest zainstalowany w site-packages, więc katalogi z danymi wskazujemy jawnie.
+# Kod działa z site-packages (źródła usunięte po instalacji), więc katalogi z danymi wskazujemy jawnie.
 ENV SZKOLENIA_DATA_DIR=/app/data \
     SZKOLENIA_DB=/data/szkolenia.db
 
