@@ -104,7 +104,23 @@ flowchart TB
   odpowiedź) kończy się wyjątkiem `LLMUnavailable` i przejściem na ścieżkę offline.
 - **CI** (GitHub Actions) uruchamia testy w trybie offline (`HR_AI_OFFLINE=1`).
 
-## Uruchomienie dowolnego rozwiązania
+## Wdrożenie w Dockerze (wszystkie aplikacje naraz)
+
+Wymaga Docker Desktop (Windows, macOS) albo Docker Engine z Compose ≥ 2.24 (Linux).
+
+```bash
+git clone --branch ccr-69ef4109-9sgm79 --depth 1 https://github.com/moniuh/test.git ai-w-hr
+cd ai-w-hr/deploy
+cp .env.example .env          # Windows: copy .env.example .env
+docker compose up -d --build
+```
+
+Potem otwórz <http://localhost:8080>. Portal startowy prowadzi do aplikacji na portach 8001–8005.
+Obrazy budują się bezpośrednio z branchy `ai-hr/*`. Dane SQLite są w wolumenach Dockera.
+Porty są dostępne tylko z tego komputera, bo aplikacje nie mają logowania. Klucz API do funkcji
+AI, kopie zapasowe, aktualizacja i rozwiązywanie problemów: [`deploy/README.md`](deploy/README.md).
+
+## Uruchomienie dowolnego rozwiązania bez Dockera
 
 ```bash
 git checkout ai-hr/<nazwa>            # np. ai-hr/asystent-kadrowy

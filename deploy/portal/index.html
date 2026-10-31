@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI w HR</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #1b1f24;
+      --muted: #5c6670;
+      --line: #e3e6ea;
+      --accent: #2156d9;
+      --accent-soft: #e8eefc;
+      --ok: #1f8a4c;
+      --ok-soft: #e4f4ea;
+      --bad: #b42318;
+      --bad-soft: #fdeceb;
+      --wait: #8a6d1f;
+      --wait-soft: #faf3df;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121418;
+        --card: #1b1e24;
+        --text: #e8eaed;
+        --muted: #9aa3ad;
+        --line: #2c3139;
+        --accent: #7ea2ff;
+        --accent-soft: #1f2a44;
+        --ok: #5fcf8e;
+        --ok-soft: #173225;
+        --bad: #ff8a80;
+        --bad-soft: #3a1d1b;
+        --wait: #e5c463;
+        --wait-soft: #352d14;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { max-width: 960px; margin: 0 auto; padding: 40px 16px 56px; }
+    header { margin-bottom: 28px; }
+    h1 { font-size: 28px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
+    .lead { margin: 0; color: var(--muted); max-width: 640px; }
+    ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    li a {
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 20px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    li a:hover { border-color: var(--accent); box-shadow: 0 2px 10px rgb(0 0 0 / .06); }
+    li a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .step {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: grid; place-items: center;
+      background: var(--accent-soft); color: var(--accent);
+      font-weight: 700;
+    }
+    .name { display: block; font-weight: 650; font-size: 17px; }
+    .desc { display: block; color: var(--muted); font-size: 14.5px; margin-top: 2px; }
+    .meta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; white-space: nowrap; }
+    .port { font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--muted); }
+    .status {
+      font-size: 12.5px; font-weight: 600;
+      padding: 2px 10px; border-radius: 999px;
+      background: var(--wait-soft); color: var(--wait);
+    }
+    .status[data-state="ok"] { background: var(--ok-soft); color: var(--ok); }
+    .status[data-state="down"] { background: var(--bad-soft); color: var(--bad); }
+    footer { margin-top: 28px; color: var(--muted); font-size: 14px; }
+    footer p { margin: 6px 0; }
+    code { font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    @media (max-width: 560px) {
+      main { padding-top: 28px; }
+      h1 { font-size: 24px; }
+      li a { grid-template-columns: 36px 1fr; padding: 16px; }
+      .step { width: 36px; height: 36px; }
+      .meta { grid-column: 2; flex-direction: row; align-items: center; justify-content: flex-start; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>AI w HR</h1>
+      <p class="lead">Pięć aplikacji wspierających dział HR, ułożonych według cyklu życia pracownika.
+        AI doradza, decyzje podejmuje człowiek.</p>
+    </header>
+
+    <ol id="apps">
+      <li><a data-port="8001"><span class="step">1</span>
+        <span><span class="name">Audytor ogłoszeń o pracę</span>
+          <span class="desc">Jawność wynagrodzeń, język neutralny płciowo, sformułowania dyskryminujące i nadmiarowe dane.</span></span>
+        <span class="meta"><span class="status">sprawdzam…</span><span class="port">:8001</span></span></a></li>
+      <li><a data-port="8002"><span class="step">2</span>
+        <span><span class="name">Preselekcja CV</span>
+          <span class="desc">Ocena wymagań z dowodem z CV, tryb blind, decyzja człowieka, dziennik i audyt stronniczości.</span></span>
+        <span class="meta"><span class="status">sprawdzam…</span><span class="port">:8002</span></span></a></li>
+      <li><a data-port="8003"><span class="step">3</span>
+        <span><span class="name">Trener rozmów rekrutacyjnych</span>
+          <span class="desc">Rozmowa z symulowanym kandydatem, podpowiedzi na żywo i raport STAR po sesji.</span></span>
+        <span class="meta"><span class="status">sprawdzam…</span><span class="port">:8003</span></span></a></li>
+      <li><a data-port="8004"><span class="step">4</span>
+        <span><span class="name">Szkolenia obowiązkowe</span>
+          <span class="desc">Terminy i odnowienia, przypomnienia, testy zatwierdzane przez HR, zaświadczenia i raport na kontrolę.</span></span>
+        <span class="meta"><span class="status">sprawdzam…</span><span class="port">:8004</span></span></a></li>
+      <li><a data-port="8005"><span class="step">5</span>
+        <span><span class="name">Asystent kadrowy</span>
+          <span class="desc">Odpowiedzi na pytania pracowników z cytatami z regulaminów; sprawy wrażliwe trafiają do HR.</span></span>
+        <span class="meta"><span class="status">sprawdzam…</span><span class="port">:8005</span></span></a></li>
+    </ol>
+
+    <footer>
+      <p>Dane demonstracyjne są fikcyjne. Dane zapisane w aplikacjach zostają na tym komputerze, w wolumenach Dockera.</p>
+      <p>Funkcje AI włącza klucz <code>ANTHROPIC_API_KEY</code> w pliku <code>.env</code>; bez niego aplikacje działają w trybie offline.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Linki budujemy od adresu, pod którym otwarto portal, żeby działały też z innego komputera w sieci.
+    const host = location.hostname || "localhost";
+    const links = document.querySelectorAll("#apps a[data-port]");
+
+    for (const link of links) {
+      link.href = `${location.protocol === "https:" ? "https" : "http"}://${host}:${link.dataset.port}/`;
+    }
+
+    async function check(link) {
+      const badge = link.querySelector(".status");
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 4000);
+      try {
+        // Inny port to inne pochodzenie: odpowiedź jest nieprzezroczysta, ale samo powodzenie znaczy, że aplikacja działa.
+        await fetch(link.href, { mode: "no-cors", cache: "no-store", signal: controller.signal });
+        badge.dataset.state = "ok";
+        badge.textContent = "działa";
+      } catch {
+        badge.dataset.state = "down";
+        badge.textContent = "niedostępna";
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    function checkAll() { links.forEach(check); }
+    checkAll();
+    setInterval(checkAll, 15000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+# Portfolio „AI w HR”: pięć aplikacji i portal startowy.
+#
+# Obrazy budują się bezpośrednio z branchy repozytorium na GitHubie, więc nie trzeba
+# klonować każdego brancha osobno. Szczegóły i instrukcja: README.md w tym katalogu.
+#
+#   cp .env.example .env        # (Windows: copy .env.example .env)
+#   docker compose up -d --build
+#   → http://localhost:8080
+#
+# Porty są wystawione tylko na 127.0.0.1 (BIND_ADDR), bo aplikacje nie mają logowania.
+
+name: ai-w-hr
+
+x-app: &app
+  restart: unless-stopped
+  env_file:
+    - path: .env
+      required: false
+  environment:
+    TZ: ${TZ:-Europe/Warsaw}
+
+services:
+  # Statyczna strona startowa. Używa tego samego obrazu bazowego co aplikacje,
+  # więc nie trzeba pobierać dodatkowego obrazu.
+  portal:
+    image: python:3.12-slim
+    restart: unless-stopped
+    user: "65534:65534"
+    command: ["python", "-m", "http.server", "8080", "--directory", "/srv/portal"]
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:${PORTAL_PORT:-8080}:8080"
+    volumes:
+      - ./portal:/srv/portal:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/', timeout=4)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  ogloszenia:
+    <<: *app
+    build: ${REPO_URL:-https://github.com/moniuh/test.git}#ai-hr/ogloszenia-zgodnosc
+    image: ai-hr/ogloszenia:latest
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:8001:8000"
+
+  preselekcja:
+    <<: *app
+    build: ${REPO_URL:-https://github.com/moniuh/test.git}#ai-hr/preselekcja-cv
+    image: ai-hr/preselekcja:latest
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:8002:8000"
+    volumes:
+      - preselekcja-dane:/data
+      # Dane demograficzne (audyt stronniczości) celowo w osobnym wolumenie.
+      - preselekcja-demografia:/data-demografia
+
+  symulator:
+    <<: *app
+    build: ${REPO_URL:-https://github.com/moniuh/test.git}#ai-hr/symulator-rozmow
+    image: ai-hr/symulator:latest
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:8003:8000"
+    volumes:
+      - symulator-dane:/data
+
+  szkolenia:
+    <<: *app
+    build: ${REPO_URL:-https://github.com/moniuh/test.git}#ai-hr/szkolenia-lms
+    image: ai-hr/szkolenia:latest
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:8004:8000"
+    volumes:
+      - szkolenia-dane:/data
+
+  asystent:
+    <<: *app
+    build: ${REPO_URL:-https://github.com/moniuh/test.git}#ai-hr/asystent-kadrowy
+    image: ai-hr/asystent:latest
+    ports:
+      - "${BIND_ADDR:-127.0.0.1}:8005:8000"
+    volumes:
+      - asystent-dane:/data
+
+volumes:
+  preselekcja-dane:
+  preselekcja-demografia:
+  symulator-dane:
+  szkolenia-dane:
+  asystent-dane:
