@@ -228,6 +228,9 @@ function InboxCard({
           {!item.seen && <Badge tone="info">Nowa</Badge>}
           {item.origin === 'MANUAL' && <Badge>dodana ręcznie</Badge>}
           {item.excluded && <Badge tone="danger">wykluczona</Badge>}
+          {(item.scamRisk === 'HIGH' || item.scamRisk === 'MEDIUM') && (
+            <Badge tone={item.scamRisk === 'HIGH' ? 'danger' : 'warning'}>ryzyko oszustwa: {item.scamRiskLabel}</Badge>
+          )}
           {item.rankScore != null && <Badge title="Ranking: dopasowanie, wynagrodzenie, tryb pracy, lokalizacja, świeżość">ranking {item.rankScore}</Badge>}
           <span className="aggregator-score">
             Dopasowanie <ScoreBadge score={item.score ?? undefined} />

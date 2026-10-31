@@ -62,7 +62,8 @@ public final class AggregatorDtos {
                             String origin, Long sourceId, String sourceName, Instant fetchedAt, LocalDate publishedAt,
                             LocalDate expiresAt, Integer score, Integer mustHaveMet, Integer mustHaveTotal,
                             List<String> missingSkills, List<InjectionSignal> signals, boolean seen, String snippet,
-                            Integer rankScore, boolean excluded, List<String> exclusionReasons) {
+                            Integer rankScore, boolean excluded, List<String> exclusionReasons,
+                            String scamRisk, String scamRiskLabel) {
     }
 
     public record Inbox(List<InboxItem> items, int total, long unseen) {

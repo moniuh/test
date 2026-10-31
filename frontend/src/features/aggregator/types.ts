@@ -137,6 +137,9 @@ export interface InboxItem {
   /** Oferta wykluczona przez deal-breakery z profilu. */
   excluded: boolean;
   exclusionReasons: string[];
+  /** Ryzyko oszustwa z modułu analizy ofert (#19): LOW, MEDIUM, HIGH. */
+  scamRisk: 'LOW' | 'MEDIUM' | 'HIGH' | null;
+  scamRiskLabel: string | null;
 }
 
 export interface Inbox {

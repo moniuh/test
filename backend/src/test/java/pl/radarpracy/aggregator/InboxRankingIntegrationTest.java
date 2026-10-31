@@ -22,13 +22,18 @@ class InboxRankingIntegrationTest {
     MockMvc mvc;
 
     @Test
-    void inboxIsSortedByRankWithExcludedLast() throws Exception {
+    void inboxIsSortedByRankWithScamsAndExcludedLast() throws Exception {
         String json = mvc.perform(get("/api/aggregator/inbox")).andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
         List<Boolean> excluded = JsonPath.read(json, "$.items[*].excluded");
         List<Object> ranks = JsonPath.read(json, "$.items[*].rankScore");
         assertThat(excluded).isNotEmpty();
         assertThat(ranks).doesNotContainNull();
+        List<String> risks = JsonPath.read(json, "$.items[*].scamRisk");
+        int firstHigh = risks.indexOf("HIGH");
+        assertThat(firstHigh).as("demo zawiera ofertę-oszustwo").isGreaterThanOrEqualTo(0);
+        assertThat(risks.subList(firstHigh, risks.size())).containsOnly("HIGH");
+        excluded = excluded.subList(0, firstHigh);
         int firstExcluded = excluded.indexOf(true);
         if (firstExcluded >= 0) {
             assertThat(excluded.subList(firstExcluded, excluded.size())).containsOnly(true);

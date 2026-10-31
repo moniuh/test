@@ -17,6 +17,8 @@ import pl.radarpracy.matching.ranking.RankingSnapshot;
 import pl.radarpracy.offer.JobOffer;
 import pl.radarpracy.offer.OfferService;
 import pl.radarpracy.offer.OfferStatus;
+import pl.radarpracy.offer.analysis.ScamAssessment;
+import pl.radarpracy.offer.analysis.ScamDetector;
 import pl.radarpracy.salary.NormalizedSalary;
 import pl.radarpracy.salary.SalaryNormalizer;
 
@@ -105,7 +107,9 @@ public class InboxService {
                 Comparator.nullsLast(Comparator.reverseOrder()));
         Comparator<InboxItem> byScore = Comparator.comparing((InboxItem i) -> i.score() == null ? -1 : i.score())
                 .reversed();
-        Comparator<InboxItem> byRank = Comparator.comparing((InboxItem i) -> i.excluded())
+        // wysokie ryzyko oszustwa (#19) i wykluczenia z preferencji (#32) zawsze na końcu
+        Comparator<InboxItem> byRank = Comparator.comparing((InboxItem i) -> "HIGH".equals(i.scamRisk()))
+                .thenComparing(InboxItem::excluded)
                 .thenComparing(Comparator.comparing((InboxItem i) -> i.rankScore() == null ? -1 : i.rankScore()).reversed());
         if ("fresh".equalsIgnoreCase(sort)) {
             items.sort(fresh.thenComparing(byScore));
@@ -120,6 +124,7 @@ public class InboxService {
     private InboxItem item(JobOffer o, AggregatedOffer m, boolean fromSource, boolean seen, MatchResult match,
                            RankedOffer ranked) {
         NormalizedSalary ns = normalizer.normalize(o);
+        ScamAssessment scam = ScamDetector.assess(o);
         List<InjectionSignal> signals = m != null && m.getSignals() != null ? m.getSignals() : List.of();
         return new InboxItem(o.getId(), o.getTitle(), o.getCompany(), o.getLocation(), o.getUrl(), o.getWorkMode(),
                 o.getContractTypes(), o.getSeniority(), o.getSalaryMin(), o.getSalaryMax(), o.getSalaryCurrency(),
@@ -132,7 +137,8 @@ public class InboxService {
                 match == null ? List.of() : match.missingSkills().stream().limit(4).toList(), signals, seen,
                 Text.truncate(Text.nullToEmpty(o.getDescription()).replaceAll("\\s+", " ").strip(), 240),
                 ranked == null ? null : ranked.rankScore(), ranked != null && ranked.excluded(),
-                ranked == null ? List.of() : ranked.exclusions().stream().map(Exclusion::reason).toList());
+                ranked == null ? List.of() : ranked.exclusions().stream().map(Exclusion::reason).toList(),
+                scam.level().name(), scam.levelLabel());
     }
 
     private static Instant freshness(InboxItem i) {
