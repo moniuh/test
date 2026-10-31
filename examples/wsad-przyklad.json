@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "tytul": "Magazynier",
+      "tresc": "Magazynier\n\nMagazyny Północ sp. z o.o. zatrudni mężczyznę do pracy w magazynie w Strykowie.\n\nWymagania:\n- wiek do 35 lat\n- dobry stan zdrowia\n- dyspozycyjność, osoba bez zobowiązań rodzinnych\n- uprawnienia na wózki widłowe\n- doświadczenie min. 1 rok\n\nOferujemy:\n- atrakcyjne wynagrodzenie\n- pracę w młodym zespole\n- rodzinną atmosferę\n\nCV ze zdjęciem prosimy przesyłać na adres: rekrutacja@magazyny-polnoc.example\n\nWyrażam zgodę na przetwarzanie moich danych osobowych zawartych w ofercie pracy dla potrzeb niezbędnych do realizacji procesu rekrutacji zgodnie z ustawą z dnia 29 sierpnia 1997 r. o ochronie danych osobowych (Dz. U. z 2002 r. Nr 101, poz. 926).\n"
+    },
+    {
+      "id": "2",
+      "tytul": "Recepcjonistka",
+      "tresc": "Recepcjonistka\n\nHotel Pod Jesionem w Sopocie poszukuje recepcjonistki do młodego, dynamicznego zespołu.\n\nCzego oczekujemy:\n- miłej aparycji i wysokiej kultury osobistej\n- native speaker języka angielskiego lub niemieckiego\n- osoba w wieku 20–30 lat\n- niepaląca\n- gotowość do pracy w weekendy\n\nOferujemy wynagrodzenie do negocjacji, umowę zlecenie i pracę w rodzinnej atmosferze.\n\nW zgłoszeniu prosimy podać datę urodzenia, numer PESEL, stan cywilny oraz informację o obecnym wynagrodzeniu.\nAplikacje: praca@pod-jesionem.example, tel. 600 100 200.\n"
+    },
+    {
+      "id": "3",
+      "tytul": "Specjalista ds. płac",
+      "tresc": "Specjalista ds. płac\n\nBiuro Rachunkowe Liczba sp. z o.o. (Kraków, praca hybrydowa) szuka osoby do zespołu kadr i płac.\n\nTwoje zadania:\n- naliczanie list płac dla ok. 1500 pracowników naszych klientów,\n- przygotowywanie deklaracji ZUS i PIT,\n- obsługa programu Płatnik.\n\nWymagania:\n- wykształcenie wyższe ekonomiczne\n- min. 3 lata doświadczenia w kadrach i płacach\n- znajomość Kodeksu pracy\n- znajomość przepisów ZUS\n- biegła obsługa Excela\n- znajomość programu Symfonia\n- dokładność\n- samodzielność\n- komunikatywność\n- odporność na stres\n- jesteś zorganizowany i dokładny\n\nOferujemy:\n- umowę o pracę na pełny etat,\n- wynagrodzenie 7500–9000,\n- prywatną opiekę medyczną,\n- kartę sportową z dofinansowaniem 100 zł.\n\nSzukamy kandydata, który odnajdzie się w naszym zespole, będzie potrafił samodzielnie organizować pracę przy jednoczesnej obsłudze wielu klientów i terminów, a także będzie chętnie dzielił się wiedzą z młodszymi koleżankami i kolegami z działu, którzy dopiero zaczynają swoją karierę w kadrach i płacach.\n\nAdministratorem danych osobowych jest Biuro Rachunkowe Liczba sp. z o.o. Szczegóły w klauzuli informacyjnej na stronie www.liczba.example/rodo.\n"
+    },
+    {
+      "id": "4",
+      "tytul": "Programista / Programistka Python",
+      "tresc": "Programista / Programistka Python (K/M)\n\nWynagrodzenie: 14 000–18 000 zł brutto miesięcznie (umowa o pracę) lub 100–125 zł netto + VAT za godzinę (B2B)\nLokalizacja: Wrocław, praca hybrydowa (2 dni w tygodniu w biurze) lub w pełni zdalna\nForma zatrudnienia: umowa o pracę na czas nieokreślony albo B2B, pełny etat\n\nCzym będziesz się zajmować:\n- rozwojem systemu do planowania dostaw w Pythonie i Django,\n- projektowaniem API i integracjami z systemami partnerów,\n- przeglądami kodu i dbaniem o jakość testów,\n- współpracą z zespołem produktowym przy planowaniu kolejnych funkcji.\n\nCzego oczekujemy:\n- min. 3 lat doświadczenia w programowaniu w Pythonie,\n- znajomości PostgreSQL i REST API,\n- znajomości języka angielskiego na poziomie B2 (dokumentacja techniczna),\n- umiejętności pracy w zespole.\n\nMile widziane:\n- doświadczenie z Kubernetes,\n- znajomość React Native.\n\nOferujemy:\n- budżet szkoleniowy 4 000 zł rocznie,\n- elastyczne godziny pracy i 2 dodatkowe dni wolne dla rodziców,\n- prywatną opiekę medyczną.\n\nZapraszamy do aplikowania wszystkie osoby, bez względu na wiek, płeć, niepełnosprawność, wyznanie, narodowość czy orientację seksualną. Biuro jest dostępne dla osób poruszających się na wózku.\n\nCV (bez zdjęcia) prześlij przez formularz: praca.przyklad-tech.example/python. Nie pytamy o obecne wynagrodzenie — powiedz nam o swoich oczekiwaniach finansowych.\n\nAdministratorem Twoich danych osobowych jest Przykład Tech sp. z o.o. Dane przetwarzamy w celu przeprowadzenia rekrutacji (art. 6 ust. 1 lit. b i c RODO oraz art. 22¹ Kodeksu pracy) przez 6 miesięcy. Masz prawo dostępu do danych, ich sprostowania, usunięcia i ograniczenia przetwarzania. Pełna klauzula: praca.przyklad-tech.example/rodo.\n"
+    },
+    {
+      "id": "5",
+      "tytul": "Kierowca kat. C+E",
+      "tresc": "Kierowca kat. C+E\n\nFirma transportowa Szybki Szlak zatrudni kierowcę do 45 lat w transporcie międzynarodowym. Wymagamy dobrego stanu zdrowia i dyspozycyjności. Oferujemy konkurencyjne wynagrodzenie oraz umowę o pracę.\nKontakt: kadry@szybki-szlak.example"
+    },
+    {
+      "id": "6",
+      "tytul": "Kelner / Kelnerka (K/M)",
+      "tresc": "Kelner / Kelnerka (K/M)\n\nRestauracja Pod Lipą w Toruniu, umowa zlecenie, stawka 32–36 zł brutto/h.\nTwoje zadania: obsługa gości, przyjmowanie zamówień, dbanie o porządek na sali.\nAdministratorem danych jest Restauracja Pod Lipą — klauzula RODO w formularzu."
+    },
+    {
+      "id": "7",
+      "tytul": "Asystentka zarządu",
+      "tresc": "Asystentka zarządu\n\nSzukamy pani o miłej aparycji, bez zobowiązań rodzinnych, z biegłym angielskim. Biuro w Warszawie, umowa o pracę.\nObowiązki: organizacja kalendarza, obsługa korespondencji.\nCV ze zdjęciem: biuro@przyklad-zarzad.example"
+    },
+    {
+      "id": "8",
+      "tytul": "Analityk / Analityczka danych (K/M)",
+      "tresc": "Analityk / Analityczka danych (K/M)\n\nWynagrodzenie: 11 000–14 000 zł brutto/mies., umowa o pracę, praca zdalna.\nZakres obowiązków: przygotowywanie raportów, modelowanie danych w SQL, współpraca z działem sprzedaży.\nKlauzula informacyjna RODO: dane przetwarza Przykładowe Dane sp. z o.o. w celu rekrutacji."
+    },
+    {
+      "id": "9",
+      "tytul": "Opiekunka osób starszych",
+      "tresc": "Opiekunka osób starszych\n\nAgencja Opieki Spokojna Przystań zatrudni opiekunkę, nie starszą niż 55 lat, osobę niepalącą. Praca w Lublinie, umowa zlecenie, 28 zł brutto za godzinę.\nObowiązki: pomoc w codziennych czynnościach, przygotowywanie posiłków.\nPrzetwarzanie danych osobowych zgodnie z RODO."
+    },
+    {
+      "id": "10",
+      "tytul": "Księgowa",
+      "tresc": "Księgowa\n\nBiuro Rachunkowe Bilans w Gdańsku zatrudni księgową. Wynagrodzenie 8000–9500 brutto, umowa o pracę, praca stacjonarna.\nZakres obowiązków: prowadzenie pełnej księgowości, rozliczenia VAT.\nProsimy o informację o obecnym wynagrodzeniu.\nAdministratorem danych osobowych jest Biuro Rachunkowe Bilans."
+    }
+  ]
+}
