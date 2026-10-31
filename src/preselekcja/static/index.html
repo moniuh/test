@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Preselekcja CV — decyzję podejmuje człowiek</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">P</span>
+      <div>
+        <h1>Preselekcja CV</h1>
+        <p class="tagline">Wsparcie wstępnej selekcji · ocena w trybie blind · decyzję podejmuje człowiek</p>
+      </div>
+    </div>
+    <div class="topbar-controls">
+      <label class="field-inline">
+        <span>Oferta</span>
+        <select id="job-select" aria-label="Wybierz ofertę"></select>
+      </label>
+      <label class="field-inline">
+        <span>Użytkownik</span>
+        <input id="actor" type="text" maxlength="80" placeholder="np. rekruter-1" autocomplete="off">
+      </label>
+      <span id="mode-badge" class="badge badge-muted" title="Tryb oceny">…</span>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Sekcje">
+    <a href="#/ranking" data-tab="ranking">Ranking</a>
+    <a href="#/oferta" data-tab="oferta">Oferta</a>
+    <a href="#/dodaj" data-tab="dodaj">Dodaj CV</a>
+    <a href="#/audyt" data-tab="audyt">Dziennik audytowy</a>
+    <a href="#/raporty" data-tab="raporty">Nadzór i stronniczość</a>
+  </nav>
+
+  <main id="view" tabindex="-1"></main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <footer class="footer">
+    System wysokiego ryzyka (AI Act, zał. III pkt 4). Ranking i rekomendacje to informacje pomocnicze —
+    system nigdy sam nie odrzuca kandydatów. Dane w wersji demonstracyjnej są fikcyjne.
+  </footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>
