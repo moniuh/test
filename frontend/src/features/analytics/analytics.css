@@ -1,0 +1,65 @@
+/* Moduł „Analityka i motywacja” — style uzupełniające wspólne klasy (.bars, .stat, .progress, .card). */
+
+.analytics-stats .stat { padding: 0.85rem 1rem; }
+.analytics-stats .stat-value small { font-size: 0.95rem; font-weight: 600; color: var(--muted); }
+
+.analytics-progress { height: 14px; margin: 0.35rem 0 0.5rem; }
+.analytics-progress.achieved > span { background: var(--success); }
+
+/* mini-wykres tygodni: kolumny z wartościami tekstowymi */
+.analytics-weeks { list-style: none; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0.35rem; padding: 0; margin: 0.75rem 0 0; }
+.analytics-weeks li { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; font-size: 0.75rem; color: var(--muted); }
+.analytics-weeks .col { width: 100%; height: 56px; display: flex; align-items: flex-end; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+.analytics-weeks .col > span { display: block; width: 100%; background: var(--primary); border-radius: 4px 4px 0 0; }
+.analytics-weeks .col > span.achieved { background: var(--success); }
+.analytics-weeks .value { font-weight: 700; color: var(--text); }
+.analytics-weeks .current .value { text-decoration: underline; }
+
+/* „Co dalej?” */
+.analytics-actions { list-style: none; padding: 0; margin: 0; counter-reset: action; }
+.analytics-actions > li { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem 0.75rem; padding: 0.65rem 0; border-bottom: 1px solid var(--border); }
+.analytics-actions > li:last-child { border-bottom: none; }
+.analytics-actions .badge { align-self: start; margin-top: 0.15rem; min-width: 6.5rem; justify-content: center; }
+.analytics-actions a { font-weight: 600; }
+.analytics-actions p { margin: 0.1rem 0 0; }
+
+/* szybki wpis nastroju: radio jako „pigułki” z etykietą słowną */
+.analytics-scale { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.analytics-scale label {
+  display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.65rem; border: 1px solid var(--border);
+  border-radius: 999px; font-weight: 500; font-size: 0.88rem; cursor: pointer; background: var(--surface);
+}
+.analytics-scale label:hover { background: var(--surface-2); }
+.analytics-scale label:has(input:checked) { border-color: var(--primary); background: var(--primary-soft); color: var(--primary); font-weight: 700; }
+.analytics-scale label:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+.analytics-scale input { margin: 0; }
+.analytics-mood textarea { min-height: 60px; }
+
+/* lejek */
+.analytics-funnel .bar-row { grid-template-columns: minmax(120px, 160px) 1fr minmax(4.5rem, auto); }
+.analytics-funnel .conversion { grid-column: 2 / 4; margin-top: -0.3rem; font-size: 0.8rem; color: var(--muted); }
+
+/* trendy */
+.analytics-trends .bar-row { grid-template-columns: minmax(110px, 150px) 1fr minmax(10rem, auto); }
+.analytics-trends .meta { grid-column: 1 / 4; display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; margin: -0.25rem 0 0.35rem; font-size: 0.8rem; color: var(--muted); }
+
+/* historia nastroju */
+.analytics-scale-cell { display: grid; grid-template-columns: 70px auto; align-items: center; gap: 0.5rem; white-space: nowrap; }
+.analytics-scale-cell .bar-track { height: 10px; }
+
+/* nagłówki wierszy: bez wersalików z globalnego stylu th */
+.analytics-table tbody th { text-transform: none; letter-spacing: normal; font-size: 0.92rem; color: var(--text); font-weight: 600; }
+.analytics-table tbody th .small { font-weight: 400; }
+
+.analytics-filters { display: flex; flex-wrap: wrap; gap: 0 1rem; align-items: flex-end; }
+.analytics-filters .field { min-width: 160px; }
+.analytics-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* raport do wydruku */
+.analytics-report .stat-value { font-size: 1.5rem; }
+@media print {
+  .analytics-report .table-wrap { overflow: visible; }
+  .analytics-report th, .analytics-report td { padding: 0.3rem 0.4rem; font-size: 10.5pt; }
+  .analytics-report .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .analytics-report a { color: inherit; text-decoration: none; }
+}
