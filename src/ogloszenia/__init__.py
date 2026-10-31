@@ -1,0 +1,1 @@
+"""Audytor ogłoszeń o pracę."""

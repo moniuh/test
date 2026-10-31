@@ -1,0 +1,20 @@
+{
+  "examples": [
+    {"id": "magazynier-zle", "title": "Magazynier", "kind": "złe", "file": "magazynier-zle.txt",
+     "description": "Wiek, płeć, zdrowie, zdjęcie w CV, brak kwot i nieaktualna zgoda RODO."},
+    {"id": "recepcjonistka-zle", "title": "Recepcjonistka", "kind": "złe", "file": "recepcjonistka-zle.txt",
+     "description": "Aparycja, native speaker, PESEL, stan cywilny i pytanie o obecne wynagrodzenie."},
+    {"id": "handlowiec-zle", "title": "Przedstawiciel handlowy", "kind": "złe", "file": "handlowiec-zle.txt",
+     "description": "Żargon, narodowość, religia, wiek, dowód osobisty i zaświadczenie o zarobkach."},
+    {"id": "specjalista-plac-do-poprawy", "title": "Specjalista ds. płac", "kind": "do poprawy",
+     "file": "specjalista-plac-do-poprawy.txt",
+     "description": "Kwota bez waluty i brutto/netto, za długa lista wymagań, tytuł w formie męskiej."},
+    {"id": "programista-dobre", "title": "Programista / Programistka Python (K/M)", "kind": "dobre",
+     "file": "programista-dobre.txt",
+     "description": "Widełki, tryb pracy, klauzula równego traktowania i RODO."},
+    {"id": "mlodszy-specjalista-dobre", "title": "Młodszy specjalista (k/m/x) — Junior", "kind": "dobre",
+     "file": "mlodszy-specjalista-dobre.txt",
+     "description": "Pułapki fałszywych alarmów: „młodszy”, „Junior”, data urodzenia, oczekiwania finansowe."}
+  ],
+  "batch": {"csv": "wsad-przyklad.csv", "json": "wsad-przyklad.json"}
+}

@@ -1,0 +1,32 @@
+Programista / Programistka Python (K/M)
+
+Wynagrodzenie: 14 000–18 000 zł brutto miesięcznie (umowa o pracę) lub 100–125 zł netto + VAT za godzinę (B2B)
+Lokalizacja: Wrocław, praca hybrydowa (2 dni w tygodniu w biurze) lub w pełni zdalna
+Forma zatrudnienia: umowa o pracę na czas nieokreślony albo B2B, pełny etat
+
+Czym będziesz się zajmować:
+- rozwojem systemu do planowania dostaw w Pythonie i Django,
+- projektowaniem API i integracjami z systemami partnerów,
+- przeglądami kodu i dbaniem o jakość testów,
+- współpracą z zespołem produktowym przy planowaniu kolejnych funkcji.
+
+Czego oczekujemy:
+- min. 3 lat doświadczenia w programowaniu w Pythonie,
+- znajomości PostgreSQL i REST API,
+- znajomości języka angielskiego na poziomie B2 (dokumentacja techniczna),
+- umiejętności pracy w zespole.
+
+Mile widziane:
+- doświadczenie z Kubernetes,
+- znajomość React Native.
+
+Oferujemy:
+- budżet szkoleniowy 4 000 zł rocznie,
+- elastyczne godziny pracy i 2 dodatkowe dni wolne dla rodziców,
+- prywatną opiekę medyczną.
+
+Zapraszamy do aplikowania wszystkie osoby, bez względu na wiek, płeć, niepełnosprawność, wyznanie, narodowość czy orientację seksualną. Biuro jest dostępne dla osób poruszających się na wózku.
+
+CV (bez zdjęcia) prześlij przez formularz: praca.przyklad-tech.example/python. Nie pytamy o obecne wynagrodzenie — powiedz nam o swoich oczekiwaniach finansowych.
+
+Administratorem Twoich danych osobowych jest Przykład Tech sp. z o.o. Dane przetwarzamy w celu przeprowadzenia rekrutacji (art. 6 ust. 1 lit. b i c RODO oraz art. 22¹ Kodeksu pracy) przez 6 miesięcy. Masz prawo dostępu do danych, ich sprostowania, usunięcia i ograniczenia przetwarzania. Pełna klauzula: praca.przyklad-tech.example/rodo.

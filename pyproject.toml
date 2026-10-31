@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ogloszenia"
+version = "0.1.0"
+description = "Audytor ogłoszeń o pracę: jawność wynagrodzeń, język neutralny płciowo, dyskryminacja, dane nadmiarowe"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "fastapi>=0.110",
+    "pydantic>=2.6",
+    "uvicorn>=0.27",
+    "anthropic>=2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[project.scripts]
+ogloszenia-wsad = "ogloszenia.batch:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ogloszenia = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
