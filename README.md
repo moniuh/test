@@ -1,8 +1,12 @@
 # Radar Pracy
 
-Asystent szukania pracy dla kandydata: zbiera oferty, porównuje je z Twoim CV wymaganie po
-wymaganiu (z cytatem z CV jako dowodem), prowadzi przez aplikowanie, rozmowy i negocjacje,
-a na koniec pokazuje, co działa, a co nie.
+**Agregator ogłoszeń o pracę z tailoringiem CV.** Oferty z wielu źródeł (kanały RSS/Atom, strony
+kariery firm z danymi schema.org, wklejone ogłoszenia i linki) trafiają do jednej skrzynki, gdzie są
+automatycznie analizowane: wymagania, widełki sprowadzone do wspólnej miary, tryb pracy, czerwone
+flagi, duplikaty. Każdą ofertę widzisz z wynikiem dopasowania do Twojego CV (wymaganie po wymaganiu,
+z cytatem z CV jako dowodem), a pod wybraną ofertę generujesz **dopasowaną, prawdziwą wersję CV**:
+właściwe kompetencje na górze, punkty doświadczenia w kolejności trafności, nic zmyślonego (pilnuje
+tego strażnik prawdomówności).
 
 - **Stack:** React 19 + TypeScript (Vite) · Java 21 + Spring Boot 4 (JPA, H2/PostgreSQL) · opcjonalnie Claude API
 - **Dane zostają u Ciebie.** Aplikacja jest jednoosobowa i działa w pełni bez AI. Z kluczem API
