@@ -3,7 +3,9 @@ import { useEffect, useRef } from 'react';
 
 const NAV = [
   { to: '/', label: 'Pulpit', end: true },
+  { to: '/agregator', label: 'Agregator' },
   { to: '/oferty', label: 'Oferty' },
+  { to: '/dopasuj-cv', label: 'Tailoring CV' },
   { to: '/aplikacje', label: 'Aplikacje' },
   { to: '/rozmowy', label: 'Rozmowy' },
   { to: '/wynagrodzenia', label: 'Wynagrodzenia' },

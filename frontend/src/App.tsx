@@ -12,15 +12,21 @@ import { ApplicationsPage } from './features/applications/ApplicationsPage';
 import { ApplicationDetailPage } from './features/applications/ApplicationDetailPage';
 import { InterviewsPage } from './features/interviews/InterviewsPage';
 import { SalaryPage } from './features/salary/SalaryPage';
+import { AggregatorPage } from './features/aggregator/AggregatorPage';
+import { TailoredCvsPage } from './features/tailoring/TailoredCvsPage';
+import { TailorPage } from './features/tailoring/TailorPage';
 
 export function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<DashboardPage />} />
+        <Route path="agregator" element={<AggregatorPage />} />
         <Route path="oferty" element={<OffersPage />} />
         <Route path="oferty/nowa" element={<OfferNewPage />} />
         <Route path="oferty/:id" element={<OfferDetailPage />} />
+        <Route path="dopasuj-cv" element={<TailoredCvsPage />} />
+        <Route path="dopasuj-cv/:offerId" element={<TailorPage />} />
         <Route path="aplikacje" element={<ApplicationsPage />} />
         <Route path="aplikacje/:id" element={<ApplicationDetailPage />} />
         <Route path="rozmowy" element={<InterviewsPage />} />

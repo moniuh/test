@@ -1,133 +1,1358 @@
 {
   "model": {
-    "opis": "Każdy pomysł oceniony w skali 1–5 w pięciu wymiarach. Wynik = (0,30·W + 0,20·C + 0,25·K + 0,15·R + 0,10·Z) × 20 → 0–100. Remis rozstrzyga kolejno: W, C, K, numer pomysłu.",
+    "opis": "Każdy pomysł oceniony w skali 1–5 w pięciu wymiarach względem celu produktu (agregator ogłoszeń + tailoring CV). Wynik = (0,30·W + 0,20·C + 0,25·K + 0,15·R + 0,10·Z) × 20 → 0–100. Remis rozstrzyga kolejno: W, C, K, numer pomysłu.",
     "wymiary": [
-      { "kod": "W", "nazwa": "Wartość", "waga": 0.30, "piec": "wyraźnie zwiększa szansę na pracę lub oszczędza godziny tygodniowo", "jeden": "kosmetyka, miło mieć" },
-      { "kod": "C", "nazwa": "Częstotliwość", "waga": 0.20, "piec": "używane codziennie w trakcie szukania pracy", "jeden": "raz na całe poszukiwania" },
-      { "kod": "K", "nazwa": "Wykonalność", "waga": 0.25, "piec": "≤1 dzień, bez zewnętrznych zależności", "jeden": "tygodnie pracy, zewnętrzne API, umowy partnerskie" },
-      { "kod": "R", "nazwa": "Wyróżnik", "waga": 0.15, "piec": "nie oferują tego portale ani arkusz kalkulacyjny", "jeden": "standard w każdym narzędziu" },
-      { "kod": "Z", "nazwa": "Bezpieczeństwo", "waga": 0.10, "piec": "brak ryzyka prawnego i zależności od platform", "jeden": "zależność od regulaminów cudzych platform, dane wrażliwe" }
+      {
+        "kod": "W",
+        "nazwa": "Wartość",
+        "waga": 0.3,
+        "piec": "wyraźnie zwiększa szansę na pracę lub oszczędza godziny tygodniowo",
+        "jeden": "kosmetyka, miło mieć"
+      },
+      {
+        "kod": "C",
+        "nazwa": "Częstotliwość",
+        "waga": 0.2,
+        "piec": "używane codziennie w trakcie szukania pracy",
+        "jeden": "raz na całe poszukiwania"
+      },
+      {
+        "kod": "K",
+        "nazwa": "Wykonalność",
+        "waga": 0.25,
+        "piec": "≤1 dzień, bez zewnętrznych zależności",
+        "jeden": "tygodnie pracy, zewnętrzne API, umowy partnerskie"
+      },
+      {
+        "kod": "R",
+        "nazwa": "Wyróżnik",
+        "waga": 0.15,
+        "piec": "nie oferują tego portale ani arkusz kalkulacyjny",
+        "jeden": "standard w każdym narzędziu"
+      },
+      {
+        "kod": "Z",
+        "nazwa": "Bezpieczeństwo",
+        "waga": 0.1,
+        "piec": "brak ryzyka prawnego i zależności od platform",
+        "jeden": "zależność od regulaminów cudzych platform, dane wrażliwe"
+      }
     ]
   },
   "kategorie": {
-    "A": "Profil i CV",
-    "B": "Pozyskiwanie i analiza ofert",
-    "C": "Dopasowanie i rekomendacje",
+    "S": "Źródła i agregacja ofert",
+    "T": "Tailoring CV",
+    "B": "Analiza i jakość ofert",
+    "C": "Wyszukiwanie i rekomendacje",
+    "A": "Profil i baza CV",
     "D": "Aplikowanie i śledzenie",
     "E": "Przygotowanie do rozmów",
     "F": "Wynagrodzenia i negocjacje",
-    "G": "Analityka i motywacja",
+    "G": "Analityka rynku i postępów",
     "H": "Prywatność, bezpieczeństwo, dostępność",
     "I": "Platforma i integracje"
   },
   "pomysly": [
-    { "id": 1, "kat": "A", "tytul": "Import CV z PDF i DOCX", "opis": "Wgranie pliku CV, ekstrakcja tekstu (PDFBox, Apache POI) i zapis jako nowa wersja CV.", "s": [5, 3, 4, 2, 5] },
-    { "id": 2, "kat": "A", "tytul": "Automatyczna ekstrakcja umiejętności z CV", "opis": "Słownik technologii i kompetencji z synonimami rozpoznaje umiejętności w CV i proponuje je do profilu, z latami doświadczenia, jeśli są w tekście.", "s": [5, 4, 4, 3, 5] },
-    { "id": 3, "kat": "A", "tytul": "Warianty CV pod różne role", "opis": "Kilka wersji CV (np. Backend, Fullstack) z wyborem aktywnej; dopasowanie liczy się względem wybranej wersji.", "s": [4, 3, 5, 3, 5] },
-    { "id": 4, "kat": "A", "tytul": "Audyt CV pod ATS", "opis": "Kontrola sekcji, długości, danych kontaktowych, czasowników akcji i mierzalnych efektów; wynik 0–100 z listą poprawek.", "s": [5, 3, 5, 3, 5] },
-    { "id": 5, "kat": "A", "tytul": "Dopasowanie CV do oferty (tailoring)", "opis": "Lista słów kluczowych z oferty, których brakuje w CV, ale które kandydat ma w profilu, z gotową propozycją zdania.", "s": [5, 4, 4, 4, 5] },
-    { "id": 6, "kat": "A", "tytul": "Eksport CV do PDF z szablonu", "opis": "Generowanie estetycznego PDF z danych profilu w kilku szablonach.", "s": [4, 2, 3, 2, 5] },
-    { "id": 7, "kat": "A", "tytul": "Klauzula RODO w CV", "opis": "Sprawdzenie obecności klauzuli zgody na przetwarzanie danych i generator aktualnej treści.", "s": [3, 2, 5, 3, 5] },
-    { "id": 8, "kat": "A", "tytul": "Wykrywanie zbędnych danych wrażliwych w CV", "opis": "Ostrzeżenia o PESEL, dacie urodzenia, stanie cywilnym, zdjęciu i innych danych, których pracodawca nie potrzebuje.", "s": [4, 2, 5, 4, 5] },
-    { "id": 9, "kat": "A", "tytul": "Mapa umiejętności z poziomami", "opis": "Wizualizacja umiejętności z poziomem biegłości i latami doświadczenia.", "s": [3, 2, 4, 2, 5] },
-    { "id": 10, "kat": "A", "tytul": "Linki portfolio z walidacją", "opis": "GitHub, LinkedIn i strona osobista z kontrolą poprawności adresów.", "s": [2, 1, 5, 1, 5] },
-    { "id": 11, "kat": "A", "tytul": "Tłumaczenie CV PL↔EN przez AI", "opis": "Wersja językowa CV generowana przez model z zachowaniem terminologii.", "s": [3, 2, 3, 2, 3] },
-    { "id": 12, "kat": "A", "tytul": "Historia wersji CV z porównaniem", "opis": "Wersjonowanie treści CV i podgląd różnic między wersjami.", "s": [3, 2, 4, 3, 5] },
-
-    { "id": 13, "kat": "B", "tytul": "Parser struktury oferty", "opis": "Z wklejonego tekstu: stanowisko, firma, lokalizacja, widełki, wymagania obowiązkowe i mile widziane.", "s": [5, 5, 4, 3, 5] },
-    { "id": 14, "kat": "B", "tytul": "Import oferty z adresu URL", "opis": "Pobranie strony ogłoszenia na żądanie użytkownika i ekstrakcja treści do parsera.", "s": [5, 5, 3, 3, 2] },
-    { "id": 15, "kat": "B", "tytul": "Subskrypcja kanałów RSS/JSON z ofertami", "opis": "Cykliczny import ofert z kanałów udostępnianych przez portale i firmy.", "s": [4, 4, 3, 3, 3] },
-    { "id": 16, "kat": "B", "tytul": "Deduplikacja ofert", "opis": "Wykrywanie tej samej oferty opublikowanej w kilku źródłach (podobieństwo tytułu, firmy i treści).", "s": [4, 4, 4, 4, 5] },
-    { "id": 17, "kat": "B", "tytul": "Normalizacja wynagrodzeń", "opis": "Sprowadzenie widełek godzinowych, dziennych, miesięcznych i rocznych, brutto, netto i B2B do wspólnej miary miesięcznej.", "s": [5, 4, 4, 5, 5] },
-    { "id": 18, "kat": "B", "tytul": "Detektor czerwonych flag w ofercie", "opis": "Brak widełek, nieodpłatny okres próbny, umowa o dzieło na stałą pracę, „rodzinna atmosfera” i inne sygnały ostrzegawcze z uzasadnieniem.", "s": [5, 4, 5, 5, 5] },
-    { "id": 19, "kat": "B", "tytul": "Wykrywanie ofert-oszustw", "opis": "Prośby o opłaty, przelewy, przyjmowanie paczek, dane dokumentów na starcie i komunikatory zamiast rozmowy.", "s": [5, 3, 4, 5, 5] },
-    { "id": 20, "kat": "B", "tytul": "Klasyfikacja poziomu stanowiska", "opis": "Junior, mid lub senior na podstawie treści ogłoszenia i wymaganych lat doświadczenia.", "s": [3, 4, 5, 2, 5] },
-    { "id": 21, "kat": "B", "tytul": "Wykrywanie trybu pracy i typu umowy", "opis": "Zdalna, hybrydowa, stacjonarna; UoP, B2B, zlecenie, dzieło — rozpoznane z treści.", "s": [4, 5, 5, 2, 5] },
-    { "id": 22, "kat": "B", "tytul": "Wygasanie ofert i archiwizacja", "opis": "Data ważności ogłoszenia i automatyczne przenoszenie przeterminowanych ofert do archiwum.", "s": [3, 3, 5, 2, 5] },
-    { "id": 23, "kat": "B", "tytul": "Tagi i notatki przy ofertach", "opis": "Własne etykiety i notatki do filtrowania ofert.", "s": [3, 4, 5, 1, 5] },
-    { "id": 24, "kat": "B", "tytul": "Odrzucanie ofert z powodem", "opis": "Odrzucenie jednym kliknięciem z powodem (wynagrodzenie, lokalizacja, technologia), który zasila ranking.", "s": [4, 5, 5, 3, 5] },
-    { "id": 25, "kat": "B", "tytul": "Profile firm", "opis": "Agregacja ofert i aplikacji po firmie, notatki i własna ocena pracodawcy.", "s": [3, 3, 4, 3, 5] },
-    { "id": 26, "kat": "B", "tytul": "Mapa ofert i czas dojazdu", "opis": "Geokodowanie adresów i czas dojazdu z domu.", "s": [3, 3, 2, 3, 3] },
-
-    { "id": 27, "kat": "C", "tytul": "Dopasowanie stopniowane", "opis": "Częściowe trafienia: brakujące lata doświadczenia, poziom języka, pokrewna technologia z tej samej rodziny.", "s": [4, 5, 4, 4, 5] },
-    { "id": 28, "kat": "C", "tytul": "Słownik synonimów i rodzin technologii", "opis": "React.js = React, k8s = Kubernetes, Postgres = PostgreSQL; rodziny (bazy SQL, chmury) dają częściowe dopasowanie.", "s": [5, 5, 5, 3, 5] },
-    { "id": 29, "kat": "C", "tytul": "Edytowalne wagi wymagań", "opis": "Użytkownik decyduje, które wymagania liczą się bardziej w wyniku.", "s": [3, 3, 5, 3, 5] },
-    { "id": 30, "kat": "C", "tytul": "Luki kompetencyjne na tle rynku", "opis": "Które umiejętności najczęściej blokują dopasowanie w zebranych ofertach i ile ofert odblokowałaby nauka każdej z nich.", "s": [5, 3, 5, 4, 5] },
-    { "id": 31, "kat": "C", "tytul": "Ranking ofert: dopasowanie × preferencje", "opis": "Kolejność ofert wg dopasowania, wynagrodzenia, trybu pracy i lokalizacji, z rozbiciem na składniki.", "s": [5, 5, 5, 3, 5] },
-    { "id": 32, "kat": "C", "tytul": "Twarde filtry deal-breakerów", "opis": "Wykluczenie ofert z wykluczającymi warunkami (np. tylko praca w biurze, wynagrodzenie poniżej minimum, słowa zakazane).", "s": [4, 5, 5, 2, 5] },
-    { "id": 33, "kat": "C", "tytul": "Zapisane wyszukiwania z alertami", "opis": "Zapis filtrów i licznik nowych ofert spełniających kryteria od ostatniego sprawdzenia.", "s": [5, 4, 4, 2, 5] },
-    { "id": 34, "kat": "C", "tytul": "Wyjaśnienie wyniku dopasowania", "opis": "„Dlaczego 72%”: wkład każdego wymagania w punktach, z cytatem z CV jako dowodem.", "s": [4, 4, 5, 4, 5] },
-    { "id": 35, "kat": "C", "tytul": "Uczenie preferencji z ocen", "opis": "Polubione i odrzucone oferty korygują wagi cech w rankingu (np. technologie, tryb pracy).", "s": [4, 4, 3, 4, 5] },
-    { "id": 36, "kat": "C", "tytul": "Podobne oferty", "opis": "TF-IDF i podobieństwo cosinusowe — „więcej takich ofert”.", "s": [4, 4, 4, 3, 5] },
-    { "id": 37, "kat": "C", "tytul": "Role sąsiednie i ścieżki zmiany kariery", "opis": "Podpowiedzi stanowisk o dużym pokryciu umiejętności (np. QA → SDET).", "s": [3, 2, 3, 4, 5] },
-    { "id": 38, "kat": "C", "tytul": "Dopasowanie semantyczne przez AI", "opis": "Druga opinia modelu językowego dla wymagań, których nie rozpoznał słownik.", "s": [4, 4, 3, 3, 3] },
-
-    { "id": 39, "kat": "D", "tytul": "Tablica Kanban z przeciąganiem", "opis": "Aplikacje w kolumnach statusów, zmiana statusu przez przeciągnięcie lub klawiaturą.", "s": [5, 5, 4, 2, 5] },
-    { "id": 40, "kat": "D", "tytul": "Oś czasu aplikacji", "opis": "Historia zmian statusów, rozmów, wiadomości i notatek w jednym widoku.", "s": [4, 4, 5, 2, 5] },
-    { "id": 41, "kat": "D", "tytul": "Przypomnienia o follow-upie", "opis": "Automatyczny termin kontaktu (np. 7 dni bez odpowiedzi) i lista zaległych follow-upów.", "s": [5, 4, 5, 3, 5] },
-    { "id": 42, "kat": "D", "tytul": "List motywacyjny oparty na dowodach", "opis": "List budowany z cytatów CV dopasowanych do wymagań oferty; tryb offline z szablonu i opcjonalnie AI.", "s": [5, 4, 4, 4, 4] },
-    { "id": 43, "kat": "D", "tytul": "Szablony wiadomości", "opis": "Follow-up, podziękowanie po rozmowie, prośba o informację zwrotną, odmowa i przyjęcie oferty — z podstawieniem danych.", "s": [4, 3, 5, 2, 5] },
-    { "id": 44, "kat": "D", "tytul": "Mini-CRM kontaktów rekruterów", "opis": "Baza osób, z którymi kandydat rozmawiał, z historią kontaktów.", "s": [3, 3, 4, 2, 5] },
-    { "id": 45, "kat": "D", "tytul": "Kalendarz rozmów z eksportem .ics", "opis": "Terminy rozmów przy aplikacjach i eksport do dowolnego kalendarza.", "s": [4, 3, 5, 2, 5] },
-    { "id": 46, "kat": "D", "tytul": "Snapshot wysłanych dokumentów", "opis": "Zapis dokładnej treści CV i listu wysłanych do firmy w chwili aplikowania.", "s": [4, 2, 5, 3, 5] },
-    { "id": 47, "kat": "D", "tytul": "Ostrzeżenie o ponownej aplikacji", "opis": "Informacja, że kandydat już aplikował do tej firmy lub na tę samą rolę, z datą i wynikiem.", "s": [4, 3, 5, 3, 5] },
-    { "id": 48, "kat": "D", "tytul": "Cel tygodniowy i seria", "opis": "Liczba aplikacji na tydzień i licznik tygodni z osiągniętym celem.", "s": [3, 4, 5, 2, 5] },
-    { "id": 49, "kat": "D", "tytul": "Import i eksport CSV", "opis": "Przeniesienie trackera z arkusza kalkulacyjnego i z powrotem.", "s": [3, 2, 5, 1, 5] },
-    { "id": 50, "kat": "D", "tytul": "Automatyczne statusy z poczty", "opis": "Rozpoznawanie odpowiedzi firm w skrzynce Gmail i aktualizacja statusu.", "s": [5, 4, 2, 4, 2] },
-    { "id": 51, "kat": "D", "tytul": "Rozszerzenie przeglądarki „zapisz ofertę”", "opis": "Jedno kliknięcie na stronie portalu zapisuje ofertę w aplikacji.", "s": [5, 5, 2, 3, 3] },
-    { "id": 52, "kat": "D", "tytul": "Notatki z rozmów", "opis": "Osoby prowadzące, zadane pytania, wrażenia i ustalenia przy każdej rozmowie.", "s": [4, 3, 5, 2, 5] },
-
-    { "id": 53, "kat": "E", "tytul": "Generator pytań rekrutacyjnych z oferty", "opis": "Pytania techniczne i behawioralne wyprowadzone z wymagań konkretnej oferty, z luką kompetencyjną na pierwszym miejscu.", "s": [5, 4, 5, 4, 5] },
-    { "id": 54, "kat": "E", "tytul": "Ocena odpowiedzi metodą STAR", "opis": "Heurystyki sprawdzają sytuację, zadanie, działanie, rezultat, liczby i długość odpowiedzi.", "s": [5, 3, 4, 4, 5] },
-    { "id": 55, "kat": "E", "tytul": "Symulator rozmowy z AI", "opis": "Model w roli rekrutera prowadzi rozmowę na podstawie oferty.", "s": [5, 3, 3, 4, 3] },
-    { "id": 56, "kat": "E", "tytul": "Bank historii STAR", "opis": "Własne osiągnięcia zapisane raz i podpowiadane do pytań oraz wymagań.", "s": [4, 3, 5, 4, 5] },
-    { "id": 57, "kat": "E", "tytul": "Pytania do rekrutera", "opis": "Generator pytań, które kandydat zadaje firmie, zależnie od etapu.", "s": [3, 3, 5, 2, 5] },
-    { "id": 58, "kat": "E", "tytul": "Checklista przed rozmową", "opis": "Research firmy, sprzęt, dojazd, dokumenty.", "s": [3, 3, 5, 2, 5] },
-    { "id": 59, "kat": "E", "tytul": "Fiszki z luk kompetencyjnych", "opis": "Materiał do powtórek generowany z brakujących umiejętności.", "s": [3, 3, 4, 3, 5] },
-    { "id": 60, "kat": "E", "tytul": "Nagrywanie i transkrypcja odpowiedzi", "opis": "Ćwiczenie odpowiedzi głosowych z zapisem tekstu.", "s": [3, 2, 2, 3, 3] },
-    { "id": 61, "kat": "E", "tytul": "Stoper odpowiedzi", "opis": "Limit czasu na odpowiedź w trybie ćwiczeń.", "s": [2, 3, 5, 1, 5] },
-    { "id": 62, "kat": "E", "tytul": "Debrief po rozmowie", "opis": "Co poszło dobrze, co poprawić, jakie padły pytania; wnioski zbierane między rozmowami.", "s": [4, 3, 5, 3, 5] },
-
-    { "id": 63, "kat": "F", "tytul": "Kalkulator netto UoP, B2B, zlecenie", "opis": "Szacunek kwoty „na rękę” z parametrami podatkowymi na dany rok zapisanymi w jednym miejscu.", "s": [5, 4, 4, 4, 4] },
-    { "id": 64, "kat": "F", "tytul": "Porównywarka ofert", "opis": "Zestawienie kilku ofert: netto, benefity, dni wolne, dojazd — z wartością całkowitą.", "s": [5, 3, 4, 4, 5] },
-    { "id": 65, "kat": "F", "tytul": "Statystyki widełek z zebranych ofert", "opis": "Mediana i rozrzut wynagrodzeń wg poziomu i typu umowy.", "s": [4, 3, 5, 4, 5] },
-    { "id": 66, "kat": "F", "tytul": "Asystent negocjacji", "opis": "Kotwica, kontroferta i gotowe sformułowania na podstawie oferty i danych rynkowych.", "s": [4, 2, 5, 3, 5] },
-    { "id": 67, "kat": "F", "tytul": "Wycena benefitów", "opis": "Wartość pieniężna karty sportowej, opieki medycznej, PPK i budżetu szkoleniowego.", "s": [3, 2, 5, 3, 4] },
-    { "id": 68, "kat": "F", "tytul": "Koszt i czas dojazdu", "opis": "Miesięczny koszt i czas dojazdu w porównaniu ofert.", "s": [3, 2, 5, 2, 5] },
-    { "id": 69, "kat": "F", "tytul": "Ostrzeżenie o stawce poniżej rynku", "opis": "Porównanie widełek oferty z medianą podobnych ofert.", "s": [4, 3, 5, 4, 5] },
-    { "id": 70, "kat": "F", "tytul": "Raport płacowy z danych publicznych", "opis": "Integracja z danymi GUS o wynagrodzeniach w zawodach.", "s": [2, 1, 2, 2, 3] },
-
-    { "id": 71, "kat": "G", "tytul": "Lejek rekrutacyjny", "opis": "Aplikacje → odpowiedzi → rozmowy → oferty, z konwersją między etapami.", "s": [5, 4, 5, 3, 5] },
-    { "id": 72, "kat": "G", "tytul": "Skuteczność wg źródła i wersji CV", "opis": "Odsetek odpowiedzi i rozmów dla każdego źródła oferty i wariantu CV (test A/B CV).", "s": [5, 3, 5, 5, 5] },
-    { "id": 73, "kat": "G", "tytul": "Pulpit tygodniowy", "opis": "Aktywność w bieżącym tygodniu względem celu, najbliższe rozmowy i najlepsze nowe oferty.", "s": [4, 5, 5, 2, 5] },
-    { "id": 74, "kat": "G", "tytul": "Czas odpowiedzi firm", "opis": "Średni czas od aplikacji do pierwszej odpowiedzi.", "s": [3, 2, 5, 3, 5] },
-    { "id": 75, "kat": "G", "tytul": "Trendy umiejętności w ofertach", "opis": "Najczęściej wymagane technologie w zebranych ofertach i ich pokrycie przez profil.", "s": [4, 3, 5, 4, 5] },
-    { "id": 76, "kat": "G", "tytul": "Dziennik samopoczucia", "opis": "Krótki wpis nastroju i energii; ostrzeżenie przy spadku i sugestia przerwy.", "s": [3, 3, 5, 4, 5] },
-    { "id": 77, "kat": "G", "tytul": "Cotygodniowe podsumowanie e-mail", "opis": "Raport aktywności wysyłany pocztą.", "s": [3, 2, 3, 2, 4] },
-    { "id": 78, "kat": "G", "tytul": "Heatmapa aktywności", "opis": "Kalendarz dni z aplikacjami i rozmowami.", "s": [2, 3, 5, 1, 5] },
-    { "id": 79, "kat": "G", "tytul": "Raport aktywności poszukiwania pracy", "opis": "Zestawienie aplikacji i rozmów do wydruku lub CSV, np. dla doradcy kariery lub urzędu pracy.", "s": [4, 2, 5, 5, 5] },
-    { "id": 80, "kat": "G", "tytul": "Anonimowy benchmark z innymi", "opis": "Porównanie własnych wskaźników ze zagregowanymi danymi innych użytkowników.", "s": [3, 2, 2, 4, 2] },
-
-    { "id": 81, "kat": "H", "tytul": "Dziennik wywołań AI", "opis": "Co, kiedy i w jakiej postaci (po maskowaniu) zostało wysłane do modelu.", "s": [3, 2, 5, 4, 5] },
-    { "id": 82, "kat": "H", "tytul": "Maskowanie danych osobowych przed AI", "opis": "Imię i nazwisko, e-mail, telefon, PESEL i adres zastępowane znacznikami przed wysłaniem do modelu i przywracane w wyniku.", "s": [4, 3, 5, 4, 5] },
-    { "id": 83, "kat": "H", "tytul": "Detektor prompt injection w ofertach", "opis": "Wykrywanie ukrytych poleceń dla AI w treści ogłoszeń.", "s": [3, 2, 5, 5, 5] },
-    { "id": 84, "kat": "H", "tytul": "Eksport, import i usunięcie danych", "opis": "Kopia zapasowa całości w JSON i trwałe usunięcie danych (RODO).", "s": [4, 1, 5, 3, 5] },
-    { "id": 85, "kat": "H", "tytul": "Szyfrowanie danych w spoczynku", "opis": "Szyfrowana baza danych z hasłem użytkownika.", "s": [3, 5, 3, 2, 5] },
-    { "id": 86, "kat": "H", "tytul": "Konta użytkowników i logowanie", "opis": "Tryb wieloosobowy z uwierzytelnianiem i separacją danych.", "s": [3, 5, 2, 1, 4] },
-    { "id": 87, "kat": "H", "tytul": "Dostępność WCAG 2.2 AA", "opis": "Pełna obsługa klawiaturą, etykiety ARIA, kontrast, widoczny fokus, link „przejdź do treści”.", "s": [4, 5, 4, 2, 5] },
-    { "id": 88, "kat": "H", "tytul": "Tryb ciemny", "opis": "Motyw ciemny zgodny z ustawieniem systemu.", "s": [2, 5, 5, 1, 5] },
-
-    { "id": 89, "kat": "I", "tytul": "Dokumentacja API (OpenAPI)", "opis": "Interaktywna specyfikacja REST.", "s": [2, 1, 5, 1, 5] },
-    { "id": 90, "kat": "I", "tytul": "PWA na telefon", "opis": "Instalowalna aplikacja z pracą offline.", "s": [4, 4, 3, 2, 5] },
-    { "id": 91, "kat": "I", "tytul": "Powiadomienia w przeglądarce i e-mail", "opis": "Alerty o follow-upach i nowych dopasowaniach poza aplikacją.", "s": [4, 3, 3, 2, 4] },
-    { "id": 92, "kat": "I", "tytul": "Docker Compose z PostgreSQL", "opis": "Gotowe wdrożenie z bazą produkcyjną.", "s": [3, 1, 5, 1, 5] },
-    { "id": 93, "kat": "I", "tytul": "Synchronizacja z Kalendarzem Google", "opis": "Dwukierunkowa synchronizacja terminów rozmów.", "s": [3, 2, 2, 2, 2] },
-    { "id": 94, "kat": "I", "tytul": "Marketplace mentorów", "opis": "Płatna recenzja CV i próbna rozmowa z człowiekiem.", "s": [4, 2, 1, 4, 3] },
-    { "id": 95, "kat": "I", "tytul": "Import profilu z LinkedIn", "opis": "Pobranie doświadczenia i umiejętności z profilu LinkedIn.", "s": [4, 2, 1, 3, 1] },
-    { "id": 96, "kat": "I", "tytul": "Interfejs PL/EN", "opis": "Przełączanie języka interfejsu.", "s": [3, 5, 4, 2, 5] },
-    { "id": 97, "kat": "I", "tytul": "„Co dalej?” — następne kroki", "opis": "Lista najważniejszych działań na dziś wyliczona z danych (follow-upy, rozmowy, dobre oferty bez aplikacji, debriefy).", "s": [4, 4, 4, 4, 5] },
-    { "id": 98, "kat": "I", "tytul": "Kreator pierwszego uruchomienia", "opis": "Profil, CV i preferencje w trzech krokach.", "s": [4, 2, 5, 2, 5] },
-    { "id": 99, "kat": "I", "tytul": "Dane demonstracyjne i reset", "opis": "Przykładowy profil i oferty do wypróbowania aplikacji oraz przywrócenie stanu początkowego.", "s": [3, 1, 5, 1, 5] },
-    { "id": 100, "kat": "I", "tytul": "Plan nauki z luk", "opis": "Zestaw zasobów do nauki dla brakujących umiejętności.", "s": [3, 2, 3, 3, 4] }
-  ]
+    {
+      "id": 1,
+      "kat": "A",
+      "tytul": "Import CV z PDF i DOCX",
+      "opis": "Wgranie pliku CV, ekstrakcja tekstu (PDFBox, Apache POI) i zapis jako nowa wersja CV.",
+      "s": [
+        5,
+        3,
+        4,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 2,
+      "kat": "A",
+      "tytul": "Automatyczna ekstrakcja umiejętności z CV",
+      "opis": "Słownik technologii i kompetencji z synonimami rozpoznaje umiejętności w CV i proponuje je do profilu, z latami doświadczenia, jeśli są w tekście.",
+      "s": [
+        5,
+        4,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 3,
+      "kat": "A",
+      "tytul": "Warianty CV pod różne role",
+      "opis": "Kilka wersji CV (np. Backend, Fullstack) z wyborem aktywnej; dopasowanie liczy się względem wybranej wersji.",
+      "s": [
+        5,
+        4,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 4,
+      "kat": "A",
+      "tytul": "Audyt CV pod ATS",
+      "opis": "Kontrola sekcji, długości, danych kontaktowych, czasowników akcji i mierzalnych efektów; wynik 0–100 z listą poprawek.",
+      "s": [
+        5,
+        3,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 5,
+      "kat": "A",
+      "tytul": "Dopasowanie CV do oferty (tailoring)",
+      "opis": "Lista słów kluczowych z oferty, których brakuje w CV, ale które kandydat ma w profilu, z gotową propozycją zdania.",
+      "s": [
+        5,
+        5,
+        4,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 6,
+      "kat": "A",
+      "tytul": "Eksport CV do PDF z szablonu",
+      "opis": "Generowanie estetycznego PDF z danych profilu w kilku szablonach.",
+      "s": [
+        4,
+        2,
+        3,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 7,
+      "kat": "A",
+      "tytul": "Klauzula RODO w CV",
+      "opis": "Sprawdzenie obecności klauzuli zgody na przetwarzanie danych i generator aktualnej treści.",
+      "s": [
+        3,
+        2,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 8,
+      "kat": "A",
+      "tytul": "Wykrywanie zbędnych danych wrażliwych w CV",
+      "opis": "Ostrzeżenia o PESEL, dacie urodzenia, stanie cywilnym, zdjęciu i innych danych, których pracodawca nie potrzebuje.",
+      "s": [
+        4,
+        2,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 9,
+      "kat": "S",
+      "tytul": "Konektor RSS/Atom",
+      "opis": "Subskrypcja kanałów RSS/Atom z ofertami (portale, firmy, wyszukiwania zapisane w portalach) i mapowanie wpisów na oferty.",
+      "s": [
+        5,
+        5,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": 10,
+      "kat": "S",
+      "tytul": "Konektor JSON API z mapowaniem pól",
+      "opis": "Dowolne publiczne API ofert w JSON z konfigurowalnym mapowaniem pól (ścieżki do tytułu, firmy, treści, widełek).",
+      "s": [
+        4,
+        4,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": 11,
+      "kat": "A",
+      "tytul": "Tłumaczenie CV PL↔EN przez AI",
+      "opis": "Wersja językowa CV generowana przez model z zachowaniem terminologii.",
+      "s": [
+        3,
+        2,
+        3,
+        2,
+        3
+      ]
+    },
+    {
+      "id": 12,
+      "kat": "A",
+      "tytul": "Historia wersji CV z porównaniem",
+      "opis": "Wersjonowanie treści CV i podgląd różnic między wersjami.",
+      "s": [
+        3,
+        2,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 13,
+      "kat": "B",
+      "tytul": "Parser struktury oferty",
+      "opis": "Z wklejonego tekstu: stanowisko, firma, lokalizacja, widełki, wymagania obowiązkowe i mile widziane.",
+      "s": [
+        5,
+        5,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 14,
+      "kat": "B",
+      "tytul": "Import oferty z adresu URL",
+      "opis": "Pobranie strony ogłoszenia na żądanie użytkownika i ekstrakcja treści do parsera.",
+      "s": [
+        5,
+        5,
+        3,
+        3,
+        2
+      ]
+    },
+    {
+      "id": 15,
+      "kat": "S",
+      "tytul": "Harmonogram pobierania i stan źródeł",
+      "opis": "Cykliczne pobieranie ze wszystkich źródeł, ręczne „pobierz teraz”, historia przebiegów: nowe, duplikaty, błędy.",
+      "s": [
+        5,
+        4,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 16,
+      "kat": "B",
+      "tytul": "Deduplikacja ofert",
+      "opis": "Wykrywanie tej samej oferty opublikowanej w kilku źródłach (podobieństwo tytułu, firmy i treści).",
+      "s": [
+        5,
+        5,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 17,
+      "kat": "B",
+      "tytul": "Normalizacja wynagrodzeń",
+      "opis": "Sprowadzenie widełek godzinowych, dziennych, miesięcznych i rocznych, brutto, netto i B2B do wspólnej miary miesięcznej.",
+      "s": [
+        5,
+        4,
+        4,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 18,
+      "kat": "B",
+      "tytul": "Detektor czerwonych flag w ofercie",
+      "opis": "Brak widełek, nieodpłatny okres próbny, umowa o dzieło na stałą pracę, „rodzinna atmosfera” i inne sygnały ostrzegawcze z uzasadnieniem.",
+      "s": [
+        5,
+        4,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 19,
+      "kat": "B",
+      "tytul": "Wykrywanie ofert-oszustw",
+      "opis": "Prośby o opłaty, przelewy, przyjmowanie paczek, dane dokumentów na starcie i komunikatory zamiast rozmowy.",
+      "s": [
+        5,
+        3,
+        4,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 20,
+      "kat": "B",
+      "tytul": "Klasyfikacja poziomu stanowiska",
+      "opis": "Junior, mid lub senior na podstawie treści ogłoszenia i wymaganych lat doświadczenia.",
+      "s": [
+        3,
+        4,
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 21,
+      "kat": "B",
+      "tytul": "Wykrywanie trybu pracy i typu umowy",
+      "opis": "Zdalna, hybrydowa, stacjonarna; UoP, B2B, zlecenie, dzieło — rozpoznane z treści.",
+      "s": [
+        4,
+        5,
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 22,
+      "kat": "B",
+      "tytul": "Wygasanie ofert i archiwizacja",
+      "opis": "Data ważności ogłoszenia i automatyczne przenoszenie przeterminowanych ofert do archiwum.",
+      "s": [
+        4,
+        4,
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 23,
+      "kat": "B",
+      "tytul": "Tagi i notatki przy ofertach",
+      "opis": "Własne etykiety i notatki do filtrowania ofert.",
+      "s": [
+        3,
+        4,
+        5,
+        1,
+        5
+      ]
+    },
+    {
+      "id": 24,
+      "kat": "B",
+      "tytul": "Odrzucanie ofert z powodem",
+      "opis": "Odrzucenie jednym kliknięciem z powodem (wynagrodzenie, lokalizacja, technologia), który zasila ranking.",
+      "s": [
+        4,
+        5,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 25,
+      "kat": "B",
+      "tytul": "Profile firm",
+      "opis": "Agregacja ofert i aplikacji po firmie, notatki i własna ocena pracodawcy.",
+      "s": [
+        3,
+        3,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 26,
+      "kat": "S",
+      "tytul": "Gotowe konektory publicznych API ofert",
+      "opis": "Wbudowane źródła z publicznymi API ofert pracy (z atrybucją i limitem zapytań zgodnie z ich warunkami).",
+      "s": [
+        4,
+        4,
+        4,
+        3,
+        3
+      ]
+    },
+    {
+      "id": 27,
+      "kat": "C",
+      "tytul": "Dopasowanie stopniowane",
+      "opis": "Częściowe trafienia: brakujące lata doświadczenia, poziom języka, pokrewna technologia z tej samej rodziny.",
+      "s": [
+        4,
+        5,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 28,
+      "kat": "C",
+      "tytul": "Słownik synonimów i rodzin technologii",
+      "opis": "React.js = React, k8s = Kubernetes, Postgres = PostgreSQL; rodziny (bazy SQL, chmury) dają częściowe dopasowanie.",
+      "s": [
+        5,
+        5,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 29,
+      "kat": "C",
+      "tytul": "Edytowalne wagi wymagań",
+      "opis": "Użytkownik decyduje, które wymagania liczą się bardziej w wyniku.",
+      "s": [
+        3,
+        3,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 30,
+      "kat": "C",
+      "tytul": "Luki kompetencyjne na tle rynku",
+      "opis": "Które umiejętności najczęściej blokują dopasowanie w zebranych ofertach i ile ofert odblokowałaby nauka każdej z nich.",
+      "s": [
+        5,
+        3,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 31,
+      "kat": "C",
+      "tytul": "Ranking ofert: dopasowanie × preferencje",
+      "opis": "Kolejność ofert wg dopasowania, wynagrodzenia, trybu pracy i lokalizacji, z rozbiciem na składniki.",
+      "s": [
+        5,
+        5,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 32,
+      "kat": "C",
+      "tytul": "Twarde filtry deal-breakerów",
+      "opis": "Wykluczenie ofert z wykluczającymi warunkami (np. tylko praca w biurze, wynagrodzenie poniżej minimum, słowa zakazane).",
+      "s": [
+        4,
+        5,
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 33,
+      "kat": "C",
+      "tytul": "Zapisane wyszukiwania z alertami",
+      "opis": "Zapis filtrów i licznik nowych ofert spełniających kryteria od ostatniego sprawdzenia.",
+      "s": [
+        5,
+        5,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 34,
+      "kat": "C",
+      "tytul": "Wyjaśnienie wyniku dopasowania",
+      "opis": "„Dlaczego 72%”: wkład każdego wymagania w punktach, z cytatem z CV jako dowodem.",
+      "s": [
+        4,
+        4,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 35,
+      "kat": "C",
+      "tytul": "Uczenie preferencji z ocen",
+      "opis": "Polubione i odrzucone oferty korygują wagi cech w rankingu (np. technologie, tryb pracy).",
+      "s": [
+        4,
+        4,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 36,
+      "kat": "C",
+      "tytul": "Podobne oferty",
+      "opis": "TF-IDF i podobieństwo cosinusowe — „więcej takich ofert”.",
+      "s": [
+        4,
+        4,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 37,
+      "kat": "C",
+      "tytul": "Role sąsiednie i ścieżki zmiany kariery",
+      "opis": "Podpowiedzi stanowisk o dużym pokryciu umiejętności (np. QA → SDET).",
+      "s": [
+        3,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 38,
+      "kat": "C",
+      "tytul": "Dopasowanie semantyczne przez AI",
+      "opis": "Druga opinia modelu językowego dla wymagań, których nie rozpoznał słownik.",
+      "s": [
+        4,
+        4,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "id": 39,
+      "kat": "D",
+      "tytul": "Tablica Kanban z przeciąganiem",
+      "opis": "Aplikacje w kolumnach statusów, zmiana statusu przez przeciągnięcie lub klawiaturą.",
+      "s": [
+        4,
+        5,
+        4,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 40,
+      "kat": "D",
+      "tytul": "Oś czasu aplikacji",
+      "opis": "Historia zmian statusów, rozmów, wiadomości i notatek w jednym widoku.",
+      "s": [
+        4,
+        4,
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 41,
+      "kat": "D",
+      "tytul": "Przypomnienia o follow-upie",
+      "opis": "Automatyczny termin kontaktu (np. 7 dni bez odpowiedzi) i lista zaległych follow-upów.",
+      "s": [
+        4,
+        4,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 42,
+      "kat": "D",
+      "tytul": "List motywacyjny oparty na dowodach",
+      "opis": "List budowany z cytatów CV dopasowanych do wymagań oferty; tryb offline z szablonu i opcjonalnie AI.",
+      "s": [
+        5,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": 43,
+      "kat": "D",
+      "tytul": "Szablony wiadomości",
+      "opis": "Follow-up, podziękowanie po rozmowie, prośba o informację zwrotną, odmowa i przyjęcie oferty — z podstawieniem danych.",
+      "s": [
+        3,
+        3,
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 44,
+      "kat": "S",
+      "tytul": "Obserwowane strony kariery firm",
+      "opis": "Lista firm do obserwowania; oferty z ich stron kariery odczytywane z danych schema.org JobPosting (z poszanowaniem robots.txt).",
+      "s": [
+        5,
+        4,
+        3,
+        5,
+        4
+      ]
+    },
+    {
+      "id": 45,
+      "kat": "D",
+      "tytul": "Kalendarz rozmów z eksportem .ics",
+      "opis": "Terminy rozmów przy aplikacjach i eksport do dowolnego kalendarza.",
+      "s": [
+        3,
+        3,
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 46,
+      "kat": "D",
+      "tytul": "Snapshot wysłanych dokumentów",
+      "opis": "Zapis dokładnej treści CV i listu wysłanych do firmy w chwili aplikowania.",
+      "s": [
+        4,
+        2,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 47,
+      "kat": "D",
+      "tytul": "Ostrzeżenie o ponownej aplikacji",
+      "opis": "Informacja, że kandydat już aplikował do tej firmy lub na tę samą rolę, z datą i wynikiem.",
+      "s": [
+        4,
+        3,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 48,
+      "kat": "S",
+      "tytul": "Skrzynka nowych ofert",
+      "opis": "Jeden strumień nowych ofert ze wszystkich źródeł: nieprzejrzane, szybkie „zapisz / odrzuć / dopasuj CV”, sortowanie wg rankingu.",
+      "s": [
+        5,
+        5,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 49,
+      "kat": "S",
+      "tytul": "Automatyczna analiza pobranych ofert",
+      "opis": "Każda pobrana oferta przechodzi parser, normalizację widełek, wykrywanie trybu pracy i umowy oraz wyodrębnienie wymagań.",
+      "s": [
+        5,
+        5,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 50,
+      "kat": "D",
+      "tytul": "Automatyczne statusy z poczty",
+      "opis": "Rozpoznawanie odpowiedzi firm w skrzynce Gmail i aktualizacja statusu.",
+      "s": [
+        5,
+        4,
+        2,
+        4,
+        2
+      ]
+    },
+    {
+      "id": 51,
+      "kat": "D",
+      "tytul": "Rozszerzenie przeglądarki „zapisz ofertę”",
+      "opis": "Jedno kliknięcie na stronie portalu zapisuje ofertę w aplikacji.",
+      "s": [
+        5,
+        5,
+        2,
+        3,
+        3
+      ]
+    },
+    {
+      "id": 52,
+      "kat": "D",
+      "tytul": "Notatki z rozmów",
+      "opis": "Osoby prowadzące, zadane pytania, wrażenia i ustalenia przy każdej rozmowie.",
+      "s": [
+        3,
+        3,
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 53,
+      "kat": "E",
+      "tytul": "Generator pytań rekrutacyjnych z oferty",
+      "opis": "Pytania techniczne i behawioralne wyprowadzone z wymagań konkretnej oferty, z luką kompetencyjną na pierwszym miejscu.",
+      "s": [
+        4,
+        4,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 54,
+      "kat": "E",
+      "tytul": "Ocena odpowiedzi metodą STAR",
+      "opis": "Heurystyki sprawdzają sytuację, zadanie, działanie, rezultat, liczby i długość odpowiedzi.",
+      "s": [
+        4,
+        3,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 55,
+      "kat": "E",
+      "tytul": "Symulator rozmowy z AI",
+      "opis": "Model w roli rekrutera prowadzi rozmowę na podstawie oferty.",
+      "s": [
+        4,
+        3,
+        3,
+        4,
+        3
+      ]
+    },
+    {
+      "id": 56,
+      "kat": "E",
+      "tytul": "Bank historii STAR",
+      "opis": "Własne osiągnięcia zapisane raz i podpowiadane do pytań oraz wymagań.",
+      "s": [
+        3,
+        3,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 57,
+      "kat": "S",
+      "tytul": "Etykieta pobierania",
+      "opis": "robots.txt, limit zapytań na domenę, identyfikujący User-Agent, atrybucja i link do oryginału przy każdej ofercie.",
+      "s": [
+        3,
+        3,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 58,
+      "kat": "S",
+      "tytul": "Import alertów e-mail z portali",
+      "opis": "Wklejenie treści maila z alertem (lub pliku .eml) → wiele ofert naraz z linkami do oryginałów.",
+      "s": [
+        4,
+        3,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": 59,
+      "kat": "S",
+      "tytul": "Bookmarklet „zapisz ofertę”",
+      "opis": "Zakładka w przeglądarce, która wysyła bieżącą stronę ogłoszenia do aplikacji — bez instalowania rozszerzenia.",
+      "s": [
+        4,
+        4,
+        4,
+        3,
+        4
+      ]
+    },
+    {
+      "id": 60,
+      "kat": "S",
+      "tytul": "Filtry na poziomie źródła",
+      "opis": "Słowa kluczowe, lokalizacja i minimalne widełki stosowane już przy pobieraniu, żeby nie zaśmiecać skrzynki.",
+      "s": [
+        4,
+        4,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 61,
+      "kat": "C",
+      "tytul": "Wyszukiwarka pełnotekstowa",
+      "opis": "Wyszukiwanie po tytule, firmie, treści i umiejętnościach we wszystkich zebranych ofertach.",
+      "s": [
+        4,
+        5,
+        4,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 62,
+      "kat": "E",
+      "tytul": "Debrief po rozmowie",
+      "opis": "Co poszło dobrze, co poprawić, jakie padły pytania; wnioski zbierane między rozmowami.",
+      "s": [
+        3,
+        3,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 63,
+      "kat": "F",
+      "tytul": "Kalkulator netto UoP, B2B, zlecenie",
+      "opis": "Szacunek kwoty „na rękę” z parametrami podatkowymi na dany rok zapisanymi w jednym miejscu.",
+      "s": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": 64,
+      "kat": "F",
+      "tytul": "Porównywarka ofert",
+      "opis": "Zestawienie kilku ofert: netto, benefity, dni wolne, dojazd — z wartością całkowitą.",
+      "s": [
+        4,
+        3,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 65,
+      "kat": "F",
+      "tytul": "Statystyki widełek z zebranych ofert",
+      "opis": "Mediana i rozrzut wynagrodzeń wg poziomu i typu umowy.",
+      "s": [
+        4,
+        3,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 66,
+      "kat": "F",
+      "tytul": "Asystent negocjacji",
+      "opis": "Kotwica, kontroferta i gotowe sformułowania na podstawie oferty i danych rynkowych.",
+      "s": [
+        3,
+        2,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 67,
+      "kat": "T",
+      "tytul": "Generator dopasowanego CV pod ofertę",
+      "opis": "Nowa wersja CV pod wybraną ofertę: sekcja kluczowych kompetencji z wymagań, kolejność umiejętności i punktów doświadczenia wg trafności; offline z reguł, opcjonalnie redakcja AI.",
+      "s": [
+        5,
+        4,
+        3,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 68,
+      "kat": "T",
+      "tytul": "Strażnik prawdomówności tailoringu",
+      "opis": "Każda umiejętność i fakt w dopasowanym CV musi wynikać z CV bazowego lub profilu; nowe twierdzenia są blokowane albo jawnie oznaczane.",
+      "s": [
+        5,
+        4,
+        4,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 69,
+      "kat": "F",
+      "tytul": "Ostrzeżenie o stawce poniżej rynku",
+      "opis": "Porównanie widełek oferty z medianą podobnych ofert.",
+      "s": [
+        4,
+        3,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 70,
+      "kat": "T",
+      "tytul": "Kolejność punktów doświadczenia wg trafności",
+      "opis": "Punkty w każdym stanowisku sortowane wg pokrycia wymagań oferty; nieistotne można zwinąć.",
+      "s": [
+        4,
+        4,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 71,
+      "kat": "G",
+      "tytul": "Lejek rekrutacyjny",
+      "opis": "Aplikacje → odpowiedzi → rozmowy → oferty, z konwersją między etapami.",
+      "s": [
+        4,
+        4,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 72,
+      "kat": "G",
+      "tytul": "Skuteczność wg źródła i wersji CV",
+      "opis": "Odsetek odpowiedzi i rozmów dla każdego źródła oferty i wariantu CV (test A/B CV).",
+      "s": [
+        5,
+        3,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 73,
+      "kat": "G",
+      "tytul": "Pulpit tygodniowy",
+      "opis": "Aktywność w bieżącym tygodniu względem celu, najbliższe rozmowy i najlepsze nowe oferty.",
+      "s": [
+        4,
+        5,
+        5,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 74,
+      "kat": "T",
+      "tytul": "Podsumowanie zawodowe pod ofertę",
+      "opis": "Krótkie podsumowanie na górze CV zbudowane z rzeczywistych umiejętności pasujących do oferty (szablon offline, AI opcjonalnie).",
+      "s": [
+        4,
+        4,
+        4,
+        3,
+        4
+      ]
+    },
+    {
+      "id": 75,
+      "kat": "G",
+      "tytul": "Trendy umiejętności w ofertach",
+      "opis": "Najczęściej wymagane technologie w zebranych ofertach i ich pokrycie przez profil.",
+      "s": [
+        4,
+        3,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 76,
+      "kat": "G",
+      "tytul": "Dziennik samopoczucia",
+      "opis": "Krótki wpis nastroju i energii; ostrzeżenie przy spadku i sugestia przerwy.",
+      "s": [
+        2,
+        3,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 77,
+      "kat": "T",
+      "tytul": "Porównanie wersji dopasowanej z bazową",
+      "opis": "Widok różnic: co dodano, co przesunięto, co ukryto — przed zapisem i wysłaniem.",
+      "s": [
+        4,
+        3,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 78,
+      "kat": "T",
+      "tytul": "Wynik przed i po tailoringu",
+      "opis": "Dopasowanie oferty liczone dla CV bazowego i dopasowanego, z listą wymagań, które zyskały dowód.",
+      "s": [
+        5,
+        4,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 79,
+      "kat": "G",
+      "tytul": "Raport aktywności poszukiwania pracy",
+      "opis": "Zestawienie aplikacji i rozmów do wydruku lub CSV, np. dla doradcy kariery lub urzędu pracy.",
+      "s": [
+        3,
+        2,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 80,
+      "kat": "T",
+      "tytul": "Bank osiągnięć",
+      "opis": "Zbiór punktów i osiągnięć (z tagami umiejętności), z których tailoring dobiera najlepsze pod ofertę.",
+      "s": [
+        4,
+        3,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 81,
+      "kat": "H",
+      "tytul": "Dziennik wywołań AI",
+      "opis": "Co, kiedy i w jakiej postaci (po maskowaniu) zostało wysłane do modelu.",
+      "s": [
+        3,
+        2,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 82,
+      "kat": "H",
+      "tytul": "Maskowanie danych osobowych przed AI",
+      "opis": "Imię i nazwisko, e-mail, telefon, PESEL i adres zastępowane znacznikami przed wysłaniem do modelu i przywracane w wyniku.",
+      "s": [
+        4,
+        3,
+        5,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 83,
+      "kat": "H",
+      "tytul": "Detektor prompt injection w ofertach",
+      "opis": "Wykrywanie ukrytych poleceń dla AI w treści ogłoszeń.",
+      "s": [
+        4,
+        3,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "id": 84,
+      "kat": "H",
+      "tytul": "Eksport, import i usunięcie danych",
+      "opis": "Kopia zapasowa całości w JSON i trwałe usunięcie danych (RODO).",
+      "s": [
+        4,
+        1,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 85,
+      "kat": "T",
+      "tytul": "Eksport dopasowanego CV do DOCX",
+      "opis": "Plik Word z dopasowaną wersją CV, gotowy do wysłania lub dalszej edycji.",
+      "s": [
+        4,
+        3,
+        4,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 86,
+      "kat": "H",
+      "tytul": "Konta użytkowników i logowanie",
+      "opis": "Tryb wieloosobowy z uwierzytelnianiem i separacją danych.",
+      "s": [
+        3,
+        5,
+        2,
+        1,
+        4
+      ]
+    },
+    {
+      "id": 87,
+      "kat": "H",
+      "tytul": "Dostępność WCAG 2.2 AA",
+      "opis": "Pełna obsługa klawiaturą, etykiety ARIA, kontrast, widoczny fokus, link „przejdź do treści”.",
+      "s": [
+        4,
+        5,
+        4,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 88,
+      "kat": "T",
+      "tytul": "Tailoring wsadowy",
+      "opis": "Dopasowane wersje CV dla kilku najlepszych ofert ze skrzynki jednym poleceniem.",
+      "s": [
+        4,
+        3,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 89,
+      "kat": "I",
+      "tytul": "Dokumentacja API (OpenAPI)",
+      "opis": "Interaktywna specyfikacja REST.",
+      "s": [
+        2,
+        1,
+        5,
+        1,
+        5
+      ]
+    },
+    {
+      "id": 90,
+      "kat": "I",
+      "tytul": "PWA na telefon",
+      "opis": "Instalowalna aplikacja z pracą offline.",
+      "s": [
+        4,
+        4,
+        3,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 91,
+      "kat": "I",
+      "tytul": "Powiadomienia w przeglądarce i e-mail",
+      "opis": "Alerty o follow-upach i nowych dopasowaniach poza aplikacją.",
+      "s": [
+        5,
+        4,
+        3,
+        2,
+        4
+      ]
+    },
+    {
+      "id": 92,
+      "kat": "I",
+      "tytul": "Docker Compose z PostgreSQL",
+      "opis": "Gotowe wdrożenie z bazą produkcyjną.",
+      "s": [
+        3,
+        1,
+        5,
+        1,
+        5
+      ]
+    },
+    {
+      "id": 93,
+      "kat": "T",
+      "tytul": "Przepisywanie punktów na „działanie + efekt + liczba”",
+      "opis": "Podpowiedzi offline (brak czasownika, brak liczby) i opcjonalna redakcja AI bez dodawania faktów.",
+      "s": [
+        4,
+        3,
+        3,
+        4,
+        4
+      ]
+    },
+    {
+      "id": 94,
+      "kat": "T",
+      "tytul": "Biblioteka dopasowanych CV",
+      "opis": "Lista wersji dopasowanych do ofert z powiązaniem: oferta → wersja CV → aplikacja.",
+      "s": [
+        4,
+        3,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 95,
+      "kat": "T",
+      "tytul": "Słowa kluczowe ATS w dopasowanym CV",
+      "opis": "Czy każde słowo kluczowe z wymagań, które kandydat ma, występuje w CV dosłownie i w dobrym miejscu (podsumowanie, umiejętności, doświadczenie).",
+      "s": [
+        4,
+        3,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 96,
+      "kat": "I",
+      "tytul": "Interfejs PL/EN",
+      "opis": "Przełączanie języka interfejsu.",
+      "s": [
+        3,
+        5,
+        4,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 97,
+      "kat": "I",
+      "tytul": "„Co dalej?” — następne kroki",
+      "opis": "Lista najważniejszych działań na dziś wyliczona z danych (follow-upy, rozmowy, dobre oferty bez aplikacji, debriefy).",
+      "s": [
+        4,
+        4,
+        4,
+        4,
+        5
+      ]
+    },
+    {
+      "id": 98,
+      "kat": "T",
+      "tytul": "Profile tailoringu per rola",
+      "opis": "Zapisane reguły „co eksponować” dla typów ról (np. backend, fullstack), używane jako punkt wyjścia.",
+      "s": [
+        3,
+        2,
+        4,
+        3,
+        5
+      ]
+    },
+    {
+      "id": 99,
+      "kat": "I",
+      "tytul": "Dane demonstracyjne i reset",
+      "opis": "Przykładowy profil i oferty do wypróbowania aplikacji oraz przywrócenie stanu początkowego.",
+      "s": [
+        3,
+        1,
+        5,
+        1,
+        5
+      ]
+    },
+    {
+      "id": 100,
+      "kat": "T",
+      "tytul": "Pakiet aplikacyjny jednym kliknięciem",
+      "opis": "Dopasowane CV + list motywacyjny + aplikacja w trackerze dla wybranej oferty.",
+      "s": [
+        4,
+        3,
+        4,
+        3,
+        4
+      ]
+    }
+  ],
+  "cel": "Agregator ogłoszeń o pracę z tailoringiem CV: oferty z wielu źródeł trafiają do jednej skrzynki, są analizowane i rankowane, a pod wybraną ofertę powstaje dopasowana (prawdziwa) wersja CV."
 }

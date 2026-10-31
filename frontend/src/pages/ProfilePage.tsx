@@ -37,7 +37,13 @@ export function ProfilePage() {
   );
 }
 
-function CvSection({ profile, cvs, onChanged }: { profile: CandidateProfile; cvs: CvVariant[]; onChanged: () => void }) {
+/** Wersje wygenerowane przez tailoring mają `origin` zaczynające się od „dopasowane”. */
+const isTailored = (c: CvVariant) => (c.origin ?? '').startsWith('dopasowane');
+
+function CvSection({ profile, cvs: allCvs, onChanged }: { profile: CandidateProfile; cvs: CvVariant[]; onChanged: () => void }) {
+  const [showTailored, setShowTailored] = useState(false);
+  const tailoredCount = allCvs.filter(isTailored).length;
+  const cvs = showTailored ? allCvs : allCvs.filter((c) => !isTailored(c) || c.id === profile.activeCvId);
   const [selectedId, setSelectedId] = useState<number | null>(profile.activeCvId ?? cvs[0]?.id ?? null);
   const selected = cvs.find((c) => c.id === selectedId) ?? null;
   const [name, setName] = useState('');
@@ -100,6 +106,12 @@ function CvSection({ profile, cvs, onChanged }: { profile: CandidateProfile; cvs
       }
     >
       {error && <ErrorBox message={error} />}
+      {tailoredCount > 0 && (
+        <label className="row small" style={{ gap: '0.4rem', marginBottom: '0.5rem' }}>
+          <input type="checkbox" checked={showTailored} onChange={(e) => setShowTailored(e.target.checked)} />
+          Pokaż wersje dopasowane do ofert ({tailoredCount})
+        </label>
+      )}
       {cvs.length === 0 ? (
         <p className="muted">Nie masz jeszcze CV. Utwórz wersję i wklej treść albo zaimportuj plik.</p>
       ) : (

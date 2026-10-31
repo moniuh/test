@@ -15,6 +15,7 @@ import { TailoringPanel } from '../features/profile/TailoringPanel';
 import { InterviewQuestionsPanel } from '../features/interviews/InterviewQuestionsPanel';
 import { OfferSalaryPanel } from '../features/salary/OfferSalaryPanel';
 import { ApplyPanel } from '../features/applications/ApplyPanel';
+import { TailorCvCallout } from '../features/tailoring/TailorCvCallout';
 
 const BASIS: Record<NormalizedSalary['basis'], string> = {
   UOP_GROSS: 'brutto', B2B_NET: 'netto + VAT (B2B)', NET: 'netto', UNKNOWN: 'nie podano brutto/netto',
@@ -161,6 +162,7 @@ export function OfferDetailPage() {
             {match.error && <ErrorBox message={match.error} onRetry={match.reload} />}
             {match.data && <MatchBreakdown match={match.data} />}
           </Card>
+          <TailorCvCallout offerId={offerId} cvId={activeCvId} />
           <TailoringPanel offerId={offerId} cvId={activeCvId} />
           <InterviewQuestionsPanel offerId={offerId} cvId={activeCvId} />
           <Card title="Treść ogłoszenia">

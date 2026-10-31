@@ -14,6 +14,14 @@ radar:
     offline: true
     model: claude-opus-5-5
     max-tokens: 2000
+  aggregator:
+    scheduler-enabled: false
+    interval-minutes: 60
+    user-agent: "RadarPracy-test"
+    request-timeout-seconds: 5
+    per-host-delay-ms: 0
+    max-items-per-fetch: 200
+    archive-after-days: 45
   salary:
     fx:
       EUR: 4.25

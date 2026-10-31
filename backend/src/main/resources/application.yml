@@ -26,6 +26,16 @@ radar:
     offline: ${RADAR_AI_OFFLINE:false}
     model: ${RADAR_AI_MODEL:claude-opus-5-5}
     max-tokens: 8000
+  aggregator:
+    # Cykliczne pobieranie ofert ze źródeł (RSS/Atom, strony kariery itp.).
+    scheduler-enabled: ${RADAR_AGGREGATOR_SCHEDULER:true}
+    interval-minutes: ${RADAR_AGGREGATOR_INTERVAL:60}
+    user-agent: "RadarPracy/0.2 (osobisty agregator ofert pracy)"
+    request-timeout-seconds: 15
+    per-host-delay-ms: 1500
+    max-items-per-fetch: 200
+    # Oferty z datą ważności w przeszłości są archiwizowane; bez daty — po tylu dniach od pobrania.
+    archive-after-days: 45
   salary:
     # Kursy do przeliczania widełek w walutach obcych (PLN za 1 jednostkę). Zaktualizuj według potrzeb.
     fx:
