@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:radar-test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create-drop
+
+radar:
+  demo-data: true
+  ai:
+    offline: true
+    model: claude-opus-5-5
+    max-tokens: 2000
+  salary:
+    fx:
+      EUR: 4.25
+      USD: 3.90
+      GBP: 4.95
+      CHF: 4.55
+    hours-per-month: 168
+    days-per-month: 21
+    b2b-to-uop-factor: 1.25
+    net-to-gross-factor: 1.40

@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: radar-pracy
+  datasource:
+    url: ${RADAR_DB_URL:jdbc:h2:file:./data/radarpracy;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;AUTO_SERVER=TRUE}
+    username: ${RADAR_DB_USER:sa}
+    password: ${RADAR_DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: always
+
+radar:
+  demo-data: ${RADAR_DEMO_DATA:true}
+  ai:
+    # Bez ANTHROPIC_API_KEY (lub z RADAR_AI_OFFLINE=true) każda funkcja AI używa ścieżki offline.
+    offline: ${RADAR_AI_OFFLINE:false}
+    model: ${RADAR_AI_MODEL:claude-opus-5-5}
+    max-tokens: 8000
+  salary:
+    # Kursy do przeliczania widełek w walutach obcych (PLN za 1 jednostkę). Zaktualizuj według potrzeb.
+    fx:
+      EUR: 4.25
+      USD: 3.90
+      GBP: 4.95
+      CHF: 4.55
+    hours-per-month: 168
+    days-per-month: 21
+    # Przybliżony przelicznik B2B (netto + VAT) → równoważnik UoP brutto: B2B / 1.25.
+    b2b-to-uop-factor: 1.25
+    # Przybliżony przelicznik UoP netto → UoP brutto (netto ≈ 71% brutto przy średnich zarobkach).
+    net-to-gross-factor: 1.40

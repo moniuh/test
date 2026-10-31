@@ -1,0 +1,16 @@
+# backend
+backend/target/
+backend/data/
+backend/src/main/resources/static/
+*.log
+
+# frontend
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
