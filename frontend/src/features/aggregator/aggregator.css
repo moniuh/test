@@ -1,0 +1,51 @@
+/* Moduł „Agregator ofert” — klasy z prefiksem aggregator-. Kolory z palety rdzenia (kontrast WCAG AA). */
+
+.aggregator-toolbar {
+  display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; align-items: flex-end; margin-bottom: 1rem;
+  padding: 0.75rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.aggregator-toolbar .field { margin-bottom: 0; min-width: 160px; }
+.aggregator-toolbar .aggregator-check { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.9rem; min-height: 38px; }
+.aggregator-toolbar .aggregator-spacer { flex: 1 1 auto; }
+
+.aggregator-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+
+.aggregator-offer { position: relative; }
+.aggregator-offer.is-unseen { border-left: 4px solid var(--primary); }
+.aggregator-offer h3 { font-size: 1.05rem; margin: 0 0 0.2rem; }
+.aggregator-offer .aggregator-meta { margin: 0; color: var(--muted); font-size: 0.88rem; }
+.aggregator-offer .aggregator-snippet { margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--text); }
+.aggregator-offer .aggregator-head { display: flex; justify-content: space-between; gap: 0.75rem; align-items: flex-start; flex-wrap: wrap; }
+.aggregator-score { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; color: var(--muted); }
+
+.aggregator-signals { margin-top: 0.6rem; padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid #f1b9bc; background: var(--danger-soft); color: #8e1b22; }
+.aggregator-signals.is-medium { border-color: #f0d59a; background: var(--warning-soft); color: #6b4600; }
+.aggregator-signals.is-low { border-color: var(--border); background: var(--surface-2); color: var(--text); }
+.aggregator-signals p { margin: 0 0 0.35rem; font-weight: 600; }
+.aggregator-signals ul { margin: 0; padding-left: 1.1rem; font-size: 0.88rem; }
+.aggregator-signals blockquote {
+  margin: 0.2rem 0 0.35rem; padding: 0.25rem 0.6rem; border-left: 3px solid currentColor; background: rgba(255, 255, 255, 0.6);
+  font-family: var(--mono); font-size: 0.82rem; white-space: pre-wrap; word-break: break-word;
+}
+
+.aggregator-sources { display: flex; flex-direction: column; gap: 0.75rem; }
+.aggregator-source-url { font-family: var(--mono); font-size: 0.82rem; word-break: break-all; color: var(--muted); }
+.aggregator-source-state { display: flex; flex-wrap: wrap; gap: 0.35rem 0.75rem; align-items: center; font-size: 0.88rem; margin: 0.35rem 0; }
+.aggregator-source-error { font-size: 0.85rem; margin: 0.35rem 0 0; color: #8e1b22; word-break: break-word; }
+.aggregator-etiquette { font-size: 0.88rem; }
+.aggregator-etiquette ul { margin: 0.3rem 0 0; }
+
+.aggregator-form fieldset { margin-top: 0.25rem; }
+.aggregator-preview { margin-top: 1rem; }
+.aggregator-preview li { font-size: 0.9rem; }
+
+.aggregator-search { display: flex; gap: 0.5rem; align-items: flex-end; flex-wrap: wrap; margin-bottom: 0.75rem; }
+.aggregator-search .field { margin-bottom: 0; flex: 1 1 280px; }
+.aggregator-search mark, .aggregator-offer mark { background: #fff1b8; color: inherit; padding: 0 0.1em; border-radius: 3px; }
+
+.aggregator-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.65rem; }
+.aggregator-runs td { font-size: 0.88rem; }
+.aggregator-runs th[scope='row'] { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--text); font-size: 0.88rem; }
+.aggregator-runs .aggregator-num { text-align: right; font-variant-numeric: tabular-nums; }
+.aggregator-message { max-width: 420px; word-break: break-word; }
+
