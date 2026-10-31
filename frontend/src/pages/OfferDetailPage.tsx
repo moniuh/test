@@ -171,7 +171,14 @@ export function OfferDetailPage() {
                 </a>
               </p>
             )}
-            {o.description ? <div className="offer-desc">{o.description}</div> : <p className="muted">Brak treści.</p>}
+            {o.description ? (
+              // przewijany obszar musi być osiągalny klawiaturą (WCAG 2.1.1)
+              <div className="offer-desc" tabIndex={0} role="region" aria-label="Treść ogłoszenia">
+                {o.description}
+              </div>
+            ) : (
+              <p className="muted">Brak treści.</p>
+            )}
           </Card>
         </div>
         <div className="stack">

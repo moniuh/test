@@ -94,4 +94,15 @@ class MatchServiceTest {
                 "Rozwijałam mikroserwisy płatnicze dla banków.", new CandidateProfile());
         assertThat(r.requirements().get(0).credit()).isGreaterThan(0);
     }
+
+    @Test
+    void evidencePrefersLineWithYearsWhenYearsRequired() {
+        String cv = "Java\nDoświadczenie:\nBackend w Java i Spring — FirmaX (2019 – 2024)\n";
+        MatchResult r = service.matchRequirements(List.of(new Requirement("3 lata w Java", true, 3)), cv,
+                new CandidateProfile());
+        RequirementMatch m = r.requirements().get(0);
+        assertThat(m.evidence()).contains("2019");
+        assertThat(m.candidateYears()).isEqualTo(5);
+        assertThat(m.level()).isEqualTo(MatchLevel.FULL);
+    }
 }

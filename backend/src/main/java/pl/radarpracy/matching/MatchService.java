@@ -85,19 +85,22 @@ public class MatchService {
 
     /** Umiejętności kandydata: z CV (z cytatem) i z profilu (z latami). */
     record CandidateSkills(String cvText, Long cvId, String cvName, Map<String, SkillHit> inCv,
-                           Map<String, SkillEntry> inProfile) {
+                           Map<String, List<SkillHit>> allHits, Map<String, SkillEntry> inProfile) {
     }
 
     CandidateSkills analyze(CvVariant cv, CandidateProfile profile) {
         String text = cv == null ? "" : Text.nullToEmpty(cv.getContent());
         Map<String, SkillHit> inCv = new LinkedHashMap<>();
+        Map<String, List<SkillHit>> allHits = new HashMap<>();
         for (SkillHit h : dictionary.find(text)) {
             inCv.putIfAbsent(h.skill(), h);
+            allHits.computeIfAbsent(h.skill(), k -> new ArrayList<>()).add(h);
         }
         // relacja „obejmuje”: Spring Boot w CV ⇒ Spring i Java (dowodem jest wzmianka o Spring Boot)
         for (SkillHit h : new ArrayList<>(inCv.values())) {
             for (String implied : dictionary.impliedBy(h.skill())) {
                 inCv.putIfAbsent(implied, h);
+                allHits.computeIfAbsent(implied, k -> new ArrayList<>()).add(h);
             }
         }
         Map<String, SkillEntry> inProfile = new HashMap<>();
@@ -107,7 +110,7 @@ public class MatchService {
             }
         }
         return new CandidateSkills(text, cv == null ? null : cv.getId(), cv == null ? null : cv.getName(), inCv,
-                inProfile);
+                allHits, inProfile);
     }
 
     MatchResult match(JobOffer offer, CvVariant cv, CandidateSkills candidate) {
@@ -211,6 +214,7 @@ public class MatchService {
         if (hit != null) {
             level = MatchLevel.FULL;
             credit = 1.0;
+            hit = bestHit(c, skill, minYears != null);
             evidence = Text.quoteAround(c.cvText(), hit.start(), hit.end(), QUOTE_MAX);
             if (!hit.skill().equals(skill)) {
                 note = skill + " — wynika z: " + hit.skill() + ".";
@@ -267,6 +271,33 @@ public class MatchService {
             }
         }
         return new SkillOutcome(skill, level, credit, evidence, note, candidateYears);
+    }
+
+    /**
+     * Najlepszy cytat dla umiejętności: przy wymaganych latach — linia z datami/latami (najwięcej lat),
+     * w pozostałych przypadkach — najbardziej opisowy fragment (pełne zdanie zamiast nagłówka).
+     */
+    private static SkillHit bestHit(CandidateSkills c, String skill, boolean preferYears) {
+        List<SkillHit> hits = c.allHits().getOrDefault(skill, List.of(c.inCv().get(skill)));
+        SkillHit best = hits.get(0);
+        int bestScore = Integer.MIN_VALUE;
+        for (SkillHit h : hits) {
+            String line = lineOf(c.cvText(), c.cvText().substring(h.start(), h.end()), h.start());
+            int words = line.split("\\s+").length;
+            Integer years = YearsParser.yearsInText(line);
+            int score = Math.min(words, 25) + (preferYears && years != null ? 100 + years : 0);
+            if (score > bestScore) {
+                bestScore = score;
+                best = h;
+            }
+        }
+        return best;
+    }
+
+    private static String lineOf(String text, String fragment, int at) {
+        int from = text.lastIndexOf('\n', at) + 1;
+        int to = text.indexOf('\n', at + fragment.length());
+        return text.substring(from, to < 0 ? text.length() : to);
     }
 
     private String relatedInCv(String skill, CandidateSkills c) {
