@@ -1,0 +1,276 @@
+{
+  "_opis": "Bank pytań rekrutacyjnych (pomysł #53). Placeholdery: {skill}, {requirement}, {note}, {company}, {title}. Wybór pytań jest deterministyczny (kolejność w pliku).",
+  "skills": {
+    "Java": [
+      {"q": "Czym różni się equals() od ==, i jaki kontrakt łączy equals() z hashCode()?", "tip": "Podaj przykład błędu z HashMap przy złamanym kontrakcie — to pokazuje praktykę, nie tylko teorię."},
+      {"q": "Jakie zmiany w Javie 17–21 wykorzystujesz na co dzień (rekordy, sealed classes, pattern matching, wirtualne wątki)?", "tip": "Wybierz 2–3 funkcje i powiedz, jaki problem rozwiązały w Twoim kodzie."}
+    ],
+    "Spring Boot": [
+      {"q": "Jak działa adnotacja @Transactional i kiedy transakcja się nie rozpocznie (np. wywołanie metody z tej samej klasy)?", "tip": "Wyjaśnij proxy i propagację; dodaj przykład błędu, który udało się znaleźć."},
+      {"q": "Jak skonfigurujesz aplikację Spring Boot na różne środowiska i jak monitorujesz ją na produkcji?", "tip": "Wspomnij o profilach, zmiennych środowiskowych, Actuatorze i metrykach."}
+    ],
+    "Spring": [
+      {"q": "Na czym polega wstrzykiwanie zależności w Springu i dlaczego wstrzykiwanie przez konstruktor jest zalecane?", "tip": "Odwołaj się do testowalności i niezmienności obiektów."}
+    ],
+    "Hibernate": [
+      {"q": "Czym jest problem N+1 w Hibernate i jak go wykrywasz oraz rozwiązujesz?", "tip": "Wymień fetch join, @EntityGraph, batch fetching i logowanie zapytań — z konkretnym przypadkiem."}
+    ],
+    "JPA": [
+      {"q": "Jakie są stany encji w JPA i co się dzieje przy merge() na odłączonej encji?", "tip": "Narysuj w myślach cykl życia encji i opowiedz go krok po kroku."}
+    ],
+    "SQL": [
+      {"q": "Jak przeanalizujesz wolne zapytanie SQL? Od czego zaczniesz?", "tip": "Plan wykonania (EXPLAIN), indeksy, selektywność, liczba wierszy — najlepiej na przykładzie z pracy."},
+      {"q": "Czym różnią się JOIN, LEFT JOIN i podzapytanie skorelowane? Kiedy użyjesz funkcji okna?", "tip": "Podaj krótki przykład biznesowy, np. ranking klientów."}
+    ],
+    "PostgreSQL": [
+      {"q": "Jakie typy indeksów oferuje PostgreSQL i kiedy indeks nie zostanie użyty?", "tip": "B-tree, GIN, częściowe indeksy; wspomnij o statystykach i VACUUM/ANALYZE."},
+      {"q": "Jak zapewnisz spójność danych przy współbieżnych transakcjach (poziomy izolacji, blokady)?", "tip": "Wyjaśnij różnicę między READ COMMITTED i SERIALIZABLE na przykładzie."}
+    ],
+    "MySQL": [
+      {"q": "Jak zoptymalizujesz tabelę MySQL z milionami wierszy, po której często filtrujesz?", "tip": "Indeksy złożone, kolejność kolumn, EXPLAIN, partycjonowanie."}
+    ],
+    "Oracle DB": [
+      {"q": "Jakie masz doświadczenie z Oracle DB i czym różni się praca z nim od PostgreSQL?", "tip": "Jeśli znasz tylko PostgreSQL, pokaż, co przeniesiesz (SQL, indeksy, transakcje) i jak szybko nadrobisz różnice."}
+    ],
+    "MongoDB": [
+      {"q": "Kiedy wybierzesz MongoDB zamiast relacyjnej bazy i jak zaprojektujesz dokumenty?", "tip": "Embedding vs referencje, wzorce dostępu do danych."}
+    ],
+    "Redis": [
+      {"q": "Do czego używasz Redisa i jak unikasz niespójności cache z bazą?", "tip": "TTL, cache-aside, unieważnianie — z przykładem."}
+    ],
+    "Kafka": [
+      {"q": "Jak zaprojektujesz idempotentnego konsumenta Kafki i co zrobisz z wiadomością, której nie da się przetworzyć?", "tip": "Klucze, offsety, deduplikacja, dead letter topic, ponowienia."},
+      {"q": "Jak Kafka gwarantuje kolejność wiadomości i co ją może zaburzyć?", "tip": "Partycje i klucze; skalowanie konsumentów w grupie."}
+    ],
+    "RabbitMQ": [
+      {"q": "Czym różnią się exchange typu direct, topic i fanout w RabbitMQ?", "tip": "Podaj przypadek użycia każdego z nich."}
+    ],
+    "Docker": [
+      {"q": "Jak zbudujesz mały i bezpieczny obraz Dockera dla aplikacji?", "tip": "Multi-stage build, obraz bazowy, użytkownik bez uprawnień roota, warstwy i cache."}
+    ],
+    "Kubernetes": [
+      {"q": "Jak wdrożysz aplikację na Kubernetes bez przestojów i jak zadbasz o jej zdrowie?", "tip": "Deployment, rolling update, readiness/liveness probe, limity zasobów."},
+      {"q": "Czym różni się Deployment od StatefulSet i kiedy użyjesz ConfigMap, a kiedy Secret?", "tip": "Krótko i z przykładem z projektu (albo z nauki, jeśli to luka)."}
+    ],
+    "AWS": [
+      {"q": "Z jakich usług AWS korzystasz i jak zaprojektujesz uprawnienia IAM dla aplikacji?", "tip": "Zasada najmniejszych uprawnień, role zamiast kluczy, przykład architektury."}
+    ],
+    "Azure": [
+      {"q": "Jakie usługi Azure znasz i jak wdrażasz na nie aplikacje?", "tip": "App Service, AKS, Functions — wybierz to, co znasz z praktyki."}
+    ],
+    "GCP": [
+      {"q": "Jakie usługi Google Cloud znasz i do czego ich używasz?", "tip": "Nazwij usługi i konkretny przypadek użycia."}
+    ],
+    "Terraform": [
+      {"q": "Jak zarządzasz stanem Terraform w zespole i jak unikasz konfliktów zmian?", "tip": "Zdalny backend, blokady stanu, moduły, plan w CI."}
+    ],
+    "CI/CD": [
+      {"q": "Jak wygląda pipeline CI/CD, który budujesz lub utrzymujesz? Co jest w nim najważniejsze?", "tip": "Etapy, testy, bramki jakości, wdrożenie i rollback."}
+    ],
+    "Linux": [
+      {"q": "Serwer na Linuksie zwalnia — jakie polecenia uruchomisz, żeby znaleźć przyczynę?", "tip": "top/htop, df, free, journalctl, ss — opowiedz kolejność diagnozy."}
+    ],
+    "Git": [
+      {"q": "Jak pracujesz z gałęziami w Git i jak rozwiązujesz konflikty przy scalaniu?", "tip": "Opisz przyjęty w zespole przepływ (np. trunk-based lub GitFlow) i jeden trudny konflikt."}
+    ],
+    "REST API": [
+      {"q": "Jak zaprojektujesz REST API, które będzie wersjonowane, bezpieczne i łatwe w użyciu?", "tip": "Zasoby, kody HTTP, idempotencja, paginacja, wersjonowanie, obsługa błędów."}
+    ],
+    "Mikroserwisy": [
+      {"q": "Jak zapewnisz spójność danych między mikroserwisami bez transakcji rozproszonych?", "tip": "Saga, outbox, zdarzenia, idempotencja — najlepiej z przykładem z pracy."},
+      {"q": "Kiedy podział na mikroserwisy nie ma sensu?", "tip": "Pokaż dojrzałość: koszty operacyjne, mały zespół, niejasne granice domeny."}
+    ],
+    "GraphQL": [
+      {"q": "Jakie problemy GraphQL rozwiązuje lepiej niż REST, a jakie stwarza?", "tip": "Over/under-fetching vs. N+1 i cache."}
+    ],
+    "JavaScript": [
+      {"q": "Jak działa pętla zdarzeń w JavaScripcie i czym różnią się mikrozadania od makrozadań?", "tip": "Podaj przykład z Promise i setTimeout."}
+    ],
+    "TypeScript": [
+      {"q": "Jak w TypeScripcie modelujesz dane, które mogą mieć kilka wariantów (unie, zawężanie typów)?", "tip": "Pokaż unię rozróżnianą (discriminated union) na przykładzie stanu formularza."}
+    ],
+    "React": [
+      {"q": "Kiedy komponent React renderuje się ponownie i jak ograniczasz zbędne renderowania?", "tip": "Stan, propsy, kontekst; memo, useMemo, useCallback — i pomiar w profilerze."},
+      {"q": "Jak zarządzasz stanem w większej aplikacji React i kiedy sięgasz po bibliotekę zewnętrzną?", "tip": "Stan lokalny, kontekst, Redux/zapytania serwerowe — kryteria wyboru."}
+    ],
+    "Redux": [
+      {"q": "Jak w Redux Toolkit obsługujesz zapytania asynchroniczne i normalizację danych?", "tip": "createAsyncThunk lub RTK Query, createEntityAdapter."}
+    ],
+    "Next.js": [
+      {"q": "Czym różni się renderowanie po stronie serwera, statyczne i po stronie klienta w Next.js?", "tip": "Podaj, kiedy wybierzesz każde podejście i dlaczego."}
+    ],
+    "Angular": [
+      {"q": "Jak działa wykrywanie zmian w Angularze i kiedy użyjesz strategii OnPush?", "tip": "Wspomnij o RxJS i sygnałach, jeśli ich używasz."}
+    ],
+    "Vue.js": [
+      {"q": "Jak działa reaktywność w Vue 3 i czym różni się Composition API od Options API?", "tip": "Przykład komponentu, który przepisano na Composition API."}
+    ],
+    "Node.js": [
+      {"q": "Jak w Node.js obsłużysz zadanie obciążające procesor, żeby nie blokować serwera?", "tip": "Worker threads, kolejki, podział na procesy."}
+    ],
+    "Python": [
+      {"q": "Czym różnią się listy, krotki i generatory w Pythonie i kiedy użyjesz każdego z nich?", "tip": "Wspomnij o pamięci i leniwym przetwarzaniu."}
+    ],
+    "Django": [
+      {"q": "Jak w Django unikasz nadmiarowych zapytań do bazy?", "tip": "select_related, prefetch_related, django-debug-toolbar."}
+    ],
+    "Kotlin": [
+      {"q": "Co zyskujesz, pisząc backend w Kotlinie zamiast w Javie? Jak działają korutyny?", "tip": "Null-safety, data class, extension functions; korutyny vs wątki."}
+    ],
+    "Go": [
+      {"q": "Jak w Go obsługujesz współbieżność i błędy?", "tip": "Gorutyny, kanały, context, jawne zwracanie błędów."}
+    ],
+    "C#": [
+      {"q": "Jak działa async/await w C# i jakie błędy najczęściej się przy nim popełnia?", "tip": "Deadlocki, async void, ConfigureAwait."}
+    ],
+    ".NET": [
+      {"q": "Jak zorganizujesz projekt w .NET, żeby był testowalny i łatwy w utrzymaniu?", "tip": "Dependency injection, warstwy, testy jednostkowe i integracyjne."}
+    ],
+    "Testy automatyczne": [
+      {"q": "Jak decydujesz, co przetestować jednostkowo, a co integracyjnie lub end-to-end?", "tip": "Piramida testów, koszt utrzymania, przykład z projektu."}
+    ],
+    "JUnit": [
+      {"q": "Jak piszesz czytelne testy w JUnit 5 i jak testujesz kod z zależnościami zewnętrznymi?", "tip": "Given/When/Then, testy parametryzowane, Mockito, Testcontainers."}
+    ],
+    "Jest": [
+      {"q": "Jak testujesz komponenty i logikę frontendu w Jest?", "tip": "Testing Library, mocki API, testowanie zachowania zamiast implementacji."}
+    ],
+    "Selenium": [
+      {"q": "Jak sprawić, by testy Selenium były stabilne i nie dawały fałszywych alarmów?", "tip": "Jawne oczekiwania, Page Object, izolacja danych testowych."}
+    ],
+    "Testowanie manualne": [
+      {"q": "Jak zaprojektujesz przypadki testowe dla nowej funkcji, mając tylko krótką specyfikację?", "tip": "Klasy równoważności, wartości brzegowe, ścieżki negatywne, pytania do analityka."}
+    ],
+    "Scrum": [
+      {"q": "Jak w praktyce wyglądał Scrum w Twoim zespole i co poprawiłabyś/poprawiłbyś w tym procesie?", "tip": "Konkret: długość sprintu, ceremonie, jedna zmiana, która zadziałała."}
+    ],
+    "Agile": [
+      {"q": "Jak radzisz sobie, gdy wymagania zmieniają się w trakcie sprintu?", "tip": "Pokaż współpracę z właścicielem produktu i priorytetyzację."}
+    ],
+    "Angielski": [
+      {"q": "Tell me about your current project and your role in it.", "tip": "Część rozmowy może być po angielsku — przygotuj 1–2 minuty o projekcie, swoim wkładzie i wyniku."},
+      {"q": "Describe a technical decision you made and how you explained it to non-technical people.", "tip": "Ćwicz na głos; proste zdania są lepsze niż skomplikowane słownictwo."}
+    ],
+    "Niemiecki": [
+      {"q": "Erzählen Sie kurz über Ihre aktuelle Rolle und Ihre Aufgaben.", "tip": "Przygotuj krótką wypowiedź po niemiecku o sobie i projekcie."}
+    ],
+    "Excel": [
+      {"q": "Jak w Excelu połączysz dane z dwóch arkuszy i przygotujesz zestawienie dla przełożonego?", "tip": "WYSZUKAJ.X / X.WYSZUKAJ, tabele przestawne, formatowanie warunkowe — z przykładem raportu."}
+    ],
+    "Power BI": [
+      {"q": "Jak zbudujesz raport w Power BI, który odpowie na konkretne pytanie biznesowe?", "tip": "Model danych, miary DAX, odbiorca raportu."}
+    ],
+    "Zarządzanie projektami": [
+      {"q": "Jak planujesz projekt i jak reagujesz, gdy zagrożony jest termin?", "tip": "Harmonogram, ryzyka, komunikacja z interesariuszami — przykład z liczbami."}
+    ],
+    "Analiza biznesowa": [
+      {"q": "Jak zbierasz wymagania od interesariuszy, którzy mają sprzeczne oczekiwania?", "tip": "Warsztaty, priorytetyzacja (MoSCoW), dokumentowanie decyzji."}
+    ],
+    "Obsługa klienta": [
+      {"q": "Jak postąpisz z niezadowolonym klientem, który ma rację tylko częściowo?", "tip": "Wysłuchanie, empatia, konkretne rozwiązanie, domknięcie sprawy."}
+    ],
+    "Sprzedaż": [
+      {"q": "Jak wygląda Twój proces sprzedaży od pierwszego kontaktu do zamknięcia?", "tip": "Etapy, liczby (konwersja, wartość), przykład trudnej transakcji."}
+    ],
+    "Figma": [
+      {"q": "Jak organizujesz pliki i komponenty w Figmie, żeby zespół mógł z nich korzystać?", "tip": "System projektowy, warianty, przekazanie do programistów."}
+    ],
+    "UX": [
+      {"q": "Jak sprawdzisz, czy nowy projekt interfejsu rzeczywiście pomaga użytkownikom?", "tip": "Badania, testy użyteczności, metryki — przykład zmiany po teście."}
+    ],
+    "Machine Learning": [
+      {"q": "Jak ocenisz, czy model ML jest gotowy na produkcję?", "tip": "Metryki, walidacja, przeuczenie, monitoring dryfu danych."}
+    ],
+    "ETL": [
+      {"q": "Jak zaprojektujesz proces ETL odporny na błędne dane i ponowne uruchomienia?", "tip": "Idempotencja, walidacja, logowanie, obsługa przyrostów."}
+    ],
+    "Cyberbezpieczeństwo": [
+      {"q": "Jakie zagrożenia z listy OWASP Top 10 spotykasz najczęściej i jak im zapobiegasz?", "tip": "Wstrzykiwanie, XSS, kontrola dostępu — przykład z kodu."}
+    ],
+    "TDD": [
+      {"q": "Jak w praktyce stosujesz TDD i kiedy uważasz, że się nie opłaca?", "tip": "Cykl red-green-refactor, przykład, uczciwa ocena ograniczeń."}
+    ],
+    "Code review": [
+      {"q": "Na co zwracasz uwagę w code review i jak przekazujesz krytyczne uwagi?", "tip": "Poprawność, czytelność, testy; ton komentarzy i przykład trudnej rozmowy."}
+    ],
+    "Prometheus": [
+      {"q": "Jakie metryki i alerty skonfigurujesz dla nowej usługi?", "tip": "Złote sygnały: opóźnienie, ruch, błędy, nasycenie."}
+    ],
+    "Bash": [
+      {"q": "Jaki skrypt w Bashu ostatnio napisałaś/napisałeś i jak zadbałaś/zadbałeś o obsługę błędów?", "tip": "set -euo pipefail, walidacja argumentów, logowanie."}
+    ],
+    "HTML": [
+      {"q": "Jak zadbasz o dostępność formularza w HTML?", "tip": "Etykiety, kolejność fokusu, komunikaty błędów, ARIA tylko gdy potrzebne."}
+    ],
+    "CSS": [
+      {"q": "Jak zbudujesz responsywny układ strony i jak organizujesz style w dużym projekcie?", "tip": "Grid/Flexbox, zmienne CSS, konwencja nazewnictwa lub CSS Modules."}
+    ]
+  },
+  "categories": {
+    "jezyk-programowania": [{"q": "Jakie są mocne i słabe strony języka {skill} w projektach, nad którymi pracujesz?", "tip": "Pokaż świadome wybory: wydajność, czytelność, ekosystem — na przykładzie."}],
+    "framework": [{"q": "Jak zorganizujesz projekt oparty na {skill} i jakich pułapek tego frameworka unikasz?", "tip": "Struktura projektu, konfiguracja, testowanie, typowe błędy."}],
+    "baza-danych": [{"q": "Jak projektujesz schemat i zapytania w {skill}, żeby działały wydajnie?", "tip": "Indeksy, normalizacja, plan wykonania — przykład z pracy."}],
+    "narzedzie": [{"q": "Jak wykorzystujesz {skill} w codziennej pracy zespołu?", "tip": "Konkretny scenariusz i usprawnienie, które wprowadzono."}],
+    "platforma": [{"q": "Jakie wyzwania techniczne spotkałaś/spotkałeś przy tworzeniu aplikacji na {skill}?", "tip": "Wydajność, cykl życia aplikacji, publikacja w sklepie."}],
+    "frontend": [{"q": "Jak dbasz o jakość i dostępność warstwy {skill} w aplikacji?", "tip": "Standardy, przeglądy, testy, WCAG."}],
+    "architektura": [{"q": "Kiedy {skill} jest dobrym wyborem architektonicznym, a kiedy nie?", "tip": "Kompromisy i przykład decyzji podjętej w projekcie."}],
+    "chmura": [{"q": "Jak zaprojektujesz wdrożenie aplikacji w {skill} z myślą o kosztach i bezpieczeństwie?", "tip": "Usługi, uprawnienia, monitoring kosztów."}],
+    "devops": [{"q": "Jak wykorzystujesz {skill} do automatyzacji wdrożeń i utrzymania systemu?", "tip": "Przykład konfiguracji i problemu, który rozwiązała."}],
+    "testy": [{"q": "Jak wykorzystujesz {skill} i jak decydujesz, co warto przetestować?", "tip": "Strategia testów, przykład wykrytego błędu."}],
+    "metodyka": [{"q": "Jak {skill} wygląda w praktyce w Twoim zespole?", "tip": "Konkretne praktyki, a nie definicje z podręcznika."}],
+    "dane": [{"q": "Opowiedz o projekcie danych, w którym używałaś/używałeś {skill}: skąd dane, co z nimi zrobiono, jaki był wynik?", "tip": "Skala danych, jakość, wynik biznesowy."}],
+    "analityka": [{"q": "Jak budujesz raport w {skill}, żeby odbiorca szybko znalazł odpowiedź?", "tip": "Odbiorca, kluczowe metryki, prostota."}],
+    "biuro": [{"q": "Jakie zadania automatyzujesz lub przyspieszasz w {skill}?", "tip": "Konkretny przykład oszczędności czasu."}],
+    "marketing": [{"q": "Jak mierzysz skuteczność działań z wykorzystaniem {skill}?", "tip": "Metryki, eksperymenty, wnioski."}],
+    "biznes": [{"q": "Opowiedz o swoim doświadczeniu w obszarze: {skill}. Jaki był Twój największy sukces?", "tip": "Struktura STAR, liczby, Twoja rola."}],
+    "design": [{"q": "Jak wygląda Twój proces pracy z {skill} — od problemu do gotowego projektu?", "tip": "Badania, iteracje, współpraca z zespołem."}],
+    "inzynieria": [{"q": "Jakie projekty realizowałaś/realizowałeś w {skill} i jak dbasz o poprawność dokumentacji?", "tip": "Skala projektu, normy, weryfikacja."}],
+    "uprawnienia": [{"q": "Czy masz aktualne uprawnienia ({skill}) i jak często z nich korzystasz?", "tip": "Przygotuj daty ważności i dokumenty."}],
+    "bezpieczenstwo": [{"q": "Jak dbasz o bezpieczeństwo w obszarze {skill}?", "tip": "Konkretne zabezpieczenia i incydent, którego udało się uniknąć."}],
+    "jezyk-obcy": [{"q": "Czy możemy chwilę porozmawiać w tym języku ({skill})? Opowiedz o swoim ostatnim projekcie.", "tip": "Przygotuj krótką wypowiedź o sobie i projekcie w tym języku."}],
+    "wyksztalcenie": [{"q": "Jak Twoje wykształcenie przekłada się na pracę na tym stanowisku?", "tip": "Wybierz 1–2 rzeczy ze studiów, których faktycznie używasz."}]
+  },
+  "fallbackTechnical": [
+    {"q": "Opowiedz o projekcie, w którym używałaś/używałeś {skill}. Jaka była Twoja rola?", "tip": "Kontekst, Twoje zadania, rezultat — 1–2 minuty."}
+  ],
+  "gap": [
+    {"q": "W Twoim CV nie widzę {skill}. Jak szybko wdrożysz się w tę technologię?", "tip": "Nie udawaj — przyznaj lukę, pokaż plan nauki (kurs, projekt, termin) i podobne doświadczenie, które przyspieszy wdrożenie."},
+    {"q": "{skill} jest u nas ważne. Czy miałaś/miałeś z tym styczność, choćby w projekcie prywatnym?", "tip": "Wspomnij o nauce własnej lub małym projekcie; zaproponuj, jak nadrobisz brak w pierwszych tygodniach."},
+    {"q": "Jak podejdziesz do zadania wymagającego {skill}, skoro nie pracowałaś/pracowałeś z tym komercyjnie?", "tip": "Pokaż sposób uczenia się nowych narzędzi na przykładzie innej technologii, którą opanowano szybko."}
+  ],
+  "partial": [
+    {"q": "W ogłoszeniu prosimy o: „{requirement}”. Jak oceniasz swoje doświadczenie w tym obszarze?", "tip": "Bądź konkretna/konkretny: ile lat, w jakich projektach, czego jeszcze brakuje i jak to uzupełniasz."},
+    {"q": "Wymaganie „{requirement}” spełniasz częściowo. Co sprawia, że mimo to poradzisz sobie na tym stanowisku?", "tip": "Zrównoważ lukę mocnymi stronami i dowodem szybkiej nauki."}
+  ],
+  "soft": {
+    "Komunikatywność": [{"q": "Opowiedz o sytuacji, w której musiałaś/musiałeś wyjaśnić coś złożonego osobie nietechnicznej.", "tip": "STAR: kim był odbiorca, jak uprościć przekaz, po czym poznać, że zrozumiał."}],
+    "Praca zespołowa": [{"q": "Opowiedz o konflikcie w zespole i o tym, jak pomogłaś/pomogłeś go rozwiązać.", "tip": "Mów o swoich działaniach, nie o winie innych; zakończ wynikiem i wnioskiem."}],
+    "Samodzielność": [{"q": "Opowiedz o zadaniu, które trzeba było wykonać samodzielnie, bez jasnych wytycznych.", "tip": "Jak ustalono cel, jakie decyzje podjęto, kiedy poproszono o pomoc."}],
+    "Myślenie analityczne": [{"q": "Opowiedz o trudnym problemie, którego przyczynę trzeba było znaleźć w danych lub logach.", "tip": "Hipotezy, weryfikacja, wynik — z liczbami."}],
+    "Zarządzanie zespołem": [{"q": "Opowiedz o sytuacji, w której członek zespołu nie dowoził zadań. Co zrobiono?", "tip": "Rozmowa 1:1, ustalenie przyczyny, plan, efekt — Twoja rola jako lidera lub mentora."}],
+    "Organizacja pracy": [{"q": "Jak ustalasz priorytety, gdy kilka pilnych zadań ma ten sam termin?", "tip": "Kryteria, komunikacja z interesariuszami, przykład z liczbami."}],
+    "Negocjacje": [{"q": "Opowiedz o negocjacjach, które zakończyły się porozumieniem korzystnym dla obu stron.", "tip": "Interesy stron, ustępstwa, wynik."}]
+  },
+  "keywords": [
+    {"match": ["stres", "presj", "pressure", "nadgodzin", "dyspozycyjn"], "category": "behawioralne", "q": "Opowiedz o okresie dużej presji czasu. Jak sobie z nią radzisz?", "tip": "Konkretna sytuacja, sposób organizacji pracy, wynik; przy okazji zapytaj, jak często takie sytuacje się zdarzają."},
+    {"match": ["klient", "client", "customer", "kultur"], "category": "behawioralne", "q": "Opowiedz o trudnej rozmowie z klientem lub interesariuszem i jej wyniku.", "tip": "STAR, z naciskiem na Twoje działania i efekt dla klienta."},
+    {"match": ["domen", "sektor", "branz", "projektach", "e-commerce", "platnosc", "bankow", "medyczn", "experience with"], "category": "o-firmę", "q": "W ogłoszeniu jest: „{requirement}”. Co wiesz o specyfice tej branży i jak Twoje doświadczenie się do niej przekłada?", "tip": "Przeczytaj o branży firmy; podaj przykład z pracy, który pokazuje zrozumienie podobnych problemów."}
+  ],
+  "requirementBehavioral": [
+    {"q": "Opowiedz o konkretnej sytuacji, która pokazuje: „{requirement}”.", "tip": "Metoda STAR: sytuacja, zadanie, Twoje działania, mierzalny rezultat."}
+  ],
+  "behavioral": [
+    {"q": "Opowiedz o swoim największym zawodowym sukcesie z ostatnich dwóch lat.", "tip": "STAR i liczby: co się zmieniło dzięki Tobie?"},
+    {"q": "Opowiedz o błędzie, który popełniłaś/popełniłeś w pracy, i o tym, czego Cię nauczył.", "tip": "Wybierz prawdziwy, ale nie krytyczny błąd; większość czasu poświęć na naprawę i wnioski."},
+    {"q": "Opowiedz o sytuacji, w której nie zgadzałaś/nie zgadzałeś się z decyzją przełożonego.", "tip": "Pokaż argumentację opartą na faktach i to, że potrafisz zaakceptować ostateczną decyzję."},
+    {"q": "Opowiedz o sytuacji, w której trzeba było szybko nauczyć się czegoś nowego.", "tip": "Plan nauki, źródła, czas, efekt."}
+  ],
+  "motivational": [
+    {"q": "Dlaczego chcesz pracować w {company}?", "tip": "Połącz to, co wiesz o firmie i produkcie, z tym, czego szukasz — bez ogólników typu „dynamiczna firma”."},
+    {"q": "Co przyciąga Cię w roli {title} i dlaczego zmieniasz pracę teraz?", "tip": "Mów o tym, do czego dążysz, a nie o tym, od czego uciekasz."},
+    {"q": "Gdzie widzisz się zawodowo za 2–3 lata?", "tip": "Pokaż kierunek rozwoju spójny z tą rolą."}
+  ],
+  "company": [
+    {"q": "Co wiesz o {company} i produkcie, nad którym pracuje zespół?", "tip": "Przejrzyj stronę firmy, produkt, ostatnie wiadomości i profil na LinkedIn; przygotuj 2 pytania do rekrutera."}
+  ]
+}

@@ -1,0 +1,24 @@
+/* Moduł „wynagrodzenia” — tylko uzupełnienia wspólnych klas (prefiks salary-). */
+.salary-tiles { margin-bottom: 1rem; }
+.stat-value.salary-stat-small { font-size: 1.2rem; }
+.stat.salary-amount { gap: 0.25rem; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2); }
+.salary-table .salary-row-result th, .salary-table .salary-row-result td,
+.salary-compare .salary-row-result th, .salary-compare .salary-row-result td { font-weight: 700; background: var(--success-soft); }
+.salary-table .salary-row-info th, .salary-table .salary-row-info td { color: var(--muted); font-style: italic; }
+.salary-table th[scope='row'], .salary-compare th[scope='row'] { text-transform: none; letter-spacing: 0; font-size: 0.9rem; color: var(--text); font-weight: 500; }
+.salary-compare th[scope='col'] { text-transform: none; letter-spacing: 0; font-size: 0.9rem; min-width: 11rem; }
+.salary-company { font-weight: 400; }
+.salary-offer-picker { max-height: 320px; overflow: auto; }
+.salary-pick { display: flex; gap: 0.5rem; align-items: flex-start; font-weight: 400; cursor: pointer; }
+.salary-pick input { margin-top: 0.25rem; }
+.salary-settings { border-top: 1px solid var(--border); padding-top: 0.6rem; margin-top: 0.4rem; }
+.salary-settings:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+.salary-benefits, .salary-notes { margin: 0.25rem 0 0; padding-left: 1rem; }
+.salary-phrases { padding-left: 1.25rem; }
+.salary-phrases li { margin-bottom: 0.75rem; }
+.salary-phrases p { margin: 0 0 0.3rem; }
+.salary-net { font-size: 1.3rem; }
+.salary-panel .alert { margin-bottom: 0; }
+.salary-panel .kv dd { overflow-wrap: anywhere; }
+.salary-bars .bar-row { grid-template-columns: minmax(130px, 200px) 1fr auto; }
+.salary-range { display: block; }
