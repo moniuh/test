@@ -39,7 +39,8 @@ export function CopyButton({
     <button
       type="button"
       className="btn btn-small"
-      aria-label={ariaLabel}
+      // nazwa dostępna zaczyna się od widocznego tekstu (WCAG 2.5.3 „etykieta w nazwie”)
+      aria-label={ariaLabel ? `${label}: ${ariaLabel}` : undefined}
       onClick={async () => {
         const ok = await copyText(text);
         onResult(ok ? `Skopiowano: ${ariaLabel ?? label}` : 'Nie udało się skopiować — zaznacz tekst i skopiuj go ręcznie.');
